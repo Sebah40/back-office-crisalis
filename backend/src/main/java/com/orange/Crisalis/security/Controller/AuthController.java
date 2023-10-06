@@ -8,12 +8,14 @@ package com.orange.Crisalis.security.Controller;
  *
  * @author Sebastián
  */
+import com.orange.Crisalis.security.Dto.DisableUsuario;
 import com.orange.Crisalis.security.Dto.JwtDto;
 import com.orange.Crisalis.security.Dto.LoginUsuario;
 import com.orange.Crisalis.security.Dto.NuevoUsuario;
 import com.orange.Crisalis.security.Entity.Rol;
 import com.orange.Crisalis.security.Entity.Usuario;
 import com.orange.Crisalis.security.Enums.RolNombre;
+import com.orange.Crisalis.security.Repository.iUsuarioRepository;
 import com.orange.Crisalis.security.Service.RolService;
 import com.orange.Crisalis.security.Service.UsuarioService;
 import com.orange.Crisalis.security.jwt.JwtProvider;
@@ -50,6 +52,8 @@ public class AuthController {
     RolService rolService;
     @Autowired
     JwtProvider jwtProvider;
+    @Autowired
+    iUsuarioRepository iusuarioRepository;
     
     @PostMapping("/nuevo")
     public ResponseEntity<?> nuevo(@Valid @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindingResult){
@@ -75,7 +79,16 @@ public class AuthController {
         
         return new ResponseEntity(new Mensaje("Usuario guardado"),HttpStatus.CREATED);
     }
-    
+
+    @PostMapping("/disable")
+    public ResponseEntity<?> disable(@Valid @RequestBody DisableUsuario disableUsuario, BindingResult bindingResult){
+        if(bindingResult.hasErrors())
+            return new ResponseEntity(new Mensaje("Usuario no existe"), HttpStatus.BAD_REQUEST);
+        Usuario user = iusuarioRepository.findByNombreUsuario(disableUsuario.getNombreUsuario()).get();
+        user.setActive(false);
+        iusuarioRepository.save(user);
+        return new ResponseEntity(new Mensaje("Deshabilitado exitosamente"),HttpStatus.OK);
+    }
     @PostMapping("/login")
     public ResponseEntity<JwtDto> login(@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult){
         if(bindingResult.hasErrors())

@@ -40,10 +40,7 @@ public class CrisalisApplication {
 							4.0,
 							item));
 			System.out.println(orderDetail.toString());
-			Usuario admin = iusuarioRepository.findByNombreUsuario("admin").get();
-			admin.setActive(true);
-			iusuarioRepository.save(admin);
-			System.out.println(admin.isActive());
+
 		};
 
 	}

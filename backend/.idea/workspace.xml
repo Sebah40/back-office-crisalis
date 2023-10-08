@@ -5,30 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bdee6678-9cdd-4e6f-9ce2-359b60bd9bb9" name="Changes" comment="Se agregó el método getAll. Devuelve un string de los nombres de usuario, mails y rol.&#10;Se agregó CrossOrigin para probar métodos con Angular desde localhost:4200.">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Entity/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Entity/Usuario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/CrisalisApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/CrisalisApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/model/Item.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/model/Item.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/model/OrderDetail.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/model/OrderDetail.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/repository/ItemRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/repository/ItemRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/repository/OrderDetailRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/repository/OrderDetailRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Controller/AuthController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Controller/AuthController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Controller/Mensaje.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Controller/Mensaje.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Dto/JwtDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Dto/JwtDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Dto/LoginUsuario.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Dto/LoginUsuario.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Dto/NuevoUsuario.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Dto/NuevoUsuario.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Entity/Rol.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Entity/Rol.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Entity/Usuario.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Entity/Usuario.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Entity/UsuarioPrincipal.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Entity/UsuarioPrincipal.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Enums/RolNombre.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Enums/RolNombre.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/MainSecurity.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/MainSecurity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Repository/iRolRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Repository/iRolRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Repository/iUsuarioRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Repository/iUsuarioRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Service/RolService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Service/RolService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Service/UserDetailsImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Service/UserDetailsImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Service/UsuarioService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Service/UsuarioService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/jwt/JwtEntryPoint.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/jwt/JwtEntryPoint.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/jwt/JwtProvider.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/jwt/JwtProvider.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/jwt/JwtTokenFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/jwt/JwtTokenFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +64,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "c49ce681",
+    "git-widget-placeholder": "79e7e6a0",
     "last_opened_file_path": "/home/sebastian/Workspace/back-office-crisalis/backend",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
@@ -140,7 +117,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696789120185</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Se agregó el método getAll. Devuelve un string de los nombres de usuario, mails y rol.&#10;Se agregó CrossOrigin para probar métodos con Angular desde localhost:4200.">
+      <option name="closed" value="true" />
+      <created>1696791882471</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1696791882472</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="UnknownFeatures">

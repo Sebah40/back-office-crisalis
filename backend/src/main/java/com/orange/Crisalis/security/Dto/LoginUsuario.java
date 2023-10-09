@@ -15,7 +15,12 @@ public class LoginUsuario {
     private String nombreUsuario;
     @NotBlank
     private String password;
-    
+
+    private String editPassword;
+
+    private String editUser;
+
+
     public String getNombreUsuario() {
         return nombreUsuario;
     }
@@ -31,5 +36,20 @@ public class LoginUsuario {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
+    public String getEditPassword() {
+        return editPassword;
+    }
+
+    public void setEditPassword(String editPassword) {
+        this.editPassword = editPassword;
+    }
+
+    public String getEditUser() {
+        return editUser;
+    }
+
+    public void setEditUser(String editUser) {
+        this.editUser = editUser;
+    }
 }

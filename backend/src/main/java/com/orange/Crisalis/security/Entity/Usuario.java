@@ -34,6 +34,7 @@ public class Usuario {
     @NotNull
     private String password;
     private boolean isActive;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "usuario_rol", joinColumns = @JoinColumn(name ="usuario_id"), inverseJoinColumns = @JoinColumn(name = "rol_id"))
     private Set<Rol> roles = new HashSet<>();
@@ -47,6 +48,7 @@ public class Usuario {
         this.email = email;
         this.password = password;
         this.isActive = isActive;
+
     }
     
     public int getId() {
@@ -106,6 +108,9 @@ public class Usuario {
     public boolean isActive() {
         return isActive;
     }
+
+
+
     public List getUser(){
         if(this.getRoles().toArray().length == 2)                                               // Esto va a dar problemas si decidimos crear más roles en un futuro
             return List.of(new String[]{this.getNombre(), this.getEmail(), "Administrador"});

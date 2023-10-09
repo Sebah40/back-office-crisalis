@@ -8,10 +8,7 @@ package com.orange.Crisalis.security.Controller;
  *
  * @author Sebastián
  */
-import com.orange.Crisalis.security.Dto.DisableUsuario;
-import com.orange.Crisalis.security.Dto.JwtDto;
-import com.orange.Crisalis.security.Dto.LoginUsuario;
-import com.orange.Crisalis.security.Dto.NuevoUsuario;
+import com.orange.Crisalis.security.Dto.*;
 import com.orange.Crisalis.security.Entity.Rol;
 import com.orange.Crisalis.security.Entity.Usuario;
 import com.orange.Crisalis.security.Enums.RolNombre;
@@ -79,15 +76,8 @@ public class AuthController {
         return new ResponseEntity(new Mensaje("Usuario guardado"),HttpStatus.CREATED);
     }
 
-    @PostMapping("/disable")
-    public ResponseEntity<?> disable(@Valid @RequestBody DisableUsuario disableUsuario, BindingResult bindingResult){
-        if(bindingResult.hasErrors())
-            return new ResponseEntity(new Mensaje("Usuario no existe"), HttpStatus.BAD_REQUEST);
-        Usuario user = iusuarioRepository.findByNombreUsuario(disableUsuario.getNombreUsuario()).get();
-        user.setActive(false);
-        iusuarioRepository.save(user);
-        return new ResponseEntity(new Mensaje("Deshabilitado exitosamente"),HttpStatus.OK);
-    }
+
+
     @PostMapping("/login")
     public ResponseEntity<JwtDto> login(@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult){
         if(bindingResult.hasErrors())
@@ -106,11 +96,5 @@ public class AuthController {
         JwtDto jwtDto = new JwtDto(jwt, userDetails.getUsername(), userDetails.getAuthorities());
         
         return new ResponseEntity(jwtDto, HttpStatus.OK);
-    }
-
-    @GetMapping("/getAll")
-    public ResponseEntity<List<List>> listUser(){
-        return ResponseEntity.ok(usuarioService.findAll().stream().map(Usuario::getUser).collect(Collectors.toList()));
-        // return (ResponseEntity.ok(usuarioService.findAll().stream().map(Usuario::getNombreUsuario).collect(Collectors.toList())));
     }
 }

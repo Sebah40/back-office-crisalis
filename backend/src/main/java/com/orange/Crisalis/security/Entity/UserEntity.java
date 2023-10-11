@@ -13,22 +13,21 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
-import com.orange.Crisalis.security.Entity.Rol;
 
 /**
  *
  * @author Sebastián
  */
 @Entity
-public class Usuario {
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotNull
-    private String nombre;
+    private String name;
     @NotNull
     @Column(unique = true)
-    private String nombreUsuario;
+    private String username;
     @NotNull
     private String email;
     @NotNull
@@ -36,15 +35,15 @@ public class Usuario {
     private boolean isActive;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "usuario_rol", joinColumns = @JoinColumn(name ="usuario_id"), inverseJoinColumns = @JoinColumn(name = "rol_id"))
-    private Set<Rol> roles = new HashSet<>();
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name ="user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<RoleEntity> roles = new HashSet<>();
     
-    public Usuario() {
+    public UserEntity() {
     }
 
-    public Usuario(String nombre, String nombreUsuario, String email, String password, boolean isActive) {
-        this.nombre = nombre;
-        this.nombreUsuario = nombreUsuario;
+    public UserEntity(String name, String username, String email, String password, boolean isActive) {
+        this.name = name;
+        this.username = username;
         this.email = email;
         this.password = password;
         this.isActive = isActive;
@@ -60,21 +59,21 @@ public class Usuario {
     }
 
     public String getNombre() {
-        return nombre;
+        return name;
     }
 
 
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String nombre) {
+        this.name = nombre;
     }
 
-    public String getNombreUsuario() {
-        return nombreUsuario;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
+    public void setUsername(String nombreUsuario) {
+        this.username = nombreUsuario;
     }
 
     public String getEmail() {
@@ -93,11 +92,11 @@ public class Usuario {
         this.password = password;
     }
 
-    public Set<Rol> getRoles() {
+    public Set<RoleEntity> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Rol> roles) {
+    public void setRoles(Set<RoleEntity> roles) {
         this.roles = roles;
     }
 
@@ -113,8 +112,8 @@ public class Usuario {
 
     public List getUser(){
         if(this.getRoles().toArray().length == 2)                                               // Esto va a dar problemas si decidimos crear más roles en un futuro
-            return List.of(new String[]{this.getNombre(), this.getEmail(), "Administrador"});
-        return List.of(new String[]{this.getNombre(), this.getEmail(), "Usuario"});
+            return List.of(new String[]{this.getNombre(),this.getUsername(), this.getEmail(), "Administrador"});
+        return List.of(new String[]{this.getNombre(),this.getUsername(), this.getEmail(), "Usuario"});
 
     }
 }

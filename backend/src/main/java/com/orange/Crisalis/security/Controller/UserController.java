@@ -1,10 +1,11 @@
 package com.orange.Crisalis.security.Controller;
 
-import com.orange.Crisalis.security.Dto.DisableUsuario;
-import com.orange.Crisalis.security.Dto.LoginUsuario;
-import com.orange.Crisalis.security.Entity.Usuario;
-import com.orange.Crisalis.security.Repository.iUsuarioRepository;
-import com.orange.Crisalis.security.Service.UsuarioService;
+import com.orange.Crisalis.security.Dto.DisableUser;
+import com.orange.Crisalis.security.Dto.EditUser;
+import com.orange.Crisalis.security.Dto.LoginUser;
+import com.orange.Crisalis.security.Entity.UserEntity;
+import com.orange.Crisalis.security.Repository.iUserRepository;
+import com.orange.Crisalis.security.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,30 +24,47 @@ public class UserController {
     @Autowired
     PasswordEncoder passwordEncoder;
     @Autowired
-    UsuarioService usuarioService;
+    UserService userService;
     @Autowired
-    iUsuarioRepository iusuarioRepository;
+    iUserRepository iusuarioRepository;
     @PostMapping("/disable")
-    public ResponseEntity<?> disable(@Valid @RequestBody DisableUsuario disableUsuario, BindingResult bindingResult){
+    public ResponseEntity<?> disable(@Valid @RequestBody DisableUser disableUser, BindingResult bindingResult){
         if(bindingResult.hasErrors())
-            return new ResponseEntity(new Mensaje("Usuario no existe"), HttpStatus.BAD_REQUEST);
-        Usuario user = iusuarioRepository.findByNombreUsuario(disableUsuario.getNombreUsuario()).get();
+            return new ResponseEntity(new Message("Usuario no existe"), HttpStatus.BAD_REQUEST);
+        UserEntity user = iusuarioRepository.findByUsername(disableUser.getUsername()).get();
         user.setActive(false);
         iusuarioRepository.save(user);
-        return new ResponseEntity(new Mensaje("Deshabilitado exitosamente"),HttpStatus.OK);
+        return new ResponseEntity(new Message("Deshabilitado exitosamente"),HttpStatus.OK);
     }
     @GetMapping("/getAll")
     public ResponseEntity<List<List>> listUser(){
-        return ResponseEntity.ok(usuarioService.findAll().stream().map(Usuario::getUser).collect(Collectors.toList()));
+        return ResponseEntity.ok(userService.findAll().stream().map(UserEntity::getUser).collect(Collectors.toList()));
     }
-    @PostMapping("/edit")
-    public ResponseEntity<?> edit(@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult){
+    @PostMapping("/editPassword")
+    public ResponseEntity<?> editPassword(@Valid @RequestBody EditUser editUser, BindingResult bindingResult){
         if(bindingResult.hasErrors())
-            return new ResponseEntity(new Mensaje("Usuario no existe"), HttpStatus.BAD_REQUEST);
-        Usuario user = iusuarioRepository.findByNombreUsuario(loginUsuario.getNombreUsuario()).get();
-        user.setPassword(passwordEncoder.encode(loginUsuario.getEditPassword()));
-        user.setNombreUsuario(loginUsuario.getEditUser());
+            return new ResponseEntity(new Message("Usuario no existe"), HttpStatus.BAD_REQUEST);
+        UserEntity user = iusuarioRepository.findByUsername(editUser.getUsername()).get();
+        user.setPassword(passwordEncoder.encode(editUser.getPassword()));
         iusuarioRepository.save(user);
-        return new ResponseEntity(new Mensaje("Editado exitosamente"),HttpStatus.OK);
+        return new ResponseEntity(new Message("Editado exitosamente"),HttpStatus.OK);
+    }
+    @PostMapping("/editName")
+    public ResponseEntity<?> editName(@Valid @RequestBody EditUser editUser, BindingResult bindingResult){
+        if(bindingResult.hasErrors())
+            return new ResponseEntity(new Message("Usuario no existe"), HttpStatus.BAD_REQUEST);
+        UserEntity user = iusuarioRepository.findByUsername(editUser.getUsername()).get();
+        user.setName(editUser.getName());
+        iusuarioRepository.save(user);
+        return new ResponseEntity(new Message("Editado exitosamente"),HttpStatus.OK);
+    }
+    @PostMapping("/editEmail")
+    public ResponseEntity<?> editEmail(@Valid @RequestBody EditUser editUser, BindingResult bindingResult){
+        if(bindingResult.hasErrors())
+            return new ResponseEntity(new Message("Usuario no existe"), HttpStatus.BAD_REQUEST);
+        UserEntity user = iusuarioRepository.findByUsername(editUser.getUsername()).get();
+        user.setEmail(editUser.getEmail());
+        iusuarioRepository.save(user);
+        return new ResponseEntity(new Message("Editado exitosamente"),HttpStatus.OK);
     }
 }

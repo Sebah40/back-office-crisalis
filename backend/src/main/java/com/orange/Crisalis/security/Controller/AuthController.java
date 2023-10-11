@@ -9,22 +9,19 @@ package com.orange.Crisalis.security.Controller;
  * @author Sebastián
  */
 import com.orange.Crisalis.security.Dto.*;
-import com.orange.Crisalis.security.Entity.Rol;
-import com.orange.Crisalis.security.Entity.Usuario;
-import com.orange.Crisalis.security.Enums.RolNombre;
-import com.orange.Crisalis.security.Repository.iUsuarioRepository;
-import com.orange.Crisalis.security.Service.RolService;
-import com.orange.Crisalis.security.Service.UsuarioService;
+import com.orange.Crisalis.security.Entity.RoleEntity;
+import com.orange.Crisalis.security.Entity.UserEntity;
+import com.orange.Crisalis.security.Enums.RoleName;
+import com.orange.Crisalis.security.Repository.iUserRepository;
+import com.orange.Crisalis.security.Service.RoleService;
+import com.orange.Crisalis.security.Service.UserService;
 import com.orange.Crisalis.security.jwt.JwtProvider;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -43,48 +40,46 @@ public class AuthController {
     @Autowired
     AuthenticationManager authenticationManager;
     @Autowired
-    UsuarioService usuarioService;
+    UserService userService;
     @Autowired
-    RolService rolService;
+    RoleService roleService;
     @Autowired
     JwtProvider jwtProvider;
-    @Autowired
-    iUsuarioRepository iusuarioRepository;
     
     @PostMapping("/new")
-    public ResponseEntity<?> nuevo(@Valid @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindingResult){
+    public ResponseEntity<?> nuevo(@Valid @RequestBody NewUser newUser, BindingResult bindingResult){
         if(bindingResult.hasErrors())
-            return new ResponseEntity(new Mensaje("Campos mal puestos o email invalido"),HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new Message("Campos mal puestos o email invalido"),HttpStatus.BAD_REQUEST);
         
-        if(usuarioService.existsByNombreUsuario(nuevoUsuario.getNombreUsuario()))
-            return new ResponseEntity(new Mensaje("Ese nombre de usuario ya existe"), HttpStatus.BAD_REQUEST);
+        if(userService.existsByUsername(newUser.getUsername()))
+            return new ResponseEntity(new Message("Ese nombre de userEntity ya existe"), HttpStatus.BAD_REQUEST);
         
-        if(usuarioService.existsByEmail(nuevoUsuario.getEmail()))
-            return new ResponseEntity(new Mensaje("Ese email ya existe"), HttpStatus.BAD_REQUEST);
+        if(userService.existsByEmail(newUser.getEmail()))
+            return new ResponseEntity(new Message("Ese email ya existe"), HttpStatus.BAD_REQUEST);
         
-        Usuario usuario = new Usuario(nuevoUsuario.getNombre(), nuevoUsuario.getNombreUsuario(),
-            nuevoUsuario.getEmail(),passwordEncoder.encode(nuevoUsuario.getPassword()), true);
+        UserEntity userEntity = new UserEntity(newUser.getName(), newUser.getUsername(),
+            newUser.getEmail(),passwordEncoder.encode(newUser.getPassword()), true);
         
-        Set<Rol> roles = new HashSet<>();
-        roles.add(rolService.getByRolNombre(RolNombre.ROLE_USER).get());
+        Set<RoleEntity> roles = new HashSet<>();
+        roles.add(roleService.getByRoleName(RoleName.ROLE_USER).get());
         
-        if(nuevoUsuario.getRoles().contains("admin"))
-            roles.add(rolService.getByRolNombre(RolNombre.ROLE_ADMIN).get());
-        usuario.setRoles(roles);
-        usuarioService.save(usuario);
+        if(newUser.getRoles().contains("admin"))
+            roles.add(roleService.getByRoleName(RoleName.ROLE_ADMIN).get());
+        userEntity.setRoles(roles);
+        userService.save(userEntity);
         
-        return new ResponseEntity(new Mensaje("Usuario guardado"),HttpStatus.CREATED);
+        return new ResponseEntity(new Message("UserEntity guardado"),HttpStatus.CREATED);
     }
 
 
 
     @PostMapping("/login")
-    public ResponseEntity<JwtDto> login(@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult){
+    public ResponseEntity<JwtDto> login(@Valid @RequestBody LoginUser loginUser, BindingResult bindingResult){
         if(bindingResult.hasErrors())
-            return new ResponseEntity(new Mensaje("Campos mal puestos"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new Message("Campos mal puestos"), HttpStatus.BAD_REQUEST);
 
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-        loginUsuario.getNombreUsuario(), loginUsuario.getPassword()));
+        loginUser.getUsername(), loginUser.getPassword()));
         
         
         SecurityContextHolder.getContext().setAuthentication(authentication);

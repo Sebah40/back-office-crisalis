@@ -4,9 +4,7 @@ import com.orange.Crisalis.model.Item;
 import com.orange.Crisalis.model.OrderDetail;
 import com.orange.Crisalis.repository.ItemRepository;
 import com.orange.Crisalis.repository.OrderDetailRepository;
-import com.orange.Crisalis.security.Entity.Usuario;
-import com.orange.Crisalis.security.Repository.iUsuarioRepository;
-import com.orange.Crisalis.security.Service.UsuarioService;
+import com.orange.Crisalis.security.Repository.iUserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,7 +23,7 @@ public class CrisalisApplication {
 	CommandLineRunner commandLineRunner(
 			OrderDetailRepository orderDetailRepository,
 			ItemRepository itemRepository,
-			iUsuarioRepository iusuarioRepository
+			iUserRepository iusuarioRepository
 	) {
 		return args -> {
 			Item item = itemRepository

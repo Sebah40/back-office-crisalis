@@ -4,15 +4,46 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdee6678-9cdd-4e6f-9ce2-359b60bd9bb9" name="Changes" comment="Se agregó el método getAll. Devuelve un string de los nombres de usuario, mails y rol.&#10;Se agregó CrossOrigin para probar métodos con Angular desde localhost:4200.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Controller/UserController.java" afterDir="false" />
+    <list default="true" id="bdee6678-9cdd-4e6f-9ce2-359b60bd9bb9" name="Changes" comment="POST http://localhost:8080/user/disable // Deshabilita usuario. &#10;GET http://localhost:8080/user/getAll // Devuelve lista de users&#10;POST http://localhost:8080/user/edit // Editar usuario y contraseña&#10;&#10;POST http://localhost:8080/auth/new // Nuevo usuario&#10;POST http://localhost:8080/auth/login // Iniciar sesión">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Dto/EditUser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Enums/RoleName.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/CrisalisApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/CrisalisApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Dto/LoginUsuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Dto/LoginUsuario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Entity/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Entity/Usuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Controller/Mensaje.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Controller/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Dto/DisableUsuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Dto/DisableUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Dto/LoginUsuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Dto/LoginUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Dto/NuevoUsuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Dto/NewUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Entity/Rol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Entity/RoleEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Entity/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Entity/UserEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Entity/UsuarioPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Entity/MainUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Enums/RolNombre.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Repository/iRolRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Repository/iRoleRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Repository/iUsuarioRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Repository/iUserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Service/RolService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Service/RoleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Service/UserDetailsImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Service/UserDetailsImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Service/UsuarioService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/jwt/JwtProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/jwt/JwtProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/CrisalisApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/CrisalisApplication.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Controller/AuthController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Controller/AuthController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Dto/LoginUsuario.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Dto/LoginUsuario.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Entity/Usuario.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Entity/Usuario.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Controller/Mensaje.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Dto/DisableUsuario.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Dto/LoginUsuario.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Dto/NuevoUsuario.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Entity/Rol.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Entity/Usuario.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Entity/UsuarioPrincipal.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Enums/RolNombre.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Repository/iRolRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Repository/iUsuarioRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Service/RolService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Service/UserDetailsImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Service/UserDetailsImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Service/UsuarioService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/jwt/JwtProvider.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/jwt/JwtProvider.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,7 +163,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696791882472</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="POST http://localhost:8080/user/disable // Deshabilita usuario. &#10;GET http://localhost:8080/user/getAll // Devuelve lista de users&#10;POST http://localhost:8080/user/edit // Editar usuario y contraseña&#10;&#10;POST http://localhost:8080/auth/new // Nuevo usuario&#10;POST http://localhost:8080/auth/login // Iniciar sesión">
+      <option name="closed" value="true" />
+      <created>1696861034489</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1696861034489</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -153,6 +192,19 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Se agregó el método disable para auth. Se agregó la clase DisableUsuario." />
     <MESSAGE value="Se agregó el método getAll. Devuelve un string de los nombres de usuario, mails y rol.&#10;Se agregó CrossOrigin para probar métodos con Angular desde localhost:4200." />
-    <option name="LAST_COMMIT_MESSAGE" value="Se agregó el método getAll. Devuelve un string de los nombres de usuario, mails y rol.&#10;Se agregó CrossOrigin para probar métodos con Angular desde localhost:4200." />
+    <MESSAGE value="POST http://localhost:8080/user/disable // Deshabilita usuario. &#10;GET http://localhost:8080/user/getAll // Devuelve lista de users&#10;POST http://localhost:8080/user/edit // Editar usuario y contraseña&#10;&#10;POST http://localhost:8080/auth/new // Nuevo usuario&#10;POST http://localhost:8080/auth/login // Iniciar sesión" />
+    <option name="LAST_COMMIT_MESSAGE" value="POST http://localhost:8080/user/disable // Deshabilita usuario. &#10;GET http://localhost:8080/user/getAll // Devuelve lista de users&#10;POST http://localhost:8080/user/edit // Editar usuario y contraseña&#10;&#10;POST http://localhost:8080/auth/new // Nuevo usuario&#10;POST http://localhost:8080/auth/login // Iniciar sesión" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-field">
+          <url>file://$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Dto/EditUser.java</url>
+          <line>14</line>
+          <properties field="username" class="com.orange.Crisalis.security.Dto.EditUser" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

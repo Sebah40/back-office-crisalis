@@ -3,13 +3,13 @@ package com.orange.Crisalis.security.Controller;
  *
  * @author Sebastián
  */
-public class Mensaje {
+public class Message {
     private String mensaje;
     
-    public Mensaje() {
+    public Message() {
     }
 
-    public Mensaje(String mensaje) {
+    public Message(String mensaje) {
         this.mensaje = mensaje;
     }
 

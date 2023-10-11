@@ -2,7 +2,10 @@ package com.orange.Crisalis.security.Service;
 
 import com.orange.Crisalis.security.Entity.Usuario;
 import com.orange.Crisalis.security.Repository.iUsuarioRepository;
+
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +22,10 @@ public class UsuarioService {
     
     public boolean existsByNombreUsuario(String nombreUsuario){
         return iusuarioRepository.existsByNombreUsuario(nombreUsuario);
+    }
+
+    public List<Usuario> findAll(){
+        return iusuarioRepository.findAll();
     }
     
     public boolean existsByEmail(String email){

@@ -1,6 +1,7 @@
 package com.orange.Crisalis.security.Entity;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -59,6 +60,8 @@ public class Usuario {
         return nombre;
     }
 
+
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -101,5 +104,11 @@ public class Usuario {
 
     public boolean isActive() {
         return isActive;
+    }
+    public List getUser(){
+        if(this.getRoles().toArray().length == 2)                                               // Esto va a dar problemas si decidimos crear más roles en un futuro
+            return List.of(new String[]{this.getNombre(), this.getEmail(), "Administrador"});
+        return List.of(new String[]{this.getNombre(), this.getEmail(), "Usuario"});
+
     }
 }

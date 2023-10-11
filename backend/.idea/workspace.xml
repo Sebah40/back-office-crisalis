@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdee6678-9cdd-4e6f-9ce2-359b60bd9bb9" name="Changes" comment="http://localhost:8080/user/disable POST&#10;http://localhost:8080/user/getAll GET&#10;http://localhost:8080/user/editPassword POST&#10;http://localhost:8080/user/editName POST&#10;http://localhost:8080/user/editEmail POST&#10;&#10;http://localhost:8080/auth/login POST&#10;http://localhost:8080/user/new POST&#10;&#10;POSTMAN&#10;&#10;{&#10;    &quot;name&quot;:&quot;&quot;,&#10;    &quot;username&quot;:&quot;&quot;,&#10;    &quot;email&quot;:&quot;&quot;,&#10;    &quot;password&quot;:&quot;&quot;,&#10;    &quot;role&quot;:[&quot;admin&quot;,&quot;user&quot;]&#10;}">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/CrisalisApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/CrisalisApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Repository/iRoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Repository/iRoleRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/CrisalisApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/CrisalisApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Controller/AuthController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Controller/AuthController.class" afterDir="false" />
-    </list>
+    <list default="true" id="bdee6678-9cdd-4e6f-9ce2-359b60bd9bb9" name="Changes" comment="Small fixes" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -149,7 +139,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697033265939</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Small fixes">
+      <option name="closed" value="true" />
+      <created>1697037689498</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1697037689498</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -172,7 +170,8 @@
     <MESSAGE value="Se agregó el método getAll. Devuelve un string de los nombres de usuario, mails y rol.&#10;Se agregó CrossOrigin para probar métodos con Angular desde localhost:4200." />
     <MESSAGE value="POST http://localhost:8080/user/disable // Deshabilita usuario. &#10;GET http://localhost:8080/user/getAll // Devuelve lista de users&#10;POST http://localhost:8080/user/edit // Editar usuario y contraseña&#10;&#10;POST http://localhost:8080/auth/new // Nuevo usuario&#10;POST http://localhost:8080/auth/login // Iniciar sesión" />
     <MESSAGE value="http://localhost:8080/user/disable POST&#10;http://localhost:8080/user/getAll GET&#10;http://localhost:8080/user/editPassword POST&#10;http://localhost:8080/user/editName POST&#10;http://localhost:8080/user/editEmail POST&#10;&#10;http://localhost:8080/auth/login POST&#10;http://localhost:8080/user/new POST&#10;&#10;POSTMAN&#10;&#10;{&#10;    &quot;name&quot;:&quot;&quot;,&#10;    &quot;username&quot;:&quot;&quot;,&#10;    &quot;email&quot;:&quot;&quot;,&#10;    &quot;password&quot;:&quot;&quot;,&#10;    &quot;role&quot;:[&quot;admin&quot;,&quot;user&quot;]&#10;}" />
-    <option name="LAST_COMMIT_MESSAGE" value="http://localhost:8080/user/disable POST&#10;http://localhost:8080/user/getAll GET&#10;http://localhost:8080/user/editPassword POST&#10;http://localhost:8080/user/editName POST&#10;http://localhost:8080/user/editEmail POST&#10;&#10;http://localhost:8080/auth/login POST&#10;http://localhost:8080/user/new POST&#10;&#10;POSTMAN&#10;&#10;{&#10;    &quot;name&quot;:&quot;&quot;,&#10;    &quot;username&quot;:&quot;&quot;,&#10;    &quot;email&quot;:&quot;&quot;,&#10;    &quot;password&quot;:&quot;&quot;,&#10;    &quot;role&quot;:[&quot;admin&quot;,&quot;user&quot;]&#10;}" />
+    <MESSAGE value="Small fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Small fixes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

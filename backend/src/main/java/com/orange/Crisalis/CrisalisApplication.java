@@ -5,10 +5,13 @@ import com.orange.Crisalis.model.OrderDetail;
 import com.orange.Crisalis.repository.ItemRepository;
 import com.orange.Crisalis.repository.OrderDetailRepository;
 import com.orange.Crisalis.security.Repository.iUserRepository;
+import com.orange.Crisalis.security.Service.RoleService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
 
@@ -16,9 +19,8 @@ import java.math.BigDecimal;
 public class CrisalisApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CrisalisApplication.class, args);
-	}
-
+        SpringApplication.run(CrisalisApplication.class, args);
+    }
 	@Bean
 	CommandLineRunner commandLineRunner(
 			OrderDetailRepository orderDetailRepository,
@@ -36,9 +38,9 @@ public class CrisalisApplication {
 							null,
 							item.getPrice(),
 							4.0,
-							item));
+							item)
+					);
 			System.out.println(orderDetail.toString());
-
 		};
 
 	}

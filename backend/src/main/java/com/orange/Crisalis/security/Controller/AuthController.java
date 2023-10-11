@@ -18,6 +18,7 @@ import com.orange.Crisalis.security.Service.UserService;
 import com.orange.Crisalis.security.jwt.JwtProvider;
 import java.util.HashSet;
 import java.util.Set;
+import javax.management.relation.Role;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,18 +46,20 @@ public class AuthController {
     RoleService roleService;
     @Autowired
     JwtProvider jwtProvider;
-    
+
     @PostMapping("/new")
     public ResponseEntity<?> nuevo(@Valid @RequestBody NewUser newUser, BindingResult bindingResult){
         if(bindingResult.hasErrors())
             return new ResponseEntity(new Message("Campos mal puestos o email invalido"),HttpStatus.BAD_REQUEST);
         
         if(userService.existsByUsername(newUser.getUsername()))
-            return new ResponseEntity(new Message("Ese nombre de userEntity ya existe"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new Message("Ese nombre de Usuario ya existe"), HttpStatus.BAD_REQUEST);
         
         if(userService.existsByEmail(newUser.getEmail()))
             return new ResponseEntity(new Message("Ese email ya existe"), HttpStatus.BAD_REQUEST);
-        
+
+
+
         UserEntity userEntity = new UserEntity(newUser.getName(), newUser.getUsername(),
             newUser.getEmail(),passwordEncoder.encode(newUser.getPassword()), true);
         
@@ -68,10 +71,8 @@ public class AuthController {
         userEntity.setRoles(roles);
         userService.save(userEntity);
         
-        return new ResponseEntity(new Message("UserEntity guardado"),HttpStatus.CREATED);
+        return new ResponseEntity(new Message("Usuario guardado"),HttpStatus.CREATED);
     }
-
-
 
     @PostMapping("/login")
     public ResponseEntity<JwtDto> login(@Valid @RequestBody LoginUser loginUser, BindingResult bindingResult){

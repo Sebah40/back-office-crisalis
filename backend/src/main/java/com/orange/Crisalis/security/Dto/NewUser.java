@@ -5,30 +5,29 @@ import java.util.Set;
 
 /**
  *
- * @author Usuario
+ * @author UserEntity
  */
-public class NuevoUsuario {
-    private String nombre;
-    private String nombreUsuario;
+public class NewUser {
+    private String name;
+    private String username;
     private String email;
     private String password;
     private Set<String> roles = new HashSet<>();
     private boolean isActive;
-    
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getNombreUsuario() {
-        return nombreUsuario;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {

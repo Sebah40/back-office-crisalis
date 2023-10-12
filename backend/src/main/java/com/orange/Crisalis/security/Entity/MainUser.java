@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.orange.Crisalis.security.Repository.iUsuarioRepository;
+import com.orange.Crisalis.security.Repository.iUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,32 +14,32 @@ import org.springframework.security.core.userdetails.UserDetails;
  *
  * @author Sebastián
  */
-public class UsuarioPrincipal implements UserDetails {
+public class MainUser implements UserDetails {
     @Autowired
-    iUsuarioRepository iusuarioRepository;
+    iUserRepository iusuarioRepository;
 
-    private String nombre;
-    private String nombreUsuario;
+    private String name;
+    private String username;
     private String email;
     private String password;
     private boolean isActive;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UsuarioPrincipal(String nombre, String nombreUsuario, String email, String password, Collection<? extends GrantedAuthority> authorities, boolean isActive) {
-        this.nombre = nombre;
-        this.nombreUsuario = nombreUsuario;
+    public MainUser(String name, String username, String email, String password, Collection<? extends GrantedAuthority> authorities, boolean isActive) {
+        this.name = name;
+        this.username = username;
         this.email = email;
         this.password = password;
         this.authorities = authorities;
         this.isActive = isActive;
     }
 
-    public static UsuarioPrincipal build(Usuario usuario) {
-        List<GrantedAuthority> authorities = usuario.getRoles().stream()
+    public static MainUser build(UserEntity userEntity) {
+        List<GrantedAuthority> authorities = userEntity.getRoles().stream()
                 .map(rol -> new SimpleGrantedAuthority(rol.getRolNombre().name())).collect(Collectors
                 .toList());
-        return new UsuarioPrincipal(usuario.getNombre(), usuario.getNombreUsuario(), usuario.getEmail(),
-                 usuario.getPassword(), authorities, usuario.isActive());
+        return new MainUser(userEntity.getNombre(), userEntity.getUsername(), userEntity.getEmail(),
+                 userEntity.getPassword(), authorities, userEntity.isActive());
     }
 
     @Override
@@ -52,8 +52,8 @@ public class UsuarioPrincipal implements UserDetails {
         return password;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
     public String getEmail() {
@@ -62,7 +62,7 @@ public class UsuarioPrincipal implements UserDetails {
 
     @Override
     public String getUsername() {
-        return nombreUsuario;
+        return username;
     }
 
     @Override

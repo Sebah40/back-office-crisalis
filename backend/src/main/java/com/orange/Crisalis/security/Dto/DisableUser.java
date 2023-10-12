@@ -10,17 +10,17 @@ import javax.validation.constraints.NotBlank;
  *
  * @author Sebastián
  */
-public class DisableUsuario {
+public class DisableUser {
     @NotBlank
-    private String nombreUsuario;
+    private String username;
 
 
-    public String getNombreUsuario() {
-        return nombreUsuario;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
 }

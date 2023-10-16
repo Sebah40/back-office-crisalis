@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'frontend';
+  theme?:string;
+  preferedColorScheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';  
+  changeTheme = () => {
+    if(localStorage.getItem('theme') !== undefined) {
+      this.theme = JSON.stringify(localStorage.getItem('theme'));
+    } else {
+      this.theme = this.preferedColorScheme;
+    }
+    this.preferedColorScheme = this.theme ;
+  }
 }

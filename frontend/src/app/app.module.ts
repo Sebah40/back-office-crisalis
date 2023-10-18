@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 const routes: Routes = [
   {path: '', component: HomepageComponent}
@@ -24,6 +25,7 @@ const routes: Routes = [
     LoginComponent,
   ],
   imports: [
+    SweetAlert2Module.forRoot(),
     BrowserModule,
     FormsModule,
     HttpClientModule,

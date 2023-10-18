@@ -4,7 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdee6678-9cdd-4e6f-9ce2-359b60bd9bb9" name="Changes" comment="Small fixes" />
+    <list default="true" id="bdee6678-9cdd-4e6f-9ce2-359b60bd9bb9" name="Changes" comment="Small fixes">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Dto/GetUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/CrisalisApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/CrisalisApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Entity/MainUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Entity/MainUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Entity/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Entity/UserEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Repository/iRoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Repository/IRoleRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Repository/iUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Repository/IUserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Service/RoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Service/RoleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Controller/AuthController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Controller/AuthController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Entity/MainUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Entity/MainUser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Entity/UserEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Entity/UserEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/app.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/styles.css" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

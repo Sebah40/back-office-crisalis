@@ -2,7 +2,7 @@ package com.orange.Crisalis.security.Service;
 
 import com.orange.Crisalis.security.Entity.RoleEntity;
 import com.orange.Crisalis.security.Enums.RoleName;
-import com.orange.Crisalis.security.Repository.iRoleRepository;
+import com.orange.Crisalis.security.Repository.IRoleRepository;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +16,13 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class RoleService {
     @Autowired
-    iRoleRepository irolRepository;
+    IRoleRepository iroleRepository;
     
     public Optional<RoleEntity> getByRoleName(RoleName roleName){
-        return irolRepository.findByRoleName(roleName);
+        return iroleRepository.findByRoleName(roleName);
     }
     
     public void save(RoleEntity roleEntity){
-        irolRepository.save(roleEntity);
+        iroleRepository.save(roleEntity);
     }
 }

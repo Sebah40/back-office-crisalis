@@ -4,31 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdee6678-9cdd-4e6f-9ce2-359b60bd9bb9" name="Changes" comment="Small fixes">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Dto/GetUser.java" afterDir="false" />
+    <list default="true" id="bdee6678-9cdd-4e6f-9ce2-359b60bd9bb9" name="Changes" comment="Se arregló el metodo getAll">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/CrisalisApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/CrisalisApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Controller/AuthController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Entity/MainUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Entity/MainUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Entity/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Entity/UserEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Repository/iRoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Repository/IRoleRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Repository/iUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Repository/IUserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Service/RoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Service/RoleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/security/Service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Controller/AuthController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Controller/AuthController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Entity/MainUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Entity/MainUser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Entity/UserEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Entity/UserEntity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/main.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +21,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="developer" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -54,8 +37,8 @@
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
-        <option name="accountId" value="efda5500-60d4-4395-9c74-547f66ffc1c2" />
-        <option name="url" value="https://github.com/CrisalisOrange/back-office-crisalis.git" />
+        <option name="accountId" value="6375a788-9945-41c9-b869-b3f35774ab71" />
+        <option name="url" value="https://github.com/Sebah40/back-office-crisalis" />
       </UrlAndAccount>
     </option>
   </component>
@@ -80,21 +63,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;developer&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/sebastian/Workspace/back-office-crisalis/backend&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.tools&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "SCRUM-11",
+    "last_opened_file_path": "/home/sebastian/Workspace/back-office-crisalis/backend",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "configurable.group.tools"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="CrisalisApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.orange.Crisalis.CrisalisApplication" />
@@ -172,7 +155,23 @@
       <option name="project" value="LOCAL" />
       <updated>1697037689498</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Se arregló el metodo getAll">
+      <option name="closed" value="true" />
+      <created>1697643276723</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1697643276723</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Se arregló el metodo getAll">
+      <option name="closed" value="true" />
+      <created>1697643307478</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1697643307478</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -196,7 +195,8 @@
     <MESSAGE value="POST http://localhost:8080/user/disable // Deshabilita usuario. &#10;GET http://localhost:8080/user/getAll // Devuelve lista de users&#10;POST http://localhost:8080/user/edit // Editar usuario y contraseña&#10;&#10;POST http://localhost:8080/auth/new // Nuevo usuario&#10;POST http://localhost:8080/auth/login // Iniciar sesión" />
     <MESSAGE value="http://localhost:8080/user/disable POST&#10;http://localhost:8080/user/getAll GET&#10;http://localhost:8080/user/editPassword POST&#10;http://localhost:8080/user/editName POST&#10;http://localhost:8080/user/editEmail POST&#10;&#10;http://localhost:8080/auth/login POST&#10;http://localhost:8080/user/new POST&#10;&#10;POSTMAN&#10;&#10;{&#10;    &quot;name&quot;:&quot;&quot;,&#10;    &quot;username&quot;:&quot;&quot;,&#10;    &quot;email&quot;:&quot;&quot;,&#10;    &quot;password&quot;:&quot;&quot;,&#10;    &quot;role&quot;:[&quot;admin&quot;,&quot;user&quot;]&#10;}" />
     <MESSAGE value="Small fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Small fixes" />
+    <MESSAGE value="Se arregló el metodo getAll" />
+    <option name="LAST_COMMIT_MESSAGE" value="Se arregló el metodo getAll" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -44,7 +44,10 @@ public class UserController {
     @GetMapping("/getAll")
     public ResponseEntity<List<GetUser>> listUser(){
         List<UserEntity> users = userService.findAll();
-        return ResponseEntity.ok(users.stream().map(GetUser::new).collect(Collectors.toList()));
+        return ResponseEntity.ok(users.stream()
+                .filter(user -> user.isActive())
+                .map(GetUser::new)
+                .collect(Collectors.toList()));
     }
     @PostMapping("/editPassword")
     public ResponseEntity<?> editPassword(@Valid @RequestBody EditUser editUser, BindingResult bindingResult){

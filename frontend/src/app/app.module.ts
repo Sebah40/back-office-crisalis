@@ -8,6 +8,8 @@ import { HomeSectionsComponent } from './home-sections/home-sections.component';
 import { UpperbarComponent } from './upperbar/upperbar.component';
 
 import { RouterModule, Routes } from '@angular/router';
+import { MenuComponent } from './menu/menu.component';
+import { MenuItemComponent } from './menu-item/menu-item.component';
 
 const routes: Routes = [
   {path: '', component: HomepageComponent}
@@ -18,7 +20,9 @@ const routes: Routes = [
     AppComponent,
     HomepageComponent,
     HomeSectionsComponent,
-    UpperbarComponent
+    UpperbarComponent,
+    MenuComponent,
+    MenuItemComponent
   ],
   imports: [
     BrowserModule,

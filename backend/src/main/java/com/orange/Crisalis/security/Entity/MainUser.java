@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.orange.Crisalis.security.Repository.iUserRepository;
+import com.orange.Crisalis.security.Repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,7 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 public class MainUser implements UserDetails {
     @Autowired
-    iUserRepository iusuarioRepository;
+    IUserRepository iusuarioRepository;
 
     private String name;
     private String username;
@@ -38,7 +38,7 @@ public class MainUser implements UserDetails {
         List<GrantedAuthority> authorities = userEntity.getRoles().stream()
                 .map(rol -> new SimpleGrantedAuthority(rol.getRolNombre().name())).collect(Collectors
                 .toList());
-        return new MainUser(userEntity.getNombre(), userEntity.getUsername(), userEntity.getEmail(),
+        return new MainUser(userEntity.getName(), userEntity.getUsername(), userEntity.getEmail(),
                  userEntity.getPassword(), authorities, userEntity.isActive());
     }
 

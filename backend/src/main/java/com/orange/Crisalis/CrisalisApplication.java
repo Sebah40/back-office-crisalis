@@ -4,17 +4,19 @@ import com.orange.Crisalis.model.Item;
 import com.orange.Crisalis.model.OrderDetail;
 import com.orange.Crisalis.repository.ItemRepository;
 import com.orange.Crisalis.repository.OrderDetailRepository;
+
 import com.orange.Crisalis.security.Entity.RoleEntity;
 import com.orange.Crisalis.security.Enums.RoleName;
 import com.orange.Crisalis.security.Repository.iRoleRepository;
-import com.orange.Crisalis.security.Repository.iUserRepository;
+
 import com.orange.Crisalis.security.Service.RoleService;
+
+import com.orange.Crisalis.security.Repository.IUserRepository;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
 
@@ -28,8 +30,10 @@ public class CrisalisApplication {
 	CommandLineRunner commandLineRunner(
 			OrderDetailRepository orderDetailRepository,
 			ItemRepository itemRepository,
-			iUserRepository iusuarioRepository,
+
+			IUserRepository iusuarioRepository,
 			iRoleRepository roleRepo
+
 
 	) {
 		return args -> {

@@ -4,7 +4,11 @@
  * and open the template in the editor.
  */
 package com.orange.Crisalis.security.Dto;
+import com.orange.Crisalis.security.Entity.RoleEntity;
+
 import javax.validation.constraints.NotBlank;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -16,6 +20,7 @@ public class EditUser {
     private String name;
     private String password;
     private String email;
+
 
 
     public String getUsername() {
@@ -45,4 +50,5 @@ public class EditUser {
     public void setEmail(String email) {
         this.email = email;
     }
+
 }

@@ -3,6 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { interceptorProvider } from './service/interceptor.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { UsersModule } from './users/users.module';
+import { HttpClientModule } from '@angular/common/http';
+import { UsersRoutingModule } from './users/users.routing.module';
 import { HomepageComponent } from './homepage/homepage.component';
 import { HomeSectionsComponent } from './home-sections/home-sections.component';
 import { UpperbarComponent } from './upperbar/upperbar.component';
@@ -35,10 +38,10 @@ const routes: Routes = [
   imports: [
     SweetAlert2Module.forRoot(),
     BrowserModule,
-    AppRoutingModule,
-    RouterModule.forRoot(routes),
-    FormsModule,
+    UsersModule,
     HttpClientModule,
+    UsersRoutingModule,
+    FormsModule,
     AppRoutingModule,
     RouterModule.forRoot(routes),
   ],
@@ -47,4 +50,4 @@ const routes: Routes = [
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

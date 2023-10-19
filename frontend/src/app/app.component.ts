@@ -3,10 +3,13 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'frontend';
+
+  title = 'Home';
+
+ 
   theme?:string;
   preferedColorScheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';  
   changeTheme = () => {
@@ -17,4 +20,5 @@ export class AppComponent {
     }
     this.preferedColorScheme = this.theme ;
   }
+
 }

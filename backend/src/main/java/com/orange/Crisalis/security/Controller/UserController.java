@@ -76,4 +76,18 @@ public class UserController {
         iusuarioRepository.save(user);
         return new ResponseEntity(new Message("Editado exitosamente"),HttpStatus.OK);
     }
+    @PostMapping("/edit-user")
+    public ResponseEntity<?> editUserHandler(@Valid @RequestBody EditUser editUser, BindingResult bindingResult){
+        if(bindingResult.hasErrors())
+            return new ResponseEntity(new Message("Usuario no existe"), HttpStatus.BAD_REQUEST);
+        UserEntity user = iusuarioRepository.findByUsername(editUser.getUsername()).get();
+        user.setEmail(editUser.getEmail());
+        user.setName(editUser.getName());
+        if(!editUser.getPassword().isEmpty()){
+            user.setPassword(passwordEncoder.encode(editUser.getPassword()));
+        }
+        /*user.setRoles(editUser.getRoles());*/
+        iusuarioRepository.save(user);
+        return new ResponseEntity(new Message("Editado exitosamente"),HttpStatus.OK);
+    }
 }

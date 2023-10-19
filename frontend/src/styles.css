@@ -1,4 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+  background-image: url("./assets/fondo-list.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
 .ligh {
   background-color: #C4C4C4;
 }
@@ -24,4 +31,5 @@ body{
 .banner {
   background-color: var(--banner-background);
   color: var(--banner-h2);
+
 }

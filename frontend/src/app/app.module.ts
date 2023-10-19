@@ -4,12 +4,11 @@ import { interceptorProvider } from './service/interceptor.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UsersModule } from './users/users.module';
-import { HttpClientModule } from '@angular/common/http';
+
 import { UsersRoutingModule } from './users/users.routing.module';
 import { HomepageComponent } from './homepage/homepage.component';
 import { HomeSectionsComponent } from './home-sections/home-sections.component';
 import { UpperbarComponent } from './upperbar/upperbar.component';
-
 
 import { RouterModule, Routes } from '@angular/router';
 import { MenuComponent } from './menu/menu.component';
@@ -20,10 +19,7 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
-
-const routes: Routes = [
-  {path: '', component: HomepageComponent}
-];
+const routes: Routes = [{ path: '', component: HomepageComponent }];
 
 @NgModule({
   declarations: [
@@ -45,9 +41,7 @@ const routes: Routes = [
     AppRoutingModule,
     RouterModule.forRoot(routes),
   ],
-  providers: [
-    interceptorProvider
-  ],
-  bootstrap: [AppComponent]
+  providers: [interceptorProvider],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

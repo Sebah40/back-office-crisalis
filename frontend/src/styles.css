@@ -5,31 +5,30 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-
+}
 .ligh {
-  background-color: #C4C4C4;
+  background-color: #c4c4c4;
 }
 .dark {
-  background-color: #22333B;
+  background-color: #22333b;
   opacity: 90%;
 }
 
 [data-theme="light"] {
-  --background: #C4C4C4;
+  --background: #c4c4c4;
   --banner-background: #949494;
   --banner-h2: rgb(34, 51, 59);
 }
 [data-theme="dark"] {
-  --background: rgb(34, 51, 59, .9);
-  --banner-background: rgb(34, 51, 59, .9);
-  --banner-h2: #C6AC8F;
+  --background: rgb(34, 51, 59, 0.9);
+  --banner-background: rgb(34, 51, 59, 0.9);
+  --banner-h2: #c6ac8f;
 }
-body{
+body {
   background-color: var(--background);
   color: var(--banner-h2);
 }
 .banner {
   background-color: var(--banner-background);
   color: var(--banner-h2);
-
 }

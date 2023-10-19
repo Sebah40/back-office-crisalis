@@ -1,0 +1,13 @@
+.oculto {
+  display: none;
+  list-style: none;
+  padding-left: 2.5rem;
+}
+
+.show {
+  display: block;
+}
+
+.girar {
+  transform: rotate(45deg);
+}

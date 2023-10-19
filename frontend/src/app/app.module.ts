@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [{ path: '', component: HomepageComponent }];
 
@@ -30,6 +31,7 @@ const routes: Routes = [{ path: '', component: HomepageComponent }];
     MenuComponent,
     MenuItemComponent,
     LoginComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     SweetAlert2Module.forRoot(),

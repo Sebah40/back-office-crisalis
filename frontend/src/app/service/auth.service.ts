@@ -9,7 +9,7 @@ import { Login } from '../model/login';
   providedIn: 'root'
 })
 export class AuthService {
-  authURL = 'http://localhost:8080/auth/';
+  authURL = 'http://localhost:3000/auth/';
   constructor(private httpClient: HttpClient) { }
   
   public nuevo(newUser: NewUser): Observable<any> {

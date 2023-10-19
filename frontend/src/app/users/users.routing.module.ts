@@ -12,7 +12,7 @@ const routes: Routes = [
   },
   { path: 'user/edit/:username', component: UserFormComponent },
   { path: 'user/create', component: UserFormComponent },
-  { path: '', redirectTo: 'user', pathMatch: 'full' },
+  //{ path: '', redirectTo: 'login', pathMatch: 'full' },
 ];
 
 @NgModule({

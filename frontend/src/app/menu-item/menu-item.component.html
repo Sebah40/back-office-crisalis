@@ -1,4 +1,4 @@
-<a style="text-decoration: none;color: #FFF; font-weight: bold; display: inline-flex; gap: .75rem; align-items: center;" (click)="toggleMenu()" href="#">
+<a style="text-decoration: none;color: #FFF; font-weight: bold; display: inline-flex; gap: .75rem; align-items: center;" (click)="toggleMenu()" [routerLink]="item.enlace">
   <img #icono
   [src]="imagenUrl ? imagenUrl : imagenDefaultUrl" 
   alt="arrow"
@@ -8,7 +8,7 @@
 </a>
 <ul #opciones *ngIf="item.items" class="oculto">
   <li *ngFor="let opcion of item.items">
-    <a style="text-decoration:none; color: #FFF;" href="#">
+    <a style="text-decoration:none; color: #FFF;" [routerLink]="item.enlace">
       {{opcion.texto}}
     </a>
   </li>

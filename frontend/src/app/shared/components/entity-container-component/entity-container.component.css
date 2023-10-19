@@ -12,7 +12,8 @@
   background-color: #eae0d5cc;
   color: #22333b;
   height: max-content;
-  min-width: 80%;
+  min-width: 70%;
+  max-width: 90%;
 }
 
 .title {
@@ -30,4 +31,7 @@ td {
 }
 #custom-table {
   min-height: 100px;
+}
+#container-button {
+  width: 90%;
 }

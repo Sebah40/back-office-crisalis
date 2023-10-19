@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
+import { IUserGet } from 'src/app/users/model/UserGet.model';
 import { UserService } from 'src/app/users/services/user.service';
 
 @Component({
@@ -18,28 +19,35 @@ export class EntityContainerComponent<T extends object> {
     if (this.entities && this.entities.length > 0) {
       this.entityKeys = Object.keys(this.entities[0]) as (keyof T)[];
     }
+    console.log(this.entities);
   }
 
   getData(): any[] {
+    console.log(
+      this.entities.map((item) => this.entityKeys.map((key) => item[key]))
+    );
     return this.entities.map((item) => this.entityKeys.map((key) => item[key]));
   }
 
-  deleteUserHandler(username: { username: string }) {
-    this.userService.delete(username).subscribe({
-      next: (response) => {
-        console.log(response);
+  deleteUserHandler(entity: any) {
+    const user: { username: string } = { username: entity.username };
+    this.userService.deleteUser(user).subscribe({
+      next: (response: any) => {
+        this.userService.updateUserListData();
+        alert(response.mensaje);
       },
-      error: (error) => {
+      error: (error: any) => {
         console.log(error);
       },
     });
   }
 
-  redirectToEdit(username: string, rowData: string[]) {
+  redirectToEdit(entity: any) {
+    console.log(entity);
     const navigationExtras: NavigationExtras = {
-      state: rowData,
+      state: entity,
     };
-    this.router.navigate(['/user/edit', username], navigationExtras);
+    this.router.navigate(['/user/edit', entity['username']], navigationExtras);
   }
 
   goToCreateForm() {

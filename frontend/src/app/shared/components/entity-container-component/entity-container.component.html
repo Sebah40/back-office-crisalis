@@ -2,24 +2,26 @@
   <h2 class="title">Lista de {{ title }}</h2>
   <div class="rounded p-2 mx-4 d-flex flex-column w-100" id="container-list">
     <table class="table p-2" id="custom-table">
-      <thead id="custom-table">
-        <tr  id="custom-table">
-          <th class="text-center" *ngFor="let key of entityKeys">{{ key }}</th>
-          <th class="text-center" >Acciones</th>
+      <thead>
+        <tr>
+          <th style="background-color: transparent;" class="text-center" *ngFor="let key of entityKeys">{{ key }}</th>
+          <th style="background-color: transparent;" class="text-center">Acciones</th>
         </tr>
       </thead>
       <tbody>
-        <tr class="align-middle" *ngFor="let rowData of getData()">
-          <td *ngFor="let value of rowData">{{ value }}</td>
-          <td>
-            <button *ngIf="isEditable" class="btn btn-dark mx-1" (click)="redirectToEdit(rowData[1],rowData)" >Editar</button>
-            <button *ngIf="isEditable" (click)="deleteUserHandler({username:rowData[1]})"  class="btn btn-danger mx-1" >Eliminar</button>
+        <tr style="height: 20px;"></tr>
+        <tr class="align-middle" *ngFor="let entity of entities">
+          <td class="text-center" *ngFor="let key of entityKeys">{{ entity[key] }}</td>
+          <td class="d-flex justify-content-center">
+            <button *ngIf="isEditable" (click)="redirectToEdit(entity)" class="btn btn-dark mx-1" >Editar</button>
+            <button *ngIf="isEditable" (click)="deleteUserHandler(entity)" class="btn btn-danger mx-1">Eliminar</button>
           </td>
         </tr>
+        <tr style="height: 20px;"></tr>
       </tbody>
     </table>
   </div>
-  <div class="container my-3 p-0">
-    <button *ngIf="isEditable" class="btn btn-primary" (click)="goToCreateForm()" >Crear nuevo usuario</button>
+  <div class="container my-3 p-0" id="container-button">
+    <button *ngIf="isEditable" class="btn btn-primary" (click)="goToCreateForm()">Crear nuevo usuario</button>
   </div>
 </div>

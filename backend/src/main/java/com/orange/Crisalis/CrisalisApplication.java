@@ -7,7 +7,8 @@ import com.orange.Crisalis.repository.OrderDetailRepository;
 
 import com.orange.Crisalis.security.Entity.RoleEntity;
 import com.orange.Crisalis.security.Enums.RoleName;
-import com.orange.Crisalis.security.Repository.iRoleRepository;
+import com.orange.Crisalis.security.Repository.IRoleRepository;
+
 
 import com.orange.Crisalis.security.Service.RoleService;
 
@@ -32,7 +33,7 @@ public class CrisalisApplication {
 			ItemRepository itemRepository,
 
 			IUserRepository iusuarioRepository,
-			iRoleRepository roleRepo
+			IRoleRepository  roleRepo
 
 
 	) {

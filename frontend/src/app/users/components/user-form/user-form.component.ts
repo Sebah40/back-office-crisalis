@@ -38,9 +38,9 @@ export class UserFormComponent implements OnInit {
       const username = params['username'];
       if (username) {
         this.userEdit.username = username;
-        this.userEdit.name = state[0];
-        this.userEdit.email = state[2];
-        this.userEdit.roles = state[3] == 'Usuario' ? ['user'] : ['admin'];
+        this.userEdit.name = state.name;
+        this.userEdit.email = state.email;
+        this.userEdit.roles = state.role == 'Usuario' ? ['user'] : ['admin'];
       }
     });
 

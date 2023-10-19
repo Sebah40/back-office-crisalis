@@ -6,10 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="bdee6678-9cdd-4e6f-9ce2-359b60bd9bb9" name="Changes" comment="No se muestran los usuarios deshabilitados en el método getAll">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/CrisalisApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/orange/Crisalis/CrisalisApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Controller/UserController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Dto/EditUser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Entity/MainUser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Entity/UserEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Repository/IRoleRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Repository/IUserRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Service/RoleService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/orange/Crisalis/security/Service/UserService.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

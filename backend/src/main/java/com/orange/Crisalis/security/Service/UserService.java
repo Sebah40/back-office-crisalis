@@ -1,7 +1,7 @@
 package com.orange.Crisalis.security.Service;
 
 import com.orange.Crisalis.security.Entity.UserEntity;
-import com.orange.Crisalis.security.Repository.iUserRepository;
+import com.orange.Crisalis.security.Repository.IUserRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,25 +13,25 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class UserService {
     @Autowired
-    iUserRepository iusuarioRepository;
+    IUserRepository iuserRepository;
     
     public Optional<UserEntity> getByUserName(String username){
-        return iusuarioRepository.findByUsername(username);
+        return iuserRepository.findByUsername(username);
     }
     
     public boolean existsByUsername(String username){
-        return iusuarioRepository.existsByUsername(username);
+        return iuserRepository.existsByUsername(username);
     }
 
     public List<UserEntity> findAll(){
-        return iusuarioRepository.findAll();
+        return iuserRepository.findAll();
     }
     
     public boolean existsByEmail(String email){
-        return iusuarioRepository.existsByEmail(email);
+        return iuserRepository.existsByEmail(email);
     }
     
-    public void save(UserEntity userEntity){
-        iusuarioRepository.save(userEntity);
+        public void save(UserEntity userEntity){
+        iuserRepository.save(userEntity);
     }
 }

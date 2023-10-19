@@ -1,5 +1,7 @@
 package com.orange.Crisalis.security.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -31,6 +33,7 @@ public class UserEntity {
     @NotNull
     private String email;
     @NotNull
+    @JsonIgnore
     private String password;
     private boolean isActive;
 
@@ -58,7 +61,7 @@ public class UserEntity {
         this.id = id;
     }
 
-    public String getNombre() {
+    public String getName() {
         return name;
     }
 
@@ -110,10 +113,10 @@ public class UserEntity {
 
 
 
-    public List getUser(){
-        if(this.getRoles().toArray().length == 2)                                               // Esto va a dar problemas si decidimos crear más roles en un futuro
-            return List.of(new String[]{this.getNombre(),this.getUsername(), this.getEmail(), "Administrador"});
-        return List.of(new String[]{this.getNombre(),this.getUsername(), this.getEmail(), "Usuario"});
-
-    }
+//    public List getUser(){
+//        if(this.getRoles().toArray().length == 2)                                               // Esto va a dar problemas si decidimos crear más roles en un futuro
+//            return List.of(new String[]{this.getName(),this.getUsername(), this.getEmail(), "Administrador"});
+//        return List.of(new String[]{this.getName(),this.getUsername(), this.getEmail(), "Usuario"});
+//
+//    }
 }

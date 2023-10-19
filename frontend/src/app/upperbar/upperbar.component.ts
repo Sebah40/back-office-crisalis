@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { TokenService } from '../service/token.service';
 
 @Component({
   selector: 'app-upperbar',
@@ -13,6 +14,23 @@ export class UpperbarComponent {
   
   showSun:string = localStorage.getItem("theme") != 'light' ? 'block' : 'none'
   showMoon:string = localStorage.getItem("theme") != 'dark' ? 'block' : 'none'
+
+  constructor(private tokenService : TokenService) { }
+  isLogged = false;
+  name = "username"
+  ngOnInit(): void {
+    if (this.tokenService.getToken()) {
+      this.isLogged = true;
+      this.name = this.tokenService.getUserName()
+    } else {
+      this.isLogged = false;
+    }
+  }
+  onLogOut(): void {
+    this.tokenService.logOut();
+    window.location.reload();
+  }
+
   changeTheme() {
     this.sun = document.querySelector("#sun");
     this.moon = document.querySelector("#moon");

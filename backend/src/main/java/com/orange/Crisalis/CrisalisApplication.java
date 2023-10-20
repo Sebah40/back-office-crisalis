@@ -4,9 +4,16 @@ import com.orange.Crisalis.model.Item;
 import com.orange.Crisalis.model.OrderDetail;
 import com.orange.Crisalis.repository.ItemRepository;
 import com.orange.Crisalis.repository.OrderDetailRepository;
-import com.orange.Crisalis.security.Entity.Usuario;
-import com.orange.Crisalis.security.Repository.iUsuarioRepository;
-import com.orange.Crisalis.security.Service.UsuarioService;
+
+import com.orange.Crisalis.security.Entity.RoleEntity;
+import com.orange.Crisalis.security.Enums.RoleName;
+import com.orange.Crisalis.security.Repository.IRoleRepository;
+
+
+import com.orange.Crisalis.security.Service.RoleService;
+
+import com.orange.Crisalis.security.Repository.IUserRepository;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,14 +25,17 @@ import java.math.BigDecimal;
 public class CrisalisApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CrisalisApplication.class, args);
-	}
-
+        SpringApplication.run(CrisalisApplication.class, args);
+    }
 	@Bean
 	CommandLineRunner commandLineRunner(
 			OrderDetailRepository orderDetailRepository,
 			ItemRepository itemRepository,
-			iUsuarioRepository iusuarioRepository
+
+			IUserRepository iusuarioRepository,
+			IRoleRepository  roleRepo
+
+
 	) {
 		return args -> {
 			Item item = itemRepository
@@ -38,8 +48,12 @@ public class CrisalisApplication {
 							null,
 							item.getPrice(),
 							4.0,
-							item));
+							item)
+					);
 			System.out.println(orderDetail.toString());
+
+			RoleEntity admin = roleRepo.save(new RoleEntity(RoleName.ROLE_ADMIN));
+			RoleEntity user = roleRepo.save(new RoleEntity(RoleName.ROLE_USER));
 		};
 
 	}

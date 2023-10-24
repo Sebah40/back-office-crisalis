@@ -55,8 +55,5 @@ public class CrisalisApplication {
 			RoleEntity admin = roleRepo.save(new RoleEntity(RoleName.ROLE_ADMIN));
 			RoleEntity user = roleRepo.save(new RoleEntity(RoleName.ROLE_USER));
 		};
-
 	}
-
-
 }

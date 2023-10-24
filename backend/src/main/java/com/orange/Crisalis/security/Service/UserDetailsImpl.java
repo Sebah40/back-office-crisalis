@@ -18,6 +18,5 @@ public class UserDetailsImpl implements UserDetailsService{
         UserEntity userEntity = userService.getByUserName(username).get();
         return MainUser.build(userEntity);
     }
-    
-    
+
 }

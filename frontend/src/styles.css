@@ -20,8 +20,8 @@ body {
   --banner-h2: rgb(34, 51, 59);
 }
 [data-theme="dark"] {
-  --background: rgb(34, 51, 59, 0.9);
-  --banner-background: rgb(34, 51, 59, 0.9);
+  --background: rgb(58, 88, 102);
+  --banner-background: rgb(34, 51, 59);
   --banner-h2: #c6ac8f;
 }
 body {
@@ -31,4 +31,7 @@ body {
 .banner {
   background-color: var(--banner-background);
   color: var(--banner-h2);
+}
+.home {
+  background-color: var(--background);
 }

@@ -15,17 +15,19 @@ public class EnterpriseEntity extends ClientEntity {
     private String cuit;
     @NotNull
     private LocalDate date;
+    private boolean isActive;
 
 /*    private PersonEntity personEntity;    */
 
     public EnterpriseEntity() {
     }
 
-    public EnterpriseEntity(int id, boolean beneficiary, String businessName, String cuit, LocalDate date) {
-        super(id, beneficiary);
+    public EnterpriseEntity(boolean beneficiary, String businessName, String cuit, LocalDate date, boolean isActive) {
+        super(beneficiary);
         this.businessName = businessName;
         this.cuit = cuit;
         this.date = date;
+        this.isActive = isActive;
     }
 
     public String getBusinessName() {
@@ -50,5 +52,13 @@ public class EnterpriseEntity extends ClientEntity {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 }

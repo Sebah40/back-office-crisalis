@@ -23,8 +23,7 @@ public class ClientEntity {
     public ClientEntity() {
     }
 
-    public ClientEntity(int id, boolean beneficiary) {
-        this.id = id;
+    public ClientEntity(boolean beneficiary) {
         this.beneficiary = beneficiary;
     }
 

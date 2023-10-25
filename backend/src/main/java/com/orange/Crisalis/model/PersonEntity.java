@@ -1,22 +1,28 @@
 package com.orange.Crisalis.model;
 import com.orange.Crisalis.model.ClientEntity;
 import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class PersonEntity extends ClientEntity {
 
+    @NotNull
     private String lastName;
+    @NotNull
     private String firstName;
+    @NotNull
     private String dni;
+    private boolean isActive;
 
     public PersonEntity() {
     }
 
-    public PersonEntity(int id, boolean beneficiary, String lastName, String firstName, String dni) {
-        super(id, beneficiary);
+    public PersonEntity(boolean beneficiary, String lastName, String firstName, String dni, boolean isActive) {
+        super(beneficiary);
         this.lastName = lastName;
         this.firstName = firstName;
         this.dni = dni;
+        this.isActive = isActive;
     }
 
     public String getLastName() {
@@ -41,5 +47,13 @@ public class PersonEntity extends ClientEntity {
 
     public void setDni(String dni) {
         this.dni = dni;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 }

@@ -2,24 +2,28 @@ package com.orange.Crisalis.model.dto;
 
 import com.orange.Crisalis.model.EnterpriseEntity;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
-public class EnterpriseDTO implements Serializable {
+public class NewEnterpriseDTO {
 
     private String businessName;
     private String cuit;
-    private int id;
     private LocalDate date;
+    private boolean beneficiary;
+    private boolean active;
 
-    public EnterpriseDTO() {
+    public NewEnterpriseDTO() {
     }
 
-    public EnterpriseDTO(EnterpriseEntity enterprise) {
-        this.id = enterprise.getId();
+    public NewEnterpriseDTO(EnterpriseEntity enterprise){
         this.businessName = enterprise.getBusinessName();
         this.cuit = enterprise.getCuit();
-        this.date =enterprise.getDate();
+        this.date = enterprise.getDate();
+        this.beneficiary = enterprise.isBeneficiary();
+    }
+
+    public boolean isActive() {
+        return active;
     }
 
     public String getBusinessName() {
@@ -30,11 +34,11 @@ public class EnterpriseDTO implements Serializable {
         return cuit;
     }
 
-    public int getId() {
-        return id;
-    }
-
     public LocalDate getDate() {
         return date;
+    }
+
+    public boolean isBeneficiary() {
+        return beneficiary;
     }
 }

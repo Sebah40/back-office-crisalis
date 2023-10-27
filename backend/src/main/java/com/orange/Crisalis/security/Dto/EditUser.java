@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package com.orange.Crisalis.security.Dto;
-import com.orange.Crisalis.security.Entity.RoleEntity;
 
 import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
@@ -20,7 +19,7 @@ public class EditUser {
     private String name;
     private String password;
     private String email;
-
+    private Set<String> roles = new HashSet<>();
 
 
     public String getUsername() {
@@ -51,4 +50,11 @@ public class EditUser {
         this.email = email;
     }
 
+    public Set<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<String> roles) {
+        this.roles = roles;
+    }
 }

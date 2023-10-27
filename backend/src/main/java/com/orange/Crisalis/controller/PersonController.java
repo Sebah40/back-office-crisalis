@@ -1,6 +1,4 @@
 package com.orange.Crisalis.controller;
-
-
 import com.orange.Crisalis.model.PersonEntity;
 import com.orange.Crisalis.model.dto.NewPersonDTO;
 import com.orange.Crisalis.model.dto.PersonDTO;
@@ -30,12 +28,12 @@ public class PersonController {
     @PostMapping("/create")
     public ResponseEntity<?> create(@Valid @RequestBody NewPersonDTO newPersonDTO, BindingResult bindingResult){
         if(bindingResult.hasErrors())
-            return new ResponseEntity(new Message("Error en el formato de los campos"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new Message("Error en el formato de los campos"),
+                    HttpStatus.BAD_REQUEST);
 
         if(personService.existsByDni(newPersonDTO.getDni()))
-            return new ResponseEntity(new Message("Este DNI se encuentra asociado a otra persona"), HttpStatus.BAD_REQUEST);
-
-        /*        LocalDate date = LocalDate.now();*/
+            return new ResponseEntity(new Message("Este DNI se encuentra asociado a otra persona"),
+                    HttpStatus.BAD_REQUEST);
 
         PersonEntity person = new PersonEntity(newPersonDTO.isBeneficiary(), newPersonDTO.getLastName(),
                 newPersonDTO.getFirstName(), newPersonDTO.getDni(), newPersonDTO.isActive());

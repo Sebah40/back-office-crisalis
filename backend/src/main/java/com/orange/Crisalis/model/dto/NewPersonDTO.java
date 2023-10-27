@@ -9,6 +9,7 @@ public class NewPersonDTO {
     private String dni;
     private boolean beneficiary;
     private boolean active;
+    private boolean client;
 
     public NewPersonDTO() {
     }
@@ -40,4 +41,5 @@ public class NewPersonDTO {
     public boolean isActive() {
         return active;
     }
+
 }

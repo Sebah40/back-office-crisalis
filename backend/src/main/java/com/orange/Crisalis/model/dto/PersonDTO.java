@@ -11,6 +11,7 @@ public class PersonDTO implements Serializable {
     private String dni;
     private int id;
     private boolean beneficiary;
+    private boolean client;
 
     public PersonDTO() {
     }

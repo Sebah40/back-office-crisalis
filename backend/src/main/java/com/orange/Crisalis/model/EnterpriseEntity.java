@@ -1,8 +1,12 @@
 package com.orange.Crisalis.model;
 
 import com.orange.Crisalis.model.ClientEntity;
+import lombok.Getter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
@@ -16,18 +20,29 @@ public class EnterpriseEntity extends ClientEntity {
     @NotNull
     private LocalDate date;
     private boolean isActive;
+    @Getter
+    private String firstNameResponsible;
+    @Getter
+    private String lastNameResponsible;
+    @Getter
+    private String dniResponsible;
 
-/*    private PersonEntity personEntity;    */
+/*    @Getter
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private PersonEntity personEntity;*/
 
     public EnterpriseEntity() {
     }
 
-    public EnterpriseEntity(boolean beneficiary, String businessName, String cuit, LocalDate date, boolean isActive) {
+    public EnterpriseEntity(boolean beneficiary, String businessName, String cuit, LocalDate date, boolean isActive, String firstNameResponsible, String lastNameResponsible, String dniResponsible) {
         super(beneficiary);
         this.businessName = businessName;
         this.cuit = cuit;
         this.date = date;
         this.isActive = isActive;
+        this.firstNameResponsible = firstNameResponsible;
+        this.lastNameResponsible = lastNameResponsible;
+        this.dniResponsible = dniResponsible;
     }
 
     public String getBusinessName() {
@@ -60,5 +75,17 @@ public class EnterpriseEntity extends ClientEntity {
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    public void setFirstNameResponsible(String firstNameResponsible) {
+        this.firstNameResponsible = firstNameResponsible;
+    }
+
+    public void setLastNameResponsible(String lastNameResponsible) {
+        this.lastNameResponsible = lastNameResponsible;
+    }
+
+    public void setDniResponsible(String dniResponsible) {
+        this.dniResponsible = dniResponsible;
     }
 }

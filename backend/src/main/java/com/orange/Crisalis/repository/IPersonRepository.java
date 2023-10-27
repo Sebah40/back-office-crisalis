@@ -3,10 +3,12 @@ package com.orange.Crisalis.repository;
 import com.orange.Crisalis.model.EnterpriseEntity;
 import com.orange.Crisalis.model.PersonEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public interface IPersonRepository extends JpaRepository<PersonEntity, Integer> {
 
     Optional<PersonEntity> findById(int id);

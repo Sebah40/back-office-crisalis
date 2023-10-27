@@ -35,17 +35,19 @@ public class EnterpriseController {
         if(enterpriseService.existsByBusinessName(newEnterpriseDTO.getBusinessName()))
             return new ResponseEntity(new Message("Esta razón social se encuentra asociada a otra empresa"), HttpStatus.BAD_REQUEST);
 
-/*        LocalDate date = LocalDate.now();*/
+        if(enterpriseService.existsByBusinessName(newEnterpriseDTO.getBusinessName()))
+            return new ResponseEntity(new Message("Esta razón social se encuentra asociada a otra empresa"), HttpStatus.BAD_REQUEST);
+
 
         EnterpriseEntity enterprise = new EnterpriseEntity(newEnterpriseDTO.isBeneficiary(),
                 newEnterpriseDTO.getBusinessName(), newEnterpriseDTO.getCuit(), newEnterpriseDTO.getDate(),
-                newEnterpriseDTO.isActive());
+                newEnterpriseDTO.isActive(), newEnterpriseDTO.getFirstNameResponsible(),
+                newEnterpriseDTO.getLastNameResponsible(), newEnterpriseDTO.getDniResponsible());
 
         enterpriseService.save(enterprise);
 
         return new ResponseEntity(new Message("Empresa guardada satisfactoriamente"),HttpStatus.CREATED);
     }
-
 
     @GetMapping("/getAll")
     public ResponseEntity<List<EnterpriseDTO>> listEnterprise(){
@@ -63,6 +65,9 @@ public class EnterpriseController {
         EnterpriseEntity enterprise = iEnterpriseRepository.findById(enterpriseDTO.getId()).get();
         enterprise.setCuit(enterpriseDTO.getCuit());
         enterprise.setBusinessName(enterpriseDTO.getBusinessName());
+        enterprise.setFirstNameResponsible(enterpriseDTO.getFirstNameResponsible());
+        enterprise.setLastNameResponsible(enterpriseDTO.getLastNameResponsible());
+        enterprise.setDniResponsible(enterpriseDTO.getDniResponsible());
 
         /*             IMPORTANTE:
         * FALTA ACÁ AGREGAR PARA EDITAR LA PERSONA RESPONSABLE DE LA EMEPRESA,

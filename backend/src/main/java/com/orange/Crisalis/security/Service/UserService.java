@@ -18,6 +18,10 @@ public class UserService {
     public Optional<UserEntity> getByUserName(String username){
         return iuserRepository.findByUsername(username);
     }
+
+    public Optional<UserEntity> getByEmail(String email){
+        return iuserRepository.findByEmail(email);
+    }
     
     public boolean existsByUsername(String username){
         return iuserRepository.existsByUsername(username);
@@ -31,7 +35,7 @@ public class UserService {
         return iuserRepository.existsByEmail(email);
     }
     
-        public void save(UserEntity userEntity){
+    public void save(UserEntity userEntity){
         iuserRepository.save(userEntity);
     }
 }

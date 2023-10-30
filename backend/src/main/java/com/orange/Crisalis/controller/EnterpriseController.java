@@ -8,6 +8,7 @@ import com.orange.Crisalis.service.EnterpriseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
@@ -24,6 +25,7 @@ public class EnterpriseController {
     @Autowired
     IEnterpriseRepository iEnterpriseRepository;
 
+    @PreAuthorize("hasAnyRole('USER' ,'ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<?> create(@Valid @RequestBody NewEnterpriseDTO newEnterpriseDTO, BindingResult bindingResult){
         if(bindingResult.hasErrors())
@@ -49,6 +51,7 @@ public class EnterpriseController {
         return new ResponseEntity(new Message("Empresa guardada satisfactoriamente"),HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasAnyRole('USER' ,'ADMIN')")
     @GetMapping("/getAll")
     public ResponseEntity<List<EnterpriseDTO>> listEnterprise(){
         List<EnterpriseEntity> enterprises = iEnterpriseRepository.findAll();
@@ -58,6 +61,7 @@ public class EnterpriseController {
                 .collect(Collectors.toList()));
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/edit")
     public ResponseEntity<?> editEnterpriseHandler(@Valid @RequestBody EnterpriseDTO enterpriseDTO, BindingResult bindingResult){
         if(bindingResult.hasErrors())
@@ -77,6 +81,7 @@ public class EnterpriseController {
         return new ResponseEntity(new Message("Editado exitosamente"),HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/disable")
     public ResponseEntity<?> disable(@Valid @RequestBody EnterpriseDTO enterpriseDTO, BindingResult bindingResult){
         if(bindingResult.hasErrors())

@@ -8,6 +8,7 @@ import com.orange.Crisalis.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +26,7 @@ public class PersonController {
     @Autowired
     IPersonRepository iPersonRepository;
 
+    @PreAuthorize("hasAnyRole('USER' ,'ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<?> create(@Valid @RequestBody NewPersonDTO newPersonDTO, BindingResult bindingResult){
         if(bindingResult.hasErrors())
@@ -43,6 +45,7 @@ public class PersonController {
         return new ResponseEntity(new Message("Persona guardada satisfactoriamente"),HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasAnyRole('USER' ,'ADMIN')")
     @GetMapping("/getAll")
     public ResponseEntity<List<PersonDTO>> listPerson(){
         List<PersonEntity> persons = iPersonRepository.findAll();
@@ -52,6 +55,7 @@ public class PersonController {
                 .collect(Collectors.toList()));
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/edit")
     public ResponseEntity<?> editPersonHandler(@Valid @RequestBody PersonDTO personDTO, BindingResult bindingResult){
         if(bindingResult.hasErrors())
@@ -65,6 +69,7 @@ public class PersonController {
         return new ResponseEntity(new Message("Editado exitosamente"), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/disable")
     public ResponseEntity<?> disable(@Valid @RequestBody PersonDTO personDTO, BindingResult bindingResult){
         if(bindingResult.hasErrors())

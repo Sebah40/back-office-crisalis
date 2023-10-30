@@ -29,6 +29,11 @@ public class Item {
     private Long id;
     private String name;
     private BigDecimal price;
+    @OneToMany(
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL
+    )
+    private Set<ItemTax> orderDetails = new HashSet<>();
 
 /*    @OneToMany(
             fetch = FetchType.EAGER,

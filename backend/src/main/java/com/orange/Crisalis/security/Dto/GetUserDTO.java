@@ -4,14 +4,14 @@ import com.orange.Crisalis.security.Entity.UserEntity;
 
 import java.io.Serializable;
 
-public class GetUser implements Serializable {
+public class GetUserDTO implements Serializable {
     private String username;
     private String name;
     private String email;
     private String role;
 
 
-    public GetUser(UserEntity user) {
+    public GetUserDTO(UserEntity user) {
         this.username = user.getUsername();
         this.name = user.getName();
         this.email = user.getEmail();

@@ -50,7 +50,6 @@ public class UserEntity {
         this.email = email;
         this.password = password;
         this.isActive = isActive;
-
     }
     
     public int getId() {

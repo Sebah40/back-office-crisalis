@@ -2,7 +2,7 @@ package com.orange.Crisalis.security.Controller;
 
 import com.orange.Crisalis.security.Dto.DisableUser;
 import com.orange.Crisalis.security.Dto.EditUser;
-import com.orange.Crisalis.security.Dto.GetUser;
+import com.orange.Crisalis.security.Dto.GetUserDTO;
 import com.orange.Crisalis.security.Entity.RoleEntity;
 import com.orange.Crisalis.security.Entity.UserEntity;
 import com.orange.Crisalis.security.Enums.RoleName;
@@ -49,11 +49,11 @@ public class UserController {
 //    }
 
     @GetMapping("/getAll")
-    public ResponseEntity<List<GetUser>> listUser(){
+    public ResponseEntity<List<GetUserDTO>> listUser(){
         List<UserEntity> users = userService.findAll();
         return ResponseEntity.ok(users.stream()
                 .filter(user -> user.isActive())
-                .map(GetUser::new)
+                .map(GetUserDTO::new)
                 .collect(Collectors.toList()));
     }
     @PostMapping("/editPassword")

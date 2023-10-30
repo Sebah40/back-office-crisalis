@@ -16,4 +16,8 @@ public interface ITaxService {
     void updateTax(TaxDto tax, Integer id);
 
     void deleteTax(Integer id);
+
+    boolean verifyTax(TaxDto taxDto);
+
+    boolean verifyTaxById(Integer id);
 }

@@ -1,6 +1,7 @@
 package com.orange.Crisalis.controller;
 
 import com.orange.Crisalis.dto.TaxDto;
+import com.orange.Crisalis.exceptions.ResponseMessage;
 import com.orange.Crisalis.model.Tax;
 import com.orange.Crisalis.security.Entity.UserEntity;
 import com.orange.Crisalis.security.Service.UserService;
@@ -39,7 +40,10 @@ public class TaxController {
     @PreAuthorize("hasAnyRole('USER' ,'ADMIN')")
     @GetMapping("/{id}")
     public TaxDto getTaxById(@PathVariable("id") Integer id) {
-        return taxService.getTaxById(id);
+        if(taxService.verifyTaxById(id)) {
+            return taxService.getTaxById(id);
+        }
+        return null;
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -47,10 +51,16 @@ public class TaxController {
     @PostMapping("/create")
     public ResponseEntity<Object> createTax(@Valid @RequestBody TaxDto taxDto, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
-            return new ResponseEntity<Object>("Hubo un error en el envío", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ResponseMessage("Hubo un error en el envío", HttpStatus.BAD_REQUEST), HttpStatus.BAD_REQUEST);
         }
-        taxService.saveTax(taxDto);
-        return new ResponseEntity<>("Creado con éxito", HttpStatus.OK);
+        if(taxService.verifyTax(taxDto)) {
+            taxService.saveTax(taxDto);
+            return new ResponseEntity<>(new ResponseMessage("Creado con éxito", HttpStatus.OK), HttpStatus.OK);
+        } else {
+
+            return new ResponseEntity<>(new ResponseMessage("Impuesto existente", HttpStatus.IM_USED), HttpStatus.IM_USED);
+        }
+
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -58,17 +68,28 @@ public class TaxController {
     @PutMapping("/update/{id}")
     public ResponseEntity<Object> updateTax(@RequestBody TaxDto taxDto, @PathVariable("id") Integer id, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
-            return new ResponseEntity<Object>("Hubo un error en el envío", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<Object>(new ResponseMessage("Hubo un error en el envío", HttpStatus.BAD_REQUEST), HttpStatus.BAD_REQUEST);
         }
-        taxService.updateTax(taxDto, id);
-        return new ResponseEntity<>("Creado con éxito", HttpStatus.OK);
+        if(taxService.verifyTaxById(id)) {
+            taxService.updateTax(taxDto, id);
+            return new ResponseEntity<>(new ResponseMessage("Editado con éxito", HttpStatus.OK), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new ResponseMessage("El impuesto con el ID solicitado no existe", HttpStatus.NOT_FOUND)
+                    , HttpStatus.NOT_FOUND);
+        }
+
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
     @PatchMapping("/delete/{id}")
     public ResponseEntity<Object> deleteTax(@PathVariable("id") Integer id) {
-        taxService.deleteTax(id);
-        return new ResponseEntity<>("Impuesto eliminado", HttpStatus.OK);
+        if(taxService.verifyTaxById(id)) {
+            taxService.deleteTax(id);
+            return new ResponseEntity<>(new ResponseMessage("Eliminado con éxito", HttpStatus.OK), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new ResponseMessage("El impuesto con el ID solicitado no existe", HttpStatus.NOT_FOUND)
+                    , HttpStatus.NOT_FOUND);
+        }
     }
 
 

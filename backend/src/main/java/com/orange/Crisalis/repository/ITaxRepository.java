@@ -17,7 +17,11 @@ public interface ITaxRepository extends JpaRepository<Tax, Integer> {
     @Query(value = "SELECT DISTINCT * FROM tax WHERE is_active = 1", nativeQuery = true)
     List<Tax> findAllTaxes();
 
-    Optional<Tax> findTaxById(Integer id);
+    @Query(value = "SELECT * FROM tax  WHERE id = :id AND is_active = 1", nativeQuery = true)
+    Optional<Tax> findTaxById(@Param("id") Integer id);
+
+    @Query(value = "SELECT * FROM tax  WHERE tax_name LIKE %:name% AND is_active = 1", nativeQuery = true)
+    Optional<Tax> findTaxByTaxName(String name);
 
     @Transactional
     @Modifying

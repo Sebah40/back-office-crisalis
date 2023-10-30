@@ -19,6 +19,18 @@ public class TaxServiceImpl implements ITaxService {
         this.taxRepository = taxRepository;
     }
 
+    public final boolean verifyTax(TaxDto taxDto) {
+        if(taxDto != null && taxDto.getTaxPercentage() != null && taxDto.getTaxName() != null) {
+            return taxRepository.findTaxByTaxName(taxDto.getTaxName()).isEmpty();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean verifyTaxById(Integer id) {
+        return taxRepository.findTaxById(id).isPresent();
+    }
+
     @Override
     public List<TaxDto> getTaxes() {
         List<TaxDto> taxList = taxRepository.findAllTaxes().stream().map(TaxDto::new).collect(Collectors.toList());;
@@ -46,6 +58,9 @@ public class TaxServiceImpl implements ITaxService {
         tax.setTaxPercentage(taxDto.getTaxPercentage());
         taxRepository.updateTax(id, tax.getTaxName(), tax.getTaxPercentage());
     }
+
+
+
 
     @Override
     public void deleteTax(Integer id) {

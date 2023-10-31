@@ -5,7 +5,7 @@
       <thead>
         <tr>
           <th style="background-color: transparent;" class="text-center" *ngFor="let key of entityKeys">{{ key }}</th>
-          <th style="background-color: transparent;" class="text-center">Acciones</th>
+          <th *ngIf="entities.length" style="background-color: transparent;" class="text-center">Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -14,7 +14,7 @@
           <td class="text-center" *ngFor="let key of entityKeys">{{ entity[key] }}</td>
           <td class="d-flex justify-content-center">
             <button *ngIf="isEditable" (click)="redirectToEdit(entity)" class="btn btn-dark mx-1" >Editar</button>
-            <button *ngIf="isEditable" (click)="deleteUserHandler(entity)" class="btn btn-danger mx-1">Eliminar</button>
+            <button *ngIf="isEditable" (click)="deleteHandler(entity)" class="btn btn-danger mx-1">Eliminar</button>
           </td>
         </tr>
         <tr style="height: 20px;"></tr>

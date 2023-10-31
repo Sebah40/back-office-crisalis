@@ -1,5 +1,6 @@
 package com.orange.Crisalis.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,9 +26,14 @@ public class Tax {
 
     private boolean isActive = true;
 
-    @OneToMany(mappedBy = "tax")
-    @Getter(value = AccessLevel.NONE)
-    private Set<ItemTax> itemTaxes;
+    @ManyToMany(fetch = FetchType.LAZY,
+        cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+        },
+        mappedBy = "taxes")
+    @JsonIgnore
+    private Set<SellableGood> sellableGoods;
 
     public Tax(String taxName, Double taxPercentage) {
         this.taxName = taxName;

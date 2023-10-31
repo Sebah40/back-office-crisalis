@@ -29,6 +29,7 @@ public class SellableGood {
   )
   private Long id;
 
+  @Column(unique=true)
   @NotNull
   private String name;
 

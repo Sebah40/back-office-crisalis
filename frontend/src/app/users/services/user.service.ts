@@ -5,6 +5,9 @@ import { IUser } from '../model/User.model';
 import { ResponseCreateUser } from '../interfaces/ResponseCreateUser.type';
 import { IUserGet } from '../model/UserGet.model';
 
+type User = { username: string };
+type Message = { mensaje: string };
+
 @Injectable({
   providedIn: 'root',
 })
@@ -38,9 +41,9 @@ export class UserService {
     );
   }
 
-  deleteUser(username: { username: string }): Observable<{ mensaje: string }> {
+  delete(username: User): Observable<Message> {
     console.log(username);
-    return this.http.post<{ mensaje: string }>(`${this.URL}/disable`, username);
+    return this.http.post<Message>(`${this.URL}/disable`, username);
   }
 
   edit(user: IUser): Observable<ResponseCreateUser> {

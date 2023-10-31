@@ -1,2 +1,6 @@
-<app-entity-container-component [entities]="userListData" [title]="'usuarios'" [isEditable]="editableValue"></app-entity-container-component>
-<!-- <button class="btn btn-primary " (click)="goToCreateForm()" >Crear nuevo usuario</button> -->
+<app-entity-container-component 
+[entities]="userListData" [title]="'usuarios'" 
+[isEditable]="editableValue" pathCreateEntity="/user/create" 
+pathEditEntity="/user/edit" (entityToDelete)="deleteUser($event)"
+entityKeyToRedirect="'username'"></app-entity-container-component>
+

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { IUserGet } from '../../model/UserGet.model';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -12,7 +11,7 @@ export class UserListComponent implements OnInit {
   public userListData: IUserGet[] = [];
   public editableValue: boolean = true;
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(public userService: UserService) {}
 
   ngOnInit(): void {
     this.userService.userListData$.subscribe((users) => {
@@ -24,7 +23,18 @@ export class UserListComponent implements OnInit {
       this.userListData = users;
     });
   }
-  // goToCreateForm() {
-  //   this.router.navigate(['/user/create']);
-  // }
+  deleteUser(entity: any) {
+    console.log('userlist', entity);
+    const user: { username: string } = { username: entity.username };
+    console.log('userList', user);
+    this.userService.delete(user).subscribe({
+      next: (response: any) => {
+        this.userService.updateUserListData();
+        alert(response.mensaje);
+      },
+      error: (error: any) => {
+        console.log(error);
+      },
+    });
+  }
 }

@@ -1,7 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
-import { IUserGet } from 'src/app/users/model/UserGet.model';
-import { UserService } from 'src/app/users/services/user.service';
 
 @Component({
   selector: 'app-entity-container-component',
@@ -10,11 +8,19 @@ import { UserService } from 'src/app/users/services/user.service';
 })
 export class EntityContainerComponent<T extends object> {
   @Input() entities: T[] = [];
-  entityKeys: (keyof T)[] = [];
   @Input() title: string = '';
+  @Input() entityKeyToRedirect: string = '';
+  @Input() pathCreateEntity: string = '';
+  @Input() pathEditEntity: string = '';
+  @Input() buttonText: string = '';
   @Input() isEditable: boolean = false;
+  @Input() deleteEntity?: (entity: any) => void;
+  @Output() entityToDelete: EventEmitter<Object>;
+  entityKeys: (keyof T)[] = [];
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private router: Router) {
+    this.entityToDelete = new EventEmitter();
+  }
   ngOnChanges() {
     if (this.entities && this.entities.length > 0) {
       this.entityKeys = Object.keys(this.entities[0]) as (keyof T)[];
@@ -29,17 +35,18 @@ export class EntityContainerComponent<T extends object> {
     return this.entities.map((item) => this.entityKeys.map((key) => item[key]));
   }
 
-  deleteUserHandler(entity: any) {
-    const user: { username: string } = { username: entity.username };
-    this.userService.deleteUser(user).subscribe({
-      next: (response: any) => {
-        this.userService.updateUserListData();
-        alert(response.mensaje);
-      },
-      error: (error: any) => {
-        console.log(error);
-      },
-    });
+  deleteHandler(entity: any) {
+    // const user: { username: string } = { username: entity.username };
+    // this.userService.deleteUser(user).subscribe({
+    //   next: (response: any) => {
+    //     this.userService.updateUserListData();
+    //     alert(response.mensaje);
+    //   },
+    //   error: (error: any) => {
+    //     console.log(error);
+    //   },
+    // });
+    this.entityToDelete.emit(entity);
   }
 
   redirectToEdit(entity: any) {
@@ -47,10 +54,13 @@ export class EntityContainerComponent<T extends object> {
     const navigationExtras: NavigationExtras = {
       state: entity,
     };
-    this.router.navigate(['/user/edit', entity['username']], navigationExtras);
+    this.router.navigate(
+      [this.pathEditEntity, entity[this.entityKeyToRedirect]],
+      navigationExtras
+    );
   }
 
   goToCreateForm() {
-    this.router.navigate(['/user/create']);
+    this.router.navigate([this.pathCreateEntity]);
   }
 }

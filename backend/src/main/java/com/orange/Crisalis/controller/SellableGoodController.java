@@ -30,64 +30,64 @@ public class SellableGoodController {
 
   @PreAuthorize("hasAnyRole('USER' ,'ADMIN')")
   @GetMapping("/getAll")
-  public List<SellableGood> getAllSalableGoods() {
+  public List<SellableGood> getAllSellableGoods() {
     return sellableGoodService.findAll();
   }
   @PreAuthorize("hasAnyRole('USER' ,'ADMIN')")
   @GetMapping("/read")
-  public SellableGood getSalableGoodById(@RequestBody Long id) throws Exception {
+  public SellableGood getSellableGoodById(@RequestBody Long id) throws Exception {
     return sellableGoodService.findById(id).orElseThrow(() -> new Exception("Producto/Servicio con id:" + id+" no se encontro."));
   }
   @PreAuthorize("hasRole('ADMIN')")
   @Transactional
   @PostMapping("/create")
-  public ResponseEntity<SellableGood> createSalableGood(@RequestBody SellableGood sellableGood) {
+  public ResponseEntity<SellableGood> createSellableGood(@RequestBody SellableGood sellableGood) {
     SellableGood newSellableGood = sellableGoodService.save(sellableGood);
     return new ResponseEntity<>(newSellableGood, HttpStatus.CREATED);
   }
   @PreAuthorize("hasRole('ADMIN')")
   @Transactional
   @PutMapping("/edit")
-  public ResponseEntity<?> updateSalableGoods(@RequestBody SellableGood sellableGood) throws Exception {
-    SellableGood existingSalableGood = sellableGoodService.findById(sellableGood.getId()).orElseThrow(() -> new Exception("Product not found with id: " + sellableGood.getId()));
-    existingSalableGood.setName(sellableGood.getName());
-    existingSalableGood.setType(sellableGood.getType());
-    existingSalableGood.setPrice(sellableGood.getPrice());
-    existingSalableGood.setDescription(sellableGood.getDescription());
-    existingSalableGood.setActive(sellableGood.isActive());
-    existingSalableGood.setTaxes(sellableGood.getTaxes());
+  public ResponseEntity<?> updateSellableGoods(@RequestBody SellableGood sellableGood) throws Exception {
+    SellableGood existingSellableGood = sellableGoodService.findById(sellableGood.getId()).orElseThrow(() -> new Exception("Product not found with id: " + sellableGood.getId()));
+    existingSellableGood.setName(sellableGood.getName());
+    existingSellableGood.setType(sellableGood.getType());
+    existingSellableGood.setPrice(sellableGood.getPrice());
+    existingSellableGood.setDescription(sellableGood.getDescription());
+    existingSellableGood.setActive(sellableGood.isActive());
+    existingSellableGood.setTaxes(sellableGood.getTaxes());
     return new ResponseEntity(new Message("Editado exitosamente"), HttpStatus.OK);
   }
   @PreAuthorize("hasRole('ADMIN')")
   @Transactional
   @PutMapping("/disable")
-  public ResponseEntity<?> deleteSalableGood(@RequestBody Long id) throws Exception {
-    SellableGood existingSalableGood = sellableGoodService.findById(id).orElseThrow(() -> new Exception("Producto no encontrado id: " + id));
-    existingSalableGood.setActive(false);
-    sellableGoodService.save(existingSalableGood);
+  public ResponseEntity<?> deleteSellableGood(@RequestBody Long id) throws Exception {
+    SellableGood existingSellableGood = sellableGoodService.findById(id).orElseThrow(() -> new Exception("Producto no encontrado id: " + id));
+    existingSellableGood.setActive(false);
+    sellableGoodService.save(existingSellableGood);
     return new ResponseEntity(new Message("Producto/Servicio se deshabilito exitosamente"), HttpStatus.OK);
   }
 
   @PreAuthorize("hasRole('ADMIN')")
   @Transactional
   @PutMapping("/addTax")
-  public ResponseEntity<?> addTaxSalableGood(@RequestBody SellableGoodTax data) throws Exception {
-    SellableGood existingSalableGood = sellableGoodService.findById(data.getSellableGoodId()).orElseThrow(() -> new Exception("Producto no encontrado id: " + data.getSellableGoodId()));
+  public ResponseEntity<?> addTaxSellableGood(@RequestBody SellableGoodTax data) throws Exception {
+    SellableGood existingSellableGood = sellableGoodService.findById(data.getSellableGoodId()).orElseThrow(() -> new Exception("Producto no encontrado id: " + data.getSellableGoodId()));
     Tax existingTax = taxService.findById(data.getTaxId()).orElseThrow(() -> new Exception("Impuesto no encontrado id: " + data.getTaxId()));
-    existingSalableGood.addTax(existingTax);
+    existingSellableGood.addTax(existingTax);
     System.out.println("ASDGFADSFGSDFGSERWTQWERFASDFASDFASDFQWERFQWAWERQASWDFASDFASDFASDFQWER");
     System.out.println(data);
-    sellableGoodService.save(existingSalableGood);
+    sellableGoodService.save(existingSellableGood);
     return new ResponseEntity(new Message("Se agrego impuesto exitosamente"), HttpStatus.OK);
   }
 
   @PreAuthorize("hasRole('ADMIN')")
   @PutMapping("/removeTax")
-  public ResponseEntity<?> deleteTagFromTutorial(@RequestBody SellableGoodTax data) throws Exception {
+  public ResponseEntity<?> deleteTaxFromSellableGood(@RequestBody SellableGoodTax data) throws Exception {
     SellableGood sellableGood = sellableGoodService.findById(data.getSellableGoodId())
         .orElseThrow(() -> new Exception("No se encontro el producto/servicio con id = " + data.getSellableGoodId()));
 
-    sellableGood.removeTag(data.getTaxId());
+    sellableGood.removeTax(data.getTaxId());
     sellableGoodService.save(sellableGood);
     return new ResponseEntity<>(new Message("Se quito el impuesto exitosamente"),HttpStatus.OK);
   }

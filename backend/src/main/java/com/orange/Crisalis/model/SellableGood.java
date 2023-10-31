@@ -60,7 +60,7 @@ public class SellableGood {
     tax.getSellableGoods().add(this);
   }
 
-  public void removeTag(int taxId) {
+  public void removeTax(int taxId) {
     Tax tax = this.taxes.stream().filter(t -> t.getId() == taxId).findFirst().orElse(null);
     if (tax != null) {
       this.taxes.remove(tax);

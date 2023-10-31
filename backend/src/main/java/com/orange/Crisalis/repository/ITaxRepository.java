@@ -28,4 +28,5 @@ public interface ITaxRepository extends JpaRepository<Tax, Integer> {
     @Query(value = "UPDATE tax SET tax_name = :tax_name, tax_percentage = :tax_percentage WHERE id = :id", nativeQuery = true)
     void updateTax(@Param("id") Integer id, @Param("tax_name") String taxName, @Param("tax_percentage") Double taxPercentage);
 
+    List<Tax> findTaxesBySellableGoodsId(Long sellableGoodId);
 }

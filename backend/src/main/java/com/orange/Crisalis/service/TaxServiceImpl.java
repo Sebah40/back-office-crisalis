@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -67,5 +68,14 @@ public class TaxServiceImpl implements ITaxService {
         Tax tax = taxRepository.findTaxById(id).orElse(null);
         tax.setActive(false);
         taxRepository.save(tax);
+    }
+
+
+    public Optional<Tax> findById(Integer taxId) {
+        return taxRepository.findById(taxId);
+    }
+
+    public List<Tax> findTaxesBySellableGoodsId(Long sellableGoodId) {
+        return this.taxRepository.findTaxesBySellableGoodsId(sellableGoodId);
     }
 }

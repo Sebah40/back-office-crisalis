@@ -1,0 +1,11 @@
+<app-entity-container-component
+[title]="'empresas'"
+[entities]="enterpriseListData"
+[isEditable]="editableValue" 
+pathCreateEntity="/enterprise/create" 
+pathEditEntity="/enterprise/edit"
+(entityToDelete)="deleteEnterprise($event)"
+[entityKeyToRedirect]="'id'">
+[buttonText]="'nueva empresa'"
+>
+</app-entity-container-component>

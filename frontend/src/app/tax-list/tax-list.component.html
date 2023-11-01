@@ -1,0 +1,5 @@
+<app-entity-container-component 
+[entities]="taxListData" [title]="'impuestos'" 
+[isEditable]=true pathCreateEntity="/tax/create" 
+pathEditEntity="/tax/edit" (entityToDelete)="deleteTax($event)"
+[entityKeyToRedirect]="'id'"></app-entity-container-component>

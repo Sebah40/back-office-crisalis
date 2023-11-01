@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { UserListComponent } from './components/users-list/user-list.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { EntityContainerComponent } from '../shared/components/entity-container-component/entity-container.component';
 
 @NgModule({
@@ -13,6 +12,6 @@ import { EntityContainerComponent } from '../shared/components/entity-container-
     EntityContainerComponent,
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
-  exports: [UserListComponent, UserFormComponent],
+  exports: [UserListComponent, UserFormComponent, EntityContainerComponent, ReactiveFormsModule],
 })
 export class UsersModule {}

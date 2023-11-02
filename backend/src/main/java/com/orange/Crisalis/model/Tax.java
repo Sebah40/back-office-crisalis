@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -33,7 +34,7 @@ public class Tax {
         },
         mappedBy = "taxes")
     @JsonIgnore
-    private Set<SellableGood> sellableGoods;
+    private Set<SellableGood> sellableGoods = new HashSet<>();
 
     public Tax(String taxName, Double taxPercentage) {
         this.taxName = taxName;

@@ -1,6 +1,11 @@
 <app-entity-container-component 
-[entities]="userListData" [title]="'usuarios'" 
-[isEditable]="editableValue" pathCreateEntity="/user/create" 
-pathEditEntity="/user/edit" (entityToDelete)="deleteUser($event)"
-[entityKeyToRedirect]="'username'"></app-entity-container-component>
-
+[entities]="userListData" 
+[title]="'usuarios'" 
+[isEditable]="editableValue" 
+pathCreateEntity="/user/create" 
+pathEditEntity="/user/edit"
+(entityToDelete)="deleteUser($event)"
+[entityKeyToRedirect]="'username'"
+[buttonText]="'nuevo usuario'"
+>
+</app-entity-container-component>

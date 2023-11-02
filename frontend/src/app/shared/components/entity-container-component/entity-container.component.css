@@ -1,5 +1,5 @@
 #container {
-  width: 100%;
+  min-width: fit-content;
   min-height: 100vh;
 }
 #container h2 {
@@ -12,12 +12,14 @@
   background-color: #eae0d5cc;
   color: #22333b;
   height: max-content;
-  min-width: 70%;
-  max-width: 90%;
+  min-width: 100%;
+  /* max-width: 140%; */
 }
 
-.title {
+.text-center {
+  margin: 0 20px !important;
 }
+
 #container table,
 thead,
 tbody,
@@ -34,4 +36,8 @@ td {
 }
 #container-button {
   width: 90%;
+}
+
+#container td, th{
+  margin: 0 25px !important;
 }

@@ -20,44 +20,12 @@ export class MenuComponent {
     {
       texto:"Usuarios",
       enlace: "/user",
-      items: [
-        // {
-        //   texto: "Crear",
-        //   enlace: "",
-        //   items: []
-        // },
-        // {
-        //   texto: "Modificar",
-        //   enlace: "#",
-        //   items: []
-        // },
-        // {
-        //   texto: "Eliminar",
-        //   enlace: "#",
-        //   items: []
-        // }
-      ]
+      items: []
     },
     {
       texto:"Productos",
-      enlace: "#",
-      items: [
-        {
-          texto: "Crear",
-          enlace: "#",
-          items: []
-        },
-        {
-          texto: "Modificar",
-          enlace: "#",
-          items: []
-        },
-        {
-          texto: "Eliminar",
-          enlace: "#",
-          items: []
-        }
-      ]
+      enlace: "/good",
+      items: []
     },
     {
       texto:"Pedidos",

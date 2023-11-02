@@ -19,6 +19,7 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { SellableGoodsModule } from './sellable-goods/sellable-goods.module';
 import { TaxListComponent } from './tax-list/tax-list.component';
 import { TaxCreateComponent } from './tax-create/tax-create.component';
 
@@ -41,6 +42,7 @@ const routes: Routes = [{ path: '', component: HomepageComponent }];
     SweetAlert2Module.forRoot(),
     BrowserModule,
     UsersModule,
+    SellableGoodsModule,
     HttpClientModule,
     UsersRoutingModule,
     FormsModule,

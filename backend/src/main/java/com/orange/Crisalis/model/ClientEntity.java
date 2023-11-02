@@ -16,9 +16,9 @@ public class ClientEntity {
     @NotNull
     private boolean beneficiary;
 
-    /*  @OneToMany(mappedBy="client", fetch= FetchType.EAGER)
-    Set<Pedidos> pedidos = new HashSet<>();
-    ESPERAR A QUE HAGAN PEDIDOS    */
+    @OneToMany(mappedBy="client", fetch= FetchType.EAGER)
+    Set<OrderEntity> orderEntitySet = new HashSet<>();
+
 
     public ClientEntity() {
     }

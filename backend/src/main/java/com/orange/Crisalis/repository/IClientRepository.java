@@ -17,7 +17,7 @@ public interface IClientRepository extends JpaRepository <ClientEntity, Integer>
                     "OR c.first_name LIKE %"+":query"+"% OR c.last_name LIKE %"+":query"+"% OR c.first_name_responsible LIKE %"+":query"+"% OR c.last_name_responsible LIKE %"+":query"+"% ", nativeQuery = true)
     List<ClientEntity> searchByAnyParameter(@Param("query") String query);
 
-    Optional<ClientEntity> findById(int username);
+
 
     boolean existsById(int id);
 

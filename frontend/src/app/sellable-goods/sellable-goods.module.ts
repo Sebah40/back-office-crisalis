@@ -4,12 +4,14 @@ import { CommonModule } from '@angular/common';
 import { SellableGoodsRoutingModule } from './sellable-goods-routing.module';
 import { SellableGoodsListComponent } from './components/sellable-goods-list/sellable-goods-list.component';
 import { SellableGoodFormComponent } from './components/sellable-good-form/sellable-good-form.component';
+import { FormatTaxesPipe } from './pipes/format-taxes.pipe';
 
 
 @NgModule({
   declarations: [
     SellableGoodsListComponent,
-    SellableGoodFormComponent
+    SellableGoodFormComponent,
+    FormatTaxesPipe,
   ],
   imports: [
     CommonModule,

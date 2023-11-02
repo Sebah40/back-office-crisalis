@@ -1,1 +1,34 @@
-<p>sellable-goods-list works!</p>
+<div class="container w-100 d-flex flex-column justify-content-sm-start align-items-center" id="container">
+  <h2 class="title">Lista de productos y servicios</h2>
+  <div class="rounded p-2 mx-4 d-flex flex-column w-100" id="container-list">
+    <table class="table table-hover table-sm table-responsive" id="custom-table">
+      <thead>
+        <tr>
+          <th style="background-color: transparent;" class="text-center" *ngFor="let field of ['Id','Nombre','Descripcion','Precio','Tipo','Impuestos']">{{ field }}</th>
+          <th style="background-color: transparent;" class="text-center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="height: 5px;"></tr>
+        <tr class="align-middle" *ngFor="let data of sellableGoodListData">
+
+          <td class="text-center" >{{ data.id }}</td>
+          <td class="text-center" >{{ data.name }}</td>
+          <td class="text-center" >{{ data.description }}</td>
+          <td class="text-center" >{{ data.price }}</td>
+          <td class="text-center" >{{ data.type }}</td>
+          <td class="taxes" >{{ data.taxes | formatTaxes  }}</td>
+
+          <td style="text-align: center;">
+            <button (click)="editEntity(data)" class="btn btn-dark btn-sm m-1" >Editar</button>
+            <button (click)="disableEntity(data)" class="btn btn-danger btn-sm m-1">Eliminar</button>
+          </td>
+        </tr>
+        <tr style="height: 5px;"></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="container my-3 p-0" id="container-button">
+    <button class="btn btn-primary btn-lg my-auto" (click)="createEntity()">Crear producto/servicio</button>
+  </div>
+</div>

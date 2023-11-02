@@ -5,6 +5,7 @@ import { SellableGoodsRoutingModule } from './sellable-goods-routing.module';
 import { SellableGoodsListComponent } from './components/sellable-goods-list/sellable-goods-list.component';
 import { SellableGoodFormComponent } from './components/sellable-good-form/sellable-good-form.component';
 import { FormatTaxesPipe } from './pipes/format-taxes.pipe';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { FormatTaxesPipe } from './pipes/format-taxes.pipe';
   ],
   imports: [
     CommonModule,
-    SellableGoodsRoutingModule
+    SellableGoodsRoutingModule,
+    FormsModule, ReactiveFormsModule
   ]
 })
 export class SellableGoodsModule { }

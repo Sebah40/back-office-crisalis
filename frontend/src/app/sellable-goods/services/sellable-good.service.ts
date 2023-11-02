@@ -37,14 +37,12 @@ export class SellableGoodService {
     );
   }
 
-  disable(sellableGood: SellableGood): Observable<Message> {
-    console.log(sellableGood.id);
-    
+  disable(sellableGood: SellableGood): Observable<Message> {    
     return this.http.put<Message>(`${this.URL}/disable`, sellableGood.id);
   }
 
   edit(sellableGood: SellableGood): Observable<Message> {
-    return this.http.post<Message>(`${this.URL}/edit`, sellableGood);
+    return this.http.put<Message>(`${this.URL}/edit`, sellableGood);
   }
 
   updateSellableGoodListData() {

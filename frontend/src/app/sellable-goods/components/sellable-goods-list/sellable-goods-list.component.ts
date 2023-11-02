@@ -44,9 +44,6 @@ export class SellableGoodsListComponent implements OnInit {
     const navigationExtras: NavigationExtras = {
       state: sellableGood,
     };
-    this.router.navigate(
-      ['good/edit'],
-      navigationExtras
-    );
+    this.router.navigate(['good/edit'],navigationExtras);
   }
 }

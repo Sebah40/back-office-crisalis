@@ -51,8 +51,7 @@ export class PersonFormComponent implements OnInit {
 
     this.formPerson = this.formBuilder.group({
       id: [
-        this.personEdit.id,
-        [Validators.required],
+         this.personEdit.id,
       ],
       dni: [
         this.personEdit.dni,

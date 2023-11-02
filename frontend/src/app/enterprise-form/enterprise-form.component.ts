@@ -57,8 +57,7 @@ export class EnterpriseFormComponent implements OnInit{
 
     this.formEnterprise = this.formBuilder.group({
       id: [
-        this.enterpriseEdit.id,
-        [Validators.required],
+         this.enterpriseEdit.id,
       ],
       businessName: [
         this.enterpriseEdit.businessName,

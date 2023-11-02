@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SellableGoodService } from '../../services/sellable-good.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -20,7 +20,9 @@ function isEmpty(value: any): boolean {
   templateUrl: './sellable-good-form.component.html',
   styleUrls: ['./sellable-good-form.component.css']
 })
-export class SellableGoodFormComponent {
+export class SellableGoodFormComponent implements OnInit {
+
+  @ViewChild('selectedTax') selectedTax!:ElementRef;
   public formSellableGood!: FormGroup;
   public sellableGoodInstance: SellableGood = {
     id: undefined,
@@ -35,13 +37,15 @@ export class SellableGoodFormComponent {
   public taxes:Tax[] = [];
   public isEnabled = this.taxes.length > 0;
   
+  
 
   constructor(
     private formBuilder: FormBuilder,
     private sellableGoodService: SellableGoodService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     if(!isEmpty(history.state.id)) {
@@ -70,6 +74,9 @@ export class SellableGoodFormComponent {
       type: [
         this.sellableGoodInstance.type,
         [Validators.required],
+      ],
+      taxes: [
+        this.sellableGoodInstance.taxes,
       ]
     });
   }
@@ -131,5 +138,18 @@ export class SellableGoodFormComponent {
 
   goToSellableGoodList() {
     this.router.navigate(['/good']);
+  }
+
+  addTaxToSellableGood() {
+    const tax:Tax = this.taxes.filter(t=> t.id===parseInt(this.selectedTax.nativeElement.value))[0];
+    this.sellableGoodInstance.taxes?.push(tax);
+    this.taxes = this.taxes.filter(t=> t.id!==tax.id);
+    this.isEnabled = this.taxes.length > 0;
+  }
+
+  removeTax(tax:Tax){
+    this.sellableGoodInstance.taxes = this.sellableGoodInstance.taxes?.filter(t => t.id !== tax.id)
+    this.taxes = [...this.taxes, tax]
+    this.isEnabled = this.taxes.length > 0;
   }
 }

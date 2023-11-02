@@ -6,6 +6,7 @@ import { SellableGoodsListComponent } from './components/sellable-goods-list/sel
 import { SellableGoodFormComponent } from './components/sellable-good-form/sellable-good-form.component';
 import { FormatTaxesPipe } from './pipes/format-taxes.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TaxFormatterPipe } from './pipes/tax-formatter.pipe';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SellableGoodsListComponent,
     SellableGoodFormComponent,
     FormatTaxesPipe,
+    TaxFormatterPipe,
   ],
   imports: [
     CommonModule,

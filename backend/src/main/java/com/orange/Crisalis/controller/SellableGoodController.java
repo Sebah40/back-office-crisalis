@@ -3,6 +3,7 @@ package com.orange.Crisalis.controller;
 import com.orange.Crisalis.model.SellableGood;
 import com.orange.Crisalis.model.Tax;
 import com.orange.Crisalis.model.dto.SellableGoodTax;
+import com.orange.Crisalis.repository.ITaxRepository;
 import com.orange.Crisalis.security.Controller.Message;
 import com.orange.Crisalis.service.SellableGoodService;
 import com.orange.Crisalis.service.TaxServiceImpl;
@@ -10,23 +11,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/good")
+@CrossOrigin(origins = {"http://localhost:4200", "https://localhost:4200"})
 public class SellableGoodController {
   @Autowired
   private SellableGoodService sellableGoodService;
   @Autowired
   private TaxServiceImpl taxService;
+
+  @Autowired
+  private ITaxRepository taxRepository;
 
   @PreAuthorize("hasAnyRole('USER' ,'ADMIN')")
   @GetMapping("/getAll")
@@ -42,7 +45,17 @@ public class SellableGoodController {
   @Transactional
   @PostMapping("/create")
   public ResponseEntity<SellableGood> createSellableGood(@RequestBody SellableGood sellableGood) {
+    Set<Tax> taxes = new HashSet<>();
+    if(!sellableGood.getTaxes().isEmpty()) {
+      taxes = sellableGood.getTaxes().stream()
+          .filter(tax -> taxRepository.existsById(tax.getId()))
+          .map(tax -> taxRepository.findById(tax.getId()).get())
+          .collect(Collectors.toSet());
+      sellableGood.setTaxes(new HashSet<>());
+    }
     SellableGood newSellableGood = sellableGoodService.save(sellableGood);
+    taxes.forEach(newSellableGood::addTax);
+    newSellableGood = sellableGoodService.save(newSellableGood);
     return new ResponseEntity<>(newSellableGood, HttpStatus.CREATED);
   }
   @PreAuthorize("hasRole('ADMIN')")
@@ -55,7 +68,13 @@ public class SellableGoodController {
     existingSellableGood.setPrice(sellableGood.getPrice());
     existingSellableGood.setDescription(sellableGood.getDescription());
     existingSellableGood.setActive(sellableGood.isActive());
-    existingSellableGood.setTaxes(sellableGood.getTaxes());
+    existingSellableGood.setTaxes(new HashSet<>());
+    Set<Tax> taxes = sellableGood.getTaxes().stream()
+        .filter(tax -> taxRepository.existsById(tax.getId()))
+        .map(tax -> taxRepository.findById(tax.getId()).get())
+        .collect(Collectors.toSet());
+    taxes.forEach(existingSellableGood::addTax);
+    sellableGoodService.save(existingSellableGood);
     return new ResponseEntity(new Message("Editado exitosamente"), HttpStatus.OK);
   }
   @PreAuthorize("hasRole('ADMIN')")

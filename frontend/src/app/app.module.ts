@@ -13,13 +13,15 @@ import { UpperbarComponent } from './upperbar/upperbar.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MenuComponent } from './menu/menu.component';
 import { MenuItemComponent } from './menu-item/menu-item.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SellableGoodsModule } from './sellable-goods/sellable-goods.module';
+import { TaxListComponent } from './tax-list/tax-list.component';
+import { TaxCreateComponent } from './tax-create/tax-create.component';
 
 const routes: Routes = [{ path: '', component: HomepageComponent }];
 
@@ -33,6 +35,8 @@ const routes: Routes = [{ path: '', component: HomepageComponent }];
     MenuItemComponent,
     LoginComponent,
     PageNotFoundComponent,
+    TaxListComponent,
+    TaxCreateComponent,
   ],
   imports: [
     SweetAlert2Module.forRoot(),
@@ -44,6 +48,7 @@ const routes: Routes = [{ path: '', component: HomepageComponent }];
     FormsModule,
     AppRoutingModule,
     RouterModule.forRoot(routes),
+    ReactiveFormsModule
   ],
   providers: [interceptorProvider],
   bootstrap: [AppComponent],

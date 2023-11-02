@@ -50,23 +50,8 @@ export class MenuComponent {
     },
     {
       texto:"Impuestos",
-      enlace: "#",
+      enlace: "/taxlist",
       items: [
-        {
-          texto: "Crear",
-          enlace: "#",
-          items: []
-        },
-        {
-          texto: "Modificar",
-          enlace: "#",
-          items: []
-        },
-        {
-          texto: "Eliminar",
-          enlace: "#",
-          items: []
-        }
       ]
     },
     {

@@ -81,7 +81,7 @@ public class TaxController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @PatchMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public ResponseEntity<Object> deleteTax(@PathVariable("id") Integer id) {
         if(taxService.verifyTaxById(id)) {
             taxService.deleteTax(id);

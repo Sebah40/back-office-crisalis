@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule  } from '@angular/forms';
 import { IEnterprise } from '../client-list/model/enterprise.model';
 import { EnterpriseService } from '../client-list/service/client-list.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -48,15 +48,21 @@ export class EnterpriseFormComponent implements OnInit{
         this.enterpriseEdit.lastNameResponsible = state.lastNameResponsible;
         this.enterpriseEdit.dniResponsible = state.dniResponsible;
         this.enterpriseEdit.date = state.date;
+        this.enterpriseEdit.beneficiary = state.beneficiary;
+        this.enterpriseEdit.active = state.active;
       }
     });
 
     this.isEditing = this.enterpriseEdit.businessName.length ? true : false;
 
     this.formEnterprise = this.formBuilder.group({
+      id: [
+        this.enterpriseEdit.id,
+        [Validators.required],
+      ],
       businessName: [
         this.enterpriseEdit.businessName,
-        [Validators.required, Validators.minLength(8)],
+        [Validators.required, Validators.minLength(2)],
       ],
       cuit: [
         this.enterpriseEdit.cuit,
@@ -77,7 +83,7 @@ export class EnterpriseFormComponent implements OnInit{
       date: [
         this.enterpriseEdit.date,
         [Validators.required]
-      ]
+      ],
     });
 
     this.setButtonText();

@@ -10,11 +10,14 @@
 
 .logo img {
   height: 85px;
+  margin-left: 80%;
 }
+
 .btn {
   color: #C6AC8F;
   box-shadow: 1px 2px 6px #19252b;
 }
+
 .btn-mode svg, .btn-mode p {
   margin: 0;
   padding: 0;
@@ -27,12 +30,15 @@
 li a {
   color: #C6AC8F;
 }
+
 li a:hover {
   background-color: #18252b;
 }
+
 .dropdown-toggle {
   font-size: 17px;
 }
+
 .show-span {
   display: flex;
   flex-direction: column;
@@ -51,4 +57,3 @@ li a:hover {
   flex-wrap: nowrap;
   justify-content: center;
 }
-

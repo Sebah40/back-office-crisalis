@@ -13,12 +13,12 @@ import { ResponseCreateUser } from '../users/interfaces/ResponseCreateUser.type'
   styleUrls: ['./person-form.component.css']
 })
 export class PersonFormComponent implements OnInit {
-
   public formPerson!: FormGroup;
   public editOrCreateText: string = '';
   public isEditing: boolean = false;
 
   public personEdit: IPerson = {
+    id: null,
     firstName: '',
     lastName: '',
     dni: '',
@@ -36,17 +36,24 @@ export class PersonFormComponent implements OnInit {
   ngOnInit(): void {
     const state = history.state;
     this.route.params.subscribe((params) => {
-      const dni = params['dni'];
-      if (dni) {
-        this.personEdit.dni = dni;
+      const id = params['id'];
+      if (id) {
+        this.personEdit.id = id;
+        this.personEdit.dni = state.dni;
         this.personEdit.firstName = state.firstName;
         this.personEdit.lastName = state.lastName;
+        this.personEdit.active = state.active;
+        this.personEdit.beneficiary = state.beneficiary;
       }
     });
 
     this.isEditing = this.personEdit.dni.length ? true : false;
 
     this.formPerson = this.formBuilder.group({
+      id: [
+        this.personEdit.id,
+        [Validators.required],
+      ],
       dni: [
         this.personEdit.dni,
         [Validators.required, Validators.minLength(7)],
@@ -66,6 +73,7 @@ export class PersonFormComponent implements OnInit {
 
     onSubmit() {
       const newPerson: IPerson = {
+        id: this.formPerson.value.id,
         dni: this.formPerson.value.dni,
         firstName: this.formPerson.value.firstName,
         lastName: this.formPerson.value.lastName,
@@ -106,7 +114,7 @@ export class PersonFormComponent implements OnInit {
     }
     
     setButtonText() {
-      if (this.personEdit.dni) {
+      if (this.personEdit.id) {
         this.editOrCreateText = 'Editar Persona';
       } else {
         this.editOrCreateText = 'Crear Persona';

@@ -13,6 +13,6 @@ import { EntityContainerComponent } from '../shared/components/entity-container-
     EntityContainerComponent,
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
-  exports: [UserListComponent, UserFormComponent, EntityContainerComponent],
+  exports: [UserListComponent, UserFormComponent, EntityContainerComponent, ReactiveFormsModule],
 })
 export class UsersModule {}

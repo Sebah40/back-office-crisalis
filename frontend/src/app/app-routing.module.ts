@@ -7,6 +7,8 @@ import { ClientListComponent } from './client-list/client-list.component';
 import { PersonListComponent } from './person-list/person-list.component';
 import { EnterpriseFormComponent } from './enterprise-form/enterprise-form.component';
 import { PersonFormComponent } from './person-form/person-form.component';
+import { TaxListComponent } from './tax-list/tax-list.component';
+import { TaxCreateComponent } from './tax-create/tax-create.component';
 
 const routes: Routes = [
   {path:'home', component: HomepageComponent},
@@ -21,8 +23,11 @@ const routes: Routes = [
   {path:'person/create', component: PersonFormComponent},
   {path:'person/edit/:id', component: PersonFormComponent},
   {path:'person/disable', component: PersonListComponent},
+  {path:'taxlist', component:TaxListComponent},
+  {path:'tax/create', component:TaxCreateComponent},
+  {path:'tax/edit/:id', component:TaxCreateComponent},
   {path: '', redirectTo: 'login', pathMatch: 'full' },
-  // {path:'**', component: PageNotFoundComponent},
+  {path:'**', component: PageNotFoundComponent}
 ];
 
 @NgModule({

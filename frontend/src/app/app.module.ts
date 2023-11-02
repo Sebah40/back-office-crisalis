@@ -11,6 +11,7 @@ import { UpperbarComponent } from './upperbar/upperbar.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MenuComponent } from './menu/menu.component';
 import { MenuItemComponent } from './menu-item/menu-item.component';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -20,6 +21,9 @@ import { ClientListComponent } from './client-list/client-list.component';
 import { PersonListComponent } from './person-list/person-list.component';
 import { EnterpriseFormComponent } from './enterprise-form/enterprise-form.component';
 import { PersonFormComponent } from './person-form/person-form.component';
+import { SellableGoodsModule } from './sellable-goods/sellable-goods.module';
+import { TaxListComponent } from './tax-list/tax-list.component';
+import { TaxCreateComponent } from './tax-create/tax-create.component';
 
 const routes: Routes = [{ path: '', component: HomepageComponent }];
 
@@ -37,17 +41,21 @@ const routes: Routes = [{ path: '', component: HomepageComponent }];
     PersonListComponent,
     EnterpriseFormComponent,
     PersonFormComponent,
+    TaxListComponent,
+    TaxCreateComponent,
   ],
   imports: [
     SweetAlert2Module.forRoot(),
     BrowserModule,
     UsersModule,
+    SellableGoodsModule,
     HttpClientModule,
     UsersRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
     RouterModule.forRoot(routes),
+    ReactiveFormsModule
   ],
   providers: [interceptorProvider],
   bootstrap: [AppComponent],

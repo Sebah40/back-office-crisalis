@@ -17,15 +17,8 @@ import java.util.Set;
 @NoArgsConstructor
 public class SellableGood {
   @Id
-  @SequenceGenerator(
-      name = "sellable_good_sequence",
-      sequenceName = "sellable_good_sequence",
-      allocationSize = 1,
-      initialValue = 0
-  )
   @GeneratedValue(
-      strategy = GenerationType.SEQUENCE,
-      generator = "sellable_good_sequence"
+      strategy = GenerationType.IDENTITY
   )
   private Long id;
 

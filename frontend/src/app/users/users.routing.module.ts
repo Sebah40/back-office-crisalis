@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UserFormComponent } from './components/user-form/user-form.component';
+import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
 import { UserListComponent } from './components/users-list/user-list.component';
 
 const routes: Routes = [

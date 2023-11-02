@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -18,4 +19,9 @@ public class ClientService {
     public List<ClientEntity> findAll(){
         return iClientRepository.findAll();
     }
+    public ClientEntity getById(Integer id){
+        Optional<ClientEntity> clienteOptional = iClientRepository.findById(id);
+        return clienteOptional.orElse(null);
+    }
+
 }

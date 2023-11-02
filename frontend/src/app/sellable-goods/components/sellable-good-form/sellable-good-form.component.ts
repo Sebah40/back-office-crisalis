@@ -4,6 +4,7 @@ import { SellableGoodService } from '../../services/sellable-good.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SellableGood } from '../../model/sellable-good.model';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Tax } from '../../model/tax.model';
 
 enum SellableGoodType {
   PRODUCT,
@@ -31,6 +32,9 @@ export class SellableGoodFormComponent {
     taxes: [],
     active: true
   };
+  public taxes:Tax[] = [];
+  public isEnabled = this.taxes.length > 0;
+  
 
   constructor(
     private formBuilder: FormBuilder,
@@ -43,8 +47,13 @@ export class SellableGoodFormComponent {
     if(!isEmpty(history.state.id)) {
       this.setSellableGood(history.state)
     }
-    console.log(this.sellableGoodInstance);
-    
+
+    this.sellableGoodService.getAllTaxes().subscribe((data)=>{
+      this.taxes = data;
+      this.taxes = this.taxes.filter(tax => !this.sellableGoodHasTax(tax));
+      this.isEnabled = this.taxes.length > 0;
+    });
+
     this.formSellableGood = this.formBuilder.group({
       name: [
         this.sellableGoodInstance.name,
@@ -61,8 +70,12 @@ export class SellableGoodFormComponent {
       type: [
         this.sellableGoodInstance.type,
         [Validators.required],
-      ],
+      ]
     });
+  }
+
+  sellableGoodHasTax(tax:Tax):boolean|undefined {
+    return this.sellableGoodInstance.taxes?.some(t => t.id === tax.id);
   }
 
   setSellableGood(data:any){

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { SellableGood } from '../model/sellable-good.model';
+import { Tax } from '../model/tax.model';
 
 type Message = { mensaje: string };
 
@@ -28,6 +29,10 @@ export class SellableGoodService {
 
   getAll(): Observable<SellableGood[]> {
     return this.http.get<SellableGood[]>(`${this.URL}/getAll`);
+  }
+
+  getAllTaxes(): Observable<Tax[]> {
+    return this.http.get<SellableGood[]>(`http://localhost:3000/tax`);
   }
 
   create(sellableGood: SellableGood): Observable<SellableGood> {

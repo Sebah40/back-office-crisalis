@@ -28,6 +28,15 @@
       <textarea style="height: 180px" formControlName="description" class="form-control" placeholder="Caracteristicas..." id="floatingTextarea"></textarea>
       <label for="floatingTextarea">Descripcion</label>
     </div>
+    <div class="col-md-4 d-inline-flex align-items-center my-4">
+      <div class="form-floating">
+        <select style="min-width: 15rem;" class="form-select form-select-sm" aria-label="Type">
+          <option *ngFor="let tax of taxes" [value]="tax.id">{{tax.taxName}}</option>
+        </select>
+        <label for="floatingInput" >Impuestos</label>  
+      </div>
+      <button [disabled]="!isEnabled" class="btn btn-secondary shadow-lg ms-1" type="button">Agregar</button>
+    </div>
     
     <div  class="d-flex justify-content-center my-2">
       <button class="btn btn-dark btn-lg mx-2" type="button" (click)="goToSellableGoodList()">Volver</button>

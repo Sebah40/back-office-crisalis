@@ -2,7 +2,7 @@ package com.orange.Crisalis.controller;
 
 
 import com.orange.Crisalis.dto.RequestBodyCreateOrderDTO;
-import com.orange.Crisalis.model.OrderEntity;
+
 import com.orange.Crisalis.model.dto.OrderDTO;
 import com.orange.Crisalis.security.Controller.Message;
 import com.orange.Crisalis.service.OrderService;
@@ -16,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/order")
+@CrossOrigin(origins = {"http://localhost:4200", "https://localhost:4200"})
 public class OrderController {
 
     private final OrderService orderService;

@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/enterprise")
+@CrossOrigin(origins = {"http://localhost:4200", "https://localhost:4200"})
 public class EnterpriseController {
 
     @Autowired

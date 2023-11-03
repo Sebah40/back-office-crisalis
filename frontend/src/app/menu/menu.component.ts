@@ -28,36 +28,20 @@ export class MenuComponent {
       items: []
     },
     {
-      texto:"Pedidos",
-      enlace: "#",
-      items: [
-        {
-          texto: "Crear",
-          enlace: "#",
-          items: []
-        },
-        {
-          texto: "Modificar",
-          enlace: "#",
-          items: []
-        },
-        {
-          texto: "Eliminar",
-          enlace: "#",
-          items: []
-        }
-      ]
+      texto: "Personas",
+      enlace: "/person",
+      items: []
+    },
+    {
+      texto: "Empresas",
+      enlace: "/enterprise",
+      items: []
     },
     {
       texto:"Impuestos",
       enlace: "/taxlist",
       items: [
       ]
-    },
-    {
-      texto:"Informes",
-      enlace: "#",
-      items: []
     }
   ]
 

@@ -11,7 +11,6 @@ import { UpperbarComponent } from './upperbar/upperbar.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MenuComponent } from './menu/menu.component';
 import { MenuItemComponent } from './menu-item/menu-item.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -55,7 +54,7 @@ const routes: Routes = [{ path: '', component: HomepageComponent }];
     ReactiveFormsModule,
     AppRoutingModule,
     RouterModule.forRoot(routes),
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [interceptorProvider],
   bootstrap: [AppComponent],

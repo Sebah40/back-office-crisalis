@@ -20,6 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/tax")
+@CrossOrigin(origins = {"http://localhost:4200", "https://localhost:4200"})
 public class TaxController {
 
     private ITaxService taxService;

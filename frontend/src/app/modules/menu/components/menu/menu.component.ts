@@ -1,0 +1,49 @@
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Item } from '../menu-item/item';
+
+@Component({
+  selector: 'app-menu',
+  templateUrl: './menu.component.html',
+  styleUrls: ['./menu.component.css'],
+})
+export class MenuComponent {
+  @ViewChild('menu') menu!: ElementRef;
+
+  home: Item = {
+    texto: 'Home',
+    enlace: '/home',
+    items: [],
+  };
+
+  items: Item[] = [
+    {
+      texto: 'Usuarios',
+      enlace: '/user',
+      items: [],
+    },
+    {
+      texto: 'Productos',
+      enlace: '/good',
+      items: [],
+    },
+    {
+      texto: 'Personas',
+      enlace: '/person',
+      items: [],
+    },
+    {
+      texto: 'Empresas',
+      enlace: '/enterprise',
+      items: [],
+    },
+    {
+      texto: 'Impuestos',
+      enlace: '/taxlist',
+      items: [],
+    },
+  ];
+
+  toggleMenu() {
+    this.menu.nativeElement.classList.toggle('show');
+  }
+}

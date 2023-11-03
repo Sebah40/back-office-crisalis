@@ -1,0 +1,11 @@
+<app-entity-container-component 
+[title]="'personas'"
+[entities]="personListData"
+[isEditable]="editableValue"
+pathCreateEntity="/person/create"
+pathEditEntity="/person/edit"
+(entityToDelete)="deletePerson($event)"
+[entityKeyToRedirect]="'id'"
+[buttonText]="'nueva persona'"
+>
+</app-entity-container-component>

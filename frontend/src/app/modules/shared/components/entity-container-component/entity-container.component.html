@@ -1,0 +1,27 @@
+<div class="container d-flex flex-column justify-content-sm-start align-items-center" id="container">
+  <h2 class="title">Lista de {{ title }}</h2>
+  <div class="rounded p-2 d-flex flex-column w-100" id="container-list">
+    <table class="table p-2" id="custom-table">
+      <thead>
+        <tr>
+          <th style="background-color: transparent;" class="text-center mx-4" *ngFor="let key of entityKeys">{{ key }}</th>
+          <th *ngIf="entities.length" style="background-color: transparent;" class="text-center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="height: 20px;"></tr>
+        <tr class="align-middle" *ngFor="let entity of entities">
+          <td class="text-center mx-4" *ngFor="let key of entityKeys">{{ entity[key] }}</td>
+          <td class="d-flex justify-content-center">
+            <button *ngIf="isEditable" (click)="redirectToEdit(entity)" class="btn btn-dark mx-1" >Editar</button>
+            <button *ngIf="isEditable" (click)="deleteHandler(entity)" class="btn btn-danger mx-1">Eliminar</button>
+          </td>
+        </tr>
+        <tr style="height: 20px;"></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="container my-3 p-0" id="container-button">
+    <button *ngIf="isEditable" class="btn btn-primary btn-lg my-auto" (click)="goToCreateForm()">Crear {{buttonText}}</button>
+  </div>
+</div>

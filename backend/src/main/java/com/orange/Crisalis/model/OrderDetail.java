@@ -25,11 +25,16 @@ public class OrderDetail {
     )
     private Long id;
     private BigDecimal priceSell;
-    private Double quantity;
+    private Integer quantity;
     @ManyToOne(
-            fetch = FetchType.EAGER,
-            optional = false
+        fetch = FetchType.EAGER,
+        optional = false
     )
-    @JoinColumn(name = "item_id")
-    private Item item;
+    @JoinColumn(name = "sellable_good_id")
+    private SellableGood sellableGood;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private OrderEntity order;
+
 }

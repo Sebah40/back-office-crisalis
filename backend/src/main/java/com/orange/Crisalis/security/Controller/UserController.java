@@ -2,9 +2,12 @@ package com.orange.Crisalis.security.Controller;
 
 import com.orange.Crisalis.security.Dto.DisableUser;
 import com.orange.Crisalis.security.Dto.EditUser;
-import com.orange.Crisalis.security.Dto.GetUser;
+import com.orange.Crisalis.security.Dto.GetUserDTO;
+import com.orange.Crisalis.security.Entity.RoleEntity;
 import com.orange.Crisalis.security.Entity.UserEntity;
+import com.orange.Crisalis.security.Enums.RoleName;
 import com.orange.Crisalis.security.Repository.IUserRepository;
+import com.orange.Crisalis.security.Service.RoleService;
 import com.orange.Crisalis.security.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +17,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -23,6 +28,8 @@ import java.util.stream.Collectors;
 public class UserController {
     @Autowired
     PasswordEncoder passwordEncoder;
+    @Autowired
+    RoleService roleService;
     @Autowired
     UserService userService;
     @Autowired
@@ -42,11 +49,11 @@ public class UserController {
 //    }
 
     @GetMapping("/getAll")
-    public ResponseEntity<List<GetUser>> listUser(){
+    public ResponseEntity<List<GetUserDTO>> listUser(){
         List<UserEntity> users = userService.findAll();
         return ResponseEntity.ok(users.stream()
                 .filter(user -> user.isActive())
-                .map(GetUser::new)
+                .map(GetUserDTO::new)
                 .collect(Collectors.toList()));
     }
     @PostMapping("/editPassword")
@@ -83,9 +90,26 @@ public class UserController {
         UserEntity user = iusuarioRepository.findByUsername(editUser.getUsername()).get();
         user.setEmail(editUser.getEmail());
         user.setName(editUser.getName());
-        if(!editUser.getPassword().isEmpty()){
+        if(!editUser.getPassword().isEmpty()) {
             user.setPassword(passwordEncoder.encode(editUser.getPassword()));
         }
+        if(!editUser.getRoles().isEmpty()){
+            Set<RoleEntity> roles = new HashSet<>();
+            roles.add(roleService.getByRoleName(RoleName.ROLE_USER).get());
+
+            if(editUser.getRoles().contains("admin"))
+                roles.add(roleService.getByRoleName(RoleName.ROLE_ADMIN).get());
+            else {
+                roles.clear();
+                roles.add(roleService.getByRoleName(RoleName.ROLE_USER).get());
+            }
+            user.setRoles(roles);
+            iusuarioRepository.save(user);
+            return new ResponseEntity(new Message("Editado exitosamente"),HttpStatus.OK);
+        }
+
+
+
         /*user.setRoles(editUser.getRoles());*/
         iusuarioRepository.save(user);
         return new ResponseEntity(new Message("Editado exitosamente"),HttpStatus.OK);

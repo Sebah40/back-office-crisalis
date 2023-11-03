@@ -1,0 +1,59 @@
+.upper-bar {
+  width: 100%;
+  background-color: #22333B;
+  height: 90px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding:0 30px;
+}
+
+.logo img {
+  height: 85px;
+  margin-left: 80%;
+}
+
+.btn {
+  color: #C6AC8F;
+  box-shadow: 1px 2px 6px #19252b;
+}
+
+.btn-mode svg, .btn-mode p {
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-menu {
+  background-color: #22333B;
+}
+
+li a {
+  color: #C6AC8F;
+}
+
+li a:hover {
+  background-color: #18252b;
+}
+
+.dropdown-toggle {
+  font-size: 17px;
+}
+
+.show-span {
+  display: flex;
+  flex-direction: column;
+  font-size: 10px;
+}
+
+.dropdown-mode {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 40px;
+}
+
+.btn-mode {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+}

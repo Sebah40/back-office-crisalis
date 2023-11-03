@@ -1,5 +1,9 @@
 <div class="container d-flex flex-column justify-content-sm-start align-items-center" id="container">
   <h2 class="title">Lista de {{ title }}</h2>
+  <div class="container my-3 p-0" id="container-button">
+    <button *ngIf="isEditable" class="btn my-auto" id="btn-custom" (click)="goToCreateForm()">Agregar {{buttonText}} <img id="svg-add" [src]="svgPlus" alt="SVG ADD"></button>
+  </div>
+  
   <div class="rounded p-2 d-flex flex-column w-100" id="container-list">
     <table class="table p-2" id="custom-table">
       <thead>
@@ -21,7 +25,5 @@
       </tbody>
     </table>
   </div>
-  <div class="container my-3 p-0" id="container-button">
-    <button *ngIf="isEditable" class="btn btn-primary btn-lg my-auto" (click)="goToCreateForm()">Crear {{buttonText}}</button>
-  </div>
+  
 </div>

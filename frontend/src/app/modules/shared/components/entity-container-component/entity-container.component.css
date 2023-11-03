@@ -1,6 +1,7 @@
 #container {
   min-width: fit-content;
   min-height: 100vh;
+
 }
 #container h2 {
   color: #5e503f;
@@ -8,11 +9,12 @@
   margin-top: 40px;
 }
 #container-list {
-  margin-top: 200px;
-  background-color: #eae0d5cc;
+  
+  background-color: #EAE0D5;
   color: #22333b;
   height: max-content;
   min-width: 100%;
+  background-color: #0A0908aa;
   /* max-width: 140%; */
 }
 
@@ -34,11 +36,36 @@ td {
 #custom-table {
   min-height: 100px;
 }
-#container-button {
-  width: 100%;
-}
 
 #container td,
 th {
   margin: 0 25px !important;
+}
+#container-button {
+  width: 100%;
+  display: flex;
+  justify-content: right;
+}
+
+#btn-custom {
+  color: #fff;
+  border: 0.2em solid #22333b;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  font-size: small;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  padding: 8px 20px;
+  
+}
+#btn-custom:hover{
+  background-color: #22333b33;
+}
+#svg-add{
+  width: 20px;
+  height: auto;
+  margin-left: 4px;
 }

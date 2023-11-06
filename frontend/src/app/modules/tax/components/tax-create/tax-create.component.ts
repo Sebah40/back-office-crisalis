@@ -10,7 +10,7 @@ import { Tax } from '../../model/tax';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ResponseCreateUser } from '../../../user/interfaces/ResponseCreateUser.type';
+import { ResponseCreate } from 'src/app/components/interfaces/ResponseCreate.type';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -71,12 +71,12 @@ export class TaxCreateComponent implements OnInit {
     }
   }
 
-  editTax(tax: Tax): Observable<ResponseCreateUser> {
+  editTax(tax: Tax): Observable<ResponseCreate> {
     console.log(tax);
     return this.taxService.editTax(tax);
   }
 
-  createTax(tax: Tax): Observable<ResponseCreateUser> {
+  createTax(tax: Tax): Observable<ResponseCreate> {
     return this.taxService.createTax(tax);
   }
 
@@ -91,27 +91,28 @@ export class TaxCreateComponent implements OnInit {
         next: (response) => {
           if ('mensaje' in response) {
             console.log(response.mensaje);
-            alert(response.mensaje);
+            Swal.fire(response.mensaje, undefined, 'success');
           } else {
             throw response;
           }
         },
         error: (error: HttpErrorResponse) => {
           console.log(error.error.mensaje);
-          alert(error.error.mensaje);
+          Swal.fire(error.error.mensaje, undefined, 'error');
         },
       });
     } else {
       this.createTax(newTax).subscribe({
         next: (response) => {
           if ('mensaje' in response) {
+            console.log(response.mensaje);
           } else {
             throw response;
           }
         },
         error: (error: HttpErrorResponse) => {
           console.log(error.error.mensaje);
-          alert(error.error.mensaje);
+          Swal.fire(error.error.mensaje, undefined, 'error');
         },
       });
     }

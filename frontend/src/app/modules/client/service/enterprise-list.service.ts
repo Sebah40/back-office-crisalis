@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { IEnterpriseGet } from '../model/enterpriseGet.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { ResponseCreateUser } from 'src/app/modules/user/interfaces/ResponseCreateUser.type';
+import { ResponseCreate } from 'src/app/components/interfaces/ResponseCreate.type';
 import { IEnterprise } from '../model/enterprise.model';
 
 type Enterprise = { id: number };
@@ -33,8 +33,8 @@ export class EnterpriseService {
     return this.http.get<IEnterpriseGet[]>(`${this.URL}/getAll`);
   }
 
-  create(enterprise: IEnterprise): Observable<ResponseCreateUser> {
-    return this.http.post<ResponseCreateUser>(`${this.URL}/create`, enterprise);
+  create(enterprise: IEnterprise): Observable<ResponseCreate> {
+    return this.http.post<ResponseCreate>(`${this.URL}/create`, enterprise);
   }
 
   delete(id: Enterprise): Observable<Message> {
@@ -42,8 +42,8 @@ export class EnterpriseService {
     return this.http.post<Message>(`${this.URL}/disable`, id);
   }
 
-  edit(enterprise: IEnterprise): Observable<ResponseCreateUser> {
-    return this.http.post<ResponseCreateUser>(`${this.URL}/edit`, enterprise);
+  edit(enterprise: IEnterprise): Observable<ResponseCreate> {
+    return this.http.post<ResponseCreate>(`${this.URL}/edit`, enterprise);
   }
 
   // Actualizar la lista de empresas

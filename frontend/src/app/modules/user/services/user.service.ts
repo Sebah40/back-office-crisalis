@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { IUser } from '../model/User.model';
-import { ResponseCreateUser } from '../interfaces/ResponseCreateUser.type';
+import { ResponseCreate } from 'src/app/components/interfaces/ResponseCreate.type';
 import { IUserGet } from '../model/UserGet.model';
 
 type User = { username: string };
@@ -34,8 +34,8 @@ export class UserService {
     return this.http.get<IUserGet[]>(`${this.URL}/getAll`);
   }
 
-  create(user: IUser): Observable<ResponseCreateUser> {
-    return this.http.post<ResponseCreateUser>(
+  create(user: IUser): Observable<ResponseCreate> {
+    return this.http.post<ResponseCreate>(
       'http://localhost:3000/auth/new',
       user
     );
@@ -46,8 +46,8 @@ export class UserService {
     return this.http.post<Message>(`${this.URL}/disable`, username);
   }
 
-  edit(user: IUser): Observable<ResponseCreateUser> {
-    return this.http.post<ResponseCreateUser>(`${this.URL}/edit-user`, user);
+  edit(user: IUser): Observable<ResponseCreate> {
+    return this.http.post<ResponseCreate>(`${this.URL}/edit-user`, user);
   }
 
   // Actualizar la lista de usuarios

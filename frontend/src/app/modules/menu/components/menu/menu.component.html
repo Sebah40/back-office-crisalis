@@ -1,9 +1,9 @@
 <div>
   <button class="boton_menu" (click)="toggleMenu()"><img src="../assets/icons/menu.svg" alt=""></button>
   <div #menu class="contenedor">
-    <app-menu-item [item]="home" imagenUrl="../assets/icons/home.svg" style="margin: 2rem 0;">
+    <app-menu-item [item]="home" imagenUrl="../assets/icons/home.svg" style="margin: 2rem 0;" (click)="toggleMenu()">
     </app-menu-item>
-    <app-menu-item *ngFor="let item of items" [item]="item" >
+    <app-menu-item *ngFor="let item of items" [item]="item" (click)="toggleMenu()" >
     </app-menu-item>
   </div>
 </div>

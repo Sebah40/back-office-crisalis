@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { IUser } from '../../model/User.model';
 import { UserService } from '../../services/user.service';
 import { Observable } from 'rxjs';
-import { ResponseCreateUser } from '../../interfaces/ResponseCreateUser.type';
+import { ResponseCreate } from 'src/app/components/interfaces/ResponseCreate.type';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -115,11 +115,11 @@ export class UserFormComponent implements OnInit {
     }
   }
 
-  createUser(user: IUser): Observable<ResponseCreateUser> {
+  createUser(user: IUser): Observable<ResponseCreate> {
     return this.userService.create(user);
   }
 
-  editUser(user: IUser): Observable<ResponseCreateUser> {
+  editUser(user: IUser): Observable<ResponseCreate> {
     return this.userService.edit(user);
   }
 

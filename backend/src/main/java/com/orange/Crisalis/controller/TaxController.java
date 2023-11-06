@@ -3,6 +3,7 @@ package com.orange.Crisalis.controller;
 import com.orange.Crisalis.dto.TaxDto;
 import com.orange.Crisalis.exceptions.ResponseMessage;
 import com.orange.Crisalis.model.Tax;
+import com.orange.Crisalis.security.Controller.Message;
 import com.orange.Crisalis.security.Entity.UserEntity;
 import com.orange.Crisalis.security.Service.UserService;
 import com.orange.Crisalis.service.ITaxService;
@@ -56,7 +57,7 @@ public class TaxController {
         }
         if(taxService.verifyTax(taxDto)) {
             taxService.saveTax(taxDto);
-            return new ResponseEntity<>(new ResponseMessage("Creado con éxito", HttpStatus.OK), HttpStatus.OK);
+            return new ResponseEntity(new Message("Creado con éxito"),HttpStatus.CREATED);
         } else {
 
             return new ResponseEntity<>(new ResponseMessage("Impuesto existente", HttpStatus.IM_USED), HttpStatus.IM_USED);
@@ -82,10 +83,11 @@ public class TaxController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @PostMapping("/delete/{id}")
-    public ResponseEntity<Object> deleteTax(@PathVariable("id") Integer id) {
-        if(taxService.verifyTaxById(id)) {
-            taxService.deleteTax(id);
+    @PostMapping("/delete")
+    public ResponseEntity<Object> deleteTax(@Valid @RequestBody Tax tax) {
+        System.out.println(tax);
+        if(taxService.verifyTaxById(tax.getId())) {
+            taxService.deleteTax(tax.getId());
             return new ResponseEntity<>(new ResponseMessage("Eliminado con éxito", HttpStatus.OK), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(new ResponseMessage("El impuesto con el ID solicitado no existe", HttpStatus.NOT_FOUND)

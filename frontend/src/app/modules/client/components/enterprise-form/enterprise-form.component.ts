@@ -10,7 +10,7 @@ import { EnterpriseService } from '../../service/enterprise-list.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ResponseCreateUser } from '../../../user/interfaces/ResponseCreateUser.type';
+import { ResponseCreate } from 'src/app/components/interfaces/ResponseCreate.type';
 
 @Component({
   selector: 'app-enterprise-form',
@@ -141,11 +141,11 @@ export class EnterpriseFormComponent implements OnInit {
     }
   }
 
-  createEnterprise(enterprise: IEnterprise): Observable<ResponseCreateUser> {
+  createEnterprise(enterprise: IEnterprise): Observable<ResponseCreate> {
     return this.enterpriseService.create(enterprise);
   }
 
-  editEnterprise(enterprise: IEnterprise): Observable<ResponseCreateUser> {
+  editEnterprise(enterprise: IEnterprise): Observable<ResponseCreate> {
     return this.enterpriseService.edit(enterprise);
   }
 

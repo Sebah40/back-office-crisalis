@@ -16,15 +16,13 @@ export class TaxListComponent<T extends object> implements OnInit {
   constructor(private taxService: TaxService) {}
 
   ngOnInit() {
+    this.taxService.taxListData$.subscribe((data) => {
+      this.taxListData = data;
+    });
+
     this.taxService.getAll().subscribe((data) => {
       this.taxListData = data;
     });
-  }
-  ngOnChanges() {
-    if (this.entities && this.entities.length > 0) {
-      this.entityKeys = Object.keys(this.entities[0]) as (keyof T)[];
-    }
-    console.log(this.entities);
   }
 
   getData(): any[] {
@@ -35,11 +33,12 @@ export class TaxListComponent<T extends object> implements OnInit {
   }
   deleteTax(entity: any) {
     console.log('taxList', entity);
-    const tax: { id: number } = { id: entity.id };
+    const tax: { id: number, taxName: string, taxPercentage: number } = { id: entity.id, taxName: "", taxPercentage: 0 };
+
     console.log('tax', tax);
-    this.taxService.deleteTax(tax.id).subscribe({
+    this.taxService.deleteTax(tax).subscribe({
       next: (response: any) => {
-        this.taxService.updateTaxData();
+        this.taxService.updateTaxListData();
       },
       error: (error: any) => {
         console.log(error);

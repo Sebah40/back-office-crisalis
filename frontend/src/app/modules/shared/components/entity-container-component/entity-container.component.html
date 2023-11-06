@@ -17,7 +17,8 @@
         <tr class="align-middle" *ngFor="let entity of entities">
           <td class="text-center mx-4" *ngFor="let key of entityKeys">{{ entity[key] }}</td>
           <td class="d-flex justify-content-center">
-            <button *ngIf="isEditable" (click)="redirectToEdit(entity)" class="btn btn-dark mx-1" >Editar</button>
+            <button *ngIf="isEditable" (click)="redirectToEdit(entity)" class="btn btn-primary
+             mx-1">Editar</button>
             <button *ngIf="isEditable" (click)="deleteHandler(entity)" class="btn btn-danger mx-1">Eliminar</button>
           </td>
         </tr>

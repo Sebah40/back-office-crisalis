@@ -18,7 +18,7 @@ public class OrderDetailService implements IOrderDetailService {
     }
 
     @Override
-    public OrderDetail createDetail(OrderDetail orderDetail) {
+    public OrderDetail createOrEditDetail(OrderDetail orderDetail) {
         return orderDetailRepository.save(orderDetail);
     }
 
@@ -31,5 +31,16 @@ public class OrderDetailService implements IOrderDetailService {
     public Optional<List<OrderDetail>> getOrderDetailListByOrderId(Long id) {
         return orderDetailRepository.findOrderDetailByOrderId(id);
     }
+
+    @Override
+    public Optional<OrderDetail> getOrderDetailById(Long id) {
+        return orderDetailRepository.findById(id);
+    }
+
+    @Override
+    public void deleteOrderDetail(OrderDetail orderDetail) {
+        orderDetailRepository.delete(orderDetail);
+    }
+
 
 }

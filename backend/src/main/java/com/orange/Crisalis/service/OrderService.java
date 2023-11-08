@@ -16,6 +16,7 @@ import com.orange.Crisalis.service.interfaces.IOrderService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -74,7 +75,8 @@ public class OrderService implements IOrderService {
                         orderEntity.getOrderDetailList().stream().map(ordeD -> new OrderDetailDTO(
                                 ordeD.getId(),
                                 ordeD.getPriceSell(),
-                                ordeD.getQuantity()
+                                ordeD.getQuantity(),
+                                ordeD.getSellableGood()
                                 )).collect(Collectors.toList())
 
                         )
@@ -107,10 +109,45 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public void editOrder(RequestBodyCreateOrderDTO orderToEdit, Long id) {
-        Optional<OrderEntity> order = orderRepository.findById(id);
-        Optional<List<OrderDetail>> orderDetails = orderDetailService.getOrderDetailListByOrderId(id);
+    public void editOrder(OrderDTO orderToEdit) {
+         OrderEntity order = orderRepository.findById(orderToEdit.getId()).orElseThrow(() -> new RuntimeException("No existe el pedido."));
+         order.setDateEdited(new Date());
 
+         List<OrderDetailDTO> updatedDetailList = orderToEdit.getOrderDetailDTOList();
+
+         for(OrderDetailDTO updatedDetail : updatedDetailList){
+             if(updatedDetail.getId()!=null){
+                 OrderDetail existingDetail = orderDetailService.getOrderDetailById(updatedDetail.getId())
+                         .orElseThrow(() -> new RuntimeException("El detalle con ID " + updatedDetail.getId() + " no se encontró"));
+
+                 if(updatedDetail.getQuantity() == 0){
+                     orderDetailService.deleteOrderDetail(existingDetail);
+                 }else {
+                     if(updatedDetail.getSellableGood().getType()==Type.SERVICE){
+                         existingDetail.setQuantity(1);
+                     }else {
+                         existingDetail.setQuantity(updatedDetail.getQuantity());
+                         orderDetailService.createOrEditDetail(existingDetail);
+                     }
+
+                 }
+
+             }else {
+                 if(updatedDetail.getQuantity() <= 0){
+                     throw new RuntimeException("no se puede agregar producto sin cantidad");
+                 }
+                 OrderDetail newDetail = new OrderDetail();
+                 newDetail.setSellableGood(updatedDetail.getSellableGood());
+                 newDetail.setQuantity(updatedDetail.getQuantity());
+                 newDetail.setPriceSell(updatedDetail.getSellableGood().getPrice());
+                 newDetail.setOrder(order);
+                 orderDetailService.createOrEditDetail(newDetail);
+             }
+
+         }
+
+
+        //Optional<List<OrderDetail>> orderDetails = orderDetailService.getOrderDetailListByOrderId(id);
         // order.getOrderDetailList
     }
 
@@ -134,4 +171,7 @@ public class OrderService implements IOrderService {
 
 
     }
+
+
+
 }

@@ -1,4 +1,5 @@
 package com.orange.Crisalis.model;
+import com.orange.Crisalis.model.dto.OrderDetailDTO;
 import lombok.*;
 
 import javax.persistence.*;
@@ -37,4 +38,12 @@ public class OrderDetail {
     @JoinColumn(name = "order_id")
     private OrderEntity order;
 
+
+    public OrderDetail(OrderDetailDTO orderDetailDTO) {
+        this.id = orderDetailDTO.getId();
+        this.priceSell = orderDetailDTO.getPriceSell();
+        this.quantity = orderDetailDTO.getQuantity();
+        this.sellableGood = orderDetailDTO.getSellableGood();
+
+    }
 }

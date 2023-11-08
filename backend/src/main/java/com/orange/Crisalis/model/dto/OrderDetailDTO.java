@@ -20,5 +20,6 @@ public class OrderDetailDTO implements Serializable {
         this.id = detail.getId();
         this.priceSell = detail.getPriceSell();
         this.quantity = detail.getQuantity();
+        this.sellableGood = detail.getSellableGood();
     }
 }

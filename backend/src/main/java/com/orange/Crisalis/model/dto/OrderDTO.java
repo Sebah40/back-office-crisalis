@@ -29,11 +29,12 @@ public class OrderDTO implements Serializable {
     }
 
     public OrderDTO(Long id, Date dateCreated, OrderState orderState, ClientEntity client, List<OrderDetailDTO> orderDetailDTOList) {
-
         this.id = id;
         this.dateCreated = dateCreated;
         this.orderState = orderState;
         this.client = client;
         this.orderDetailDTOList = orderDetailDTOList;
     }
+
+
 }

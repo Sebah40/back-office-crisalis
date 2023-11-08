@@ -16,5 +16,5 @@ public interface IOrderService {
 
     void cancelOrder(Long id);
 
-    void editOrder(RequestBodyCreateOrderDTO orderToEdit, Long id);
+    void editOrder(OrderDTO order);
 }

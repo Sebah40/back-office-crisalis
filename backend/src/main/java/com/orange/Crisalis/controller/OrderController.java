@@ -54,9 +54,9 @@ public class OrderController {
         return new ResponseEntity<>(new Message("El pedido ha sido cancelado"),HttpStatus.OK);
     }
 
-    @PutMapping("/edit/{id}")
-    public ResponseEntity<?> editOrder(@RequestBody RequestBodyCreateOrderDTO orderToEdit,@PathVariable("id") Long id){
-        this.orderService.editOrder(orderToEdit,id);
+    @PutMapping("/edit")
+    public ResponseEntity<?> editOrder(@RequestBody OrderDTO orderToEdit){
+        this.orderService.editOrder(orderToEdit);
         return new ResponseEntity<>(new Message("El pedido editado exisotamente"),HttpStatus.OK);
     }
 }

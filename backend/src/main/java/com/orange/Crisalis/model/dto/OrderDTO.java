@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
 public class OrderDTO implements Serializable {
     private Long id;
@@ -27,14 +28,5 @@ public class OrderDTO implements Serializable {
         this.dateCreated = order.getDateCreated();
         this.orderDetailDTOList = order.getOrderDetailList().stream().map(OrderDetailDTO::new).collect(Collectors.toList());
     }
-
-    public OrderDTO(Long id, Date dateCreated, OrderState orderState, ClientEntity client, List<OrderDetailDTO> orderDetailDTOList) {
-        this.id = id;
-        this.dateCreated = dateCreated;
-        this.orderState = orderState;
-        this.client = client;
-        this.orderDetailDTOList = orderDetailDTOList;
-    }
-
 
 }

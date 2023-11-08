@@ -1,0 +1,31 @@
+<div class="container d-flex flex-column justify-content-sm-start align-items-center" id="container">
+  <h2 class="title">Lista de {{ title }}</h2>
+<table class="table table-striped list-table">
+  <thead>
+    <tr>
+      <th align="center" *ngFor="let th of headers">
+        {{th}}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orderList">
+      <td>{{order.id}}</td>
+      <td>{{order.client.businessName}}</td>
+      <!--<td>{{order.clientEntity.id}}</td>-->
+
+      <td>
+        <!--<button class="btn btn-warning" routerLink="order/{{order.id}}">
+          Ver más
+        </button>-->    
+        <button class="btn btn-dark">
+          Editar
+        </button>
+        <button (click)="delete(order.id)" class="btn btn-danger">
+          Eliminar
+        </button>
+     </td>
+    </tr>
+  </tbody>
+</table>
+</div>

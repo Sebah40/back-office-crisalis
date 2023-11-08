@@ -3,14 +3,12 @@ package com.orange.Crisalis.model;
 import com.orange.Crisalis.model.ClientEntity;
 import lombok.Getter;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
+@DiscriminatorValue("ENTERPRISE")
 public class EnterpriseEntity extends ClientEntity {
 
     @NotNull

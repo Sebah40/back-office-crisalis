@@ -9,6 +9,9 @@ import { EnterpriseFormComponent } from './modules/client/components/enterprise-
 import { PersonFormComponent } from './modules/client/components/person-form/person-form.component';
 import { TaxListComponent } from './modules/tax/components/tax-list/tax-list.component';
 import { TaxCreateComponent } from './modules/tax/components/tax-create/tax-create.component';
+import { OrderListComponent } from './order/order-list/order-list.component';
+import { OrderComponent } from './order/order.component';
+import { CreateOrderComponent } from './order/create-order/create-order.component';
 
 const routes: Routes = [
   { path: 'home', component: HomepageComponent },
@@ -26,6 +29,9 @@ const routes: Routes = [
   { path: 'taxlist', component: TaxListComponent },
   { path: 'tax/create', component: TaxCreateComponent },
   { path: 'tax/edit/:id', component: TaxCreateComponent },
+  { path: 'order/create', component: CreateOrderComponent },
+  { path: 'order/getAll', component: OrderListComponent },
+  { path: 'order/:id', component: OrderComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];

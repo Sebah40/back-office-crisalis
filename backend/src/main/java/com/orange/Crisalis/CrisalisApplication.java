@@ -21,7 +21,7 @@ public class CrisalisApplication {
 	public static void main(String[] args) {
         SpringApplication.run(CrisalisApplication.class, args);
     }
-	@Bean
+	/*@Bean
 	CommandLineRunner commandLineRunner(
 			OrderDetailRepository orderDetailRepository,
 
@@ -52,7 +52,7 @@ public class CrisalisApplication {
 			PersonEntity person = new PersonEntity(true, "Dominguez", "Lucas", "38.123.165", true);
 			iPersonRepository.save(person);
 			System.out.println(person.getId() + "     " + person.getFirstName() + "   " + person.getLastName() + "    " + person.getDni() );
-*/
+
 		};
-	}
+	}*/
 }

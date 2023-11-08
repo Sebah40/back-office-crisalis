@@ -10,33 +10,35 @@
     </svg>
   </div>
 </div>
-<table class="table p-2" id="custom-table" >
-  <thead>
-    <tr>
-      <th>ID Cliente</th>
-      <th>Cliente</th>
-      <th>Beneficiario</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let client of clientList"  >
 
-        <td>
-          {{client.id}}
-        </td>
-        <td>
-          {{client.businessName}}
-        </td>
-        <td>
-          {{client.beneficiary}}
+  <table class="table p-2" id="custom-table" >
+    <thead>
+      <tr>
+        <th>ID Cliente</th>
+        <th>Cliente</th>
+        <th>Beneficiario</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let client of clientList"  >
   
-        </td>
+          <td>
+            {{client.id}}
+          </td>
+          <td>
+            {{client.businessName}}
+          </td>
+          <td>
+            {{client.beneficiary}}
+    
+          </td>
+  
+        
+        <td><button class="btn btn-primary" id="id-{{client.id}}" (click)="addClient(client.id)">Seleccionar</button></td>
+      </tr>
+    </tbody>
+  </table>
 
-      
-      <td><button class="btn btn-primary" id="id-{{client.id}}" (click)="addClient(client.id)">Seleccionar</button></td>
-    </tr>
-  </tbody>
-</table>
 
 <section class="form-section">
   <form class="form">

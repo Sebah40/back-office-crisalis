@@ -34,7 +34,7 @@ export class OrderListComponent implements OnInit {
     this.loadOrderList();
   }
 
-  headers = ['N° de pedido', 'Responsable', 'Fecha', 'Total', ''];
+  headers = ['N° de pedido', 'Responsable', 'Fecha'];
   entityKeys = ['N° de pedido', 'Responsable', 'Fecha', 'Total'];
   title: string = 'pedidos';
 

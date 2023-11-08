@@ -2,7 +2,7 @@ package com.orange.Crisalis.model.dto;
 
 import com.orange.Crisalis.model.OrderDetail;
 import lombok.*;
-
+import com.orange.Crisalis.model.SellableGood;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -15,6 +15,7 @@ public class OrderDetailDTO implements Serializable {
     private Long id;
     private BigDecimal priceSell;
     private Integer quantity;
+    private SellableGood sellableGood;
 
     public OrderDetailDTO(OrderDetail detail) {
         this.id = detail.getId();

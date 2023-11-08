@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/order")
@@ -23,6 +24,15 @@ public class OrderController {
 
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getOrder(@PathVariable("id") Long id) {
+        Optional<OrderDTO> order = this.orderService.getOrder(id);
+        if(order.isPresent()) {
+            return ResponseEntity.ok(order);
+        }
+        return new ResponseEntity<Object>("Pedido inexistente", HttpStatus.NOT_FOUND);
     }
 
     @Transactional

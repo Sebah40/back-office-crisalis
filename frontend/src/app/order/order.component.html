@@ -1,0 +1,46 @@
+
+
+<main>
+
+  <div class="container d-flex flex-column justify-content-sm-start align-items-center" id="container">
+    <h2 class="title">Pedido</h2>
+    <p>{{order?.client?.businessName}}</p>
+    <p>{{order?.client?.beneficiary}}</p>
+    <p>{{order?.orderState}}</p>
+    <p>{{order?.dateCreated}}</p>
+
+    <table class="table p-2" id="custom-table">
+      <thead>
+        <tr>
+          <th align="center" >
+            Precio
+          </th>
+          <th align="center" >
+            Cantidad
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+        <!--<tr *ngFor="let detail of order.orderDetailList">
+          <td>{{detail.priceSell}}</td>
+          <td>{{detail.quantity}}</td>-->
+          <td>3000</td>
+          <td>2</td>
+          <td>
+            <button class="btn btn-warning">
+              Ver más
+            </button>
+            <button class="btn btn-danger">
+              Borrar
+            </button>
+            <button class="btn btn-dark">
+              Eliminar
+            </button>
+         </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>

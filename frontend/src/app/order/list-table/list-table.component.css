@@ -1,0 +1,13 @@
+.list-table {
+  width: max-content;
+  margin: auto;
+}
+.list-table th, .list-table td {
+  background-color: rgb(256, 256, 256, 0.9);
+  color: #000000;
+  border: none;
+}
+
+.btn {
+  margin-left: 5px;
+}

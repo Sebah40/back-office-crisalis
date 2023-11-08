@@ -1,0 +1,28 @@
+<table class="table table-striped list-table">
+  <thead>
+    <tr>
+      <th align="center" *ngFor="let th of headers">
+        {{th}}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orderList">
+      <td>{{order.id}}</td>
+      <td>{{order.orderState}}</td>
+      <td>{{order.client.id}}</td>
+
+      <td>
+        <button class="btn btn-warning">
+          Ver más
+        </button>
+        <button class="btn btn-danger">
+          Borrar
+        </button>
+        <button class="btn btn-dark">
+          Eliminar
+        </button>
+     </td>
+    </tr>
+  </tbody>
+</table>

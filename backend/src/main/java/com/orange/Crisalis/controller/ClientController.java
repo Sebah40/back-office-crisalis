@@ -28,13 +28,14 @@ public class ClientController {
     @Autowired
     ClientEnterprisePersonService clientEnterprisePersonService;
 
-/*    @GetMapping("/getAll")
-    public ResponseEntity<List<ClientDTO>> listEnterprise(){
+    @GetMapping("/getAll")
+    public ResponseEntity<List<ClientEntity>> listEnterprise(){
         List<ClientEntity> clients = iClientRepository.findAll();
-        return ResponseEntity.ok(clients.stream()
-                .map(ClientDTO::new)
-                .collect(Collectors.toList()));
-    }*/
+        return ResponseEntity.ok(clients);
+        //clients.stream()
+          //      .map(client -> new ClientDto(client.get))
+            //    .collect(Collectors.toList())
+    }
 
     @PreAuthorize("hasAnyRole('USER' ,'ADMIN')")
     @GetMapping("/getByAnyParameter")

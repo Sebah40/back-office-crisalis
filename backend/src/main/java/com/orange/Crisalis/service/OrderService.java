@@ -40,6 +40,11 @@ public class OrderService implements IOrderService {
     }
 
     @Override
+    public Optional<OrderDTO> getOrder(Long id) {
+        return Optional.of(new OrderDTO(this.orderRepository.findOrderById(id).orElseThrow(null)));
+    }
+
+    @Override
     public void createOrder(RequestBodyCreateOrderDTO orderCreateBody)  {
 
         ClientEntity clientEntity = clientService.getById(orderCreateBody.getClientId());

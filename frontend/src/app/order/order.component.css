@@ -1,0 +1,46 @@
+#container {
+  min-width: fit-content;
+  min-height: 100vh;
+}
+#container h2 {
+  color: #5e503f;
+  text-align: center;
+  margin-top: 40px;
+}
+#container-list {
+  margin-top: 200px;
+  background-color: #eae0d5cc;
+  color: #22333b;
+  height: max-content;
+  min-width: 100%;
+  /* max-width: 140%; */
+}
+
+.text-center {
+  margin: 0 20px !important;
+}
+
+#container table,
+thead,
+tbody,
+td {
+  background-color: transparent;
+  color: #22333b;
+}
+#custom-table {
+  background-color: transparent;
+  color: #22333b;
+}
+#custom-table {
+  min-height: 100px;
+}
+#container-button {
+  width: 90%;
+}
+
+#container td, th{
+  margin: 0 25px !important;
+}
+tbody {
+  background-color: rgba(255, 255, 255, 0.9);
+}

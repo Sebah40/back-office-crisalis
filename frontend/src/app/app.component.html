@@ -1,2 +1,5 @@
-<app-upperbar [theme]="theme" (themeChanger)="changeTheme()"></app-upperbar>
-<router-outlet></router-outlet>
+<app-upperbar *ngIf="!isLoginPath"  [theme]="theme" (themeChanger)="changeTheme()"></app-upperbar>
+<div style="margin-top: 90px;">
+  <router-outlet></router-outlet>
+</div>
+

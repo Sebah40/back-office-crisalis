@@ -5,7 +5,7 @@ import { PersonService } from '../../service/person-list.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ResponseCreateUser } from '../../../user/interfaces/ResponseCreateUser.type';
+import { ResponseCreate } from 'src/app/components/interfaces/ResponseCreate.type';
 
 @Component({
   selector: 'app-person-form',
@@ -118,11 +118,11 @@ export class PersonFormComponent implements OnInit {
     }
   }
 
-  createPerson(person: IPerson): Observable<ResponseCreateUser> {
+  createPerson(person: IPerson): Observable<ResponseCreate> {
     return this.personService.create(person);
   }
 
-  editPerson(person: IPerson): Observable<ResponseCreateUser> {
+  editPerson(person: IPerson): Observable<ResponseCreate> {
     return this.personService.edit(person);
   }
 

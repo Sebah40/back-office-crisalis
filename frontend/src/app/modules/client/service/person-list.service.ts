@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { IPersonGet } from '../model/personGet.model';
 import { HttpClient } from '@angular/common/http';
-import { ResponseCreateUser } from 'src/app/modules/user/interfaces/ResponseCreateUser.type';
+import { ResponseCreate } from 'src/app/components/interfaces/ResponseCreate.type';
 import { IPerson } from '../model/person.model';
 
 type Person = { id: number };
@@ -34,8 +34,8 @@ export class PersonService {
     return this.http.get<IPersonGet[]>(`${this.URL}/getAll`);
   }
 
-  create(person: IPerson): Observable<ResponseCreateUser> {
-    return this.http.post<ResponseCreateUser>(`${this.URL}/create`, person);
+  create(person: IPerson): Observable<ResponseCreate> {
+    return this.http.post<ResponseCreate>(`${this.URL}/create`, person);
   }
 
   delete(id: Person): Observable<Message> {
@@ -43,8 +43,8 @@ export class PersonService {
     return this.http.post<Message>(`${this.URL}/disable`, id);
   }
 
-  edit(person: IPerson): Observable<ResponseCreateUser> {
-    return this.http.post<ResponseCreateUser>(`${this.URL}/edit`, person);
+  edit(person: IPerson): Observable<ResponseCreate> {
+    return this.http.post<ResponseCreate>(`${this.URL}/edit`, person);
   }
 
   // Actualizar la lista de personas

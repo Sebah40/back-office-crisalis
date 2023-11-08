@@ -17,6 +17,7 @@ export class EntityContainerComponent<T extends object> {
   @Input() deleteEntity?: (entity: any) => void;
   @Output() entityToDelete: EventEmitter<Object>;
   entityKeys: (keyof T)[] = [];
+  svgPlus: string = 'assets/icons/plus-solid.svg';
 
   constructor(private router: Router) {
     this.entityToDelete = new EventEmitter();

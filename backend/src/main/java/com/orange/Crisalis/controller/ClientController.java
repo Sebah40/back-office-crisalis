@@ -58,49 +58,4 @@ public class ClientController {
         ClientEntity client = clientService.getById(clientId);
         return client.getActiveServices();
     }
-
-    @PostMapping("/{clientId}/addActiveService/{serviceId}")
-    public ResponseEntity<String> addActiveServiceToClient(
-            @PathVariable int clientId, @PathVariable int serviceId) {
-        try {
-            ClientEntity client = clientService.getById(clientId);
-            SellableGood service = sellableGoodService.findById(Long.valueOf(serviceId))
-                    .orElseThrow(() -> new RuntimeException("Servicio no encontrado."));
-
-            if (client != null && service != null) {
-                client.getActiveServices().add(service);
-                client.setBeneficiary(true);
-                clientService.saveClient(client);
-                return new ResponseEntity<>("Servicio agregado al cliente.", HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>("Cliente o servicio no encontrado.", HttpStatus.NOT_FOUND);
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>("Error: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-    @PostMapping("/{clientId}/removeActiveService/{serviceId}")
-    public ResponseEntity<String> removeActiveServiceToClient(
-            @PathVariable int clientId, @PathVariable int serviceId) {
-        try {
-            ClientEntity client = clientService.getById(clientId);
-            SellableGood service = sellableGoodService.findById(Long.valueOf(serviceId))
-                    .orElseThrow(() -> new RuntimeException("Servicio no encontrado."));
-
-            if (client != null && service != null) {
-                client.getActiveServices().remove(service);
-                clientService.saveClient(client);
-                if (client.getActiveServices().isEmpty()) {
-                    client.setBeneficiary(false);
-                    clientService.saveClient(client);
-                    return new ResponseEntity<>("Servicio quitado del cliente. Ya no es beneficiario.", HttpStatus.OK);
-                }
-                return new ResponseEntity<>("Servicio quitado del cliente.", HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>("Cliente o servicio no encontrado.", HttpStatus.NOT_FOUND);
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>("Error: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
 }

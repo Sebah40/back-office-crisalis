@@ -15,10 +15,7 @@ import com.orange.Crisalis.repository.OrderRepository;
 import com.orange.Crisalis.service.interfaces.IOrderService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -82,9 +79,9 @@ public class OrderService implements IOrderService {
                                 ordeD.getPriceSell(),
                                 ordeD.getQuantity(),
                                 ordeD.getSellableGood()
-                                )).collect(Collectors.toList())
+                        )).collect(Collectors.toList())
 
-                        )
+                )
                 )
         ).collect(Collectors.toList());
         if (!ordersDTO.isEmpty()){
@@ -125,17 +122,29 @@ public class OrderService implements IOrderService {
                  OrderDetail existingDetail = orderDetailService.getOrderDetailById(updatedDetail.getId())
                          .orElseThrow(() -> new RuntimeException("El detalle con ID " + updatedDetail.getId() + " no se encontró"));
 
-                 if(updatedDetail.getQuantity() == 0){
-                     orderDetailService.deleteOrderDetail(existingDetail);
-                 }else {
-                     if(updatedDetail.getSellableGood().getType()==Type.SERVICE){
-                         existingDetail.setQuantity(1);
-                     }else {
-                         existingDetail.setQuantity(updatedDetail.getQuantity());
-                         orderDetailService.createOrEditDetail(existingDetail);
-                     }
+                if(updatedDetail.getQuantity() == 0){
+                    orderDetailService.deleteOrderDetail(existingDetail);
 
-                 }
+                    SellableGood sellableGood = existingDetail.getSellableGood();
+                    if (sellableGood != null && sellableGood.getType() == Type.SERVICE) {
+                        order.getClient().getActiveServices().remove(sellableGood);
+                        if(order.getClient().getActiveServices().isEmpty())
+                            order.getClient().setBeneficiary(false);
+                        clientService.saveClient(order.getClient());
+                    }
+
+
+                }else {
+                    if(updatedDetail.getSellableGood().getType()==Type.SERVICE){
+                        existingDetail.setQuantity(1);
+
+                    }else {
+                        existingDetail.setQuantity(updatedDetail.getQuantity());
+                        orderDetailService.createOrEditDetail(existingDetail);
+
+                    }
+
+                }
 
              }else {
                  if(updatedDetail.getQuantity() <= 0){
@@ -155,28 +164,21 @@ public class OrderService implements IOrderService {
         //Optional<List<OrderDetail>> orderDetails = orderDetailService.getOrderDetailListByOrderId(id);
         // order.getOrderDetailList
     }
-
-
-
-
-
     private List<OrderDetail> createOrderDetailList(List<ProductIdAndQuantityDTO> productIdAndQuantityDTO, OrderEntity order){
         List<OrderDetail> orderDetailList = new ArrayList<>();
         for (ProductIdAndQuantityDTO p : productIdAndQuantityDTO){
             Optional<SellableGood> sellableGood = sellableGoodService.findById(p.getProductId());
             if(sellableGood.isPresent() && sellableGood.get().getType() == Type.SERVICE){
+                SellableGood service = sellableGood.get();
                 p.setQuantity(1);
+                order.getClient().getActiveServices().add(service);
+                order.getClient().setBeneficiary(true);
+                clientService.saveClient(order.getClient());
             }
             orderDetailList.add(new OrderDetail(
                     null,sellableGood.get().getPrice(),
                     p.getQuantity(),sellableGood.get(),order));
-
         }
         return orderDetailService.saveAllOrderDetail(orderDetailList);
-
-
     }
-
-
-
 }

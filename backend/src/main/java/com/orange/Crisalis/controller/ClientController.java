@@ -28,6 +28,11 @@ public class ClientController {
     @Autowired
     ClientEnterprisePersonService clientEnterprisePersonService;
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ClientEntity> getClient(@PathVariable("id") int id) {
+        ClientEntity client = iClientRepository.findById(id).orElse(null);
+        return ResponseEntity.ok(client);
+    }
     @GetMapping("/getAll")
     public ResponseEntity<List<ClientEntity>> listEnterprise(){
         List<ClientEntity> clients = iClientRepository.findAll();

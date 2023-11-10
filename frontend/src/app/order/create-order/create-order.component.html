@@ -21,7 +21,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let client of clientList"  >
-  
+
           <td>
             {{client.id}}
           </td>
@@ -30,10 +30,10 @@
           </td>
           <td>
             {{client.beneficiary}}
-    
+
           </td>
-  
-        
+
+
         <td><button class="btn btn-primary" id="id-{{client.id}}" (click)="addClient(client.id)">Seleccionar</button></td>
       </tr>
     </tbody>
@@ -48,9 +48,9 @@
 
     <ul type="none" class="p-2">
       <li *ngFor="let item of itemList" class="list-item " >
-        
+
           <span>
-            {{item.name}} 
+            {{item.name}}
           </span>
         <span>
           <label>Unidades: <input defaultValue="{{0}}" id="{{item.id}}" class="number" name="{{item.id}}" type="number"/></label>

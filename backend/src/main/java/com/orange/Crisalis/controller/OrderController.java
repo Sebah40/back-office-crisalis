@@ -9,6 +9,7 @@ import com.orange.Crisalis.service.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -17,7 +18,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/order")
-@CrossOrigin(origins = {"http://localhost:4200", "https://localhost:4200"})
+@CrossOrigin(origins = {"http://localhost:4200", "https://localhost:4200", "*"})
 public class OrderController {
 
     private final OrderService orderService;
@@ -54,6 +55,7 @@ public class OrderController {
         return new ResponseEntity<>(new Message("El pedido ha sido cancelado"),HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAnyRole('USER' ,'ADMIN')")
     @PutMapping("/edit")
     public ResponseEntity<?> editOrder(@RequestBody OrderDTO orderToEdit){
         this.orderService.editOrder(orderToEdit);

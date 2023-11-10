@@ -1,0 +1,125 @@
+
+.text-center {
+  margin: 0 20px !important;
+}
+.table {
+  width: 50%;
+  min-width: 700px;
+  margin: auto;
+  max-height: 800px;
+  overflow-y: scroll;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+.card-container {
+  margin-top: 50px;
+}
+.table-section {
+  width: 100%;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.buttons {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+}
+.form {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  width: 50%;
+  margin: auto;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+}
+
+.form-section {
+
+  width: 100%;
+}
+.form-check-label {
+  display: inline;
+}
+.beneficiary {
+  margin-bottom: 5px;
+}
+
+
+.text-center {
+  margin: 0 20px !important;
+}
+
+.number {
+  width: 40px;
+}
+
+.btn-secondary {
+  margin: 0 3px;
+}
+tbody {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.btn-secondary {
+  margin: 0 3px;
+}
+tbody {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+
+.p-2 {
+  height: fit-content;
+  max-height: 600px;
+  overflow-y: scroll;
+}
+
+.selected {
+  background-color: rgba(255, 81, 0, 0.384);
+}
+.list-item {
+  display: flex;
+  justify-content: space-between;
+}
+.form {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  width: 50%;
+  margin: auto;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+}
+
+.form-section {
+  margin-bottom: 50px;
+  width: 100%;
+}
+.form-check-label {
+  display: inline;
+}
+.beneficiary {
+  margin-bottom: 5px;
+}
+.p-2 {
+  height: fit-content;
+  max-height: 600px;
+  overflow-y: scroll;
+}
+
+.selected {
+  background-color: rgba(255, 81, 0, 0.384);
+}
+.list-item {
+  display: flex;
+  justify-content: space-between;
+}
+#custom-table {
+  width: 50%;
+}
+
+h2 {
+  text-align: center;
+}
+
+

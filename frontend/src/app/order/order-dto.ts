@@ -1,18 +1,19 @@
 import { OrderState } from "./order-state";
 import { ClientEntity } from "./client-entity";
-import { OrderDetail } from "./order-details";
+import { OrderDetailDTO } from "./order-details-dto";
 
-export class OrderDto {
+export class OrderDTO {
   id?: number;
   client: ClientEntity;
   orderState: OrderState;
   dateCreated: Date;
-  orderDetailList: OrderDetail;
+  orderDetailDTOList: OrderDetailDTO[];
 
-  constructor(client: ClientEntity, orderState: OrderState, dateCreated: Date, orderDetailList: OrderDetail) {
+  constructor(id: number, client: ClientEntity, orderState: OrderState, dateCreated: Date, orderDetailDTOList: OrderDetailDTO[]) {
+    this.id = id;
     this.client = client;
     this.orderState = orderState;
     this.dateCreated = dateCreated;
-    this.orderDetailList = orderDetailList;
+    this.orderDetailDTOList = orderDetailDTOList;
   }
 }

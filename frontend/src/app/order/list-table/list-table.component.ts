@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { OrderDto } from '../order-dto';
+import { OrderDTO } from '../order-dto';
 
 @Component({
   selector: 'app-list-table',
@@ -8,5 +8,5 @@ import { OrderDto } from '../order-dto';
 })
 export class ListTableComponent {
   @Input() headers:any;
-  @Input() orderList?: OrderDto[]
+  @Input() orderList?: OrderDTO[]
 }

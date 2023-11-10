@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import  { OrderDto } from '../order-dto';
+import  { OrderDTO } from '../order-dto';
 import { OrderService } from '../service/order.service';
 
 @Component({
@@ -11,12 +11,12 @@ export class OrderListComponent implements OnInit {
 
 
 
-  //order = new OrderDto(300, 2, new Date());
+  //order = new OrderDTO(300, 2, new Date());
 
 
   constructor(private orderService: OrderService) {}
 
-  orderList: OrderDto[] = [];
+  orderList: OrderDTO[] = [];
   loadOrderList(): void {
       this.orderService.orderList().subscribe(orderList => {
         this.orderList = orderList;

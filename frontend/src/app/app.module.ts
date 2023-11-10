@@ -26,6 +26,7 @@ import { TaxCreateComponent } from './modules/tax/components/tax-create/tax-crea
 import { OrderComponent } from './order/order.component';
 import { OrderListComponent } from './order/order-list/order-list.component';
 import { CreateOrderComponent } from './order/create-order/create-order.component';
+import { EditOrderComponent } from './order/edit-order/edit-order.component';
 
 const routes: Routes = [{ path: '', component: HomepageComponent }];
 
@@ -47,7 +48,8 @@ const routes: Routes = [{ path: '', component: HomepageComponent }];
     TaxCreateComponent,
     OrderComponent,
     OrderListComponent,
-    CreateOrderComponent
+    CreateOrderComponent,
+    EditOrderComponent
   ],
   imports: [
     SweetAlert2Module.forRoot(),

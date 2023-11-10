@@ -21,7 +21,7 @@ export class CreateOrderComponent implements OnInit {
   clientId?: any;
   orderState = new FormControl('');
   id = new FormControl(null);
-  title = 'Crear impuesto';
+  title = 'Crear pedido';
   selectedClient?: any;
   showClient = this.selectedClient == null ? 'none' : 'inline';
   searchbar = new FormControl('');
@@ -39,7 +39,6 @@ export class CreateOrderComponent implements OnInit {
     private router: Router) {}
 
   addClient(id: any): void {
-    
     this.clientId = id;
     var element: any = document.getElementById("id-"+this.clientId);
     var bool = element?.classList.contains( 'selected' );
@@ -50,11 +49,6 @@ export class CreateOrderComponent implements OnInit {
     } else {
       this.selectedClient = this.clientList.find(client => client.id === this.clientId);
     }
-    
-      
-    
-  
-    console.log(this.selectedClient)
     var all = document.querySelectorAll( '.selected' );
     all.forEach(elem => {
       elem?.classList.remove("selected");
@@ -63,7 +57,7 @@ export class CreateOrderComponent implements OnInit {
     if(!bool) {
       element?.classList.add("selected");
       element.textContent = 'Desasignar';
-    }    
+    }
     this.disabled();
   }
 
@@ -86,7 +80,7 @@ export class CreateOrderComponent implements OnInit {
   select(id: any): void {
     this.quant = document.getElementById(`${id}`);
     var btn: any = document.getElementById(`btn-${id}`);
-    
+
     if(this.productList.find(prod => prod.productId === id)) {
       this.productList = this.productList.filter(prod => prod.productId !== id)
     }
@@ -149,7 +143,7 @@ export class CreateOrderComponent implements OnInit {
       res
       console.log(res);
     });
-    
+
     Swal.fire('Agregado con éxito', undefined, 'success')
     setTimeout(() => {
       this.redirect('order/getAll');

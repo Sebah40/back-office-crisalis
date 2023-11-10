@@ -4,10 +4,20 @@
 
   <div class="container d-flex flex-column justify-content-sm-start align-items-center" id="container">
     <h2 class="title">Pedido</h2>
-    <p>{{order?.client?.businessName}}</p>
-    <p>{{order?.client?.beneficiary}}</p>
-    <p>{{order?.orderState}}</p>
-    <p>{{order?.dateCreated}}</p>
+    <div class="card-container" width="100%">
+      <div class="card" style="width: 18rem; margin: auto;">
+        <div class="card-header">
+          <li class="list-group-item">Cliente: {{order?.client?.businessName}}</li>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">ID: {{order?.client?.id}}</li>
+
+          <li class="list-group-item">Beneficiario: {{order?.client?.beneficiary ? 'Sí': 'No'}}</li>
+          <li class="list-group-item">Fecha: {{order?.dateCreated}}</li>
+          <li class="list-group-item">Estado: {{order?.orderState}}</li>
+        </ul>
+      </div>
+    </div>
 
     <table class="table p-2" id="custom-table">
       <thead>
@@ -18,29 +28,31 @@
           <th align="center" >
             Cantidad
           </th>
+          <th align="center" >
+            Nombre
+          </th>
+          <th align="center" >
+            Tipo
+          </th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-        <!--<tr *ngFor="let detail of order.orderDetailList">
+        <tr *ngFor="let detail of order?.orderDetailDTOList">
           <td>{{detail.priceSell}}</td>
-          <td>{{detail.quantity}}</td>-->
-          <td>3000</td>
-          <td>2</td>
+          <td>{{detail.quantity}}</td>
+          <td>{{detail.sellableGood.name}}</td>
           <td>
-            <button class="btn btn-warning">
-              Ver más
-            </button>
-            <button class="btn btn-danger">
-              Borrar
-            </button>
-            <button class="btn btn-dark">
-              Eliminar
-            </button>
+            {{detail.sellableGood.type == 'PRODUCT' ? 'Producto' : 'Servicio'}}
          </td>
         </tr>
       </tbody>
+      <tfoot>
+        <button routerLink="/order/edit/{{order?.id}}" class="btn btn-primary">
+          Editar
+        </button>
+      </tfoot>
     </table>
+
   </div>
 
 </main>

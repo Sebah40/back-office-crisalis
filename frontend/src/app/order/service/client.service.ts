@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
+import { ClientEntity } from '../client-entity';
 
 @Injectable({
   providedIn: 'root'
@@ -15,5 +16,9 @@ export class ClientService {
 
   public getClients(): Observable<any> {
     return this.httpClient.get<any[]>(this.orderURL + '/getAll' ).pipe(map(res => res));
+  }
+
+  public getClient(id: any): Observable<ClientEntity> {
+    return this.httpClient.get<any>(this.orderURL + '/id' ).pipe(map(res => res));
   }
 }

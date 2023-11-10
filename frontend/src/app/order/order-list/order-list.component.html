@@ -15,14 +15,8 @@
       <td>{{order.dateCreated}}</td>
 
       <td>
-        <!--<button class="btn btn-warning" routerLink="order/{{order.id}}">
-          Ver más
-        </button>-->    
-        <button class="btn btn-dark">
-          Editar
-        </button>
-        <button (click)="delete(order.id)" class="btn btn-danger">
-          Eliminar
+        <button routerLink="{{order.id}}" class="btn btn-dark">
+          Ver detalles
         </button>
      </td>
     </tr>

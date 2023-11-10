@@ -12,6 +12,7 @@ import { TaxCreateComponent } from './modules/tax/components/tax-create/tax-crea
 import { OrderListComponent } from './order/order-list/order-list.component';
 import { OrderComponent } from './order/order.component';
 import { CreateOrderComponent } from './order/create-order/create-order.component';
+import { EditOrderComponent } from './order/edit-order/edit-order.component';
 
 const routes: Routes = [
   { path: 'home', component: HomepageComponent },
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'tax/edit/:id', component: TaxCreateComponent },
   { path: 'order/create', component: CreateOrderComponent },
   { path: 'order/getAll', component: OrderListComponent },
+  { path: 'order/edit/:id', component: EditOrderComponent },
   { path: 'order/:id', component: OrderComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },

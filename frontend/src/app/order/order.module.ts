@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { EditOrderComponent } from './edit-order/edit-order.component';
 
 //import { OrderRoutingModule } from './order-routing.module';
 
@@ -7,7 +8,6 @@ import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
-
   ],
   imports: [
     CommonModule,

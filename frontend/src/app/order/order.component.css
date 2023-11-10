@@ -15,7 +15,11 @@
   min-width: 100%;
   /* max-width: 140%; */
 }
-
+.card-container {
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
 .text-center {
   margin: 0 20px !important;
 }
@@ -43,4 +47,12 @@ td {
 }
 tbody {
   background-color: rgba(255, 255, 255, 0.9);
+  max-height: 800px;
+  overflow-y: scroll;
 }
+.table {
+  width: 50%;
+  min-width: 500px;
+}
+
+

@@ -21,7 +21,7 @@ export class CreateOrderComponent implements OnInit {
   clientId?: any;
   orderState = new FormControl('');
   id = new FormControl(null);
-  title = 'Crear impuesto';
+  title = 'Crear pedido';
   selectedClient?: any;
   showClient = this.selectedClient == null ? 'none' : 'inline';
   searchbar = new FormControl('');

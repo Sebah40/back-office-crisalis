@@ -12,6 +12,7 @@ import com.orange.Crisalis.model.*;
 import com.orange.Crisalis.model.dto.OrderDTO;
 import com.orange.Crisalis.model.dto.OrderDetailDTO;
 import com.orange.Crisalis.repository.OrderRepository;
+import com.orange.Crisalis.service.interfaces.ICalculationEngine;
 import com.orange.Crisalis.service.interfaces.IOrderService;
 import org.springframework.stereotype.Service;
 
@@ -141,10 +142,14 @@ public class OrderService implements IOrderService {
                  if(updatedDetail.getQuantity() <= 0){
                      throw new RuntimeException("no se puede agregar producto sin cantidad");
                  }
+
+                 Double priceSell = ICalculationEngine.priceWithTaxes(updatedDetail.getSellableGood());
+
                  OrderDetail newDetail = new OrderDetail();
+
                  newDetail.setSellableGood(updatedDetail.getSellableGood());
                  newDetail.setQuantity(updatedDetail.getQuantity());
-                 newDetail.setPriceSell(updatedDetail.getSellableGood().getPrice());
+                 newDetail.setPriceSell(priceSell);
                  newDetail.setOrder(order);
                  orderDetailService.createOrEditDetail(newDetail);
              }
@@ -162,16 +167,25 @@ public class OrderService implements IOrderService {
 
     private List<OrderDetail> createOrderDetailList(List<ProductIdAndQuantityDTO> productIdAndQuantityDTO, OrderEntity order){
         List<OrderDetail> orderDetailList = new ArrayList<>();
-        for (ProductIdAndQuantityDTO p : productIdAndQuantityDTO){
-            Optional<SellableGood> sellableGood = sellableGoodService.findById(p.getProductId());
-            if(sellableGood.isPresent() && sellableGood.get().getType() == Type.SERVICE){
-                p.setQuantity(1);
+        for (ProductIdAndQuantityDTO item : productIdAndQuantityDTO){
+            Optional<SellableGood> sellableGood = sellableGoodService.findById(item.getProductId());
+            if(sellableGood.isPresent()){
+                if(sellableGood.get().getType() == Type.SERVICE){
+                    item.setQuantity(1);
+                }
+                Double priceSell = ICalculationEngine.priceWithTaxes(sellableGood.get());
+                orderDetailList.add(new OrderDetail(
+                        null,
+                        priceSell,
+                        item.getQuantity(),
+                        sellableGood.get(),
+                        order));
             }
-            orderDetailList.add(new OrderDetail(
-                    null,sellableGood.get().getPrice(),
-                    p.getQuantity(),sellableGood.get(),order));
+
+
 
         }
+
         return orderDetailService.saveAllOrderDetail(orderDetailList);
 
 

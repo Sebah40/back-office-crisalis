@@ -25,7 +25,7 @@ public class OrderDetail {
             generator = "order_detail_sequence"
     )
     private Long id;
-    private BigDecimal priceSell;
+    private Double priceSell;
     private Integer quantity;
     @ManyToOne(
         fetch = FetchType.EAGER,

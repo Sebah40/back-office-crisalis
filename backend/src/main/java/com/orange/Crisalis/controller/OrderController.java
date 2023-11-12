@@ -49,8 +49,8 @@ public class OrderController {
 
     }
 
-    @PutMapping("/cancel/{id}")
-    public ResponseEntity<?> cancelOrder(@PathVariable("id") Long id){
+    @DeleteMapping("/cancel/{id}")
+    public ResponseEntity<?> cancelOrder(@PathVariable Long id){
         this.orderService.cancelOrder(id);
         return new ResponseEntity<>(new Message("El pedido ha sido cancelado"),HttpStatus.OK);
     }

@@ -11,11 +11,12 @@
   <tbody>
     <tr *ngFor="let order of orderList">
       <td>{{order.id}}</td>
-      <td>{{order.client.businessName}}</td>
+      <td>{{order.client.businessName == null ?
+      order.client.firstName + " " + order.client.lastName : order.client.businessName}}</td>
       <td>{{order.dateCreated}}</td>
-
+      <td>{{order.orderState}}</td>
       <td>
-        <button routerLink="{{order.id}}" class="btn btn-dark">
+        <button [routerLink]="['/order/'+order.id]" class="btn btn-dark">
           Ver detalles
         </button>
      </td>

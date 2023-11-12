@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/person")
-@DiscriminatorValue("PERSON")
 @CrossOrigin(origins = {"http://localhost:4200", "https://localhost:4200"})
 public class PersonController {
 

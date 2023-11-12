@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/enterprise")
-@DiscriminatorValue("ENTERPRISE")
 @CrossOrigin(origins = {"http://localhost:4200", "https://localhost:4200"})
 public class EnterpriseController {
 

@@ -41,7 +41,14 @@ td {
 
 #container td,
 th {
-  margin: 0 25px !important;
+  padding: 20px 20px;
+  
+}
+#container tbody td{
+  color:#c3d3fd
+}
+#container thead th{
+  color:#F0f0f0
 }
 #container-button {
   width: 100%;
@@ -71,3 +78,4 @@ th {
   height: auto;
   margin-left: 4px;
 }
+

@@ -156,8 +156,10 @@ public class OrderService implements IOrderService {
         // order.getOrderDetailList
     }
 
-
-
+    @Override
+    public List<OrderDTO> getAllByClientId(Long clientId) {
+        return orderRepository.findByClientId(clientId).stream().map(OrderDTO::new).collect(Collectors.toList());
+    }
 
 
     private List<OrderDetail> createOrderDetailList(List<ProductIdAndQuantityDTO> productIdAndQuantityDTO, OrderEntity order){

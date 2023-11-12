@@ -17,4 +17,6 @@ public interface IOrderService {
     void cancelOrder(Long id);
 
     void editOrder(OrderDTO order);
+
+    List<OrderDTO> getAllByClientId(Long id);
 }

@@ -53,7 +53,7 @@ public class OrderController {
 
 
     @PreAuthorize("hasAnyRole('USER' ,'ADMIN')")
-    @PutMapping("/cancel/{id}")
+    @DeleteMapping("/cancel/{id}")
     public ResponseEntity<?> cancelOrder(@PathVariable("id") Long id){
         this.orderService.cancelOrder(id);
         return new ResponseEntity<>(new Message("El pedido ha sido cancelado"),HttpStatus.OK);

@@ -116,6 +116,13 @@ public class OrderService implements IOrderService {
     @Override
     public void editOrder(OrderDTO orderToEdit) {
          OrderEntity order = orderRepository.findById(orderToEdit.getId()).orElseThrow(() -> new RuntimeException("No existe el pedido."));
+         List<Long> sellableGoodIdList = order.getOrderDetailList()
+                 .stream()
+                 .map(orderDetail -> orderDetail
+                         .getSellableGood()
+                         .getId())
+                 .collect(Collectors.toList());
+
          order.setDateEdited(new Date());
 
          List<OrderDetailDTO> updatedDetailList = orderToEdit.getOrderDetailDTOList();
@@ -139,7 +146,10 @@ public class OrderService implements IOrderService {
 
              }else {
                  if(updatedDetail.getQuantity() <= 0){
-                     throw new RuntimeException("no se puede agregar producto sin cantidad");
+                     throw new RuntimeException("No se puede agregar producto sin cantidad");
+                 }
+                 if(sellableGoodIdList.contains(updatedDetail.getSellableGood().getId())){
+                     continue;
                  }
                  OrderDetail newDetail = new OrderDetail();
                  newDetail.setSellableGood(updatedDetail.getSellableGood());
@@ -156,8 +166,10 @@ public class OrderService implements IOrderService {
         // order.getOrderDetailList
     }
 
-
-
+    @Override
+    public List<OrderDTO> getAllByClientId(Long clientId) {
+        return orderRepository.findByClientId(clientId).stream().map(OrderDTO::new).collect(Collectors.toList());
+    }
 
 
     private List<OrderDetail> createOrderDetailList(List<ProductIdAndQuantityDTO> productIdAndQuantityDTO, OrderEntity order){

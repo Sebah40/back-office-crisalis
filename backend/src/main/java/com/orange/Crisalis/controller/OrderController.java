@@ -28,6 +28,7 @@ public class OrderController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('USER' ,'ADMIN')")
     public ResponseEntity<Object> getOrder(@PathVariable("id") Long id) {
         Optional<OrderDTO> order = this.orderService.getOrder(id);
         if(order.isPresent()) {
@@ -38,18 +39,21 @@ public class OrderController {
 
     @Transactional
     @PostMapping(value = "/create",consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAnyRole('USER' ,'ADMIN')")
     public ResponseEntity<?> createOrder (@RequestBody RequestBodyCreateOrderDTO orderCreateBody){
         this.orderService.createOrder(orderCreateBody);
         return new ResponseEntity<>(new Message("pedido creado con exito"), HttpStatus.OK);
     }
-
+    @PreAuthorize("hasAnyRole('USER' ,'ADMIN')")
     @GetMapping("/getAll")
     public List<OrderDTO> getAll(){
         return this.orderService.getOrders();
 
     }
 
-    @PutMapping("/cancel/{id}")
+
+    @PreAuthorize("hasAnyRole('USER' ,'ADMIN')")
+    @DeleteMapping("/cancel/{id}")
     public ResponseEntity<?> cancelOrder(@PathVariable("id") Long id){
         this.orderService.cancelOrder(id);
         return new ResponseEntity<>(new Message("El pedido ha sido cancelado"),HttpStatus.OK);
@@ -61,6 +65,13 @@ public class OrderController {
         this.orderService.editOrder(orderToEdit);
         return new ResponseEntity<>(new Message("El pedido editado exisotamente"),HttpStatus.OK);
     }
+
+    @PreAuthorize("hasAnyRole('USER' ,'ADMIN')")
+    @GetMapping("/getAllByClient/{id}")
+    public ResponseEntity<List<OrderDTO>> getAllByClientId(@PathVariable("id") Long id){
+        return ResponseEntity.ok(this.orderService.getAllByClientId(id));
+    }
+
 }
 
 

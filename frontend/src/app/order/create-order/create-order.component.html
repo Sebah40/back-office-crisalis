@@ -26,10 +26,10 @@
             {{client.id}}
           </td>
           <td>
-            {{client.businessName}}
+            {{client.businessName == null ? client.firstName + " " + client.lastName : client.businessName}}
           </td>
           <td>
-            {{client.beneficiary}}
+            {{client.beneficiary ? 'Sí' : 'No'}}
 
           </td>
 

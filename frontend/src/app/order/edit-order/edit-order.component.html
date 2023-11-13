@@ -2,8 +2,6 @@
   <header>
     <h2>Editar pedido</h2>
   </header>
-
-
   <div class="card-container" width="100%">
     <div class="card" style="width: 18rem; margin: auto;">
       <div class="card-header">
@@ -35,40 +33,43 @@
           <td>{{detail.sellableGood.type == 'PRODUCT' ? 'Producto' : 'Servicio'}}</td>
           <td>{{detail.quantity}}</td>
           <td>{{detail.priceSell}}</td>
-
+          <ng-template [ngIf]="order.orderState != 'CANCELED'">
           <span class="buttons">
-            <label><small>Unidades:</small> <input defaultValue="{{0}}" id="det-val-{{detail.id}}" class="number" type="number"/></label>
+            <label><small>Unidades:</small> <input min="{{0}}" defaultValue="{{0}}" id="det-val-{{detail.id}}" class="number" type="number"/></label>
             <button class="btn btn-primary" [value]="detail.id" id="det-{{detail.id}}" (click)="select(detail.sellableGood, detail.id)">+</button>
           <button class="btn btn-danger" [value]="detail.id" (click)="undo(detail.id, false)">X</button>
-          <button class="btn btn-dark" (click)="remove(detail)" >Cancelar</button>
+          <button class="btn btn-dark" (click)="remove(detail)" >Quitar</button>
           </span>
+          </ng-template>
         </tr>
       </tbody>
     </table>
   </div>
 
-  <section class="form-section">
-    <form class="form">
+  <ng-template [ngIf]="order.orderState != 'CANCELED'">
+    <section class="form-section">
+      <form class="form">
 
 
-      <h3>Lista de productos y servicios:</h3>
+        <h3>Lista de productos y servicios:</h3>
 
-      <ul type="none" class="p-2">
-        <li *ngFor="let item of itemList" class="list-item " >
+        <ul type="none" class="p-2" >
+          <li *ngFor="let item of itemList" class="list-item " >
 
+              <span>
+                {{item.name}}
+              </span>
             <span>
-              {{item.name}}
+              <label>Unidades: <input defaultValue="{{0}}" min="{{0}}" id="order-{{item.id}}" class="number" type="number"/></label>
+              <button class="btn btn-primary" [value]="item.id" id="btn-{{item.id}}" (click)="select(item, null)">+</button>
+            <button class="btn btn-danger" [value]="item.id" (click)="undo(item.id, true)">X</button>
             </span>
-          <span>
-            <label>Unidades: <input defaultValue="{{0}}" id="order-{{item.id}}" class="number" type="number"/></label>
-            <button class="btn btn-primary" [value]="item.id" id="btn-{{item.id}}" (click)="select(item, null)">+</button>
-          <button class="btn btn-danger" [value]="item.id" (click)="undo(item.id, true)">X</button>
-          </span>
-        </li>
-      </ul>
-      <button class="btn btn-primary" id="submit" (click)="submitOrder()">
-        Enviar
-      </button>
-    </form>
-  </section>
+          </li>
+        </ul>
+        <button class="btn btn-primary" [disabled]="disable" id="submit" (click)="submitOrder()">
+          Enviar
+        </button>
+      </form>
+    </section>
+  </ng-template>
 </main>

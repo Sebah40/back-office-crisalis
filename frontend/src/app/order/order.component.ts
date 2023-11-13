@@ -19,15 +19,31 @@ export class OrderComponent implements OnInit {
 
     }
 
+  getOrder() {
+    this.orderService.getOrder(this.id).subscribe(res => {
+      this.order = new OrderDTO(this.id, res.client, res.orderState, res.dateCreated, res.orderDetailDTOList);
+      this.disable();
+    })
+  }
   id?:any;
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       this.id = params['id'];
     })
-    console.log(this.id)
-    this.orderService.getOrder(this.id).subscribe(res => {
-      this.order = new OrderDTO(this.id, res.client, res.orderState, res.dateCreated, res.orderDetailDTOList);
-    })
+    this.getOrder();
+  }
+  disable() {
+    var btn = document.getElementById('edit');
+    var btn2 = document.getElementById('cancel');
+    console.log(this.order)
+    if(this.order?.orderState === "CANCELED") {
+      btn?.setAttribute('disabled', '');
+      btn2?.setAttribute('disabled', '');
+    }
+  }
+  cancel(id: any) {
+    this.orderService.delete(id).subscribe(res => res);
+    this.getOrder();
   }
 
 }

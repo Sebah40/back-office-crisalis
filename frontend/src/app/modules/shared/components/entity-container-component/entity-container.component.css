@@ -1,23 +1,36 @@
 #container {
   min-width: fit-content;
-  min-height: 100vh;
+  min-height: 91vh;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 600;
-
 }
+
 #container h2 {
-  color: #5e503f;
+  color: black;
   text-align: center;
   margin-top: 40px;
 }
+
 #container-list {
-  
-  background-color: #EAE0D5;
+  /* background-color: #EAE0D5; */
   color: #22333b;
   height: max-content;
   min-width: 100%;
-  background-color: #0A0908aa;
+  border: 0.1em solid #22333b;
+  /* background-color: #0A0908aa; */
   /* max-width: 140%; */
+}
+
+.deletebutton{
+  background-color: rgb(97, 2, 2);
+  border: none;
+  color: #EAE0D5;
+}
+
+.editbutton{
+  background-color: #EAE0D5;
+  border: none;
+  color: black;
 }
 
 .text-center {
@@ -29,12 +42,22 @@ thead,
 tbody,
 td {
   background-color: transparent;
-  color: #22333b;
+  color: black;
 }
+
+#container td{
+  font-weight: 100;
+}
+
+#container th{
+  font-weight: 600;
+}
+
 #custom-table {
   background-color: transparent;
-  color: #22333b;
+  color: black;
 }
+
 #custom-table {
   min-height: 100px;
 }
@@ -42,7 +65,18 @@ td {
 #container td,
 th {
   margin: 0 25px !important;
+  color: black !important;
+  padding: 20px 20px;
 }
+
+#container tbody td{
+  color:#c3d3fd
+}
+
+#container thead th{
+  color:#F0f0f0
+}
+
 #container-button {
   width: 100%;
   display: flex;
@@ -50,7 +84,7 @@ th {
 }
 
 #btn-custom {
-  color: #fff;
+  color: black;
   border: 0.2em solid #22333b;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 600;
@@ -71,3 +105,4 @@ th {
   height: auto;
   margin-left: 4px;
 }
+

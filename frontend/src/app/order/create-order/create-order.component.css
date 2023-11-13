@@ -1,20 +1,27 @@
+section{
+  margin-top: 40px;
+}
+
 .form {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: column;
-  width: 50%;
+  width: 87%;
   margin: auto;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0);
   padding: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
 }
 
 .form-section {
-
   width: 100%;
 }
+
 .form-check-label {
   display: inline;
 }
+
 .beneficiary {
   margin-bottom: 5px;
 }
@@ -45,16 +52,21 @@
 thead,
 tbody,
 td {
-  background-color: transparent;
+  /* background-color: black; */
+  background-color: rgba(255, 255, 255, 0) !important;
   color: #22333b;
+  text-align: center;
 }
+
 #custom-table {
-  background-color: transparent;
+  /* background-color: transparent; */
   color: #22333b;
 }
+
 #custom-table {
   min-height: 100px;
 }
+
 #container-button {
   width: 90%;
 }
@@ -64,6 +76,15 @@ td {
 }
 .number {
   width: 40px;
+  margin-right: 20px;
+}
+
+.number{
+  border: none;
+  height: 33px;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 5px;
 }
 
 .btn-secondary {
@@ -72,8 +93,17 @@ td {
 tbody {
   background-color: rgba(255, 255, 255, 0.9);
 }
+
 .searchbar-section {
   margin-bottom: 50px;
+}
+
+.searchbar{
+  background-color: white !important;
+}
+
+.searchbar input{
+  background-color: rgb(255, 255, 255) !important;
 }
 
 .p-2 {
@@ -89,6 +119,49 @@ tbody {
   display: flex;
   justify-content: space-between;
 }
+
 #custom-table {
-  width: 50%;
+  width: 87%;
+}
+
+.form h3{
+  text-align: center;
+}
+
+.svgbutton{
+  border-radius: 100%;
+  border: 1px solid black;
+}
+
+.addbutton1, .addbutton2{
+  background-color: #EAE0D5 !important;
+  border: none;
+  color: black
+}
+
+.addbutton2{
+  margin: 0 5px;
+  height: 100%;
+  min-width: 35px;
+}
+
+.removebutton{
+  background-color: rgb(97, 2, 2);
+  border: none;
+  border-radius: 5px;
+  color: #EAE0D5;
+  width: 35px;
+  height: 100%;
+}
+
+.items{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.unidades{
+  height: 35px;
 }

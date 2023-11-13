@@ -26,8 +26,8 @@
       
 
       <div class="d-flex justify-content-center my-2">
-        <button class="btn btn-dark btn-lg mx-2" type="button" (click)="goToTaxList()">Volver</button>
-        <button [disabled]="formTax.invalid" class="btn btn-primary btn-lg" type="submit">{{editOrCreateText}}</button>
+        <button class="btn btn-lg mx-2 gobackbutton" type="button" (click)="goToTaxList()">Volver</button>
+        <button [disabled]="formTax.invalid" class="btn btn-primary btn-lg createbutton" type="submit">{{editOrCreateText}}</button>
       </div>
     </form>
   </div>

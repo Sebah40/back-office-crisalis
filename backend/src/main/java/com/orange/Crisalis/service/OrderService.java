@@ -11,6 +11,8 @@ import com.orange.Crisalis.model.*;
 
 import com.orange.Crisalis.model.dto.OrderDTO;
 import com.orange.Crisalis.model.dto.OrderDetailDTO;
+import com.orange.Crisalis.model.dto.OrderDetailWithCalculationEngineDTO;
+import com.orange.Crisalis.model.dto.OrderWithCalculationEngineDTO;
 import com.orange.Crisalis.repository.OrderRepository;
 import com.orange.Crisalis.service.interfaces.ICalculationEngine;
 import com.orange.Crisalis.service.interfaces.IOrderService;
@@ -63,16 +65,16 @@ public class OrderService implements IOrderService {
         newOrderEntity.setClient(clientEntity);
 
 
-        List<OrderDetail> orderDetailList = createOrderDetailList(orderCreateBody.getProductIdList(),newOrderEntity);
+        List<OrderDetail> orderDetailList = ICalculationEngine
+                .generateDiscount(createOrderDetailList(orderCreateBody.
+                        getProductIdList(),newOrderEntity));
+
         newOrderEntity.setOrderDetailList(orderDetailList);
-
-
-
     }
 
     @Override
     public List<OrderDTO> getOrders() {
-        List<OrderDTO> ordersDTO= new ArrayList<>(orderRepository.findAll()).stream().map(
+        List<OrderDTO> ordersDTO = new ArrayList<>(orderRepository.findAll()).stream().map(
                 (orderEntity -> new OrderDTO(
                         orderEntity.getId(),
                         orderEntity.getDateCreated(),
@@ -86,6 +88,38 @@ public class OrderService implements IOrderService {
                                 )).collect(Collectors.toList())
 
                         )
+                )
+        ).collect(Collectors.toList());
+        if (!ordersDTO.isEmpty()){
+            return ordersDTO;
+        }else{
+            throw new EmptyElementException("No hay ordenes para mostrar.");
+        }
+    }
+    @Override
+    public List<OrderWithCalculationEngineDTO> getOrdersWithSubTotal() {
+        List<OrderWithCalculationEngineDTO> ordersDTO = new ArrayList<>(orderRepository.findAll()).stream().map(
+                (orderEntity -> new OrderWithCalculationEngineDTO(
+                        orderEntity.getId(),
+                        orderEntity.getDateCreated(),
+                        orderEntity.getOrderState(),
+                        orderEntity.getClient(),
+                        orderEntity.getOrderDetailList().stream().map(ordeD -> new OrderDetailWithCalculationEngineDTO(
+                                ordeD.getId(),
+                                ordeD.getPriceSell(),
+                                ordeD.getQuantity(),
+                                ordeD.getSellableGood(),
+                                ordeD.getDiscount(),
+                                ICalculationEngine.generateSubTotal(ordeD),
+                                ICalculationEngine.generateSubTotalWithDiscount(ordeD)
+
+                        )).collect(Collectors.toList()),
+                        ICalculationEngine.generateDiscount(orderEntity),
+                        ICalculationEngine.generateSubTotal(orderEntity),
+                        ICalculationEngine.totalOrderPrice(orderEntity)
+
+
+                )
                 )
         ).collect(Collectors.toList());
         if (!ordersDTO.isEmpty()){
@@ -148,17 +182,20 @@ public class OrderService implements IOrderService {
                  OrderDetail newDetail = new OrderDetail();
 
                  newDetail.setSellableGood(updatedDetail.getSellableGood());
-                 newDetail.setQuantity(updatedDetail.getQuantity());
+                 newDetail.setQuantity(updatedDetail.getSellableGood().getType() == Type.SERVICE
+                         ? 1
+                         : updatedDetail.getQuantity());
                  newDetail.setPriceSell(priceSell);
                  newDetail.setOrder(order);
                  orderDetailService.createOrEditDetail(newDetail);
              }
-
          }
 
+         orderDetailService.saveAllOrderDetail(ICalculationEngine.generateDiscount(order.getOrderDetailList()));
 
-        //Optional<List<OrderDetail>> orderDetails = orderDetailService.getOrderDetailListByOrderId(id);
-        // order.getOrderDetailList
+
+
+
     }
 
 
@@ -179,7 +216,7 @@ public class OrderService implements IOrderService {
                         priceSell,
                         item.getQuantity(),
                         sellableGood.get(),
-                        order));
+                        order,0.0));
             }
 
 

@@ -38,6 +38,8 @@ public class OrderDetail {
     @JoinColumn(name = "order_id")
     private OrderEntity order;
 
+    private Double discount = .0;
+
 
     public OrderDetail(OrderDetailDTO orderDetailDTO) {
         this.id = orderDetailDTO.getId();

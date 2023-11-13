@@ -1,8 +1,8 @@
 package com.orange.Crisalis.service.interfaces;
 
 import com.orange.Crisalis.dto.RequestBodyCreateOrderDTO;
-import com.orange.Crisalis.model.OrderEntity;
 import com.orange.Crisalis.model.dto.OrderDTO;
+import com.orange.Crisalis.model.dto.OrderWithCalculationEngineDTO;
 
 
 import java.util.List;
@@ -17,4 +17,6 @@ public interface IOrderService {
     void cancelOrder(Long id);
 
     void editOrder(OrderDTO order);
+    List<OrderWithCalculationEngineDTO> getOrdersWithSubTotal();
+
 }

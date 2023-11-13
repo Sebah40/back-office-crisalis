@@ -1,9 +1,9 @@
 <app-simple-container [title]="title">
   <app-list-table [header]="['Id','Nombre','Descripcion','Precio', 'Accion']">
-    <tr class="align-middle" *ngFor="let service of clientServices">
+    <tr class="align-middle" *ngFor="let service of services">
       <td class="text-center" *ngFor="let data of toData(service)" >{{data}}</td>
       <td style="text-align: center;">
-        <button class="btn btn-danger btn-sm" disabled>baja</button>
+        <button class="btn btn-danger btn-sm" (click)="removeActiveService(service)">baja</button>
       </td>
     </tr>
   </app-list-table>

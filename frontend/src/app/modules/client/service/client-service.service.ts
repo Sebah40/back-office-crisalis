@@ -20,4 +20,8 @@ export class ClientServiceService {
   getClientServices(id:number):Observable<SellableGood[]> {
     return this.http.get<SellableGood[]>(`${this.URL}/getServices/${id}`);
   }
+
+  removeActiveService(clientId:number, serviceId:number):Observable<string> {
+    return this.http.post(`${this.URL}/${clientId}/removeActiveService/${serviceId}`,null, {responseType:'text'});
+  }
 }

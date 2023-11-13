@@ -10,7 +10,7 @@
   opacity: 0;
   transform: translateX(-100%);
   transition: opacity 0.3s, transform 0.3s;
-  padding-left: 2rem;
+  padding-left: 1.5rem;
   display: flex;
   flex-direction: column;
   padding-top: 5rem;

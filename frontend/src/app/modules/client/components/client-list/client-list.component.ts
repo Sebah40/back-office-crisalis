@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./client-list.component.css']
 })
 export class ClientList2Component implements OnInit{
+  title = "Lista de Clientes";
   clients: Client[] = []
 
   constructor(private clientService : ClientServiceService, private router: Router){}

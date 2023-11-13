@@ -10,7 +10,7 @@ import { ClientServiceService } from '../../service/client-service.service';
   styleUrls: ['./client-services-list.component.css']
 })
 export class ClientServicesListComponent implements OnInit {
-
+  title = "Servicios Activos"
   clientServices: SellableGood[] = [];
 
   constructor(private route: ActivatedRoute,

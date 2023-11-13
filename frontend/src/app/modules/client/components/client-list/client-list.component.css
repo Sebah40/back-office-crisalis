@@ -1,40 +1,6 @@
-#container {
-  width: 100%;
-  min-height: 100vh;
-}
-#container h2 {
-  color: #5e503f;
-  text-align: center;
-  margin-top: 40px;
-}
-#container-list {
-  margin-top: 5rem;
-  background-color: #eae0d5cc;
-  color: #22333b;
-  height: max-content;
-  min-width: 70%;
-  max-width: 90%;
-}
-
-#container table,
-thead,
-tbody,
 td {
   background-color: transparent;
   color: #22333b;
-}
-#custom-table {
-  background-color: transparent;
-  color: #22333b;
-  min-height: 100px;
-}
-#container-button {
-  width: 90%;
-}
-
-.taxes {
-  max-width: 9rem;
-  font-size: .8rem;
 }
 
 

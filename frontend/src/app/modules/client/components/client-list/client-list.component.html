@@ -1,25 +1,13 @@
-<div class="container w-100 d-flex flex-column justify-content-sm-start align-items-center" id="container">
-  <h2 class="title">Lista de clientes</h2>
-  <div class="rounded p-2 mx-4 d-flex flex-column w-100" id="container-list">
-    <table class="table table-hover table-sm table-responsive" id="custom-table">
-      <thead>
-        <tr>
-          <th style="background-color: transparent;" class="text-center" *ngFor="let field of ['Tipo','Id','Nombre','DNI/CUIT', 'Servicios']">{{ field }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr style="height: 5px;"></tr>
-        <tr class="align-middle" *ngFor="let client of clients">
-          <td class="text-center" *ngFor="let data of toData(client)" >{{data}}</td>
-          <td style="text-align: center;">
-            <a routerLink="/clients/{{client.id}}/services" class="btn btn-success btn-sm" *ngIf="hasActiveServices(client); else doesNot">ver servicios</a>
-            <ng-template #doesNot>
-              Sin servicios
-            </ng-template>
-          </td>
-        </tr>
-        <tr style="height: 5px;"></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+<app-simple-container [title]="title">
+  <app-list-table [header]="['Tipo','Id','Nombre','DNI/CUIT', 'Servicios']">
+    <tr class="align-middle" *ngFor="let client of clients">
+      <td class="text-center" *ngFor="let data of toData(client)" >{{data}}</td>
+      <td style="text-align: center;">
+        <a routerLink="/clients/{{client.id}}/services" class="btn btn-success btn-sm" *ngIf="hasActiveServices(client); else doesNot">ver servicios</a>
+        <ng-template #doesNot>
+          Sin servicios
+        </ng-template>
+      </td>
+    </tr>
+  </app-list-table>
+</app-simple-container>

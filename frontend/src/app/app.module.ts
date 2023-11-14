@@ -27,6 +27,7 @@ import { OrderComponent } from './order/order.component';
 import { OrderListComponent } from './order/order-list/order-list.component';
 import { CreateOrderComponent } from './order/create-order/create-order.component';
 import { EditOrderComponent } from './order/edit-order/edit-order.component';
+import { ClientModule } from './modules/client/client.module';
 
 const routes: Routes = [{ path: '', component: HomepageComponent }];
 
@@ -59,6 +60,7 @@ const routes: Routes = [{ path: '', component: HomepageComponent }];
     HttpClientModule,
     UsersRoutingModule,
     FormsModule,
+    ClientModule,
     ReactiveFormsModule,
     AppRoutingModule,
     RouterModule.forRoot(routes),

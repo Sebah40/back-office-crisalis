@@ -13,6 +13,8 @@ import { OrderListComponent } from './order/order-list/order-list.component';
 import { OrderComponent } from './order/order.component';
 import { CreateOrderComponent } from './order/create-order/create-order.component';
 import { EditOrderComponent } from './order/edit-order/edit-order.component';
+import { ClientList2Component } from './modules/client/components/client-list/client-list.component';
+import { ClientServicesListComponent } from './modules/client/components/client-services-list/client-services-list.component';
 
 const routes: Routes = [
   { path: 'home', component: HomepageComponent },
@@ -27,6 +29,8 @@ const routes: Routes = [
   { path: 'person/create', component: PersonFormComponent },
   { path: 'person/edit/:id', component: PersonFormComponent },
   { path: 'person/disable', component: PersonListComponent },
+  { path: 'clients', component: ClientList2Component },
+  { path: 'clients/:id/services', component: ClientServicesListComponent },
   { path: 'taxlist', component: TaxListComponent },
   { path: 'tax/create', component: TaxCreateComponent },
   { path: 'tax/edit/:id', component: TaxCreateComponent },

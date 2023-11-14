@@ -30,11 +30,10 @@
           </td>
           <td>
             {{client.beneficiary ? 'Sí' : 'No'}}
-
           </td>
-
-
-        <td><button class="btn btn-dark addbutton1" id="id-{{client.id}}" (click)="addClient(client.id)">Seleccionar</button></td>
+          <td>
+            <button class="btn btn-dark addbutton1" id="id-{{client.id}}" (click)="addClient(client.id)">Seleccionar</button>
+          </td>
       </tr>
     </tbody>
   </table>

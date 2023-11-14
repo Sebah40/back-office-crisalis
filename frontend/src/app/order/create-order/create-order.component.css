@@ -30,11 +30,13 @@ section{
   min-width: fit-content;
   min-height: 100vh;
 }
+
 #container h2 {
   color: #5e503f;
   text-align: center;
   margin-top: 40px;
 }
+
 #container-list {
   margin-top: 200px;
   background-color: #eae0d5cc;
@@ -61,11 +63,10 @@ td {
 #custom-table {
   /* background-color: transparent; */
   color: #22333b;
+  min-height: 100px;
+  width: 87%;
 }
 
-#custom-table {
-  min-height: 100px;
-}
 
 #container-button {
   width: 90%;
@@ -74,12 +75,10 @@ td {
 #container td, th{
   margin: 0 25px !important;
 }
+
 .number {
   width: 40px;
   margin-right: 20px;
-}
-
-.number{
   border: none;
   height: 33px;
   text-align: center;
@@ -90,6 +89,7 @@ td {
 .btn-secondary {
   margin: 0 3px;
 }
+
 tbody {
   background-color: rgba(255, 255, 255, 0.9);
 }
@@ -115,13 +115,10 @@ tbody {
 .selected {
   background-color: rgba(255, 81, 0, 0.384);
 }
+
 .list-item {
   display: flex;
   justify-content: space-between;
-}
-
-#custom-table {
-  width: 87%;
 }
 
 .form h3{

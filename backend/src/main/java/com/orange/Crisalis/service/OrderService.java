@@ -4,6 +4,7 @@ import com.orange.Crisalis.dto.ProductIdAndQuantityDTO;
 import com.orange.Crisalis.dto.RequestBodyCreateOrderDTO;
 
 import com.orange.Crisalis.enums.OrderState;
+import com.orange.Crisalis.enums.Type;
 import com.orange.Crisalis.exceptions.custom.EmptyElementException;
 import com.orange.Crisalis.exceptions.custom.NotCancelableException;
 import com.orange.Crisalis.exceptions.custom.OrderNotFoundException;
@@ -104,14 +105,16 @@ public class OrderService implements IOrderService {
                         orderEntity.getDateCreated(),
                         orderEntity.getOrderState(),
                         orderEntity.getClient(),
-                        orderEntity.getOrderDetailList().stream().map(ordeD -> new OrderDetailWithCalculationEngineDTO(
-                                ordeD.getId(),
-                                ordeD.getPriceSell(),
-                                ordeD.getQuantity(),
-                                ordeD.getSellableGood(),
-                                ordeD.getDiscount(),
-                                ICalculationEngine.generateSubTotal(ordeD),
-                                ICalculationEngine.generateSubTotalWithDiscount(ordeD)
+                        orderEntity.getOrderDetailList().stream().map(detail -> new OrderDetailWithCalculationEngineDTO(
+                                detail.getId(),
+                                detail.getPriceSell(),
+                                detail.getQuantity(),
+                                detail.getSellableGood(),
+                                detail.getSellableGood().getSupportCharge().doubleValue(),
+                                ICalculationEngine.calculateValueWarranty(detail),
+                                detail.getDiscount(),
+                                ICalculationEngine.generateSubTotal(detail),
+                                ICalculationEngine.generateSubTotalWithDiscount(detail)
 
                         )).collect(Collectors.toList()),
                         ICalculationEngine.generateDiscount(orderEntity),
@@ -162,13 +165,16 @@ public class OrderService implements IOrderService {
 
                  if(updatedDetail.getQuantity() == 0){
                      orderDetailService.deleteOrderDetail(existingDetail);
-                 }else {
-                     if(updatedDetail.getSellableGood().getType()==Type.SERVICE){
+                 }
+                 else{
+                     if(updatedDetail.getSellableGood().getType() == Type.SERVICE){
                          existingDetail.setQuantity(1);
-                     }else {
-                         existingDetail.setQuantity(updatedDetail.getQuantity());
-                         orderDetailService.createOrEditDetail(existingDetail);
+
                      }
+                     else{
+                         existingDetail.setQuantity(updatedDetail.getQuantity());
+                     }
+                         orderDetailService.createOrEditDetail(existingDetail);
 
                  }
 
@@ -211,12 +217,20 @@ public class OrderService implements IOrderService {
                     item.setQuantity(1);
                 }
                 Double priceSell = ICalculationEngine.priceWithTaxes(sellableGood.get());
-                orderDetailList.add(new OrderDetail(
-                        null,
-                        priceSell,
-                        item.getQuantity(),
-                        sellableGood.get(),
-                        order,0.0));
+                OrderDetail newDetail = new OrderDetail();
+
+                newDetail.setPriceSell(priceSell);
+                newDetail.setQuantity(item.getQuantity());
+                newDetail.setSellableGood(sellableGood.get());
+                newDetail.setOrder(order);
+
+                if(item.getWarrantyYear() == null || sellableGood.get().getType() == Type.SERVICE){
+                    newDetail.setWarrantyYear(0);
+                }else{
+                    newDetail.setWarrantyYear(item.getWarrantyYear());
+                }
+
+                orderDetailList.add(newDetail);
             }
 
 

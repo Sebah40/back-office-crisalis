@@ -1,11 +1,16 @@
 package com.orange.Crisalis.service.interfaces;
 
+import com.orange.Crisalis.enums.Type;
 import com.orange.Crisalis.model.*;
 
 
 import java.util.List;
 
 public interface ICalculationEngine {
+    static Double calculateValueWarranty(OrderDetail detail){
+        final double PERCENTAGE_PER_YEAR = .02;
+        return (detail.getSellableGood().getPrice().doubleValue() * PERCENTAGE_PER_YEAR) * detail.getWarrantyYear();
+    }
    static Double priceWithTaxes(SellableGood sellableGood){
 
        final double BASE_PRICE = sellableGood.getPrice().doubleValue();
@@ -53,18 +58,25 @@ public interface ICalculationEngine {
    }
 
    static Double generateSubTotal(OrderDetail detail){
-        return detail.getQuantity() * detail.getPriceSell();
+        return (
+                detail.getQuantity() * detail.getPriceSell())
+                + detail.getSellableGood().getSupportCharge().doubleValue()
+                + calculateValueWarranty(detail);
    }
    static Double generateSubTotal(OrderEntity order){
        return order.getOrderDetailList()
                .stream()
                .mapToDouble(detail ->
-                       detail.getPriceSell () * detail.getQuantity())
+                       (detail.getPriceSell () * detail.getQuantity())
+                               + detail.getSellableGood().getSupportCharge().doubleValue()
+                               + calculateValueWarranty(detail)
+
+               )
                .sum();
    }
 
    static Double generateSubTotalWithDiscount(OrderDetail detail){
-       return (detail.getQuantity() * detail.getPriceSell())- detail.getDiscount();
+       return generateSubTotal(detail) - detail.getDiscount();
    }
 
    static Double totalOrderPrice(OrderEntity order){

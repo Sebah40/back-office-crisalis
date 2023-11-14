@@ -3,7 +3,6 @@ import com.orange.Crisalis.model.dto.OrderDetailDTO;
 import lombok.*;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 @Entity
 @Table(name = "order_detail")
@@ -17,8 +16,7 @@ public class OrderDetail {
     @SequenceGenerator(
             name = "order_detail_sequence",
             sequenceName = "order_detail_sequence",
-            allocationSize = 5,
-            initialValue = 10
+            allocationSize = 5
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
@@ -39,6 +37,8 @@ public class OrderDetail {
     private OrderEntity order;
 
     private Double discount = .0;
+
+    private Integer warrantyYear = 0;
 
 
     public OrderDetail(OrderDetailDTO orderDetailDTO) {

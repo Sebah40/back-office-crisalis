@@ -1,9 +1,12 @@
 package com.orange.Crisalis.model;
 import com.orange.Crisalis.model.ClientEntity;
+
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@DiscriminatorValue("PERSON")
 public class PersonEntity extends ClientEntity {
 
     @NotNull

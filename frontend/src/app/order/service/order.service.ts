@@ -28,6 +28,6 @@ export class OrderService {
   }
 
   public delete(id: any): Observable<any> {
-    return this.httpClient.put<any>(this.orderURL + `/cancel/${id}`, id).pipe(map(res => res));
+    return this.httpClient.delete<any>(this.orderURL + `/cancel/${id}`, {}).pipe(map(res => res));
   }
 }

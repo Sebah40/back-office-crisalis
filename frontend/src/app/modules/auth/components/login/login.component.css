@@ -1,6 +1,9 @@
+body{
+  height:90vh;
+}
+
 h1 {
     text-align: center;
-
   }
   
   form {
@@ -28,8 +31,9 @@ h1 {
   button[type="submit"] {
     width: 100%;
     padding: 10px;
-    background-color: #0074d9;
-    color: #fff;
+    background-color: #EAE0D5;
+    color: black;
+    font-weight: bold;
     border: none;
     border-radius: 5px;
     cursor: pointer;

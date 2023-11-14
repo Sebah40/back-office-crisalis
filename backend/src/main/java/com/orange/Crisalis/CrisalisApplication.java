@@ -44,18 +44,18 @@ public class CrisalisApplication {
 
             }
 
-/*
+
 			// hardcodeo una empresa y una persona sólo de prueba
 			// Empresa
-			EnterpriseEntity enterprise = new EnterpriseEntity(true, "987564", "789456", LocalDate.now(), true, "Pepe", "Perez", "789456123");
-			iEnterpriseRepository.save(enterprise);
+			//EnterpriseEntity enterprise = new EnterpriseEntity(true, "987564", "789456", LocalDate.now(), true, "Pepe", "Perez", "789456123");
+			//iEnterpriseRepository.save(enterprise);
 
-			System.out.println(enterprise.getId() + "     " + enterprise.getBusinessName() + "        " + enterprise.getLastNameResponsible() + "       " + enterprise.getDate());
+			//System.out.println(enterprise.getId() + "     " + enterprise.getBusinessName() + "        " + enterprise.getLastNameResponsible() + "       " + enterprise.getDate());
 
 			// Persona
-			PersonEntity person = new PersonEntity(true, "Dominguez", "Lucas", "38.123.165", true);
-			iPersonRepository.save(person);
-			System.out.println(person.getId() + "     " + person.getFirstName() + "   " + person.getLastName() + "    " + person.getDni() );
+			//PersonEntity person = new PersonEntity(true, "Dominguez", "Lucas", "38.123.165", true);
+			//iPersonRepository.save(person);
+			//System.out.println(person.getId() + "     " + person.getFirstName() + "   " + person.getLastName() + "    " + person.getDni() );
 
 	*/
 		};

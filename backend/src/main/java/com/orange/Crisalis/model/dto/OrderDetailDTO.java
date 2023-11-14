@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class OrderDetailDTO implements Serializable {
     private Long id;
-    private BigDecimal priceSell;
+    private Double priceSell;
     private Integer quantity;
     private SellableGood sellableGood;
 

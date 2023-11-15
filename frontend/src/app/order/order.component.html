@@ -37,6 +37,9 @@
       </tbody>
     </table>
     <div class="tfoot">
+      <button (click)="validate(order?.id)" id="validate" class="btn editbutton">
+        Validar
+      </button>
       <button  routerLink="/order/edit/{{order?.id}}" id="edit" class="btn editbutton">
         Editar
       </button>

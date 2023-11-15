@@ -30,4 +30,8 @@ export class OrderService {
   public delete(id: any): Observable<any> {
     return this.httpClient.delete<any>(this.orderURL + `/cancel/${id}`, {}).pipe(map(res => res));
   }
+
+  public validate(id: any): Observable<any> {
+    return this.httpClient.put<any>(this.orderURL + `/validate/${id}`, {}).pipe(map(res => res));
+  }
 }

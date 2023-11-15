@@ -36,9 +36,13 @@ public class CrisalisApplication {
 
 	) {
 		return args -> {
+            if(roleRepo.findAll().isEmpty()){
 
 			RoleEntity admin = roleRepo.save(new RoleEntity(RoleName.ROLE_ADMIN));
-			RoleEntity user = roleRepo.save(new RoleEntity(RoleName.ROLE_USER));
+
+            RoleEntity user = roleRepo.save(new RoleEntity(RoleName.ROLE_USER));
+
+            }
 
 
 			// hardcodeo una empresa y una persona sólo de prueba
@@ -53,6 +57,7 @@ public class CrisalisApplication {
 			//iPersonRepository.save(person);
 			//System.out.println(person.getId() + "     " + person.getFirstName() + "   " + person.getLastName() + "    " + person.getDni() );
 
+	*/
 		};
 	}
 }

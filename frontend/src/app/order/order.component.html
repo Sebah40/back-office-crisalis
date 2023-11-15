@@ -47,8 +47,11 @@
         </tr>
       </tbody>
       <tfoot>
-        <button routerLink="/order/edit/{{order?.id}}" class="btn btn-primary">
+        <button  routerLink="/order/edit/{{order?.id}}" id="edit" class="btn btn-primary">
           Editar
+        </button>
+        <button (click)="cancel(order?.id)" id="cancel" class="btn btn-danger">
+          Cancelar
         </button>
       </tfoot>
     </table>

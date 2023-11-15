@@ -1,0 +1,11 @@
+.createbutton{
+    background-color: black;
+    color: #EAE0D5;
+    border: none;
+}
+
+.gobackbutton{
+    background-color: #EAE0D5 !important;
+    border: none;
+    color: black !important;
+}

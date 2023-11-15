@@ -19,8 +19,15 @@
         <button [routerLink]="['/order/'+order.id]" class="btn btn-dark">
           Ver detalles
         </button>
+        <button (click)="validate(order?.id)" id="validate" class="btn btn-success" [disabled]="order?.orderState === 'FINISHED' || order?.orderState === 'CANCELED'"> 
+          Validar
+        </button>
      </td>
     </tr>
+    
   </tbody>
 </table>
+<button [routerLink]="['/order/create']" class="btn btn-light">
+  Crear pedido
+</button>
 </div>

@@ -120,6 +120,7 @@ export class TaxCreateComponent implements OnInit {
     this.goToTaxList();
   }
   goToTaxList() {
-    this.router.navigate(['/taxlist']);
+
+        this.router.navigate(['/taxlist']);
   }
 }

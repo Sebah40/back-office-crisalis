@@ -45,10 +45,7 @@ export class OrderComponent implements OnInit {
     this.orderService.delete(id).subscribe(res => res);
     this.getOrder();
   }
-
-  validate(id: any) {
-    this.orderService.validate(id).subscribe(res => res);
-    this.getOrder();
+  goBack(){
+    this.router.navigate(['/order/getAll']);
   }
-
 }

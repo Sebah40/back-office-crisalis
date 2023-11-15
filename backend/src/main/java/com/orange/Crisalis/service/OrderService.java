@@ -203,6 +203,10 @@ public class OrderService implements IOrderService {
 
 
     }
+    @Override
+    public List<OrderDTO> getAllByClientId(Long clientId) {
+        return orderRepository.findByClientId(clientId).stream().map(OrderDTO::new).collect(Collectors.toList());
+    }
 
 
 
@@ -215,6 +219,11 @@ public class OrderService implements IOrderService {
             if(sellableGood.isPresent()){
                 if(sellableGood.get().getType() == Type.SERVICE){
                     item.setQuantity(1);
+                    SellableGood service = sellableGood.get();
+                    p.setQuantity(1);
+                    order.getClient().getActiveServices().add(service);
+                    order.getClient().setBeneficiary(true);
+                    clientService.saveClient(order.getClient());
                 }
                 Double priceSell = ICalculationEngine.priceWithTaxes(sellableGood.get());
                 OrderDetail newDetail = new OrderDetail();

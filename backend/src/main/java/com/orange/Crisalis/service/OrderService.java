@@ -179,6 +179,15 @@ public class OrderService implements IOrderService {
 
                  if(updatedDetail.getQuantity() == 0){
                      orderDetailService.deleteOrderDetail(existingDetail);
+
+                     SellableGood sellableGood = existingDetail.getSellableGood();
+                     if (sellableGood != null && sellableGood.getType() == Type.SERVICE) {
+                         order.getClient().getActiveServices().remove(sellableGood);
+                         if(order.getClient().getActiveServices().isEmpty())
+                             order.getClient().setBeneficiary(false);
+                         clientService.saveClient(order.getClient());
+                     }
+
                  }
                  else{
                      if(updatedDetail.getSellableGood().getType() == Type.SERVICE){

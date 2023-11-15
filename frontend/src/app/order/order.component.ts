@@ -46,4 +46,9 @@ export class OrderComponent implements OnInit {
     this.getOrder();
   }
 
+  validate(id: any) {
+    this.orderService.validate(id).subscribe(res => res);
+    this.getOrder();
+  }
+
 }

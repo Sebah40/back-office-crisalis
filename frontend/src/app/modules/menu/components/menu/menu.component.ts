@@ -22,6 +22,22 @@ export class MenuComponent {
       items: [],
     },
     {
+      texto: 'Pedidos',
+      enlace: '',
+      items: [
+        {
+          texto: 'Lista',
+          enlace: '/order/getAll',
+          items: [],
+        },
+        {
+          texto: 'Crear pedido',
+          enlace: '/order/create',
+          items: [],
+        },
+      ],
+    },
+    {
       texto: 'Productos',
       enlace: '/good',
       items: [],

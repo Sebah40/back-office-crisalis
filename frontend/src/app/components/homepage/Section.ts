@@ -1,5 +1,6 @@
 export interface Section {
-  imagen:string,
-  color:string,
-  nombre:string
+  imagen: string;
+  color: string;
+  nombre: string;
+  path: string;
 }

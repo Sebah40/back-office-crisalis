@@ -13,7 +13,7 @@
       <td>{{order.id}}</td>
       <td>{{order.client.businessName == null ?
       order.client.firstName + " " + order.client.lastName : order.client.businessName}}</td>
-      <td>{{order.dateCreated}}</td>
+      <td>{{order.dateCreated | date:'dd/MM/yyyy'  }}</td>
       <td>{{order.orderState}}</td>
       <td>
         <button [routerLink]="['/order/'+order.id]" class="btn btn-dark">

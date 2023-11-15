@@ -4,13 +4,14 @@
     <div class="card-container" width="100%">
       <div class="card" style="width: 25rem; margin: auto;">
         <div class="card-header text-center">
-          <li class="list-group-item">Cliente: {{order?.client?.businessName}}</li>
+          <li class="list-group-item">Cliente: {{order?.client?.businessName == null ?
+      order?.client?.firstName + " " + order?.client?.lastName : order?.client?.businessName}}</li>
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">ID: {{order?.client?.id}}</li>
 
           <li class="list-group-item">Beneficiario: {{order?.client?.beneficiary ? 'Sí': 'No'}}</li>
-          <li class="list-group-item">Fecha: {{order?.dateCreated}}</li>
+          <li class="list-group-item">Fecha: {{order?.dateCreated | date:'dd/MM/yyyy' }}</li>
           <li class="list-group-item">Estado: {{order?.orderState}}</li>
         </ul>
       </div>

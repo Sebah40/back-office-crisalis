@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-entity-container-component',
@@ -18,15 +19,19 @@ export class EntityContainerComponent<T extends object> {
   @Output() entityToDelete: EventEmitter<Object>;
   entityKeys: (keyof T)[] = [];
   svgPlus: string = 'assets/icons/plus-solid.svg';
+  entityKeysToString?: string[];
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private translate: TranslateService) {
     this.entityToDelete = new EventEmitter();
+    translate.use('es');
   }
   ngOnChanges() {
     if (this.entities && this.entities.length > 0) {
-      this.entityKeys = Object.keys(this.entities[0]) as (keyof T)[];
+      this.entityKeys = Object.keys(this.entities[0]).map(
+        (key) => key as keyof T
+      );
     }
-    console.log(this.entities);
+    this.entityKeysToString = this.entityKeys.map((k) => String(k));
   }
 
   getData(): any[] {

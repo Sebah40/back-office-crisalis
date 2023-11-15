@@ -220,7 +220,7 @@ public class OrderService implements IOrderService {
                 if(sellableGood.get().getType() == Type.SERVICE){
                     item.setQuantity(1);
                     SellableGood service = sellableGood.get();
-                    p.setQuantity(1);
+                    item.setQuantity(1);
                     order.getClient().getActiveServices().add(service);
                     order.getClient().setBeneficiary(true);
                     clientService.saveClient(order.getClient());

@@ -139,6 +139,20 @@ public class OrderService implements IOrderService {
         if(order.isPresent()){
             if(order.get().getOrderState() == OrderState.PENDING){
                 order.get().setOrderState(OrderState.CANCELED);
+                List<SellableGood> cancelledSellableGoods = order.get().getOrderDetailList().stream()
+                        .map(OrderDetail::getSellableGood)
+                        .collect(Collectors.toList());
+
+                for (SellableGood sellableGood : cancelledSellableGoods) {
+                    ClientEntity client = order.get().getClient();
+                    if (client != null) {
+                        client.getActiveServices().remove(sellableGood);
+                        if (client.getActiveServices().isEmpty()) {
+                            client.setBeneficiary(false);
+                        }
+                        clientService.saveClient(client);
+                    }
+                }
                 orderRepository.save(order.get());
             }
             else {

@@ -3,5 +3,18 @@ td {
   color: #22333b;
 }
 
+.gobackbutton{
+  background-color: black;
+  color: #EAE0D5;
+  width: 150px;
+}
 
+.removebutton{
+  background-color: rgb(97, 2, 2);
+  color: #EAE0D5;
+  border: none;
+}
 
+.div-gobackbutton{
+  padding: 0 !important;
+}

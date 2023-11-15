@@ -4,8 +4,9 @@
 }
 
 .custom-table-container-style {
-  background-color: #eae0d5cc;
+  background-color: transparent;
   color: #22333b;
+  border: 1px solid black;
 }
 
 table,

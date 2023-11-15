@@ -1,11 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 
 body {
-  background-image: url("./assets/fondo-list.jpg");
+  /* background-image: url("./assets/svg/wave2.svg"); */
+  background-image: url("./assets/svg/wave4.svg");
   background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  /* background-repeat: no-repeat; */
+  /* background-attachment: fixed; */
+  background-position-x: left;
+  min-height: 90vh;
 }
+
 .ligh {
   background-color: #c4c4c4;
 }
@@ -15,7 +19,7 @@ body {
 }
 
 [data-theme="light"] {
-  --background: #c4c4c4;
+  --background-image: #c4c4c4;
   --banner-background: #949494;
   --banner-h2: rgb(34, 51, 59);
 }
@@ -47,7 +51,7 @@ body {
   height: 40px;
   background-color: #D9D9D9;
   border-radius: 15px;
-  border: .5px solid #B8B8B8;
+  /* border: 0.5px solid #B8B8B8; */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -56,9 +60,17 @@ body {
   background-color: #D9D9D9;
   width: 90%;
   height: 100%;
-  border-radius: 15px 0px 0px 15px;
+  border-radius: 15px;
   border: .5px solid #B8B8B8;
 }
 .searchbar .bi {
-  width: 10%;
+  width: 12%;
+}
+
+.searchbar input::placeholder{
+  text-align: center;
+}
+
+.searchbar input{
+  text-align: center;
 }

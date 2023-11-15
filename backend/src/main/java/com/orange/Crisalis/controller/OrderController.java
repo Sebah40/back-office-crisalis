@@ -4,6 +4,7 @@ package com.orange.Crisalis.controller;
 import com.orange.Crisalis.dto.RequestBodyCreateOrderDTO;
 
 import com.orange.Crisalis.model.dto.OrderDTO;
+import com.orange.Crisalis.model.dto.OrderWithCalculationEngineDTO;
 import com.orange.Crisalis.security.Controller.Message;
 import com.orange.Crisalis.service.OrderService;
 import org.springframework.http.HttpStatus;
@@ -53,7 +54,7 @@ public class OrderController {
 
 
     @PreAuthorize("hasAnyRole('USER' ,'ADMIN')")
-    @PutMapping("/cancel/{id}")
+    @DeleteMapping("/cancel/{id}")
     public ResponseEntity<?> cancelOrder(@PathVariable("id") Long id){
         this.orderService.cancelOrder(id);
         return new ResponseEntity<>(new Message("El pedido ha sido cancelado"),HttpStatus.OK);
@@ -66,11 +67,20 @@ public class OrderController {
         return new ResponseEntity<>(new Message("El pedido editado exisotamente"),HttpStatus.OK);
     }
 
+
+    @GetMapping("/get")
+    @PreAuthorize("hasAnyRole('USER' ,'ADMIN')")
+    public List<OrderWithCalculationEngineDTO> getOrders(){
+        return this.orderService.getOrdersWithSubTotal();
+
+    }
+
     @PreAuthorize("hasAnyRole('USER' ,'ADMIN')")
     @GetMapping("/getAllByClient/{id}")
     public ResponseEntity<List<OrderDTO>> getAllByClientId(@PathVariable("id") Long id){
         return ResponseEntity.ok(this.orderService.getAllByClientId(id));
     }
+
 
 }
 

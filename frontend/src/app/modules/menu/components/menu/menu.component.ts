@@ -27,14 +27,25 @@ export class MenuComponent {
       items: [],
     },
     {
-      texto: 'Personas',
-      enlace: '/person',
-      items: [],
-    },
-    {
-      texto: 'Empresas',
-      enlace: '/enterprise',
-      items: [],
+      texto: 'Clientes',
+      enlace: '',
+      items: [
+        {
+          texto: 'Personas',
+          enlace: '/person',
+          items: [],
+        },
+        {
+          texto: 'Empresas',
+          enlace: '/enterprise',
+          items: [],
+        },
+        {
+          texto: 'Suscripciones',
+          enlace: '/clients',
+          items: [],
+        },
+      ],
     },
     {
       texto: 'Impuestos',

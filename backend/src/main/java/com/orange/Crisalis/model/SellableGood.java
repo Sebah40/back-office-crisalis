@@ -1,5 +1,6 @@
 package com.orange.Crisalis.model;
 
+import com.orange.Crisalis.enums.Type;
 import lombok.*;
 
 import javax.persistence.*;

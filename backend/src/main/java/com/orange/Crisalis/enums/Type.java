@@ -1,4 +1,4 @@
-package com.orange.Crisalis.model;
+package com.orange.Crisalis.enums;
 
 public enum Type {
   PRODUCT, SERVICE

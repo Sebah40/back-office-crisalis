@@ -11,5 +11,6 @@ import lombok.*;
 
 public class ProductIdAndQuantityDTO {
     private Long productId;
-    private Integer Quantity;
+    private Integer quantity;
+    private Integer warrantyYear;
 }

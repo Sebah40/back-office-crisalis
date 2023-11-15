@@ -23,5 +23,8 @@ public class ClientService {
         Optional<ClientEntity> clienteOptional = iClientRepository.findById(id);
         return clienteOptional.orElse(null);
     }
+    public ClientEntity saveClient(ClientEntity client) {
+        return iClientRepository.save(client);
+    }
 
 }

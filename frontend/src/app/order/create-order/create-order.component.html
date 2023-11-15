@@ -1,17 +1,17 @@
 <div class="container d-flex flex-column justify-content-sm-start align-items-center" id="container">
   <h2 class="title">{{ title }}</h2>
-<div class="searchbar-section">
-  <div class="searchbar">
-    <input [formControl]="searchbar" placeholder="Buscar cliente (DNI, NOMBRE, RAZÓN SOCIAL)" />
-    <svg type="button"
-    (click)="searchbarFilter(searchbar.value == null ? '' : searchbar.value)"
-     xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-    </svg>
+  <div class="searchbar-section">
+    <div class="searchbar">
+      <input [formControl]="searchbar" placeholder="Buscar cliente" />
+      <svg type="button" class="svgbutton"
+      (click)="searchbarFilter(searchbar.value == null ? '' : searchbar.value)"
+      xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+      </svg>
+    </div>
   </div>
-</div>
 
-  <table class="table p-2" id="custom-table" >
+  <table class="rounded p-2" id="custom-table" >
     <thead>
       <tr>
         <th>ID Cliente</th>
@@ -30,38 +30,38 @@
           </td>
           <td>
             {{client.beneficiary ? 'Sí' : 'No'}}
-
           </td>
-
-
-        <td><button class="btn btn-primary" id="id-{{client.id}}" (click)="addClient(client.id)">Seleccionar</button></td>
+          <td>
+            <button class="btn btn-dark addbutton1" id="id-{{client.id}}" (click)="addClient(client.id)">Seleccionar</button>
+          </td>
       </tr>
     </tbody>
   </table>
 
 
-<section class="form-section">
-  <form class="form">
+  <section class="form-section">
+    <form class="form">
 
 
-    <h3>Lista de productos y servicios:</h3>
+      <h3>Lista de productos y servicios</h3>
 
-    <ul type="none" class="p-2">
-      <li *ngFor="let item of itemList" class="list-item " >
-
+      <ul type="none" class="p-2" style="max-height:300px ;">
+        <li *ngFor="let item of itemList" class="list-item items" >
+            <span>
+              {{item.name}}
+            </span>
           <span>
-            {{item.name}}
+            <label class="unidades">Unidades:
+              <input defaultValue="{{0}}" id="{{item.id}}" class="number" name="{{item.id}}" type="number"/>
+            </label>
+            <button class="btn btn-primary addbutton2" [value]="item.id" id="btn-{{item.id}}" (click)="select(item.id)">+</button>
+          <button class="btn btn-danger removebutton" [value]="item.id" (click)="undo(item.id)">x</button>
           </span>
-        <span>
-          <label>Unidades: <input defaultValue="{{0}}" id="{{item.id}}" class="number" name="{{item.id}}" type="number"/></label>
-          <button class="btn btn-primary" [value]="item.id" id="btn-{{item.id}}" (click)="select(item.id)">+</button>
-        <button class="btn btn-danger" [value]="item.id" (click)="undo(item.id)">X</button>
-        </span>
-      </li>
-    </ul>
-    <button class="btn btn-primary" id="submit" (click)="submitOrder()">
-      Enviar
-    </button>
-  </form>
-</section>
+        </li>
+      </ul>
+      <button class="btn btn-dark" id="submit" (click)="submitOrder()">
+        Enviar
+      </button>
+    </form>
+  </section>
 </div>

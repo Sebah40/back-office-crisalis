@@ -37,9 +37,7 @@
       </tbody>
     </table>
     <div class="tfoot">
-      <button (click)="validate(order?.id)" id="validate" class="btn editbutton">
-        Validar
-      </button>
+      
       <button  routerLink="/order/edit/{{order?.id}}" id="edit" class="btn editbutton">
         Editar
       </button>
@@ -47,6 +45,10 @@
         Cancelar
       </button>
     </div>
+    &nbsp; &#160;
+    <button (click)="goBack()" id="goBack" class="btn editbutton">
+      Volver a lista
+    </button>
 
     <!-- <table class="table p-2" id="custom-table">
       <thead>

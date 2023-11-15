@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import  { OrderDTO } from '../order-dto';
 import { OrderService } from '../service/order.service';
+import { RouterModule, Routes, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-order-list',
@@ -14,7 +16,7 @@ export class OrderListComponent implements OnInit {
   //order = new OrderDTO(300, 2, new Date());
 
 
-  constructor(private orderService: OrderService) {}
+  constructor(private orderService: OrderService, private router: Router) {}
 
   orderList: OrderDTO[] = [];
   loadOrderList(): void {
@@ -28,6 +30,19 @@ export class OrderListComponent implements OnInit {
 
   delete(id: any): void {
     this.orderService.delete(id).subscribe();
+  }
+  validate(id: any) {
+    this.orderService.validate(id).subscribe(res => res);
+    this.redirect('order/'+id);
+    Swal.fire(
+      'Órden validada',
+      undefined,
+      'success'
+    );
+  }
+
+  redirect(id: any): void {
+    this.router.navigate(['/'+id]);
   }
 
   ngOnInit(): void {

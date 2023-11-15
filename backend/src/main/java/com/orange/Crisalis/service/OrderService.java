@@ -182,6 +182,9 @@ public class OrderService implements IOrderService {
     @Override
     public void editOrder(OrderDTO orderToEdit) {
          OrderEntity order = orderRepository.findById(orderToEdit.getId()).orElseThrow(() -> new RuntimeException("No existe el pedido."));
+         if (order.getOrderState() == OrderState.FINISHED || order.getOrderState() == OrderState.CANCELED ){
+             throw new RuntimeException("no se puede editar un pedido que esta cancelado o finalizado");
+         }
          order.setDateEdited(new Date());
 
          List<OrderDetailDTO> updatedDetailList = orderToEdit.getOrderDetailDTOList();

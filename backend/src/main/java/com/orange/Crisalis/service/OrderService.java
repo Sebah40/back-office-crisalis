@@ -140,20 +140,6 @@ public class OrderService implements IOrderService {
         if(order.isPresent()){
             if(order.get().getOrderState() == OrderState.PENDING){
                 order.get().setOrderState(OrderState.CANCELED);
-                List<SellableGood> cancelledSellableGoods = order.get().getOrderDetailList().stream()
-                        .map(OrderDetail::getSellableGood)
-                        .collect(Collectors.toList());
-
-                for (SellableGood sellableGood : cancelledSellableGoods) {
-                    ClientEntity client = order.get().getClient();
-                    if (client != null) {
-                        client.getActiveServices().remove(sellableGood);
-                        if (client.getActiveServices().isEmpty()) {
-                            client.setBeneficiary(false);
-                        }
-                        clientService.saveClient(client);
-                    }
-                }
                 orderRepository.save(order.get());
             }
             else {
@@ -207,15 +193,6 @@ public class OrderService implements IOrderService {
 
                  if(updatedDetail.getQuantity() == 0){
                      orderDetailService.deleteOrderDetail(existingDetail);
-
-                     SellableGood sellableGood = existingDetail.getSellableGood();
-                     if (sellableGood != null && sellableGood.getType() == Type.SERVICE) {
-                         order.getClient().getActiveServices().remove(sellableGood);
-                         if(order.getClient().getActiveServices().isEmpty())
-                             order.getClient().setBeneficiary(false);
-                         clientService.saveClient(order.getClient());
-                     }
-
                  }
                  else{
                      if(updatedDetail.getSellableGood().getType() == Type.SERVICE){

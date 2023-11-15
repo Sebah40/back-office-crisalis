@@ -57,7 +57,7 @@ public class CrisalisApplication {
 			//iPersonRepository.save(person);
 			//System.out.println(person.getId() + "     " + person.getFirstName() + "   " + person.getLastName() + "    " + person.getDni() );
 
-	*/
+
 		};
 	}
 }

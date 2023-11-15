@@ -3,6 +3,8 @@ package com.orange.Crisalis.controller;
 
 import com.orange.Crisalis.dto.RequestBodyCreateOrderDTO;
 
+import com.orange.Crisalis.exceptions.ErrorMessage;
+import com.orange.Crisalis.exceptions.custom.OrderNotFoundException;
 import com.orange.Crisalis.model.dto.OrderDTO;
 import com.orange.Crisalis.model.dto.OrderWithCalculationEngineDTO;
 import com.orange.Crisalis.security.Controller.Message;
@@ -14,6 +16,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import javax.validation.ValidationException;
 import java.util.List;
 import java.util.Optional;
 
@@ -67,6 +70,20 @@ public class OrderController {
         return new ResponseEntity<>(new Message("El pedido editado exisotamente"),HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAnyRole('USER' ,'ADMIN')")
+    @PutMapping("/validate/{orderId}")
+    public ResponseEntity<?> validateOrder(@PathVariable Long orderId) {
+        try {
+            orderService.validateOrder(orderId);
+            return new ResponseEntity<>(new Message("El pedido ha sido validado exitosamente"), HttpStatus.OK);
+        } catch (ValidationException e) {
+            ErrorMessage errorMessage = new ErrorMessage(e, "/validate/" + orderId);
+            return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
+        } catch (OrderNotFoundException e) {
+            ErrorMessage errorMessage = new ErrorMessage(e, "/validate/" + orderId);
+            return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
+        }
+    }
 
     @GetMapping("/get")
     @PreAuthorize("hasAnyRole('USER' ,'ADMIN')")

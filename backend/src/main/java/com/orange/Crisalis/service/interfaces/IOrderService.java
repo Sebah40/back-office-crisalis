@@ -16,6 +16,8 @@ public interface IOrderService {
 
     void cancelOrder(Long id);
 
+    void validateOrder(Long id);
+
     void editOrder(OrderDTO order);
 
     List<OrderWithCalculationEngineDTO> getOrdersWithSubTotal();

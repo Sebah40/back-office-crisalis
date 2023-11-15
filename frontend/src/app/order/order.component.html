@@ -1,12 +1,9 @@
-
-
 <main>
-
   <div class="container d-flex flex-column justify-content-sm-start align-items-center" id="container">
     <h2 class="title">Pedido</h2>
     <div class="card-container" width="100%">
-      <div class="card" style="width: 18rem; margin: auto;">
-        <div class="card-header">
+      <div class="card" style="width: 25rem; margin: auto;">
+        <div class="card-header text-center">
           <li class="list-group-item">Cliente: {{order?.client?.businessName}}</li>
         </div>
         <ul class="list-group list-group-flush">
@@ -19,7 +16,36 @@
       </div>
     </div>
 
-    <table class="table p-2" id="custom-table">
+    <table class="rounded p-2" id="custom-table" >
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Tipo</th>
+          <th>Cantidad</th>
+          <th>Precio unitario</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let detail of order?.orderDetailDTOList">
+          <td>{{detail.id}}</td>
+          <td>{{detail.sellableGood.name}}</td>
+          <td>{{detail.sellableGood.type == 'PRODUCT' ? 'Producto' : 'Servicio'}}</td>
+          <td>{{detail.quantity}}</td>
+          <td>{{detail.priceSell}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="tfoot">
+      <button  routerLink="/order/edit/{{order?.id}}" id="edit" class="btn editbutton">
+        Editar
+      </button>
+      <button (click)="cancel(order?.id)" id="cancel" class="btn cancelbutton">
+        Cancelar
+      </button>
+    </div>
+
+    <!-- <table class="table p-2" id="custom-table">
       <thead>
         <tr>
           <th align="center" >
@@ -54,8 +80,6 @@
           Cancelar
         </button>
       </tfoot>
-    </table>
-
+    </table> -->
   </div>
-
 </main>

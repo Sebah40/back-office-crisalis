@@ -1,6 +1,19 @@
+app-list-table{
+  background-color: transparent !important;
+}
+
+/* #table{
+  background-color: white !important;
+} */
+
 td {
   background-color: transparent;
   color: #22333b;
+}
+
+.servicebutton{
+  background-color: black !important;
+  color: #EAE0D5;
 }
 
 

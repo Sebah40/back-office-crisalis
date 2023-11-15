@@ -56,6 +56,7 @@ td {
 #custom-table {
   background-color: transparent;
   color: black;
+  margin-bottom: 0 !important;
 }
 
 #custom-table {
@@ -64,9 +65,8 @@ td {
 
 #container td,
 th {
-  margin: 0 25px !important;
   color: black !important;
-  padding: 20px 20px;
+  padding: 7px 7px;
 }
 
 #container tbody td{

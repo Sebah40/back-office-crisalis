@@ -12,7 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./client-services-list.component.css']
 })
 export class ClientServicesListComponent implements OnInit {
-  title = "Servicios Activos"
+  title = "Servicios activos"
   services: SellableGood[] = [];
 
   constructor(private route: ActivatedRoute,

@@ -21,6 +21,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -46,7 +47,8 @@ public class AuthController {
     JwtProvider jwtProvider;
 
     @PostMapping("/new")
-    public ResponseEntity<?> nuevo(@Valid @RequestBody NewUser newUser, BindingResult bindingResult){
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    public ResponseEntity<?> createUser(@Valid @RequestBody NewUser newUser, BindingResult bindingResult){
         if(bindingResult.hasErrors())
             return new ResponseEntity(new Message("Campos mal puestos o email inválido"),HttpStatus.BAD_REQUEST);
         
@@ -58,8 +60,12 @@ public class AuthController {
 
 
 
-        UserEntity userEntity = new UserEntity(newUser.getName(), newUser.getUsername(),
-            newUser.getEmail(),passwordEncoder.encode(newUser.getPassword()), true);
+        UserEntity userEntity = new UserEntity();
+
+        userEntity.setName(newUser.getName());
+        userEntity.setUsername(newUser.getUsername());
+        userEntity.setEmail(newUser.getEmail());
+        userEntity.setPassword(passwordEncoder.encode(newUser.getPassword()));
         
         Set<RoleEntity> roles = new HashSet<>();
         roles.add(roleService.getByRoleName(RoleName.ROLE_USER).get());
@@ -75,7 +81,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<JwtDto> login(@Valid @RequestBody LoginUser loginUser, BindingResult bindingResult){
         if(bindingResult.hasErrors())
-            return new ResponseEntity(new Message("Campos mal puestos"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new Message("Campos incorrectos"), HttpStatus.BAD_REQUEST);
 
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
         loginUser.getUsername(), loginUser.getPassword()));

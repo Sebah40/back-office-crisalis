@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { NewUser } from '../../../model/new-user';
 import { JwtDto } from '../../../model/jwt-dto';
 import { Login } from '../../../model/login';
+import { ResponseCreate } from 'src/app/components/interfaces/ResponseCreate.type';
 
 @Injectable({
   providedIn: 'root',
@@ -18,5 +19,14 @@ export class AuthService {
 
   public login(login: Login): Observable<JwtDto> {
     return this.httpClient.post<JwtDto>(this.authURL + 'login', login);
+  }
+
+  public recoverPassword(email: string): Observable<ResponseCreate> {
+    return this.httpClient.post<ResponseCreate>(
+      'http://localhost:3000/user/recover-password',
+      {
+        email,
+      }
+    );
   }
 }

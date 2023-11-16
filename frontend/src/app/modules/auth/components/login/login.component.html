@@ -14,8 +14,9 @@
 			
 
 			<div id="container-button-forget">
-				<button id="button-forget" type="button" class="text-dark text-opacity-75">¿Olvidaste la contraseña?</button>
+				<button data-bs-toggle="modal" data-bs-target="#forgotPasswordModal" id="button-forget" type="button" class="text-dark text-opacity-75">¿Olvidaste la contraseña?</button>
 			</div>
+			<app-forgot-password-modal></app-forgot-password-modal>
 
 			<button class="my-4" mat-button type="submit" value="Submit">Ingresar</button>
 		</form>

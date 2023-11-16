@@ -23,7 +23,7 @@ import { PersonFormComponent } from './modules/client/components/person-form/per
 import { SellableGoodsModule } from './modules/sellable-good/sellable-good.module';
 import { TaxListComponent } from './modules/tax/components/tax-list/tax-list.component';
 import { TaxCreateComponent } from './modules/tax/components/tax-create/tax-create.component';
-import { OrderComponent } from './order/order.component';
+import { OrderComponent } from './order/order-view/order.component';
 import { OrderListComponent } from './order/order-list/order-list.component';
 import { CreateOrderComponent } from './order/create-order/create-order.component';
 import { EditOrderComponent } from './order/edit-order/edit-order.component';

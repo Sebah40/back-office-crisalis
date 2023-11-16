@@ -1,15 +1,15 @@
 import { Component, OnInit, OnChanges, AfterContentInit, DoCheck } from '@angular/core';
-import { OrderDTO } from '../order-dto';
+import { OrderDTO } from '../model/order-dto';
 import { OrderService } from '../service/order.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SellableGood } from 'src/app/modules/sellable-good/model/sellable-good.model';
-import { ProductIdAndQuantityDto } from '../product-id-and-quantity-dto';
+import { ProductIdAndQuantityDto } from '../model/product-id-and-quantity-dto';
 import { ClientService } from '../service/client.service';
 import { SellableGoodService } from 'src/app/modules/sellable-good/services/sellable-good.service';
-import { RequestBodyCreateOrderDto } from '../request-body-create-order-dto';
+import { RequestBodyCreateOrderDto } from '../model/request-body-create-order-dto';
 import Swal from 'sweetalert2';
-import { ClientEntity } from '../client-entity';
-import { OrderDetailDTO } from '../order-details-dto';
+import { ClientEntity } from '../model/client-entity';
+import { OrderDetailDTO } from '../model/order-details-dto';
 
 @Component({
   selector: 'app-edit-order',

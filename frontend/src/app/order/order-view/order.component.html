@@ -25,6 +25,7 @@
           <th>Tipo</th>
           <th>Cantidad</th>
           <th>Precio unitario</th>
+          <th>Impuestos</th>
         </tr>
       </thead>
       <tbody>
@@ -34,11 +35,23 @@
           <td>{{detail.sellableGood.type == 'PRODUCT' ? 'Producto' : 'Servicio'}}</td>
           <td>{{detail.quantity}}</td>
           <td>{{detail.priceSell}}</td>
+          <td>
+            <div class="dropdown" [hidden]="detail?.sellableGood?.taxes?.length == 0">
+              <button class="btn dropdown-toggle editbutton" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                Ver impuestos
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" >
+                <div class="container" *ngFor="let tax of detail.sellableGood.taxes">
+                  <li class="p-2">{{tax.taxName}} ({{tax.taxPercentage}}%)</li>
+                </div>                  
+              </ul>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>
     <div class="tfoot">
-      
+
       <button  routerLink="/order/edit/{{order?.id}}" id="edit" class="btn editbutton">
         Editar
       </button>

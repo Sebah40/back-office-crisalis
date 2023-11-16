@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { RouterModule, Routes, Router } from '@angular/router';
-import { ClientEntity } from '../client-entity';
+import { ClientEntity } from '../model/client-entity';
 import { ClientService } from '../service/client.service';
-import { RequestBodyCreateOrderDto } from '../request-body-create-order-dto';
-import { ProductIdAndQuantityDto } from '../product-id-and-quantity-dto';
+import { RequestBodyCreateOrderDto } from '../model/request-body-create-order-dto';
+import { ProductIdAndQuantityDto } from '../model/product-id-and-quantity-dto';
 import { SellableGood } from 'src/app/modules/sellable-good/model/sellable-good.model';
 import { SellableGoodService } from 'src/app/modules/sellable-good/services/sellable-good.service';
 import { OrderService } from 'src/app/order/service/order.service';

@@ -28,6 +28,7 @@ import { OrderListComponent } from './order/order-list/order-list.component';
 import { CreateOrderComponent } from './order/create-order/create-order.component';
 import { EditOrderComponent } from './order/edit-order/edit-order.component';
 import { ClientModule } from './modules/client/client.module';
+import { ForgotPasswordModalComponent } from './modules/auth/components/forgot-password-modal/forgot-password-modal.component';
 
 const routes: Routes = [{ path: '', component: HomepageComponent }];
 
@@ -50,7 +51,8 @@ const routes: Routes = [{ path: '', component: HomepageComponent }];
     OrderComponent,
     OrderListComponent,
     CreateOrderComponent,
-    EditOrderComponent
+    EditOrderComponent,
+    ForgotPasswordModalComponent,
   ],
   imports: [
     SweetAlert2Module.forRoot(),

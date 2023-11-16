@@ -99,11 +99,11 @@ tbody {
 }
 
 .searchbar{
-  background-color: white !important;
+  background-color: transparent !important;
 }
 
 .searchbar input{
-  background-color: rgb(255, 255, 255) !important;
+  background-color: transparent !important;
 }
 
 .p-2 {

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import  { OrderDTO } from './order-dto';
-import { OrderService } from './service/order.service';
+import  { OrderDTO } from '../model/order-dto';
+import { OrderService } from '../service/order.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ClientEntity } from './client-entity';
+import { ClientEntity } from '../model/client-entity';
 
 
 @Component({

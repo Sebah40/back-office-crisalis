@@ -1,6 +1,6 @@
 <div class="container d-flex flex-column justify-content-sm-start align-items-center" id="container">
   <h2 class="title">Lista de {{ title }}</h2>
-<table class="table list-table">
+<table class="rounded p-2" id="custom-table">
   <thead>
     <tr>
       <th align="center" *ngFor="let th of headers">
@@ -15,19 +15,18 @@
       order.client.firstName + " " + order.client.lastName : order.client.businessName}}</td>
       <td>{{order.dateCreated | date:'dd/MM/yyyy'  }}</td>
       <td>{{order.orderState}}</td>
-      <td>
-        <button [routerLink]="['/order/'+order.id]" class="btn btn-dark">
+      <td class="buttons">
+        <button [routerLink]="['/order/'+order.id]" class="btn detailsbutton">
           Ver detalles
         </button>
-        <button (click)="validate(order?.id)" id="validate" class="btn btn-success" [disabled]="order?.orderState === 'FINISHED' || order?.orderState === 'CANCELED'"> 
+        <button (click)="validate(order?.id)" id="validate" class="btn validatebutton" [disabled]="order?.orderState === 'FINISHED' || order?.orderState === 'CANCELED'"> 
           Validar
         </button>
      </td>
     </tr>
-    
   </tbody>
 </table>
-<button [routerLink]="['/order/create']" class="btn btn-light">
-  Crear pedido
+<button [routerLink]="['/order/create']" class="btn createbutton">
+  Crear nuevo pedido
 </button>
 </div>

@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { OrderDTO } from '../order-dto';
-import { RequestBodyCreateOrderDto } from '../request-body-create-order-dto';
+import { OrderDTO } from '../model/order-dto';
+import { RequestBodyCreateOrderDto } from '../model/request-body-create-order-dto';
 
 @Injectable({
   providedIn: 'root'

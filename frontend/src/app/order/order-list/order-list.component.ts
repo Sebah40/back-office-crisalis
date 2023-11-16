@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import  { OrderDTO } from '../order-dto';
+import  { OrderDTO } from '../model/order-dto';
 import { OrderService } from '../service/order.service';
 import { RouterModule, Routes, Router } from '@angular/router';
 import Swal from 'sweetalert2';

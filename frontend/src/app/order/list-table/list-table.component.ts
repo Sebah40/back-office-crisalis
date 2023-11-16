@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { OrderDTO } from '../order-dto';
+import { OrderDTO } from '../model/order-dto';
 
 @Component({
   selector: 'app-list-table',

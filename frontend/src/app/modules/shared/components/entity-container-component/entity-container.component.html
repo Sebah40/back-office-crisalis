@@ -8,7 +8,7 @@
     <table class="p-2" id="custom-table">
       <thead>
         <tr>
-          <th style="background-color: transparent;" class="text-center " *ngFor="let key of entityKeys">{{ key }}</th>
+          <th style="background-color: transparent;" class="text-center " *ngFor="let key of entityKeysToString">{{ key | translate }}</th>
           <th *ngIf="entities.length" style="background-color: transparent;" class="text-center">Acciones</th>
         </tr>
       </thead>
@@ -24,6 +24,7 @@
         <tr style="height: 20px;"></tr>
       </tbody>
     </table>
+
     <!-- <img src="../../../../../assets/svg/wave1.svg"> -->
   </div>
   <!-- <img src="../../../../../assets/svg/wave1.svg" id="background"> -->

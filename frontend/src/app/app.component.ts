@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,10 @@ export class AppComponent {
     ? 'light'
     : 'dark';
 
-  constructor(private location: Location) {}
+  constructor(private location: Location, private translate: TranslateService) {
+    translate.setDefaultLang('es');
+  }
+
   ngOnInit(): void {
     const path: string = this.location.path() || '';
     const isLogin: string = path.split('/')[1];

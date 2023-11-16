@@ -1,26 +1,26 @@
 <div *ngIf="hasItems(item); else OneLink" >
-  <span style="cursor: pointer; text-decoration: none;color: #FFF; font-weight: bold; display: inline-flex; gap: .75rem; align-items: center;" (click)="toggleMenuItem()">
+  <span style="cursor: pointer; text-decoration: none;color: #ebdbcb; font-weight: bold; display: inline-flex; gap: .75rem; align-items: center;" (click)="toggleMenuItem()">
     <img #icono
     [src]="imagenUrl ? imagenUrl : imagenDefaultUrl" 
     alt="arrow"
-    style="color: #FFF;"
+    style="color: #ebdbcb;"
     >
     {{item.texto}}
   </span>
   <ul #opciones class="oculto">
     <li *ngFor="let opcion of item.items">
-      <a style="text-decoration:none; color: #FFF;" [routerLink]="opcion.enlace" (click)="toggleMenu()">
+      <a style="text-decoration:none; color: #ebdbcb;" [routerLink]="opcion.enlace" (click)="toggleMenu()">
         {{opcion.texto}}
       </a>
     </li>
   </ul>
 </div>
 <ng-template #OneLink>
-  <a style="text-decoration: none;color: #FFF; font-weight: bold; display: inline-flex; gap: .75rem; align-items: center;" [routerLink]="item.enlace" (click)="toggleMenu()">
+  <a style="text-decoration: none;color: #ebdbcb; font-weight: bold; display: inline-flex; gap: .75rem; align-items: center;" [routerLink]="item.enlace" (click)="toggleMenu()">
     <img #icono
     [src]="imagenUrl ? imagenUrl : imagenDefaultUrl" 
     alt="arrow"
-    style="color: #FFF;"
+    style="color: #ebdbcb;"
     >
     {{item.texto}}
   </a>

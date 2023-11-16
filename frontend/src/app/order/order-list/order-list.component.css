@@ -27,3 +27,55 @@ h2 {
 /* .btn {
   margin-left: 5px;
 } */
+
+.createbutton{
+  width: 250px;
+  background-color: black;
+  color: #eae0d5;
+}
+
+#custom-table {
+  color: #22333b;
+  min-height: 100px;
+  width: 100%;
+  margin: 25px auto;
+  border: 1px solid black !important;
+  border-radius: 10px;
+  border-collapse: separate;
+}
+
+table,
+thead,
+tbody,
+td {
+  background-color: rgba(255, 255, 255, 0) !important;
+  color: #22333b;
+  text-align: center;
+}
+
+tr, th{
+  padding: 15px;
+  text-align: center;
+  /* background-color: rgba(255, 255, 255, 0) !important; */
+}
+
+tbody tr td{
+  padding: 10px;
+  text-align: center;
+  /* background-color: rgba(255, 255, 255, 0) !important; */
+}
+
+.buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.detailsbutton{
+  background-color: #eae0d5;
+}
+
+.validatebutton{
+  background-color: #22333bd3;
+  color: #eae0d5;
+}

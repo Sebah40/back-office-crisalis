@@ -3,20 +3,55 @@
   min-height: 100vh;
 }
 #container h2 {
-  color: #5e503f;
+  color: black;
   text-align: center;
   margin-top: 40px;
 }
-#container-list {
+
+/* #container-list {
   margin-top: 5rem;
   background-color: #eae0d5cc;
   color: #22333b;
   height: max-content;
   min-width: 70%;
   max-width: 90%;
+} */
+
+#container-list {
+  /* background-color: #EAE0D5; */
+  margin-top: 55px;
+  color: #22333b;
+  height: max-content;
+  min-width: 100%;
+  border: 1px solid black;
+  border-radius: 10px;
+  /* background-color: #0A0908aa; */
+  /* max-width: 140%; */
 }
 
-#container table,
+#custom-table {
+  background-color: transparent;
+  color: black;
+  margin-bottom: 0 !important;
+  min-height: 100px;
+  width: 100%;
+}
+
+#container td,
+th {
+  color: black !important;
+  padding: 7px 7px;
+}
+
+#container tbody td{
+  color:#c3d3fd
+}
+
+#container thead th{
+  color:#F0f0f0
+}
+
+/* #container table,
 thead,
 tbody,
 td {
@@ -27,14 +62,32 @@ td {
   background-color: transparent;
   color: #22333b;
   min-height: 100px;
-}
-#container-button {
-  width: 90%;
-}
+} */
 
 .taxes {
   max-width: 9rem;
   font-size: .8rem;
+  text-align: center;
 }
 
+.createbutton{
+  background-color: black;
+  color: #EAE0D5;
+}
 
+.editbutton{
+  background-color: #EAE0D5;
+  color: black;
+  width: 75px;
+}
+
+.deletebutton{
+  background-color: rgb(97, 2, 2);
+  color: #EAE0D5;
+  width: 75px;
+}
+
+.td-buttons{
+  text-align: center;
+  width: 190px;
+}

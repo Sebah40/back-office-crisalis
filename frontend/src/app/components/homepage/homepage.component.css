@@ -9,20 +9,37 @@ section {
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
-  margin-bottom: 50px;
+
 }
 
 .banner {
   width: 100%;
   height: 200px;
-  /**background-color: #22333B;*/
-  opacity: 90%;
+  background-color: transparent;
+  color: #22333B;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .banner h2 {
   font-size: 50px;
   font-weight: 600;
 }
 
+.searchbar{
+  background-color: transparent !important;
+  margin: 0;
+}
+
+.searchbar input{
+  background-color: transparent !important;
+}
+
+h2{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.section-cards{
+  margin-top: 80px;
+}

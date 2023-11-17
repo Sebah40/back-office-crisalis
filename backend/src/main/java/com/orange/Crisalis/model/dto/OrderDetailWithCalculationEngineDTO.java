@@ -15,7 +15,7 @@ public class OrderDetailWithCalculationEngineDTO extends OrderDetailDTO {
     private Double subTotal;
 
     public OrderDetailWithCalculationEngineDTO(Long id, Double priceSell, Integer quantity, SellableGood sellableGood, Double supportCharge, Double warrantyValue, Double discount, Double subTotalWithoutDiscount, Double subTotal) {
-        super(id, priceSell, quantity, sellableGood);
+        super(id, priceSell, quantity, sellableGood, discount);
         this.supportCharge = supportCharge;
         this.warrantyValue = warrantyValue;
         this.discount = discount;

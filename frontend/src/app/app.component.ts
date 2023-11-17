@@ -1,13 +1,14 @@
 import { Location } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Home';
   isLoginPath: boolean = false;
   theme?: string;
@@ -16,14 +17,24 @@ export class AppComponent {
     ? 'light'
     : 'dark';
 
-  constructor(private location: Location, private translate: TranslateService) {
+  constructor(
+    private location: Location,
+    private translate: TranslateService,
+    private router: Router
+  ) {
     translate.setDefaultLang('es');
   }
 
   ngOnInit(): void {
-    const path: string = this.location.path() || '';
-    const isLogin: string = path.split('/')[1];
-    this.isLoginPath = isLogin == 'login';
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        const path: string = this.location.path() || '';
+        const isLogin: string = path.split('/')[1];
+        this.isLoginPath = isLogin == 'login';
+      }
+    });
+
+    // this.changeTheme();
   }
 
   changeTheme = () => {

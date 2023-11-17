@@ -21,7 +21,7 @@ export class OrderComponent implements OnInit {
 
   getOrder() {
     this.orderService.getOrder(this.id).subscribe(res => {
-      this.order = new OrderDTO(this.id, res.client, res.orderState, res.dateCreated, res.orderDetailDTOList);
+      this.order = res;
       this.disable();
     })
   }

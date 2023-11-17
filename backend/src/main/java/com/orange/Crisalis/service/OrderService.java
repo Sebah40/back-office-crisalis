@@ -272,6 +272,9 @@ public class OrderService implements IOrderService {
                 }else{
                     newDetail.setWarrantyYear(item.getWarrantyYear());
                 }
+                if(sellableGood.get().getType() == Type.SERVICE){
+                    newDetail.setQuantity(1);
+                }
 
                 orderDetailList.add(newDetail);
             }

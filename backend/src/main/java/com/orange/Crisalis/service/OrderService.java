@@ -91,13 +91,14 @@ public class OrderService implements IOrderService {
                         orderEntity.getDateCreated(),
                         orderEntity.getOrderState(),
                         orderEntity.getClient(),
+                        orderEntity.getService(),
                         orderEntity.getOrderDetailList().stream().map(ordeD -> new OrderDetailDTO(
                                 ordeD.getId(),
                                 ordeD.getPriceSell(),
                                 ordeD.getQuantity(),
-                                ordeD.getSellableGood()
+                                ordeD.getSellableGood(),
+                                ordeD.getDiscount()
                                 )).collect(Collectors.toList())
-
                         )
                 )
         ).collect(Collectors.toList());

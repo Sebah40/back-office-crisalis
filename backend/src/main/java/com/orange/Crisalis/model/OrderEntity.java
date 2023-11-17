@@ -39,6 +39,10 @@ public class OrderEntity {
     @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
     private List<OrderDetail> orderDetailList;
 
+    @ManyToOne
+    @JoinColumn(name = "service_id")
+    private SellableGood service;
+
 
 
     @PrePersist

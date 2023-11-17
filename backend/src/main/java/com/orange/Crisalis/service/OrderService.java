@@ -20,10 +20,7 @@ import com.orange.Crisalis.service.interfaces.IOrderService;
 import org.springframework.stereotype.Service;
 
 import javax.validation.ValidationException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -66,12 +63,24 @@ public class OrderService implements IOrderService {
 
         newOrderEntity.setClient(clientEntity);
 
+        List<OrderDetail> orderDetailList = createOrderDetailList(orderCreateBody.
+                        getProductIdList(),newOrderEntity);
 
-        List<OrderDetail> orderDetailList = ICalculationEngine
-                .generateDiscount(createOrderDetailList(orderCreateBody.
-                        getProductIdList(),newOrderEntity));
+        if(clientEntity.isBeneficiary() && !clientEntity.getActiveServices().isEmpty()) {
+            Set<SellableGood> activeServices = clientEntity.getActiveServices();
+            newOrderEntity.setService(getRandomService(activeServices));
+            ICalculationEngine.generateDiscount(orderDetailList);
+        }
 
         newOrderEntity.setOrderDetailList(orderDetailList);
+    }
+
+    private SellableGood getRandomService(Set<SellableGood> activeServices) {
+        if(activeServices.isEmpty()) {
+            return null;
+        }
+        List<SellableGood> services = new ArrayList<>(activeServices);
+        return services.get(0);
     }
 
     @Override
@@ -228,11 +237,11 @@ public class OrderService implements IOrderService {
              }
          }
 
-         orderDetailService.saveAllOrderDetail(ICalculationEngine.generateDiscount(order.getOrderDetailList()));
+         if(order.getService() != null){
+             ICalculationEngine.generateDiscount(order.getOrderDetailList());
+         }
 
-
-
-
+         orderDetailService.saveAllOrderDetail(order.getOrderDetailList());
     }
     @Override
     public List<OrderDTO> getAllByClientId(Long clientId) {

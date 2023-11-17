@@ -1,4 +1,4 @@
-import { SellableGood } from "../modules/sellable-good/model/sellable-good.model";
+import { SellableGood } from "../../modules/sellable-good/model/sellable-good.model";
 
 export class OrderDetailDTO {
   id:any;

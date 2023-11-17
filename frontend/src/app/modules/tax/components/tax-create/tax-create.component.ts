@@ -53,7 +53,7 @@ export class TaxCreateComponent implements OnInit {
       id: [this.taxEdit.id, [Validators.required, Validators.minLength(1)]],
       taxName: [
         this.taxEdit.taxName,
-        [Validators.required, Validators.minLength(4)],
+        [Validators.required, Validators.minLength(3)],
       ],
       taxPercentage: [
         this.taxEdit.taxPercentage,

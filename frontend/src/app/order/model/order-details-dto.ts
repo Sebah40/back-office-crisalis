@@ -5,6 +5,7 @@ export class OrderDetailDTO {
   priceSell:any;
   quantity:number;
   sellableGood: SellableGood;
+  discount?: number;
 
   constructor(id:any, priceSell:any, quantity:number, sellableGood:SellableGood){
     this.id = id;

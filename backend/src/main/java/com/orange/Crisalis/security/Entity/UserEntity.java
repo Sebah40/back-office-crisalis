@@ -51,7 +51,7 @@ public class UserEntity {
     @PrePersist
     public void prePersist(){
         this.isActive = true;
-        this.photo = "";
+        this.photo = "http://localhost:3000/user/perfil.png";
     }
 
 //    public List getUser(){

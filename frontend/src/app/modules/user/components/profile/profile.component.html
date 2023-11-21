@@ -1,0 +1,50 @@
+
+<div class="container justify-content-center text-center  ">
+  <header  class="py-4 header-img">
+    <h1 id="name-h1" class="my-4" >{{user.username | titlecase}} </h1>
+    <img id="img-profile" class="my-2" [src]="user.photo" />
+    <div id="div-edit-button" style="align-self: end; margin-right: 40%; position: relative; bottom: 50px; right: 10px;" (click)="setIsEditingImg()">
+      <img id="img-svg-button" *ngIf="!isEditingImg" src="/assets/icons/edit-user.svg" alt="edit-profile">
+      <img id="img-svg-button" *ngIf="isEditingImg" src="/assets/icons/close.svg" alt="edit-profile">
+    </div>
+     <div *ngIf="isEditingImg">
+  
+      <input type="file" (change)="onFileSelected($event)" accept="image/*">
+      <button class="button-pass"  (click)="uploadPhoto()">Subir Imagen</button>
+    </div>
+  </header>
+  <section class="section">
+    <div class="container-properties">
+      <label for="name">Nombre completo</label>
+      <input id="name" type="text" [disabled]="!isEditing" [(ngModel)]="userEdited.name" value={{user.name}}>
+    </div>
+    
+   <div class="container-properties">
+      <label for="email">Email</label>
+      <input id="email" type="text" [(ngModel)]="userEdited.email" [disabled]="!isEditing" value={{user.email}}>
+    </div>
+    <div class="container-properties">
+      <label for="birthdate">Fecha de nacimiento</label>
+      <input *ngIf="isEditing"  id="birthdate" [(ngModel)]="userEdited.birthdate " type="date" [disabled]="!isEditing" [value]="user.birthdate">
+      <span id="span-birthdate" *ngIf="!isEditing">{{user.birthdate==null? "Agregue fecha": user.birthdate | date:"dd-MM-yyyy"}}</span>
+    </div>
+  </section>
+  <section id="section-edit-button">
+    <div id="div-save-button" (click)="editProfile()" *ngIf="isEditing">
+        <button>Guardar</button>
+    </div>
+    <div id="div-edit-button"  (click)="setIsEditing()">
+      <img id="img-svg-button" *ngIf="!isEditing" src="/assets/icons/edit-user.svg" alt="edit-profile">
+      <img id="img-svg-button" *ngIf="isEditing" src="/assets/icons/close.svg" alt="edit-profile">
+    </div>
+  </section>
+  <section id="section-change-password">
+     <span (click)="toggleChangePassword()">Quieres cambiar la contraseña ▼</span>
+  <div [ngClass]="{'open': showChangePasswordFields}"  *ngIf="showChangePasswordFields" class="div-change-password">
+    <input type="password" class="pass-input" placeholder="Contraseña actual" [(ngModel)]="oldPassword">
+    <input type="password" class="pass-input" placeholder="Contraseña nueva" [(ngModel)]="newPassword">
+    <button class="button-pass" (click)="showAlert()">Cambiar contraseña</button>
+  </div>
+  </section>
+
+</div>

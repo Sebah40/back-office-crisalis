@@ -62,6 +62,8 @@ export class ProfileComponent implements OnInit {
         if ('mensaje' in response) {
           Swal.fire(response.mensaje, undefined, 'success');
           this.showChangePasswordFields = false;
+          this.oldPassword = '';
+          this.newPassword = '';
         } else {
           throw response;
         }
@@ -70,6 +72,8 @@ export class ProfileComponent implements OnInit {
         console.log(error.error.mensaje);
         Swal.fire(error.error.mensaje, undefined, 'error');
         this.showChangePasswordFields = false;
+        this.oldPassword = '';
+        this.newPassword = '';
       },
     });
   }

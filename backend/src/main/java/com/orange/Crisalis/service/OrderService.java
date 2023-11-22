@@ -70,10 +70,24 @@ public class OrderService implements IOrderService {
             Set<SellableGood> activeServices = clientEntity.getActiveServices();
             newOrderEntity.setService(getRandomService(activeServices));
             ICalculationEngine.generateDiscount(orderDetailList);
+        }else if(orderAService(orderDetailList)){
+            SellableGood orderedService = getOrderedService(orderDetailList);
+            newOrderEntity.setService(orderedService);
+            ICalculationEngine.generateDiscount(orderDetailList);
         }
 
         newOrderEntity.setOrderDetailList(orderDetailList);
     }
+
+    private SellableGood getOrderedService(List<OrderDetail> orderDetailList) {
+        Optional<OrderDetail> orderedService = orderDetailList.stream().filter(od -> od.getSellableGood().getType() == Type.SERVICE).findFirst();
+        return orderedService.map(OrderDetail::getSellableGood).orElse(null);
+    }
+
+    private boolean orderAService(List<OrderDetail> orderDetailList) {
+        return orderDetailList.stream().anyMatch(od -> od.getSellableGood().getType() == Type.SERVICE );
+    }
+
 
     private SellableGood getRandomService(Set<SellableGood> activeServices) {
         if(activeServices.isEmpty()) {

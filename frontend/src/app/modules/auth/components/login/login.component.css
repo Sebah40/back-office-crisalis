@@ -1,13 +1,16 @@
-h2 {
+body{
+  height:90vh;
+}
+
+h1 {
     text-align: center;
   }
   
   form {
-    width: 300px;
+    width: 400px;
     margin: 0 auto;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
   }
   
   label {
@@ -28,8 +31,9 @@ h2 {
   button[type="submit"] {
     width: 100%;
     padding: 10px;
-    background-color: #0074d9;
-    color: #fff;
+    background-color: #EAE0D5;
+    color: black;
+    font-weight: bold;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -37,4 +41,25 @@ h2 {
   
   button[type="submit"]:hover {
     background-color: #0056b3;
+  }
+
+  #container-login {
+    display: flex;
+    flex-direction: column;
+    min-height: 500px;
+    justify-content: space-evenly;
+    padding-top: 140px;
+  }
+  #button-forget{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 800;
+    font-size: 12px;
+    background-color: transparent;
+    border: none;
+    text-decoration:underline;
+  }
+  #container-button-forget{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
   }

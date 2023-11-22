@@ -3,7 +3,9 @@
   border-radius: 10px;
   height: 180px;
   margin-top: 50px;
-  box-shadow: 1px 2px 6px black;
+  background-color: transparent;
+  border: none;
+  /* box-shadow: 1px 2px 6px black; */
 }
 .card-body {
   padding: 0;
@@ -15,16 +17,26 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  border: none;
 }
+
 .card-body img {
-  width: 110px;
+  width: 120px;
+  margin-bottom: 25px;
+  border: none;
 }
+
 .card-body p {
   font-size: larger;
   color: rgb(0, 0, 0);
   text-decoration: none;
-  font-weight: 700;
+  font-weight: 500;
   padding: 0;
   margin-bottom: 0;
   text-shadow: .5px 1px rgba(70, 70, 70, 0.445);
+}
+
+a {
+  background-color: transparent;
+  text-decoration: none;
 }

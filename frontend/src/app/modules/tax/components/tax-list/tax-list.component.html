@@ -2,4 +2,6 @@
 [entities]="taxListData" [title]="'impuestos'" 
 [isEditable]=true pathCreateEntity="/tax/create" 
 pathEditEntity="/tax/edit" (entityToDelete)="deleteTax($event)"
-[entityKeyToRedirect]="'id'"></app-entity-container-component>
+[entityKeyToRedirect]="'id'"
+buttonText="nuevo impuesto"
+></app-entity-container-component>

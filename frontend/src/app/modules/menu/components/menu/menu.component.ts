@@ -22,19 +22,46 @@ export class MenuComponent {
       items: [],
     },
     {
+      texto: 'Pedidos',
+      enlace: '',
+      items: [
+        {
+          texto: 'Lista',
+          enlace: '/order/getAll',
+          items: [],
+        },
+        {
+          texto: 'Crear pedido',
+          enlace: '/order/create',
+          items: [],
+        },
+      ],
+    },
+    {
       texto: 'Productos',
       enlace: '/good',
       items: [],
     },
     {
-      texto: 'Personas',
-      enlace: '/person',
-      items: [],
-    },
-    {
-      texto: 'Empresas',
-      enlace: '/enterprise',
-      items: [],
+      texto: 'Clientes',
+      enlace: '',
+      items: [
+        {
+          texto: 'Personas',
+          enlace: '/person',
+          items: [],
+        },
+        {
+          texto: 'Empresas',
+          enlace: '/enterprise',
+          items: [],
+        },
+        {
+          texto: 'Suscripciones',
+          enlace: '/clients',
+          items: [],
+        },
+      ],
     },
     {
       texto: 'Impuestos',

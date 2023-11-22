@@ -1,0 +1,26 @@
+.addbutton{
+    margin-left: 15px;
+    background-color: #22333B;
+    color: #EAE0D5;
+    width: 100px;
+}
+
+.gobackbutton{
+    background-color: #EAE0D5;
+    color: black;
+}
+
+.createbutton{
+    background-color: black;
+    color: #EAE0D5;
+}
+
+.descripcion1{
+    background-color: transparent !important;
+    border: none;
+}
+
+.descripcion{
+    background-color: rgba(255, 255, 255, 0.301) !important;
+    border: 1px solid black;
+}

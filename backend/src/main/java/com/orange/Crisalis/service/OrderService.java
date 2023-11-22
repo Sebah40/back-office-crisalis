@@ -4,6 +4,7 @@ import com.orange.Crisalis.dto.ProductIdAndQuantityDTO;
 import com.orange.Crisalis.dto.RequestBodyCreateOrderDTO;
 
 import com.orange.Crisalis.enums.OrderState;
+import com.orange.Crisalis.enums.Type;
 import com.orange.Crisalis.exceptions.custom.EmptyElementException;
 import com.orange.Crisalis.exceptions.custom.NotCancelableException;
 import com.orange.Crisalis.exceptions.custom.OrderNotFoundException;
@@ -11,13 +12,15 @@ import com.orange.Crisalis.model.*;
 
 import com.orange.Crisalis.model.dto.OrderDTO;
 import com.orange.Crisalis.model.dto.OrderDetailDTO;
+import com.orange.Crisalis.model.dto.OrderDetailWithCalculationEngineDTO;
+import com.orange.Crisalis.model.dto.OrderWithCalculationEngineDTO;
 import com.orange.Crisalis.repository.OrderRepository;
+import com.orange.Crisalis.service.interfaces.ICalculationEngine;
 import com.orange.Crisalis.service.interfaces.IOrderService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import javax.validation.ValidationException;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,6 +42,11 @@ public class OrderService implements IOrderService {
     }
 
     @Override
+    public Optional<OrderDTO> getOrder(Long id) {
+        return Optional.of(new OrderDTO(this.orderRepository.findOrderById(id).orElseThrow(null)));
+    }
+
+    @Override
     public void createOrder(RequestBodyCreateOrderDTO orderCreateBody)  {
 
         ClientEntity clientEntity = clientService.getById(orderCreateBody.getClientId());
@@ -55,29 +63,77 @@ public class OrderService implements IOrderService {
 
         newOrderEntity.setClient(clientEntity);
 
+        List<OrderDetail> orderDetailList = createOrderDetailList(orderCreateBody.
+                        getProductIdList(),newOrderEntity);
 
-        List<OrderDetail> orderDetailList = createOrderDetailList(orderCreateBody.getProductIdList(),newOrderEntity);
+        if(clientEntity.isBeneficiary() && !clientEntity.getActiveServices().isEmpty()) {
+            Set<SellableGood> activeServices = clientEntity.getActiveServices();
+            newOrderEntity.setService(getRandomService(activeServices));
+            ICalculationEngine.generateDiscount(orderDetailList);
+        }
+
         newOrderEntity.setOrderDetailList(orderDetailList);
+    }
 
-
-
+    private SellableGood getRandomService(Set<SellableGood> activeServices) {
+        if(activeServices.isEmpty()) {
+            return null;
+        }
+        List<SellableGood> services = new ArrayList<>(activeServices);
+        return services.get(0);
     }
 
     @Override
     public List<OrderDTO> getOrders() {
-        List<OrderDTO> ordersDTO= new ArrayList<>(orderRepository.findAll()).stream().map(
+        List<OrderDTO> ordersDTO = new ArrayList<>(orderRepository.findAll()).stream().map(
                 (orderEntity -> new OrderDTO(
                         orderEntity.getId(),
                         orderEntity.getDateCreated(),
                         orderEntity.getOrderState(),
                         orderEntity.getClient(),
+                        orderEntity.getService(),
                         orderEntity.getOrderDetailList().stream().map(ordeD -> new OrderDetailDTO(
                                 ordeD.getId(),
                                 ordeD.getPriceSell(),
-                                ordeD.getQuantity()
+                                ordeD.getQuantity(),
+                                ordeD.getSellableGood(),
+                                ordeD.getDiscount()
                                 )).collect(Collectors.toList())
-
                         )
+                )
+        ).collect(Collectors.toList());
+        if (!ordersDTO.isEmpty()){
+            return ordersDTO;
+        }else{
+            throw new EmptyElementException("No hay ordenes para mostrar.");
+        }
+    }
+    @Override
+    public List<OrderWithCalculationEngineDTO> getOrdersWithSubTotal() {
+        List<OrderWithCalculationEngineDTO> ordersDTO = new ArrayList<>(orderRepository.findAll()).stream().map(
+                (orderEntity -> new OrderWithCalculationEngineDTO(
+                        orderEntity.getId(),
+                        orderEntity.getDateCreated(),
+                        orderEntity.getOrderState(),
+                        orderEntity.getClient(),
+                        orderEntity.getOrderDetailList().stream().map(detail -> new OrderDetailWithCalculationEngineDTO(
+                                detail.getId(),
+                                detail.getPriceSell(),
+                                detail.getQuantity(),
+                                detail.getSellableGood(),
+                                detail.getSellableGood().getSupportCharge().doubleValue(),
+                                ICalculationEngine.calculateValueWarranty(detail),
+                                detail.getDiscount(),
+                                ICalculationEngine.generateSubTotal(detail),
+                                ICalculationEngine.generateSubTotalWithDiscount(detail)
+
+                        )).collect(Collectors.toList()),
+                        ICalculationEngine.generateDiscount(orderEntity),
+                        ICalculationEngine.generateSubTotal(orderEntity),
+                        ICalculationEngine.totalOrderPrice(orderEntity)
+
+
+                )
                 )
         ).collect(Collectors.toList());
         if (!ordersDTO.isEmpty()){
@@ -107,11 +163,90 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public void editOrder(RequestBodyCreateOrderDTO orderToEdit, Long id) {
-        Optional<OrderEntity> order = orderRepository.findById(id);
-        Optional<List<OrderDetail>> orderDetails = orderDetailService.getOrderDetailListByOrderId(id);
+    public void validateOrder(Long id) {
+        Optional<OrderEntity> orderOptional = orderRepository.findById(id);
 
-        // order.getOrderDetailList
+        if (orderOptional.isPresent()) {
+            OrderEntity order = orderOptional.get();
+
+            if (order.getOrderState() == OrderState.PENDING) {
+                order.setOrderState(OrderState.FINISHED);
+                for (OrderDetail orderDetail : order.getOrderDetailList()) {
+                    SellableGood sellableGood = orderDetail.getSellableGood();
+                    if (sellableGood.getType() == Type.SERVICE) {
+                        order.getClient().getActiveServices().add(sellableGood);
+                        order.getClient().setBeneficiary(true);
+                        clientService.saveClient(order.getClient());
+                    }
+                }
+                orderRepository.save(order);
+
+            } else {
+                throw new ValidationException("No se puede validar el pedido");
+            }
+        } else {
+            throw new OrderNotFoundException("No existe el pedido");
+        }
+    }
+
+    @Override
+    public void editOrder(OrderDTO orderToEdit) {
+         OrderEntity order = orderRepository.findById(orderToEdit.getId()).orElseThrow(() -> new RuntimeException("No existe el pedido."));
+         if (order.getOrderState() == OrderState.FINISHED || order.getOrderState() == OrderState.CANCELED ){
+             throw new RuntimeException("no se puede editar un pedido que esta cancelado o finalizado");
+         }
+         order.setDateEdited(new Date());
+
+         List<OrderDetailDTO> updatedDetailList = orderToEdit.getOrderDetailDTOList();
+
+         for(OrderDetailDTO updatedDetail : updatedDetailList){
+             if(updatedDetail.getId()!=null){
+                 OrderDetail existingDetail = orderDetailService.getOrderDetailById(updatedDetail.getId())
+                         .orElseThrow(() -> new RuntimeException("El detalle con ID " + updatedDetail.getId() + " no se encontró"));
+
+                 if(updatedDetail.getQuantity() == 0){
+                     orderDetailService.deleteOrderDetail(existingDetail);
+                 }
+                 else{
+                     if(updatedDetail.getSellableGood().getType() == Type.SERVICE){
+                         existingDetail.setQuantity(1);
+
+                     }
+                     else{
+                         existingDetail.setQuantity(updatedDetail.getQuantity());
+                     }
+                         orderDetailService.createOrEditDetail(existingDetail);
+
+                 }
+
+             }else {
+                 if(updatedDetail.getQuantity() <= 0){
+                     throw new RuntimeException("no se puede agregar producto sin cantidad");
+                 }
+
+                 Double priceSell = ICalculationEngine.priceWithTaxes(updatedDetail.getSellableGood());
+
+                 OrderDetail newDetail = new OrderDetail();
+
+                 newDetail.setSellableGood(updatedDetail.getSellableGood());
+                 newDetail.setQuantity(updatedDetail.getSellableGood().getType() == Type.SERVICE
+                         ? 1
+                         : updatedDetail.getQuantity());
+                 newDetail.setPriceSell(priceSell);
+                 newDetail.setOrder(order);
+                 orderDetailService.createOrEditDetail(newDetail);
+             }
+         }
+
+         if(order.getService() != null){
+             ICalculationEngine.generateDiscount(order.getOrderDetailList());
+         }
+
+         orderDetailService.saveAllOrderDetail(order.getOrderDetailList());
+    }
+    @Override
+    public List<OrderDTO> getAllByClientId(Long clientId) {
+        return orderRepository.findByClientId(clientId).stream().map(OrderDTO::new).collect(Collectors.toList());
     }
 
 
@@ -120,18 +255,40 @@ public class OrderService implements IOrderService {
 
     private List<OrderDetail> createOrderDetailList(List<ProductIdAndQuantityDTO> productIdAndQuantityDTO, OrderEntity order){
         List<OrderDetail> orderDetailList = new ArrayList<>();
-        for (ProductIdAndQuantityDTO p : productIdAndQuantityDTO){
-            Optional<SellableGood> sellableGood = sellableGoodService.findById(p.getProductId());
-            if(sellableGood.isPresent() && sellableGood.get().getType() == Type.SERVICE){
-                p.setQuantity(1);
+        for (ProductIdAndQuantityDTO item : productIdAndQuantityDTO){
+            Optional<SellableGood> sellableGood = sellableGoodService.findById(item.getProductId());
+            if(sellableGood.isPresent()){
+
+                Double priceSell = ICalculationEngine.priceWithTaxes(sellableGood.get());
+                OrderDetail newDetail = new OrderDetail();
+
+                newDetail.setPriceSell(priceSell);
+                newDetail.setQuantity(item.getQuantity());
+                newDetail.setSellableGood(sellableGood.get());
+                newDetail.setOrder(order);
+
+                if(item.getWarrantyYear() == null || sellableGood.get().getType() == Type.SERVICE){
+                    newDetail.setWarrantyYear(0);
+                }else{
+                    newDetail.setWarrantyYear(item.getWarrantyYear());
+                }
+                if(sellableGood.get().getType() == Type.SERVICE){
+                    newDetail.setQuantity(1);
+                }
+
+                orderDetailList.add(newDetail);
             }
-            orderDetailList.add(new OrderDetail(
-                    null,sellableGood.get().getPrice(),
-                    p.getQuantity(),sellableGood.get(),order));
+
+
 
         }
+
         return orderDetailService.saveAllOrderDetail(orderDetailList);
 
 
     }
+
+
+
 }
+

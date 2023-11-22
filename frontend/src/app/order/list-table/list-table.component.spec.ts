@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MenuItemComponent } from './menu-item.component';
+import { ListTableComponent } from './list-table.component';
 
-describe('MenuItemComponent', () => {
-  let component: MenuItemComponent;
-  let fixture: ComponentFixture<MenuItemComponent>;
+describe('ListTableComponent', () => {
+  let component: ListTableComponent;
+  let fixture: ComponentFixture<ListTableComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MenuItemComponent]
+      declarations: [ListTableComponent]
     });
-    fixture = TestBed.createComponent(MenuItemComponent);
+    fixture = TestBed.createComponent(ListTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

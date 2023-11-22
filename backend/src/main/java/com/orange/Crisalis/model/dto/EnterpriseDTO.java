@@ -8,9 +8,9 @@ import java.time.LocalDate;
 
 public class EnterpriseDTO implements Serializable {
 
+    private int id;
     private String businessName;
     private String cuit;
-    private int id;
     private LocalDate date;
     private String firstNameResponsible;
     private String lastNameResponsible;

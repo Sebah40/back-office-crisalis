@@ -9,6 +9,12 @@ import { EnterpriseFormComponent } from './modules/client/components/enterprise-
 import { PersonFormComponent } from './modules/client/components/person-form/person-form.component';
 import { TaxListComponent } from './modules/tax/components/tax-list/tax-list.component';
 import { TaxCreateComponent } from './modules/tax/components/tax-create/tax-create.component';
+import { OrderListComponent } from './order/order-list/order-list.component';
+import { OrderComponent } from './order/order-view/order.component';
+import { CreateOrderComponent } from './order/create-order/create-order.component';
+import { EditOrderComponent } from './order/edit-order/edit-order.component';
+import { ClientList2Component } from './modules/client/components/client-list/client-list.component';
+import { ClientServicesListComponent } from './modules/client/components/client-services-list/client-services-list.component';
 
 const routes: Routes = [
   { path: 'home', component: HomepageComponent },
@@ -23,9 +29,15 @@ const routes: Routes = [
   { path: 'person/create', component: PersonFormComponent },
   { path: 'person/edit/:id', component: PersonFormComponent },
   { path: 'person/disable', component: PersonListComponent },
+  { path: 'clients', component: ClientList2Component },
+  { path: 'clients/:id/services', component: ClientServicesListComponent },
   { path: 'taxlist', component: TaxListComponent },
   { path: 'tax/create', component: TaxCreateComponent },
   { path: 'tax/edit/:id', component: TaxCreateComponent },
+  { path: 'order/create', component: CreateOrderComponent },
+  { path: 'order/getAll', component: OrderListComponent },
+  { path: 'order/edit/:id', component: EditOrderComponent },
+  { path: 'order/:id', component: OrderComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];

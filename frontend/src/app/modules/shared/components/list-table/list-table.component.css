@@ -1,0 +1,24 @@
+.custom-table-style {
+  background-color: transparent;
+  color: #22333b;
+}
+
+.custom-table-container-style {
+  background-color: transparent;
+  color: #22333b;
+  border: 1px solid black;
+}
+
+table,
+thead,
+tbody,
+td {
+  background-color: transparent;
+  color: #22333b;
+}
+
+h2 {
+  color: #5e503f;
+  text-align: center;
+  margin-top: 40px;
+}

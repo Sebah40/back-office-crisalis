@@ -1,0 +1,13 @@
+<app-simple-container [title]="title">
+  <app-list-table [header]="['Tipo','Id','Nombre','DNI/CUIT', 'Servicios']" id="table">
+    <tr class="align-middle" *ngFor="let client of clients">
+      <td class="text-center" *ngFor="let data of toData(client)" >{{data}}</td>
+      <td style="text-align: center;">
+        <a routerLink="/clients/{{client.id}}/services" class="btn servicebutton btn-sm" *ngIf="hasActiveServices(client); else doesNot">Ver servicios</a>
+        <ng-template #doesNot> 
+          <p class="noservice">Sin servicios</p>
+        </ng-template>
+      </td>
+    </tr>
+  </app-list-table>
+</app-simple-container>

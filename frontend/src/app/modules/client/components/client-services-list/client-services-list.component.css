@@ -1,0 +1,21 @@
+td {
+  background-color: transparent;
+  color: #22333b;
+}
+
+.gobackbutton{
+  background-color: black;
+  color: #EAE0D5;
+  width: 150px;
+}
+
+.removebutton{
+  background-color: rgb(97, 2, 2);
+  color: #EAE0D5;
+  border: none;
+  padding: 8px 20px;
+}
+
+.div-gobackbutton{
+  padding: 0 !important;
+}

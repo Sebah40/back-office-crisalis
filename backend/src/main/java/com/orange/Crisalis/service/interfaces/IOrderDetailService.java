@@ -6,7 +6,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IOrderDetailService {
-    OrderDetail createDetail(OrderDetail orderDetail);
+    OrderDetail createOrEditDetail(OrderDetail orderDetail);
     List<OrderDetail> saveAllOrderDetail(List<OrderDetail> orderDetailList);
     Optional<List<OrderDetail>> getOrderDetailListByOrderId(Long id);
+    Optional<OrderDetail> getOrderDetailById(Long id);
+
+    void deleteOrderDetail(OrderDetail orderDetail);
 }

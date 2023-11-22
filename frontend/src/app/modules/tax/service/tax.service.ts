@@ -3,7 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Tax } from '../model/tax';
 import { ITaxGet } from '../model/tax-get';
-import { ResponseCreateUser } from '../../user/interfaces/ResponseCreateUser.type';
+import { ResponseCreate } from 'src/app/components/interfaces/ResponseCreate.type';
+type ITax = { id: number };
+
 type Message = { mensaje: string };
 
 @Injectable({
@@ -12,7 +14,23 @@ type Message = { mensaje: string };
 export class TaxService {
   private apiUrl = 'http://localhost:3000/tax'; // Replace with your API URL
 
-  constructor(private http: HttpClient) {}
+  private taxListData: BehaviorSubject<ITaxGet[]> = new BehaviorSubject<
+  ITaxGet[]
+>([]);
+ taxListData$ = this.taxListData.asObservable();
+
+  constructor(private http: HttpClient) {
+    this.loadTaxListData();
+  }
+
+
+  private loadTaxListData() {
+    this.getAll().subscribe((data) => {
+      this.taxListData.next(data);
+      console.log("taxListData Actualizado")
+    });
+  }
+
 
   // Get all taxes
   getAll(): Observable<ITaxGet[]> {
@@ -20,24 +38,27 @@ export class TaxService {
   }
 
   // Create a new tax
-  createTax(newTax: Tax): Observable<ResponseCreateUser> {
-    return this.http.post<ResponseCreateUser>(`${this.apiUrl}/create/`, newTax);
+  createTax(newTax: Tax): Observable<ResponseCreate> {
+    return this.http.post<ResponseCreate>(
+      'http://localhost:3000/tax/create/', 
+    newTax
+    );
   }
 
   // Delete a tax
-  deleteTax(id: number): Observable<Message> {
-    const url = `${this.apiUrl}/delete/${id}`;
-    return this.http.post<Message>(`${url}`, id);
+  deleteTax(taxID: Tax): Observable<Message> {
+    console.log(taxID)
+    return this.http.post<Message>(`http://localhost:3000/tax/delete`, taxID);
   }
 
-  editTax(updatedTax: Tax): Observable<ResponseCreateUser> {
+  editTax(updatedTax: Tax): Observable<ResponseCreate> {
     console.log(updatedTax);
     const url = `${this.apiUrl}/update/${updatedTax.id}`; // Adjust the URL as needed
-    return this.http.put<ResponseCreateUser>(url, updatedTax);
+    return this.http.put<ResponseCreate>(url, updatedTax);
   }
 
   //Update tax
-  updateTaxData() {
-    window.location.reload();
+  updateTaxListData() {
+    this.loadTaxListData();
   }
 }

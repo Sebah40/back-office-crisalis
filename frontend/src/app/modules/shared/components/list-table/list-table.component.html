@@ -1,0 +1,14 @@
+<div class="container rounded d-flex p-2 flex-column w-100 custom-table-container-style">
+  <table class="table-hover table-sm table-responsive custom-table-style">
+    <thead>
+      <tr>
+        <th style="background-color: transparent;" class="text-center" *ngFor="let columnName of header">{{ columnName }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="height: 5px;"></tr>
+        <ng-content></ng-content>
+      <tr style="height: 5px;"></tr>
+    </tbody>
+  </table>
+</div>

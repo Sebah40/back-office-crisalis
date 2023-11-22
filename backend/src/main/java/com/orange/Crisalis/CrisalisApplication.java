@@ -3,6 +3,7 @@ package com.orange.Crisalis;
 import com.orange.Crisalis.repository.*;
 
 import com.orange.Crisalis.security.Entity.RoleEntity;
+import com.orange.Crisalis.security.Entity.UserEntity;
 import com.orange.Crisalis.security.Enums.RoleName;
 import com.orange.Crisalis.security.Repository.IRoleRepository;
 
@@ -14,8 +15,14 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @SpringBootApplication
+@ComponentScan(basePackages = "com.orange.Crisalis")
 public class CrisalisApplication {
 
 	public static void main(String[] args) {
@@ -23,36 +30,42 @@ public class CrisalisApplication {
     }
 	@Bean
 	CommandLineRunner commandLineRunner(
-			OrderDetailRepository orderDetailRepository,
-
-			IUserRepository iusuarioRepository,
+			IUserRepository iUserRepository,
 			IRoleRepository  roleRepo,
-
-			IClientRepository iClientRepository,
-			IEnterpriseRepository iEnterpriseRepository,
-			IPersonRepository iPersonRepository
+			PasswordEncoder passwordEncoder
 
 
 
 	) {
 		return args -> {
+			RoleEntity admin = new RoleEntity(RoleName.ROLE_ADMIN);
+			RoleEntity user = new RoleEntity(RoleName.ROLE_USER);
+			if(roleRepo.findAll().isEmpty()){
 
-			RoleEntity admin = roleRepo.save(new RoleEntity(RoleName.ROLE_ADMIN));
-			RoleEntity user = roleRepo.save(new RoleEntity(RoleName.ROLE_USER));
+			roleRepo.save(admin);
 
-/*
-			// hardcodeo una empresa y una persona sólo de prueba
-			// Empresa
-			EnterpriseEntity enterprise = new EnterpriseEntity(true, "987564", "789456", LocalDate.now(), true, "Pepe", "Perez", "789456123");
-			iEnterpriseRepository.save(enterprise);
+            roleRepo.save(user);
 
-			System.out.println(enterprise.getId() + "     " + enterprise.getBusinessName() + "        " + enterprise.getLastNameResponsible() + "       " + enterprise.getDate());
+            }
 
-			// Persona
-			PersonEntity person = new PersonEntity(true, "Dominguez", "Lucas", "38.123.165", true);
-			iPersonRepository.save(person);
-			System.out.println(person.getId() + "     " + person.getFirstName() + "   " + person.getLastName() + "    " + person.getDni() );
-*/
+			UserEntity adminUser = new UserEntity();
+			adminUser.setPassword(passwordEncoder.encode("admin"));
+			adminUser.setUsername("admin");
+			adminUser.setName("admin");
+			adminUser.setEmail("admin@admin.com");
+			adminUser.setActive(true);
+			Set<RoleEntity> roles = new HashSet<>();
+			roles.add(admin);
+			roles.add(user);
+			adminUser.setRoles(roles);
+
+			iUserRepository.save(adminUser);
+
+
+
+
+
+
 		};
 	}
 }

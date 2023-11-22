@@ -6,10 +6,10 @@ import java.io.Serializable;
 
 public class PersonDTO implements Serializable {
 
-    private String lastName;
-    private String firstName;
-    private String dni;
     private int id;
+    private String firstName;
+    private String lastName;
+    private String dni;
     private boolean beneficiary;
     private boolean client;
 
@@ -17,13 +17,16 @@ public class PersonDTO implements Serializable {
     }
 
     public PersonDTO(PersonEntity personEntity) {
+        this.id = personEntity.getId();
         this.lastName = personEntity.getLastName();
         this.firstName = personEntity.getFirstName();
         this.dni = personEntity.getDni();
-        this.id = personEntity.getId();
         this.beneficiary = personEntity.isBeneficiary();
     }
 
+    public int getId() {
+        return id;
+    }
     public String getLastName() {
         return lastName;
     }
@@ -36,9 +39,6 @@ public class PersonDTO implements Serializable {
         return dni;
     }
 
-    public int getId() {
-        return id;
-    }
 
     public boolean isBeneficiary() {
         return beneficiary;

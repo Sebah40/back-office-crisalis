@@ -1,0 +1,20 @@
+{
+  "username":"Nombre de usuario",
+  "name":"Nombre",
+  "email":"Correo",
+  "role":"Rol",
+  "lastName":"Apellido",
+  "firstName":"Nombre",
+  "dni":"DNI",
+  "beneficiary":"Beneficiario",
+  "businessName":"Razon Social",
+  "cuit":"CUIT",
+  "firstNameResponsible":"Nombre del responsable",
+  "lastNameResponsible":"Apellido del responsable",
+  "dniResponsible":"DNI del responsable",
+  "date":"Fecha",
+  "taxName": "Nombre del Impuesto",
+  "taxPercentage":"Porcentaje",
+  "id":"ID"
+
+}

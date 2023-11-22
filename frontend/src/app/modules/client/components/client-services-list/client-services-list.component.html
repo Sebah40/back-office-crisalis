@@ -1,0 +1,13 @@
+<app-simple-container [title]="title">
+  <app-list-table [header]="['ID','Nombre','Descripción','Precio', 'Acción']">
+    <tr class="align-middle" *ngFor="let service of services">
+      <td class="text-center" *ngFor="let data of toData(service)" >{{data}}</td>
+      <td style="text-align: center;">
+          <button class="btn btn-sm removebutton" (click)="removeActiveService(service)">Dar de baja</button>
+      </td>
+    </tr>
+  </app-list-table>
+  <div class="container my-2 div-gobackbutton">
+    <button type="button" (click)="goBack()" class="btn gobackbutton">Regresar</button>
+  </div>
+</app-simple-container>

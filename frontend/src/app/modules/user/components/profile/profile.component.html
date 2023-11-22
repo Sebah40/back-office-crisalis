@@ -26,7 +26,7 @@
     <div class="container-properties">
       <label for="birthdate">Fecha de nacimiento</label>
       <input *ngIf="isEditing"  id="birthdate" [(ngModel)]="userEdited.birthdate " type="date" [disabled]="!isEditing" [value]="user.birthdate">
-      <span id="span-birthdate" *ngIf="!isEditing">{{user.birthdate==null? "Agregue fecha": user.birthdate | date:"dd-MM-yyyy"}}</span>
+      <span id="span-birthdate" *ngIf="!isEditing">{{user.birthdate==null? "Agregue una fecha": user.birthdate | date:"dd-MM-yyyy"}}</span>
     </div>
   </section>
   <section id="section-edit-button">

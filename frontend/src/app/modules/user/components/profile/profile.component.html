@@ -40,7 +40,7 @@
     </div>
   </section>
   <section id="section-change-password">
-     <span (click)="toggleChangePassword()">Quieres cambiar la contraseña ▼</span>
+     <span (click)="toggleChangePassword()">¿Quieres cambiar la contraseña? ▼ </span>
   <div [ngClass]="{'open': showChangePasswordFields}"  *ngIf="showChangePasswordFields" class="div-change-password">
     <input type="password" class="pass-input" placeholder="Contraseña actual" [(ngModel)]="oldPassword">
     <input type="password" class="pass-input" placeholder="Contraseña nueva" [(ngModel)]="newPassword">

@@ -157,7 +157,7 @@ public class UserController {
 
         UserEntity existingUser = userService.getByUserName(jwtService.getUsernameByToken(token)).orElseThrow(null);
         if (!passwordEncoder.matches(changePasswordRequestDTO.getOldPassword(), existingUser.getPassword())) {
-            throw new RuntimeException("La contraseña es incorrecta");
+            return new ResponseEntity<>(new Message(("La contraseña es incorrecta")),HttpStatus.BAD_REQUEST);
         }
 
         existingUser.setPassword(passwordEncoder.encode(changePasswordRequestDTO.getNewPassword()));

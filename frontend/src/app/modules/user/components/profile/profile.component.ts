@@ -61,6 +61,7 @@ export class ProfileComponent implements OnInit {
       next: (response) => {
         if ('mensaje' in response) {
           Swal.fire(response.mensaje, undefined, 'success');
+          this.showChangePasswordFields = false;
         } else {
           throw response;
         }
@@ -68,6 +69,7 @@ export class ProfileComponent implements OnInit {
       error: (error: HttpErrorResponse) => {
         console.log(error.error.mensaje);
         Swal.fire(error.error.mensaje, undefined, 'error');
+        this.showChangePasswordFields = false;
       },
     });
   }

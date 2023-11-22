@@ -2,6 +2,7 @@ package com.orange.Crisalis.security.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.*;
 import javax.persistence.*;
@@ -75,6 +76,7 @@ public class UserEntity {
     private boolean isActive;
 
     private String photo;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date birthdate;
 
 

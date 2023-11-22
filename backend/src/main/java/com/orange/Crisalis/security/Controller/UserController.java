@@ -15,18 +15,25 @@ import com.orange.Crisalis.security.Service.RoleService;
 import com.orange.Crisalis.security.Service.UserService;
 import com.orange.Crisalis.service.PasswordService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @RestController
 @RequestMapping("/user")
@@ -44,6 +51,9 @@ public class UserController {
     JWTService jwtService;
     @Autowired
     PasswordService passwordService;
+
+    @Value("${file.upload-dir}")
+    private String uploadDir;
 
 
     @PostMapping("/disable")
@@ -147,7 +157,7 @@ public class UserController {
 
         UserEntity existingUser = userService.getByUserName(jwtService.getUsernameByToken(token)).orElseThrow(null);
         if (!passwordEncoder.matches(changePasswordRequestDTO.getOldPassword(), existingUser.getPassword())) {
-            throw new RuntimeException("La contraseña es incorrecta");
+            return new ResponseEntity<>(new Message(("La contraseña es incorrecta")),HttpStatus.BAD_REQUEST);
         }
 
         existingUser.setPassword(passwordEncoder.encode(changePasswordRequestDTO.getNewPassword()));
@@ -160,6 +170,34 @@ public class UserController {
         passwordService.sendPasswordByEmail(recoverPasswordRequestDTO.getEmail());
         return new ResponseEntity<>(new Message("Contraseña nueva enviada al correo"),HttpStatus.OK);
     }
+
+    @PostMapping("/upload-photo")
+    public ResponseEntity<Message> uploadPhoto(@RequestPart MultipartFile file, Principal principal) {
+        String username = principal.getName();
+        String fileName = username + "_profile.jpg";
+
+        try {
+
+            Path filePath = Paths.get(uploadDir, fileName);
+            file.transferTo(filePath.toFile());
+
+            String imageUrl = "http://localhost:3000/user/" + fileName;
+
+            UserEntity user = userService.getByUserName(username).orElseThrow(null);
+
+            user.setPhoto(imageUrl);
+
+            userService.save(user);
+
+            return new ResponseEntity<>(new Message("Se subio correctamente"),HttpStatus.OK);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+
+
 
 
     private String getTokenByHeaders(String authorizationHeader){

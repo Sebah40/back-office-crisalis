@@ -7,10 +7,11 @@
       <img id="img-svg-button" *ngIf="!isEditingImg" src="/assets/icons/edit-user.svg" alt="edit-profile">
       <img id="img-svg-button" *ngIf="isEditingImg" src="/assets/icons/close.svg" alt="edit-profile">
     </div>
-     <div *ngIf="isEditingImg">
-  
-      <input type="file" (change)="onFileSelected($event)" accept="image/*">
-      <button class="button-pass"  (click)="uploadPhoto()">Subir Imagen</button>
+    <div style="min-height: 64px;">
+       <div *ngIf="isEditingImg">
+        <input type="file" (change)="onFileSelected($event)" accept="image/*">
+        <button class="button-pass"  (click)="uploadPhoto()">Subir Imagen</button>
+      </div>
     </div>
   </header>
   <section class="section">

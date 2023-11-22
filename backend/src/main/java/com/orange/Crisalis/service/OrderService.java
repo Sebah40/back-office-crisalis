@@ -14,11 +14,15 @@ import com.orange.Crisalis.model.dto.OrderDTO;
 import com.orange.Crisalis.model.dto.OrderDetailDTO;
 import com.orange.Crisalis.model.dto.OrderDetailWithCalculationEngineDTO;
 import com.orange.Crisalis.model.dto.OrderWithCalculationEngineDTO;
+import com.orange.Crisalis.model.dto.filters.OrderFilter;
+import com.orange.Crisalis.queries.OrderQueries;
 import com.orange.Crisalis.repository.OrderRepository;
 import com.orange.Crisalis.service.interfaces.ICalculationEngine;
 import com.orange.Crisalis.service.interfaces.IOrderService;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.validation.ValidationException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,15 +37,21 @@ public class OrderService implements IOrderService {
     private final SellableGoodService sellableGoodService;
     private final OrderDetailService orderDetailService;
 
+    private final OrderQueries orderQueries;
+
+    @PersistenceContext
+    EntityManager entityManager;
+
     public OrderService(
             OrderRepository orderRepository,
             ClientService clientService,
             SellableGoodService sellableGoodService,
-            OrderDetailService orderDetailService) {
+            OrderDetailService orderDetailService, OrderQueries orderQueries) {
         this.orderRepository = orderRepository;
         this.clientService = clientService;
         this.sellableGoodService = sellableGoodService;
         this.orderDetailService = orderDetailService;
+        this.orderQueries = orderQueries;
     }
 
     @Override
@@ -131,6 +141,14 @@ public class OrderService implements IOrderService {
         }else{
             throw new EmptyElementException("No hay ordenes para mostrar.");
         }
+    }
+
+    @Override
+    public List<OrderDTO> filterOrderList(OrderFilter orderFilter) {
+        List<OrderEntity> orderList = entityManager.createNativeQuery(orderQueries.filterOrderList(orderFilter)
+                , OrderEntity.class).getResultList();
+        List<OrderDTO> orderDTOList = orderList.stream().map(OrderDTO::new).collect(Collectors.toList());
+        return orderDTOList;
     }
 
     @Override

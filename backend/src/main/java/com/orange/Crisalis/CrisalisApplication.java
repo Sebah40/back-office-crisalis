@@ -21,43 +21,5 @@ public class CrisalisApplication {
 	public static void main(String[] args) {
         SpringApplication.run(CrisalisApplication.class, args);
     }
-	@Bean
-	CommandLineRunner commandLineRunner(
-			OrderDetailRepository orderDetailRepository,
 
-			IUserRepository iusuarioRepository,
-			IRoleRepository  roleRepo,
-
-			IClientRepository iClientRepository,
-			IEnterpriseRepository iEnterpriseRepository,
-			IPersonRepository iPersonRepository
-
-
-
-	) {
-		return args -> {
-            if(roleRepo.findAll().isEmpty()){
-
-			RoleEntity admin = roleRepo.save(new RoleEntity(RoleName.ROLE_ADMIN));
-
-            RoleEntity user = roleRepo.save(new RoleEntity(RoleName.ROLE_USER));
-
-            }
-
-
-			// hardcodeo una empresa y una persona sólo de prueba
-			// Empresa
-			//EnterpriseEntity enterprise = new EnterpriseEntity(true, "987564", "789456", LocalDate.now(), true, "Pepe", "Perez", "789456123");
-			//iEnterpriseRepository.save(enterprise);
-
-			//System.out.println(enterprise.getId() + "     " + enterprise.getBusinessName() + "        " + enterprise.getLastNameResponsible() + "       " + enterprise.getDate());
-
-			// Persona
-			//PersonEntity person = new PersonEntity(true, "Dominguez", "Lucas", "38.123.165", true);
-			//iPersonRepository.save(person);
-			//System.out.println(person.getId() + "     " + person.getFirstName() + "   " + person.getLastName() + "    " + person.getDni() );
-
-
-		};
-	}
 }

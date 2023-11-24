@@ -39,7 +39,8 @@ import {
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpLoaderFactory } from './helper/httpLoaderFactory';
 import { SharedModule } from './modules/shared/shared.module';
-
+import { ReportModule } from './modules/report/report.module';
+import { ReportRoutingModule } from './modules/report/report.routing.module';
 
 const routes: Routes = [{ path: '', component: HomepageComponent }];
 
@@ -63,13 +64,14 @@ const routes: Routes = [{ path: '', component: HomepageComponent }];
     OrderListComponent,
     CreateOrderComponent,
     EditOrderComponent,
-    ForgotPasswordModalComponent
+    ForgotPasswordModalComponent,
   ],
   imports: [
     SweetAlert2Module.forRoot(),
     SharedModule,
     BrowserModule,
     UsersModule,
+    ReportModule,
     SellableGoodsModule,
     HttpClientModule,
     UsersRoutingModule,

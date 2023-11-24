@@ -73,11 +73,15 @@ export class FormReportsComponent {
       dateTo: this.dateTo,
     };
     if (this.typeReport == 1) {
-      this.router.navigate(['/report/total-discount'], { queryParams });
+      this.router.navigate(['/report/biggest-discount'], { queryParams });
     } else if (this.typeReport == 2) {
-      this.router.navigate(['/report/otro-inf'], { queryParams });
+      this.router.navigate(['/report/total-discount-for-services'], {
+        queryParams,
+      });
     } else if (this.typeReport == 3) {
-      this.router.navigate(['/report/otro-inf2'], { queryParams });
+      this.router.navigate(['/report/discrimimated-order-history'], {
+        queryParams,
+      });
     }
   }
 }

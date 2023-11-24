@@ -32,6 +32,12 @@ export class FormReportsComponent {
             element.dni !== undefined ? element.dni : element.cuit
           );
         });
+        this.clientList.unshift({
+          id: 'null',
+          name: 'TODOS',
+          dniOrCuit: '-',
+          isSelected: true,
+        });
       },
     });
   }
@@ -60,17 +66,14 @@ export class FormReportsComponent {
     this.selectedClient = this.clientList.filter(
       (cliente) => cliente.isSelected === true
     )[0];
-    console.log(this.dateFrom);
-    console.log(this.dateTo);
-    console.log(this.selectedClient);
   }
 
   redirectToReport() {
     this.setSelectedClient();
     const queryParams = {
       clientId: this.selectedClient.id,
-      dateFrom: this.dateFrom,
-      dateTo: this.dateTo,
+      dateFrom: this.dateFrom ?? '',
+      dateTo: this.dateTo ?? '',
     };
     if (this.typeReport == 1) {
       this.router.navigate(['/report/biggest-discount'], { queryParams });

@@ -1,29 +1,61 @@
 
 <div class="container d-flex flex-column align-items-center ">
-  <h1 class="text-center" style="margin-top: 80px;">Informes</h1>
-  <input class="w-50 my-3 rounded-2 p-1"  [(ngModel)]="inputValue" (ngModelChange)="searchClient($event)" type="text" placeholder="Buscar cliente"/>
-  <div class="container my-2 table-responsive d-flex flex-column w-100 align-items-center" style="max-height: 180px;" id="client-container">
-    
-    <table class="p-2 w-75 table">
-      <thead>
-        <tr class="">
-          <th>Nombre / Razon social</th>
-          <th>DNI / CUIT</th>
-          <th>Seleccionar</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class=" p-2" *ngFor="let client of clientList">
-          <td>{{client.name}}</td>
-          <td>{{client.dniOrCuit}}</td>
-          <td><input type="checkbox" [id]="'checkbox_' + client.id" [(ngModel)]="client.isSelected" (change)="onCheckboxChange(client)"></td>
-        </tr>
-      </tbody>
-    </table>
+  <h1 class="text-center" style="margin-top: 60px; margin-bottom: 40px;">Informes</h1>
 
-  </div>
   <div class="w-75 container d-flex justify-content-start my-3">
-    <div style="padding-right: 24px; display: flex;flex-direction: column;">
+    <label id="label-type-inf" class="mx-2" for="">Tipo de informe</label>
+    <select class="p-1 rounded" [(ngModel)]="typeReport" name="" id="">
+      <option value=""> </option>
+      <option value="1">Servicio que mayor descuento generó</option>
+      <option value="2">Lista de descuentos totales por servicios</option>
+      <option value="3">Historial de pedidos discriminado por productos / servicios</option>
+    </select>
+  </div>
+  <div>
+    <h3>Filtros</h3>
+  </div>
+  <div class="accordion w-75" id="accordionExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+      <button class="accordion-button text-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+        Clientes
+      </button>
+      </h2>
+      <div id="collapseOne" class="accordion-collapse collapse " data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          <input class="w-50 my-3 rounded-2 p-1"  [(ngModel)]="inputValue" (ngModelChange)="searchClient($event)" type="text" placeholder="Buscar cliente"/>
+          <div class="container my-2 table-responsive d-flex flex-column w-100 align-items-center" style="max-height: 180px;" id="client-container">
+
+            <table class="p-2 w-75 table">
+              <thead>
+                <tr class="">
+                <th>Nombre / Razon social</th>
+                <th>DNI / CUIT</th>
+                <th>Seleccionar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class=" p-2" *ngFor="let client of clientList">
+                <td>{{client.name}}</td>
+                <td>{{client.dniOrCuit}}</td>
+                <td><input type="checkbox" [id]="'checkbox_' + client.id" [(ngModel)]="client.isSelected" (change)="onCheckboxChange(client)"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
+    </div>
+    <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+        Fechas
+      </button>
+    </h2>
+    <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">
+          <div class="w-75 container d-flex justify-content-start my-3">
+          <div style="padding-right: 24px; display: flex;flex-direction: column;">
       <label for="">Desde</label>
       <input [(ngModel)]="dateFrom" type="date" class="p-1" name="" id="">
     </div>
@@ -31,20 +63,17 @@
       <label for="">Hasta</label>
     <input [(ngModel)]="dateTo" type="date" class="p-1" name="" id="">
     </div>
-  </div>  
-
-  <div class="w-75 container d-flex justify-content-start my-3">
-    <label for="">Tipo de informe</label>
-    <select [(ngModel)]="typeReport" name="" id="">
-      <option value=""> </option>
-      <option value="1">Servicio que mayor descuento generó</option>
-      <option value="2">Lista de descuentos totales por servicios</option>
-      <option value="3">Historial de pedidos discriminado por productos / servicios</option>
-    </select>
+      </div>  
+      </div>
+    </div>
   </div>
 
-  <div>
-    <button (click)="redirectToReport()" class="">Generar informe</button>
+  </div>
+
+
+
+  <div class="my-5 d-flex justify-content-center">
+    <button (click)="redirectToReport()" class="p-3 rounded-2 bg-black text-light">Generar informe</button>
   </div>
 
 </div>

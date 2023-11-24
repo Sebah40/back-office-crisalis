@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ClientService } from '../../../../order/service/client.service';
 import { ClientDTO } from '../../DTOs/clientDTO';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-reports',
@@ -11,7 +12,11 @@ export class FormReportsComponent {
   clientList!: any[];
   selectedClient!: ClientDTO;
   inputValue!: string;
-  constructor(private clientService: ClientService) {}
+  dateFrom!: Date;
+  dateTo!: Date;
+  typeReport!: number;
+
+  constructor(private clientService: ClientService, private router: Router) {}
   ngOnInit(): void {
     this.getClientList();
   }
@@ -55,7 +60,24 @@ export class FormReportsComponent {
     this.selectedClient = this.clientList.filter(
       (cliente) => cliente.isSelected === true
     )[0];
-
+    console.log(this.dateFrom);
+    console.log(this.dateTo);
     console.log(this.selectedClient);
+  }
+
+  redirectToReport() {
+    this.setSelectedClient();
+    const queryParams = {
+      clientId: this.selectedClient.id,
+      dateFrom: this.dateFrom,
+      dateTo: this.dateTo,
+    };
+    if (this.typeReport == 1) {
+      this.router.navigate(['/report/total-discount'], { queryParams });
+    } else if (this.typeReport == 2) {
+      this.router.navigate(['/report/otro-inf'], { queryParams });
+    } else if (this.typeReport == 3) {
+      this.router.navigate(['/report/otro-inf2'], { queryParams });
+    }
   }
 }

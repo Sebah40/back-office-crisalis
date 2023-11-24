@@ -25,26 +25,26 @@
   <div class="w-75 container d-flex justify-content-start my-3">
     <div style="padding-right: 24px; display: flex;flex-direction: column;">
       <label for="">Desde</label>
-      <input type="date" class="p-1" name="" id="">
+      <input [(ngModel)]="dateFrom" type="date" class="p-1" name="" id="">
     </div>
     <div style="display: flex;flex-direction: column;">
       <label for="">Hasta</label>
-    <input type="date" class="p-1" name="" id="">
+    <input [(ngModel)]="dateTo" type="date" class="p-1" name="" id="">
     </div>
   </div>  
 
   <div class="w-75 container d-flex justify-content-start my-3">
     <label for="">Tipo de informe</label>
-    <select name="" id="">
+    <select [(ngModel)]="typeReport" name="" id="">
       <option value=""> </option>
-      <option value="">Servicio que mayor descuento generó</option>
-      <option value="">Descuentos totales</option>
-      <option value="">Historial de pedidos</option>
+      <option value="1">Servicio que mayor descuento generó</option>
+      <option value="2">Descuentos totales</option>
+      <option value="3">Historial de pedidos</option>
     </select>
   </div>
 
   <div>
-    <button (click)="setSelectedClient()" class="">Generar informe</button>
+    <button (click)="redirectToReport()" class="">Generar informe</button>
   </div>
 
 </div>

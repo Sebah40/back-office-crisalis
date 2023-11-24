@@ -15,16 +15,6 @@
           <li class="list-group-item">Estado: {{order?.orderState}}</li>
         </ul>
       </div>
-      <div *ngIf="order?.service" class="card">
-        <h5 class="card-header">Servicio</h5>
-        <div class="card-body">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item"><span class="fw-medium">Id: </span> {{order?.service?.id}} </li>
-            <li class="list-group-item"><span class="fw-medium">Nombre: </span> {{order?.service?.name}} </li>
-            <li class="list-group-item"><span class="fw-medium">Descripcion: </span> {{order?.service?.description}} </li>
-          </ul>
-        </div>
-      </div>
     </div>
 
     <table class="rounded p-2" id="custom-table" >

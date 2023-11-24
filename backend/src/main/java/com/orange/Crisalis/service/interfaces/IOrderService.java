@@ -11,6 +11,7 @@ import java.util.Optional;
 public interface IOrderService {
 
     Optional<OrderDTO> getOrder(Long id);
+    OrderWithCalculationEngineDTO getOrderWithCalculation(Long id);
     void createOrder(RequestBodyCreateOrderDTO orderCreateBody);
     List<OrderDTO> getOrders();
 

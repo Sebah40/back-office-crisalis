@@ -7,3 +7,63 @@
    font-weight: 700;
    font-size: 16px;
 }
+
+.input-checkbox{
+  display: none;
+}
+
+.accordion-item{
+  margin-bottom: 25px;
+  border: 1px solid black;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: black;
+  color: white;
+  border: none;
+  box-shadow: none;
+  border-radius: 0px;
+}
+
+.accordion-button:focus{
+  border-color: black;
+  box-shadow: none;
+  border-radius: 0px;
+}
+
+.accordion-item{
+  border-radius: 0px;
+}
+
+.generatebutton{
+  background-color: black;
+  color: white;
+  width: 200px;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+}
+
+.select-option{
+  height: 52px;
+  border: 1px solid black;
+}
+
+.label-fecha{
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.input-fecha{
+  text-align: center;
+  padding: 10px;
+}
+
+.search-bar{
+  border: 1px solid black;
+}
+
+tr th, tr td{
+  text-align: center;
+}

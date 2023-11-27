@@ -19,7 +19,7 @@
 
 .accordion-button:not(.collapsed) {
   background-color: black;
-  color: white;
+  color: #EAE0D5;
   border: none;
   box-shadow: none;
   border-radius: 0px;
@@ -37,7 +37,7 @@
 
 .generatebutton{
   background-color: black;
-  color: white;
+  color: #EAE0D5;
   width: 200px;
   height: 50px;
   border: none;
@@ -66,4 +66,20 @@
 
 tr th, tr td{
   text-align: center;
+}
+
+input[type="radio"]:checked + label {
+  background-color: #0f0f0f;
+  color: #EAE0D5;
+}
+
+/* Estilos cuando no está seleccionado */
+input[type="radio"] + label {
+  background-color: #fff;
+  color: #353131;
+  border: 1px solid #0f0f0f;
+  padding: 12px 16px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 500;
+  font-size: 16.5px;
 }

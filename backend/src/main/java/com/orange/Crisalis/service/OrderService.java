@@ -47,6 +47,33 @@ public class OrderService implements IOrderService {
     }
 
     @Override
+    public OrderWithCalculationEngineDTO getOrderWithCalculation(Long id) {
+        OrderWithCalculationEngineDTO orderWithCalculationDTO = this.orderRepository.findOrderById(id).map(
+            (orderEntity -> new OrderWithCalculationEngineDTO(
+                orderEntity.getId(),
+                orderEntity.getDateCreated(),
+                orderEntity.getOrderState(),
+                orderEntity.getClient(),
+                orderEntity.getOrderDetailList().stream().map(detail -> new OrderDetailWithCalculationEngineDTO(
+                    detail.getId(),
+                    detail.getPriceSell(),
+                    detail.getQuantity(),
+                    detail.getSellableGood(),
+                    detail.getSellableGood().getSupportCharge().doubleValue(),
+                    ICalculationEngine.calculateValueWarranty(detail),
+                    detail.getDiscount(),
+                    ICalculationEngine.generateSubTotal(detail),
+                    ICalculationEngine.generateSubTotalWithDiscount(detail)
+                )).collect(Collectors.toList()),
+                ICalculationEngine.generateDiscount(orderEntity),
+                ICalculationEngine.generateSubTotal(orderEntity),
+                ICalculationEngine.totalOrderPrice(orderEntity)
+            ))).orElse(null);
+        System.out.println(orderWithCalculationDTO);
+        return orderWithCalculationDTO;
+    }
+
+    @Override
     public void createOrder(RequestBodyCreateOrderDTO orderCreateBody)  {
 
         ClientEntity clientEntity = clientService.getById(orderCreateBody.getClientId());
@@ -70,10 +97,24 @@ public class OrderService implements IOrderService {
             Set<SellableGood> activeServices = clientEntity.getActiveServices();
             newOrderEntity.setService(getRandomService(activeServices));
             ICalculationEngine.generateDiscount(orderDetailList);
+        }else if(orderAService(orderDetailList)){
+            SellableGood orderedService = getOrderedService(orderDetailList);
+            newOrderEntity.setService(orderedService);
+            ICalculationEngine.generateDiscount(orderDetailList);
         }
 
         newOrderEntity.setOrderDetailList(orderDetailList);
     }
+
+    private SellableGood getOrderedService(List<OrderDetail> orderDetailList) {
+        Optional<OrderDetail> orderedService = orderDetailList.stream().filter(od -> od.getSellableGood().getType() == Type.SERVICE).findFirst();
+        return orderedService.map(OrderDetail::getSellableGood).orElse(null);
+    }
+
+    private boolean orderAService(List<OrderDetail> orderDetailList) {
+        return orderDetailList.stream().anyMatch(od -> od.getSellableGood().getType() == Type.SERVICE );
+    }
+
 
     private SellableGood getRandomService(Set<SellableGood> activeServices) {
         if(activeServices.isEmpty()) {

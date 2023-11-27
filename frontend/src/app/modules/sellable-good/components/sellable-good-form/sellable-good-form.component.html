@@ -16,15 +16,18 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6 form-floating my-4">
-        <select formControlName="type" value="{{sellableGoodInstance.type}}" class="form-select form-select-sm descripcion" aria-label="Type">
+      <div class="col-md form-floating my-4">
+        <select [(ngModel)]="selectedType" formControlName="type" [value]="sellableGoodInstance.type" class="form-select form-select-sm descripcion" aria-label="Type">
           <option value="PRODUCT">Producto</option>
           <option value="SERVICE">Servicio</option>
         </select>
         <label for="floatingInput" >Tipo</label>  
       </div>
-      <div class="col-md-2"></div>
-      <div class="col-md-4 d-inline-flex align-items-center my-4">
+      <div *ngIf="isService()" class="col-md form-floating my-4">
+        <input formControlName="charge" value="{{sellableGoodInstance.supportCharge}}" type="text" class="form-control descripcion" id="floatingInput">
+        <label for="floatingInput" >Cargo</label>  
+      </div>
+      <div class="col-md d-inline-flex align-items-center my-4">
         <div class="form-floating mx-3">
           <select style="min-width: 12rem;" #selectedTax class="form-select form-select-sm descripcion" aria-label="Type">
             <option *ngFor="let tax of taxes" [value]="tax.id">{{tax.taxName}}</option>

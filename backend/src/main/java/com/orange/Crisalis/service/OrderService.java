@@ -178,6 +178,11 @@ public class OrderService implements IOrderService {
                         order.getClient().setBeneficiary(true);
                         clientService.saveClient(order.getClient());
                     }
+                    if(order.getClient().isBeneficiary()){
+                        SellableGood firstService = order.getClient().getActiveServices().stream().findFirst().get();
+                        Double discount = ICalculationEngine.generateDiscount(order);
+                        order.getClient().addDiscountService(firstService,discount, new Date());
+                    }
                 }
                 orderRepository.save(order);
 

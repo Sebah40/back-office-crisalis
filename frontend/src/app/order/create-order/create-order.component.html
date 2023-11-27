@@ -46,11 +46,14 @@
       <h3>Lista de productos y servicios</h3>
 
       <ul type="none" class="p-2" style="max-height:300px ;">
-        <li *ngFor="let item of itemList" class="list-item items" >
+        <li *ngFor="let item of itemList" class="list-item items" id="li-{{item.id}}" >
             <span>
               {{item.name}}
             </span>
           <span>
+            <label *ngIf="item.type === 'PRODUCT'" class="unidades">Garantia:
+              <input defaultValue="{{0}}" class="number" name="warranty" type="number"/>
+            </label>
             <label class="unidades">Unidades:
               <input defaultValue="{{0}}" id="{{item.id}}" class="number" name="{{item.id}}" type="number"/>
             </label>

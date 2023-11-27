@@ -16,11 +16,13 @@ public class OrderDetailDTO implements Serializable {
     private Double priceSell;
     private Integer quantity;
     private SellableGood sellableGood;
+    private Double discount;
 
     public OrderDetailDTO(OrderDetail detail) {
         this.id = detail.getId();
         this.priceSell = detail.getPriceSell();
         this.quantity = detail.getQuantity();
         this.sellableGood = detail.getSellableGood();
+        this.discount = detail.getDiscount();
     }
 }

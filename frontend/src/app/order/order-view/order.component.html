@@ -1,7 +1,7 @@
 <main>
   <div class="container d-flex flex-column justify-content-sm-start align-items-center" id="container">
     <h2 class="title">Pedido</h2>
-    <div class="card-container" width="100%">
+    <div class="card-container d-flex gap-5" width="100%">
       <div class="card" style="width: 25rem; margin: auto;">
         <div class="card-header text-center">
           <li class="list-group-item">Cliente: {{order?.client?.businessName == null ?
@@ -15,6 +15,16 @@
           <li class="list-group-item">Estado: {{order?.orderState}}</li>
         </ul>
       </div>
+      <div *ngIf="order?.service" class="card">
+        <h5 class="card-header">Servicio</h5>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><span class="fw-medium">Id: </span> {{order?.service?.id}} </li>
+            <li class="list-group-item"><span class="fw-medium">Nombre: </span> {{order?.service?.name}} </li>
+            <li class="list-group-item"><span class="fw-medium">Descripcion: </span> {{order?.service?.description}} </li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <table class="rounded p-2" id="custom-table" >
@@ -25,6 +35,7 @@
           <th>Tipo</th>
           <th>Cantidad</th>
           <th>Precio unitario</th>
+          <th>Descuento</th>
           <th>Impuestos</th>
         </tr>
       </thead>
@@ -35,6 +46,7 @@
           <td>{{detail.sellableGood.type == 'PRODUCT' ? 'Producto' : 'Servicio'}}</td>
           <td>{{detail.quantity}}</td>
           <td>{{detail.priceSell}}</td>
+          <td>{{detail.discount ?? 0}}</td>
           <td>
             <div class="dropdown" [hidden]="detail?.sellableGood?.taxes?.length == 0">
               <button class="btn dropdown-toggle editbutton" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -50,7 +62,8 @@
         </tr>
       </tbody>
     </table>
-    <div class="tfoot">
+    
+    <div class="tfoot mt-3">
 
       <button  routerLink="/order/edit/{{order?.id}}" id="edit" class="btn editbutton">
         Editar

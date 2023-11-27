@@ -24,10 +24,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.validation.ValidationException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -76,12 +73,24 @@ public class OrderService implements IOrderService {
 
         newOrderEntity.setClient(clientEntity);
 
+        List<OrderDetail> orderDetailList = createOrderDetailList(orderCreateBody.
+                        getProductIdList(),newOrderEntity);
 
-        List<OrderDetail> orderDetailList = ICalculationEngine
-                .generateDiscount(createOrderDetailList(orderCreateBody.
-                        getProductIdList(),newOrderEntity));
+        if(clientEntity.isBeneficiary() && !clientEntity.getActiveServices().isEmpty()) {
+            Set<SellableGood> activeServices = clientEntity.getActiveServices();
+            newOrderEntity.setService(getRandomService(activeServices));
+            ICalculationEngine.generateDiscount(orderDetailList);
+        }
 
         newOrderEntity.setOrderDetailList(orderDetailList);
+    }
+
+    private SellableGood getRandomService(Set<SellableGood> activeServices) {
+        if(activeServices.isEmpty()) {
+            return null;
+        }
+        List<SellableGood> services = new ArrayList<>(activeServices);
+        return services.get(0);
     }
 
     @Override
@@ -92,13 +101,14 @@ public class OrderService implements IOrderService {
                         orderEntity.getDateCreated(),
                         orderEntity.getOrderState(),
                         orderEntity.getClient(),
+                        orderEntity.getService(),
                         orderEntity.getOrderDetailList().stream().map(ordeD -> new OrderDetailDTO(
                                 ordeD.getId(),
                                 ordeD.getPriceSell(),
                                 ordeD.getQuantity(),
-                                ordeD.getSellableGood()
+                                ordeD.getSellableGood(),
+                                ordeD.getDiscount()
                                 )).collect(Collectors.toList())
-
                         )
                 )
         ).collect(Collectors.toList());
@@ -246,11 +256,11 @@ public class OrderService implements IOrderService {
              }
          }
 
-         orderDetailService.saveAllOrderDetail(ICalculationEngine.generateDiscount(order.getOrderDetailList()));
+         if(order.getService() != null){
+             ICalculationEngine.generateDiscount(order.getOrderDetailList());
+         }
 
-
-
-
+         orderDetailService.saveAllOrderDetail(order.getOrderDetailList());
     }
     @Override
     public List<OrderDTO> getAllByClientId(Long clientId) {
@@ -279,6 +289,9 @@ public class OrderService implements IOrderService {
                     newDetail.setWarrantyYear(0);
                 }else{
                     newDetail.setWarrantyYear(item.getWarrantyYear());
+                }
+                if(sellableGood.get().getType() == Type.SERVICE){
+                    newDetail.setQuantity(1);
                 }
 
                 orderDetailList.add(newDetail);

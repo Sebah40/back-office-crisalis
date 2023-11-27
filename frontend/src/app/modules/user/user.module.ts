@@ -6,11 +6,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EntityContainerComponent } from '../shared/components/entity-container-component/entity-container.component';
 import { TranslateModule } from '@ngx-translate/core';
 
+import { ProfileComponent } from './components/profile/profile.component';
+
 @NgModule({
   declarations: [
     UserListComponent,
     UserFormComponent,
     EntityContainerComponent,
+    ProfileComponent,
   ],
   imports: [
     CommonModule,

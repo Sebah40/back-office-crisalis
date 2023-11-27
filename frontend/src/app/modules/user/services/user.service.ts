@@ -4,6 +4,9 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { IUser } from '../model/User.model';
 import { ResponseCreate } from 'src/app/components/interfaces/ResponseCreate.type';
 import { IUserGet } from '../model/UserGet.model';
+import { UserProfileDTO } from '../model/UserProfileDTO';
+import { EditProfileDTO } from '../model/EditProfileDTO';
+import { TEditPassword } from '../model/TEditPassword';
 
 type User = { username: string };
 type Message = { mensaje: string };
@@ -48,6 +51,26 @@ export class UserService {
 
   edit(user: IUser): Observable<ResponseCreate> {
     return this.http.post<ResponseCreate>(`${this.URL}/edit-user`, user);
+  }
+
+  getProfile(): Observable<UserProfileDTO> {
+    return this.http.get<UserProfileDTO>(`${this.URL}/profile`);
+  }
+  editProfile(userEdited: EditProfileDTO): Observable<ResponseCreate> {
+    return this.http.put<ResponseCreate>(
+      `${this.URL}/edit-profile`,
+      userEdited
+    );
+  }
+
+  editPassword(passEdited: TEditPassword) {
+    return this.http.put<ResponseCreate>(
+      `${this.URL}/edit-password`,
+      passEdited
+    );
+  }
+  uploadPhoto(formData: FormData) {
+    return this.http.post<ResponseCreate>(`${this.URL}/upload-photo`, formData);
   }
 
   // Actualizar la lista de usuarios

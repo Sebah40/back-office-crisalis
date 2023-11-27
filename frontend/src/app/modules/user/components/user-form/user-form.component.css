@@ -7,3 +7,7 @@
     background-color: #EAE0D5;
     color: black;
 }
+#container{
+    min-height: 600px;
+    justify-content: space-between;
+}

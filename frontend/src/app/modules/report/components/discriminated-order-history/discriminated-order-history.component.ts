@@ -92,6 +92,10 @@ export class DiscriminatedOrderHistoryComponent implements OnInit {
         const goodGroup = clientGroup.items.find(good => good.sellablegood === order.sellableGood);
     
         if (goodGroup) {
+          goodGroup.quantityAccumulator += order.quantity;
+          goodGroup.subtotalAccumulator += order.subtotal;
+          goodGroup.totalTaxesAccumulator += order.totalTaxes;
+          goodGroup.totalAccumulator += order.total;
           goodGroup.items.push({
             orderId: order.orderId,
             status: order.orderStatus,
@@ -105,6 +109,10 @@ export class DiscriminatedOrderHistoryComponent implements OnInit {
         } else {
           clientGroup.items.push({
             sellablegood: order.sellableGood,
+            quantityAccumulator: order.quantity,
+            subtotalAccumulator: order.subtotal,
+            totalTaxesAccumulator: order.totalTaxes,
+            totalAccumulator: order.total,
             items: [{
               orderId: order.orderId,
               status: order.orderStatus,
@@ -122,6 +130,10 @@ export class DiscriminatedOrderHistoryComponent implements OnInit {
           client: order.client,
           items: [{
             sellablegood: order.sellableGood,
+            quantityAccumulator: order.quantity,
+            subtotalAccumulator: order.subtotal,
+            totalTaxesAccumulator: order.totalTaxes,
+            totalAccumulator: order.total,
             items: [{
               orderId: order.orderId,
               status: order.orderStatus,

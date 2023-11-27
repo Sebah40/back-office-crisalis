@@ -9,6 +9,8 @@ import { BiggestDiscountComponent } from './components/biggest-discount/biggest-
 import { TotalDiscountForServicesComponent } from './components/total-discount-for-services/total-discount-for-services.component';
 import { DiscriminatedOrderHistoryComponent } from './components/discriminated-order-history/discriminated-order-history.component';
 import { SharedModule } from '../shared/shared.module';
+import { DateFormatPipe } from './pipes/date-format.pipe';
+import { MoneyFormatPipe } from './pipes/money-format.pipe';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { SharedModule } from '../shared/shared.module';
     BiggestDiscountComponent,
     TotalDiscountForServicesComponent,
     DiscriminatedOrderHistoryComponent,
+    DateFormatPipe,
+    MoneyFormatPipe
   ],
   imports: [
     CommonModule,

@@ -5,6 +5,10 @@ export interface GroupClient {
 
 export interface GroupByGood {
   sellablegood: string;
+  quantityAccumulator: number;
+  subtotalAccumulator: number;
+  totalTaxesAccumulator: number;
+  totalAccumulator: number;
   items: OrderData[];
 }
 

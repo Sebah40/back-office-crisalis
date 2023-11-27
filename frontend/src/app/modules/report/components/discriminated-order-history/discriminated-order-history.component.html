@@ -1,1 +1,28 @@
-<p>discriminated-order-history works!</p>
+<app-simple-container [title]="title">
+  <app-list-table [header]="['Cliente','Producto/Servicio','Pedido Nro.','Estado','Fecha','Cantidad','Precio','Subtotal','Impuestos','Total']" id="table">
+    <ng-container *ngFor="let client of group(data)">
+      <tr style="background-color: rgba(0,0,0,.2);">
+        <td>{{client.client}}</td>
+        <td colspan="9"></td>
+      </tr>
+      <ng-container *ngFor="let good of client.items">
+        <tr style="background-color: rgba(0,0,0,.1);">
+          <td></td>
+          <td>{{good.sellablegood}}</td>
+          <td colspan="8"></td>
+        </tr>
+        <tr *ngFor="let order of good.items">
+          <td colspan="2"></td>
+          <td>{{order.orderId}}</td>
+          <td>{{order.status}}</td>
+          <td>{{order.date}}</td>
+          <td>{{order.quantity}}</td>
+          <td>{{order.price}}</td>
+          <td>{{order.subtotal}}</td>
+          <td>{{order.totalTaxes}}</td>
+          <td>{{order.total}}</td>
+        </tr>
+      </ng-container>
+    </ng-container>
+  </app-list-table>
+</app-simple-container>

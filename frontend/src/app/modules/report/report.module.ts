@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { BiggestDiscountComponent } from './components/biggest-discount/biggest-discount.component';
 import { TotalDiscountForServicesComponent } from './components/total-discount-for-services/total-discount-for-services.component';
 import { DiscriminatedOrderHistoryComponent } from './components/discriminated-order-history/discriminated-order-history.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { DiscriminatedOrderHistoryComponent } from './components/discriminated-o
     FormsModule,
     MatTableModule,
     MatSortModule,
+    SharedModule
   ],
   exports: [FormReportsComponent],
 })

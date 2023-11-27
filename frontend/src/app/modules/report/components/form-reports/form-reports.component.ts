@@ -14,7 +14,7 @@ export class FormReportsComponent {
   inputValue!: string;
   dateFrom!: Date;
   dateTo!: Date;
-  typeReport!: number;
+  typeReport: string = '1';
 
   constructor(private clientService: ClientService, private router: Router) {}
   ngOnInit(): void {
@@ -75,13 +75,13 @@ export class FormReportsComponent {
       dateFrom: this.dateFrom ?? '',
       dateTo: this.dateTo ?? '',
     };
-    if (this.typeReport == 1) {
-      this.router.navigate(['/report/biggest-discount'], { queryParams });
-    } else if (this.typeReport == 2) {
+    if (this.typeReport === '1') {
       this.router.navigate(['/report/total-discount-for-services'], {
         queryParams,
       });
-    } else if (this.typeReport == 3) {
+    } else if (this.typeReport === '2') {
+      this.router.navigate(['/report/biggest-discount'], { queryParams });
+    } else if (this.typeReport === '3') {
       this.router.navigate(['/report/discrimimated-order-history'], {
         queryParams,
       });

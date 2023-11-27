@@ -14,20 +14,25 @@
     <label class="btn btn-outline-dark" for="btncheck3">Historial de pedidos discriminado por productos / servicios</label>
   </div> -->
 
-  <div class="w-75 container d-flex flex-column justify-content-center my-2 p-0">
-    <label id="label-type-inf" class="m-2 text-center">Tipo de informe</label>
-    <select class="p-2 select-option" name="select" [(ngModel)]="typeReport">
-      <option value="1">Servicio que mayor descuento generó</option>
-      <option value="2">Lista de descuentos totales por servicios</option>
-      <option value="3">Historial de pedidos discriminado por productos / servicios</option>
-    </select>
+  <div class="w-75 container d-flex flex-column justify-content-center my-4 p-0">
+    <label id="label-type-inf" class="m-5 text-center">Tipo de informe</label>
+    
+    <div class="d-flex justify-content-between">
+     
+      <input type="radio" value="1" [(ngModel)]="typeReport" class="btn-check" name="options-report" id="option1" autocomplete="off" checked>
+      <label class="btn rounded-0" for="option1">Descuentos totales discriminados por servicios</label>
+      <input type="radio" value="2" [(ngModel)]="typeReport" class="btn-check" name="options-report" id="option2" autocomplete="off" >
+      <label class="btn rounded-0" for="option2">Mayor descuento por cliente</label> 
+      <input type="radio" value="3" [(ngModel)]="typeReport" class="btn-check" name="options-report" id="option3" autocomplete="off">
+      <label class="btn rounded-0" for="option3">Historial discriminado por servicio/producto</label>
+    </div>
+    
+
+  <div class="my-5">
+    <h4 class="text-center">Agregar filtros</h4>
   </div>
 
-  <div class="my-4">
-    <h4>Agregar filtros</h4>
-  </div>
-
-  <div class="accordion w-75" id="accordionExample">
+  <div class="accordion w-100" id="accordionExample">
     <div class="accordion-item">
       <h2 class="accordion-header">
         <button class="accordion-button text-center collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">

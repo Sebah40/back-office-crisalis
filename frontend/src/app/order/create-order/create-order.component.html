@@ -14,7 +14,7 @@
   <table class="rounded p-2" id="custom-table" >
     <thead>
       <tr>
-        <th>ID Cliente</th>
+        <!-- <th>ID Cliente</th> -->
         <th>Cliente</th>
         <th>Beneficiario</th>
       </tr>
@@ -22,9 +22,9 @@
     <tbody>
       <tr *ngFor="let client of clientList"  >
 
-          <td>
+          <!-- <td>
             {{client.id}}
-          </td>
+          </td> -->
           <td>
             {{client.businessName == null ? client.firstName + " " + client.lastName : client.businessName}}
           </td>

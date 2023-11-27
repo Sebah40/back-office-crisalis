@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderByClient } from '../../DTOs/orderByClientDTO.model';
 import { GroupClient } from '../../DTOs/groupData.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-discriminated-order-history',
@@ -72,12 +73,16 @@ export class DiscriminatedOrderHistoryComponent implements OnInit {
       total: 12550
     }
   ];
-
-  groupedDate = []
   
+  constructor(private route: ActivatedRoute) {}
+
   ngOnInit(): void {
-    console.log("Empiezo!");
-    
+    this.route.queryParams.subscribe((param) => {
+      const clientId = param['clientId'];
+      const dateFrom = param['dateFrom']
+      const dateTo = param['dateTo']
+      console.log(clientId);
+    });
   }
   
   valores(order:OrderByClient):any[]{

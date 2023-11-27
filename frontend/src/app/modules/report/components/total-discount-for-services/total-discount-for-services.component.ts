@@ -12,18 +12,18 @@ const DATA: any[] = [
     orderNum: '001',
   },
   {
-    clientId: 2,
-    clientName: 'Taxi SRL',
-    service: 'Internet 100MB',
-    discount: 2500.0,
-    orderNum: '043',
+    clientId: 1,
+    clientName: 'Gonzalo Fleitas',
+    service: 'Linea celular',
+    discount: 230.0,
+    orderNum: '061',
   },
   {
-    clientId: 3,
-    clientName: 'Pepsi SA',
-    service: 'Netflix',
-    discount: 250.0,
-    orderNum: '021',
+    clientId: 1,
+    clientName: 'Gonzalo Fleitas',
+    service: 'Internet 100MB',
+    discount: 540.0,
+    orderNum: '044',
   },
   {
     clientId: 4,
@@ -31,6 +31,53 @@ const DATA: any[] = [
     service: 'Internet 200MB',
     discount: 1200.0,
     orderNum: '002',
+  },
+];
+
+const data2 = [
+  {
+    clientId: 1, // esto no se muestra
+    clientName: 'Fede',
+    totalDiscount: 222,
+    report: [
+      {
+        discount: 111,
+        orderNum: '011',
+        service: 'Linea Celular',
+      },
+      {
+        discount: 111,
+        orderNum: '011',
+        service: 'Linea Celular',
+      },
+      {
+        discount: 111,
+        orderNum: '011',
+        service: 'Linea Celular',
+      },
+    ],
+  },
+  {
+    clientId: 1, // esto no se muestra
+    clientName: 'Gonza',
+    totalDiscount: 222,
+    report: [
+      {
+        discount: 111,
+        orderNum: '011',
+        service: 'Linea Celular',
+      },
+      {
+        discount: 111,
+        orderNum: '011',
+        service: 'Linea Celular',
+      },
+      {
+        discount: 111,
+        orderNum: '011',
+        service: 'Linea Celular',
+      },
+    ],
   },
 ];
 

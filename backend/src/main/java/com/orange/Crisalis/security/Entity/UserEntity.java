@@ -2,11 +2,9 @@ package com.orange.Crisalis.security.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -16,7 +14,6 @@ import javax.validation.constraints.NotNull;
  */
 @Data
 @Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -31,6 +28,47 @@ public class UserEntity {
     private String username;
     @NotNull
     private String email;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public void setBirthdate(Date birthdate) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(birthdate);
+        Date updatedDate = calendar.getTime();
+        calendar.add(Calendar.HOUR, 3);
+        this.birthdate = calendar.getTime();
+    }
+
+    public void setRoles(Set<RoleEntity> roles) {
+        this.roles = roles;
+    }
+
     @NotNull
     @JsonIgnore
     private String password;
@@ -38,6 +76,7 @@ public class UserEntity {
     private boolean isActive;
 
     private String photo;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date birthdate;
 
 

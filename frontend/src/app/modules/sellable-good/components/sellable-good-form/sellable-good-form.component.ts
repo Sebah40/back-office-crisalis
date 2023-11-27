@@ -21,6 +21,7 @@ function isEmpty(value: any): boolean {
   styleUrls: ['./sellable-good-form.component.css'],
 })
 export class SellableGoodFormComponent implements OnInit {
+  selectedType = '';
   @ViewChild('selectedTax') selectedTax!: ElementRef;
   public formSellableGood!: FormGroup;
   public sellableGoodInstance: SellableGood = {
@@ -56,16 +57,14 @@ export class SellableGoodFormComponent implements OnInit {
 
     this.formSellableGood = this.formBuilder.group({
       name: [this.sellableGoodInstance.name, [Validators.required]],
-      description: [
-        this.sellableGoodInstance.description,
-        [Validators.required],
-      ],
+      description: [this.sellableGoodInstance.description],
       price: [
         this.sellableGoodInstance.price,
         [Validators.required, Validators.pattern(/^\d+(\.\d+)?$/)],
       ],
       type: [this.sellableGoodInstance.type, [Validators.required]],
       taxes: [this.sellableGoodInstance.taxes],
+      charge: [this.sellableGoodInstance.supportCharge, [Validators.required, Validators.pattern(/^\d+(\.\d+)?$/)]]
     });
   }
 
@@ -92,6 +91,7 @@ export class SellableGoodFormComponent implements OnInit {
       this.formSellableGood.value.description;
     this.sellableGoodInstance.price = this.formSellableGood.value.price;
     this.sellableGoodInstance.type = this.formSellableGood.value.type;
+    this.sellableGoodInstance.supportCharge = this.formSellableGood.value.charge;
     if (isEmpty(this.sellableGoodInstance.id)) {
       this.sellableGoodService.create(this.sellableGoodInstance).subscribe({
         next: (response) => {
@@ -144,5 +144,9 @@ export class SellableGoodFormComponent implements OnInit {
     );
     this.taxes = [...this.taxes, tax];
     this.isEnabled = this.taxes.length > 0;
+  }
+
+  isService(){
+    return this.selectedType === "SERVICE";
   }
 }

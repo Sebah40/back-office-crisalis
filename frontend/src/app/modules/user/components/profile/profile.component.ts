@@ -1,4 +1,4 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { UserProfileDTO } from '../../model/UserProfileDTO';
 import { EditProfileDTO } from '../../model/EditProfileDTO';

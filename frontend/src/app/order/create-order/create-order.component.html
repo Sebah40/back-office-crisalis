@@ -52,7 +52,7 @@
             </span>
           <span>
             <label *ngIf="item.type === 'PRODUCT'" class="unidades">Garantia:
-              <input defaultValue="{{0}}" class="number" name="warranty" type="number"/>
+              <input defaultValue="{{0}}" class="number" id="warranty-{{item.id}}" name="warranty" type="number"/>
             </label>
             <label class="unidades">Unidades:
               <input defaultValue="{{0}}" id="{{item.id}}" class="number" name="{{item.id}}" type="number"/>

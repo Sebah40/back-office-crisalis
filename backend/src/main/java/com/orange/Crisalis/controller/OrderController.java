@@ -96,7 +96,17 @@ public class OrderController {
     @PreAuthorize("hasAnyRole('USER' ,'ADMIN')")
     public List<OrderWithCalculationEngineDTO> getOrders(){
         return this.orderService.getOrdersWithSubTotal();
+    }
 
+    @GetMapping("/withcalculation/{id}")
+    @PreAuthorize("hasAnyRole('USER' ,'ADMIN')")
+    public ResponseEntity<Object> getOrderWithCalculation(@PathVariable("id") Long id) {
+        OrderWithCalculationEngineDTO order = this.orderService.getOrderWithCalculation(id);
+        System.out.println("ASFDASFQWERQWERQWERQWERQWERQWERQWERQWERQWERQWER");
+        if(order != null) {
+            return ResponseEntity.ok(order);
+        }
+        return new ResponseEntity<Object>("Pedido inexistente", HttpStatus.NOT_FOUND);
     }
 
     @PreAuthorize("hasAnyRole('USER' ,'ADMIN')")

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import  { OrderDTO } from '../model/order-dto';
 import { OrderService } from '../service/order.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ClientEntity } from '../model/client-entity';
+import { CalculatedOrder } from '../model/calculated-order-dto';
+import { Client } from 'src/app/modules/client/model/client.model';
+import { PersonClient } from 'src/app/modules/client/model/person-client.model';
+import { EnterpriseClient } from 'src/app/modules/client/model/enterprise-client.model';
 
 
 @Component({
@@ -12,7 +14,8 @@ import { ClientEntity } from '../model/client-entity';
 })
 export class OrderComponent implements OnInit {
 
-  order?:OrderDTO;
+  order!:CalculatedOrder;
+  id?:any;
 
   constructor(private orderService: OrderService,
     private activatedRoute: ActivatedRoute, private router: Router) {
@@ -20,12 +23,12 @@ export class OrderComponent implements OnInit {
     }
 
   getOrder() {
-    this.orderService.getOrder(this.id).subscribe(res => {
+    this.orderService.getOrderWithCalculation(this.id).subscribe(res => {
       this.order = res;
       this.disable();
     })
   }
-  id?:any;
+
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       this.id = params['id'];
@@ -47,5 +50,13 @@ export class OrderComponent implements OnInit {
   }
   goBack(){
     this.router.navigate(['/order/getAll']);
+  }
+
+  isPerson(client: Client): client is PersonClient {
+    return !('businessName' in client);
+  }
+
+  isEnterprise(client: Client): client is EnterpriseClient {
+    return 'businessName' in client;
   }
 }

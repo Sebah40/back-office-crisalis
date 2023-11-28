@@ -17,11 +17,15 @@ import com.orange.Crisalis.model.dto.OrderDetailDTO;
 import com.orange.Crisalis.model.dto.OrderDetailWithCalculationEngineDTO;
 import com.orange.Crisalis.model.dto.OrderWithCalculationEngineDTO;
 import com.orange.Crisalis.repository.*;
+import com.orange.Crisalis.model.dto.filters.OrderFilter;
+import com.orange.Crisalis.queries.OrderQueries;
 import com.orange.Crisalis.service.interfaces.ICalculationEngine;
 import com.orange.Crisalis.service.interfaces.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.validation.ValidationException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -32,6 +36,7 @@ public class OrderService implements IOrderService {
     private final ClientService clientService;
     private final SellableGoodService sellableGoodService;
     private final OrderDetailService orderDetailService;
+
     @Autowired
     IEnterpriseRepository iEnterpriseRepository;
     @Autowired
@@ -42,20 +47,55 @@ public class OrderService implements IOrderService {
     ClientDiscountServiceRepository discountServiceRepository;
     @Autowired
     FilteredReportRepository filteredReportRepository;
+
+
+    private final OrderQueries orderQueries;
+
+    @PersistenceContext
+    EntityManager entityManager;
+
     public OrderService(
             OrderRepository orderRepository,
             ClientService clientService,
             SellableGoodService sellableGoodService,
-            OrderDetailService orderDetailService) {
+            OrderDetailService orderDetailService, OrderQueries orderQueries) {
         this.orderRepository = orderRepository;
         this.clientService = clientService;
         this.sellableGoodService = sellableGoodService;
         this.orderDetailService = orderDetailService;
+        this.orderQueries = orderQueries;
     }
 
     @Override
     public Optional<OrderDTO> getOrder(Long id) {
         return Optional.of(new OrderDTO(this.orderRepository.findOrderById(id).orElseThrow(null)));
+    }
+
+    @Override
+    public OrderWithCalculationEngineDTO getOrderWithCalculation(Long id) {
+        OrderWithCalculationEngineDTO orderWithCalculationDTO = this.orderRepository.findOrderById(id).map(
+            (orderEntity -> new OrderWithCalculationEngineDTO(
+                orderEntity.getId(),
+                orderEntity.getDateCreated(),
+                orderEntity.getOrderState(),
+                orderEntity.getClient(),
+                orderEntity.getOrderDetailList().stream().map(detail -> new OrderDetailWithCalculationEngineDTO(
+                    detail.getId(),
+                    detail.getPriceSell(),
+                    detail.getQuantity(),
+                    detail.getSellableGood(),
+                    detail.getSellableGood().getSupportCharge().doubleValue(),
+                    ICalculationEngine.calculateValueWarranty(detail),
+                    detail.getDiscount(),
+                    ICalculationEngine.generateSubTotal(detail),
+                    ICalculationEngine.generateSubTotalWithDiscount(detail)
+                )).collect(Collectors.toList()),
+                ICalculationEngine.generateDiscount(orderEntity),
+                ICalculationEngine.generateSubTotal(orderEntity),
+                ICalculationEngine.totalOrderPrice(orderEntity)
+            ))).orElse(null);
+        System.out.println(orderWithCalculationDTO);
+        return orderWithCalculationDTO;
     }
 
     @Override
@@ -82,10 +122,24 @@ public class OrderService implements IOrderService {
             Set<SellableGood> activeServices = clientEntity.getActiveServices();
             newOrderEntity.setService(getRandomService(activeServices));
             ICalculationEngine.generateDiscount(orderDetailList);
+        }else if(orderAService(orderDetailList)){
+            SellableGood orderedService = getOrderedService(orderDetailList);
+            newOrderEntity.setService(orderedService);
+            ICalculationEngine.generateDiscount(orderDetailList);
         }
 
         newOrderEntity.setOrderDetailList(orderDetailList);
     }
+
+    private SellableGood getOrderedService(List<OrderDetail> orderDetailList) {
+        Optional<OrderDetail> orderedService = orderDetailList.stream().filter(od -> od.getSellableGood().getType() == Type.SERVICE).findFirst();
+        return orderedService.map(OrderDetail::getSellableGood).orElse(null);
+    }
+
+    private boolean orderAService(List<OrderDetail> orderDetailList) {
+        return orderDetailList.stream().anyMatch(od -> od.getSellableGood().getType() == Type.SERVICE );
+    }
+
 
     private SellableGood getRandomService(Set<SellableGood> activeServices) {
         if(activeServices.isEmpty()) {
@@ -153,6 +207,14 @@ public class OrderService implements IOrderService {
         }else{
             throw new EmptyElementException("No hay ordenes para mostrar.");
         }
+    }
+
+    @Override
+    public List<OrderDTO> filterOrderList(OrderFilter orderFilter) {
+        List<OrderEntity> orderList = entityManager.createNativeQuery(orderQueries.filterOrderList(orderFilter)
+                , OrderEntity.class).getResultList();
+        List<OrderDTO> orderDTOList = orderList.stream().map(OrderDTO::new).collect(Collectors.toList());
+        return orderDTOList;
     }
 
     @Override

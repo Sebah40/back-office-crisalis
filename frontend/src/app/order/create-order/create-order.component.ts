@@ -80,12 +80,15 @@ export class CreateOrderComponent implements OnInit {
   select(id: any): void {
     this.quant = document.getElementById(`${id}`);
     var btn: any = document.getElementById(`btn-${id}`);
+    const warranty:any = document.getElementById(`warranty-${id}`);
+    console.log(warranty);
 
     if(this.productList.find(prod => prod.productId === id)) {
       this.productList = this.productList.filter(prod => prod.productId !== id)
     }
     if(this.quant.value > 0 && this.quant.value != null && this.quant.value != undefined) {
       this.productQuantity = new ProductIdAndQuantityDto(id, Number(this.quant.value));
+      this.productQuantity.warrantyYear = warranty ? warranty.value : 0;
       this.productList.push(this.productQuantity);
       btn?.setAttribute('disabled', '')
       btn.textContent = 'Agregado';

@@ -16,7 +16,6 @@ import java.util.Optional;
 public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
     List<OrderEntity> findByClientId(Long clientId);
 
-
     @Query(value = "SELECT * FROM order_entity WHERE id = :id", nativeQuery = true)
     Optional<OrderEntity> findOrderById(@Param("id") Long id);
 

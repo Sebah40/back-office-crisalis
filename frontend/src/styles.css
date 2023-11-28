@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
+
 body {
   background-image: url("./assets/svg/wave4.svg");
   background-size: cover;
@@ -8,6 +9,7 @@ body {
   background-position-x: left;
   min-height: 92vh;
 }
+
 
 .ligh {
   background-color: #c4c4c4;
@@ -18,19 +20,27 @@ body {
 }
 
 [data-theme="light"] {
-  --background-image: #c4c4c4;
+  --background-image: url("./assets/svg/wave4.svg");
   --banner-background: #949494;
   --banner-h2: rgb(34, 51, 59);
 }
 [data-theme="dark"] {
-  --background: rgb(58, 88, 102);
+  --background-image: url("./assets/svg/wave1.svg");
   --banner-background: rgb(34, 51, 59);
   --banner-h2: #c6ac8f;
 }
 body {
-  background-color: var(--background);
-  color: var(--banner-h2);
+  background-image: var(--background-image);
+  background-size: cover;
+  /* background-repeat: no-repeat; */
+  /* background-attachment: fixed; */
+  background-position-x: left;
+  min-height: 90vh;
 }
+/*body {
+  background-color: var(--background-image);
+  color: var(--banner-h2);
+}*/
 .banner {
   background-color: var(--banner-background);
   color: var(--banner-h2);

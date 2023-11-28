@@ -47,6 +47,7 @@ public class SellableGood {
   @JoinTable(name = "sellablegoods_taxes",
       joinColumns = { @JoinColumn(name = "sellablegood_id") },
       inverseJoinColumns = { @JoinColumn(name = "tax_id") })
+  @ToString.Exclude
   private Set<Tax> taxes = new HashSet<>();
 
   public void addTax(Tax tax) {

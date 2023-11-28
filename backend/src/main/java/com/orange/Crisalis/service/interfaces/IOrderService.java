@@ -3,6 +3,7 @@ package com.orange.Crisalis.service.interfaces;
 import com.orange.Crisalis.dto.RequestBodyCreateOrderDTO;
 import com.orange.Crisalis.model.dto.OrderDTO;
 import com.orange.Crisalis.model.dto.OrderWithCalculationEngineDTO;
+import com.orange.Crisalis.model.dto.filters.OrderFilter;
 
 
 import java.util.List;
@@ -23,7 +24,7 @@ public interface IOrderService {
 
     List<OrderWithCalculationEngineDTO> getOrdersWithSubTotal();
 
-
+    List<OrderDTO> filterOrderList(OrderFilter orderFilter);
 
     List<OrderDTO> getAllByClientId(Long id);
 

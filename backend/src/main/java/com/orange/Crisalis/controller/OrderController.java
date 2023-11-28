@@ -7,6 +7,7 @@ import com.orange.Crisalis.exceptions.ErrorMessage;
 import com.orange.Crisalis.exceptions.custom.OrderNotFoundException;
 import com.orange.Crisalis.model.dto.OrderDTO;
 import com.orange.Crisalis.model.dto.OrderWithCalculationEngineDTO;
+import com.orange.Crisalis.model.dto.filters.OrderFilter;
 import com.orange.Crisalis.security.Controller.Message;
 import com.orange.Crisalis.service.OrderService;
 import org.springframework.http.HttpStatus;
@@ -48,11 +49,17 @@ public class OrderController {
         this.orderService.createOrder(orderCreateBody);
         return new ResponseEntity<>(new Message("pedido creado con exito"), HttpStatus.OK);
     }
+
     @PreAuthorize("hasAnyRole('USER' ,'ADMIN')")
     @GetMapping("/getAll")
     public List<OrderDTO> getAll(){
         return this.orderService.getOrders();
+    }
 
+    @PreAuthorize("hasAnyRole('USER' ,'ADMIN')")
+    @GetMapping("/filter")
+    public List<OrderDTO> filterOrderList(@RequestBody OrderFilter orderFilter) {
+        return this.orderService.filterOrderList(orderFilter);
     }
 
 

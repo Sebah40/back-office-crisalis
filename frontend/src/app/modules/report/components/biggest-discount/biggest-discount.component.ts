@@ -2,37 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { ActivatedRoute, Router } from '@angular/router';
-
-const DATA: any[] = [
-  {
-    clientId: 1,
-    clientName: 'Gonzalo Fleitas',
-    service: 'Linea celular',
-    discount: 900.0,
-    orderNum: '001',
-  },
-  {
-    clientId: 2,
-    clientName: 'Taxi SRL',
-    service: 'Internet 100MB',
-    discount: 2500.0,
-    orderNum: '043',
-  },
-  {
-    clientId: 3,
-    clientName: 'Pepsi SA',
-    service: 'Netflix',
-    discount: 250.0,
-    orderNum: '021',
-  },
-  {
-    clientId: 4,
-    clientName: 'Coca-Cola',
-    service: 'Internet 200MB',
-    discount: 1200.0,
-    orderNum: '002',
-  },
-];
+import { ReportService } from '../../service/report.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-biggest-discount',
@@ -41,27 +12,44 @@ const DATA: any[] = [
 })
 export class BiggestDiscountComponent {
   dataSource!: any;
-  displayedColumns: string[] = [
-    'clientName',
-    'service',
-    'discount',
-    'orderNum',
-  ];
+  biggestDiscountList!: any;
+  displayedColumns: string[] = ['clientName', 'service', 'discount', 'orderID'];
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private reportService: ReportService,
+    private location: Location
+  ) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((param) => {
       const clientId = param['clientId'];
-      console.log(clientId);
-      if (clientId === 'null') {
-        this.dataSource = new MatTableDataSource<any>(DATA);
-      } else {
-        this.dataSource = new MatTableDataSource<any>(
-          DATA.filter((e) => e.clientId == clientId)
-        );
-      }
+      const dateFrom = param['dateFrom'];
+      const dateTo = param['dateTo'];
+
+      this.reportService
+        .generateBiggestDiscountList(dateFrom, dateTo)
+        .subscribe({
+          next: (res) => {
+            console.log(res);
+            this.biggestDiscountList = res;
+            console.log(this.biggestDiscountList);
+            if (clientId === 'null') {
+              this.dataSource = new MatTableDataSource<any>(
+                this.biggestDiscountList
+              );
+            } else {
+              this.dataSource = new MatTableDataSource<any>(
+                this.biggestDiscountList.filter(
+                  (e: any) => e.clientID == clientId
+                )
+              );
+            }
+            this.dataSource.sort = this.sort;
+          },
+        });
     });
   }
 
@@ -75,12 +63,16 @@ export class BiggestDiscountComponent {
         return 'Cliente';
       case 'service':
         return 'Servicio';
-      case 'orderNum':
+      case 'orderID':
         return 'Número de Pedido';
       case 'discount':
         return 'Mayor Descuento';
       default:
         return column;
     }
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

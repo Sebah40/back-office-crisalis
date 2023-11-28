@@ -17,20 +17,22 @@ import java.util.Date;
 public class ReportTotalDiscount implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", updatable = false, nullable = false)
-    private Long id;
+    @Column(name = "client_id", updatable = false, nullable = false)
+    private Long clientId;
     @Column
-    private String business_name;
+    private Long orderNum;
     @Column
-    private String first_name;
+    private String businessName;
     @Column
-    private String last_name;
+    private String firstName;
+    @Column
+    private String lastName;
     @Column
     private String dtype;
     @Column
-    private String item_name;
+    private String service;
     @Column
-    private Date date_created;
+    private Date date;
     @Column
     private Double discount;
 }

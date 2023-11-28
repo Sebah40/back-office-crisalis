@@ -1,29 +1,28 @@
-
-.gobackbutton{
-    margin-top: 25px;
-    width:100px;
+.gobackbutton {
+  margin-top: 25px;
+  width: 100px;
 }
 
-.gobackbutton:hover{
-    background-color: black;
+.gobackbutton:hover {
+  background-color: black;
+}
 
-.generatebutton{
+.generatebutton {
   background-color: black;
   font-weight: 500;
-  color: #EAE0D5;
+  color: #eae0d5;
   width: 200px;
   height: 50px;
   border: none;
-  
-  transition: .2s;
-  -webkit-transition: .2s;
-  -moz-transition: .2s;
-  -ms-transition: .2s;
-  -o-transition: .2s;
+
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
   margin: 4px;
 }
-.generatebutton:hover{
-  background-color: #EAE0D5;
+.generatebutton:hover {
+  background-color: #eae0d5;
   color: #000;
-
 }

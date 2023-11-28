@@ -43,18 +43,19 @@ public class ClientService {
         Optional<ClientEntity> clientOptional = iClientRepository.findById(clientId);
         return clientOptional.get().getDiscountServices();
     }
-    public Set<ClientDiscountServiceEntity> getAllDiscountServices(Date startDate, Date endDate) {
-        List<ClientDiscountServiceEntity> discountServicesInRange = discountServiceRepository.findByOrderDateBetween(startDate, endDate);
-        return discountServicesInRange.stream()
-                .collect(Collectors.toSet());
-    }
+
 
     public ClientEntity saveClient(ClientEntity client) {
         return iClientRepository.save(client);
     }
 
+    public Set<ClientDiscountServiceEntity> getAllDiscountServices(Date startDate, Date endDate) {
+        List<ClientDiscountServiceEntity> discountServicesInRange = discountServiceRepository.findByOrderDateBetween(startDate, endDate);
+        return discountServicesInRange.stream()
+                .collect(Collectors.toSet());
+    }
     public Set<DiscountServiceDTO> getDiscountServicesInRange(Date startDate, Date endDate) {
-        Set<DiscountServiceDTO> discountServicesInRangeDTO = this.getAllDiscountServices(startDate, endDate).stream()
+        Set<DiscountServiceDTO> discountServicesInRangeDTO = getAllDiscountServices(startDate, endDate).stream()
                 .map(entity -> {
                     DiscountServiceDTO dto = new DiscountServiceDTO();
                     dto.setClientID(entity.getId());
@@ -95,7 +96,7 @@ public class ClientService {
     }
 
     public Set<DiscountServiceGroupedDTO> getDiscountServicesInRangeGroup(Date startDate, Date endDate) {
-        Set<DiscountServiceGroupedDTO> discountServicesInRangeDTO = this.getAllDiscountServices(startDate, endDate).stream()
+        Set<DiscountServiceGroupedDTO> discountServicesInRangeDTO = getAllDiscountServices(startDate, endDate).stream()
                 .map(entity -> {
                     DiscountServiceGroupedDTO dto = new DiscountServiceGroupedDTO();
                     dto.setClientID(entity.getId());

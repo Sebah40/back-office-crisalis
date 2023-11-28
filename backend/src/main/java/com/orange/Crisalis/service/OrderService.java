@@ -1,5 +1,7 @@
 package com.orange.Crisalis.service;
 
+import com.orange.Crisalis.dto.DiscountServiceDTO;
+import com.orange.Crisalis.dto.FilteredReportDTO;
 import com.orange.Crisalis.dto.ProductIdAndQuantityDTO;
 import com.orange.Crisalis.dto.RequestBodyCreateOrderDTO;
 
@@ -14,11 +16,12 @@ import com.orange.Crisalis.model.dto.OrderDTO;
 import com.orange.Crisalis.model.dto.OrderDetailDTO;
 import com.orange.Crisalis.model.dto.OrderDetailWithCalculationEngineDTO;
 import com.orange.Crisalis.model.dto.OrderWithCalculationEngineDTO;
+import com.orange.Crisalis.repository.*;
 import com.orange.Crisalis.model.dto.filters.OrderFilter;
 import com.orange.Crisalis.queries.OrderQueries;
-import com.orange.Crisalis.repository.OrderRepository;
 import com.orange.Crisalis.service.interfaces.ICalculationEngine;
 import com.orange.Crisalis.service.interfaces.IOrderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -33,6 +36,18 @@ public class OrderService implements IOrderService {
     private final ClientService clientService;
     private final SellableGoodService sellableGoodService;
     private final OrderDetailService orderDetailService;
+
+    @Autowired
+    IEnterpriseRepository iEnterpriseRepository;
+    @Autowired
+    IClientRepository iClientRepository;
+    @Autowired
+    IPersonRepository iPersonRepository;
+    @Autowired
+    ClientDiscountServiceRepository discountServiceRepository;
+    @Autowired
+    FilteredReportRepository filteredReportRepository;
+
 
     private final OrderQueries orderQueries;
 
@@ -253,6 +268,53 @@ public class OrderService implements IOrderService {
         }
     }
 
+    public Set<FilteredReportDTO> getDTO(Date startDate, Date endDate, String sellableGood, Integer clientID) {
+        return getAllSellableGoodOrders(startDate, endDate).stream()
+                .filter(entity -> (clientID == null || clientID.equals(orderRepository.findById((long) entity.getId())
+                        .map(order -> order.getClient().getId()).orElse(null))))
+                .flatMap(entity -> orderRepository.findOrderById((long) entity.getId())
+                        .map(order -> order.getOrderDetailList().stream()
+                                .filter(orderDetail -> sellableGood == null || sellableGood.equals(orderDetail.getSellableGood().getName()))
+                                .map(orderDetail -> {
+                                    FilteredReportDTO dto = new FilteredReportDTO();
+                                    dto.setOrderDate(entity.getOrderDate());
+                                    if (clientID == null || clientID.equals(order.getClient().getId())) {
+                                        dto.setClientID(order.getClient().getId());
+                                        dto.setOrderID(entity.getId());
+                                        dto.setSellableGood(orderDetail.getSellableGood().getName());
+                                        dto.setPrice(orderDetail.getSellableGood().getPrice().doubleValue());
+                                        dto.setDiscount(orderDetail.getDiscount());
+                                        if (dto.getDiscount() < 0)
+                                            dto.setDiscount(0.0);
+                                        dto.setSubtotal(ICalculationEngine.generateSubTotal(orderDetail));
+                                        dto.setTotal(ICalculationEngine.generateSubTotal(orderDetail) - dto.getDiscount());
+                                        dto.setQuantity((int) Math.round(ICalculationEngine.generateSubTotal(orderDetail) / orderDetail.getSellableGood().getPrice().doubleValue()));
+                                        dto.setTaxes((double) Math.round(dto.getSubtotal() - orderDetail.getSellableGood().getPrice().doubleValue()*dto.getQuantity()));
+                                        iPersonRepository.findById(dto.getClientID())
+                                                .ifPresent(person -> dto.setClientName(person.getFirstName() + " " + person.getLastName()));
+                                        iEnterpriseRepository.findById(dto.getClientID())
+                                                .ifPresent(company -> dto.setClientName(company.getBusinessName()));
+                                        return dto;
+                                    } else {
+                                        return null;
+                                    }
+                                })
+                        )
+                        .orElse(null)
+                )
+                .collect(Collectors.toSet());
+    }
+
+    public Set<ClientDiscountServiceEntity> getAllDiscountServices(Date startDate, Date endDate) {
+        List<ClientDiscountServiceEntity> discountServicesInRange = discountServiceRepository.findByOrderDateBetween(startDate, endDate);
+        return discountServicesInRange.stream()
+                .collect(Collectors.toSet());
+    }
+    public Set<FilteredReportEntity> getAllSellableGoodOrders(Date startDate, Date endDate) {
+        List<FilteredReportEntity> productsAndServicesInRange = filteredReportRepository.findByOrderDateBetween(startDate, endDate);
+        return productsAndServicesInRange.stream()
+                .collect(Collectors.toSet());
+    }
     @Override
     public void editOrder(OrderDTO orderToEdit) {
          OrderEntity order = orderRepository.findById(orderToEdit.getId()).orElseThrow(() -> new RuntimeException("No existe el pedido."));

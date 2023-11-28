@@ -42,6 +42,7 @@
   width: 200px;
   height: 50px;
   border: none;
+
   border-radius: 10px;
   transition: .2s;
   -webkit-transition: .2s;
@@ -52,6 +53,7 @@
 .generatebutton:hover{
   background-color: #EAE0D5;
   color: #000;
+
 }
 
 .select-option{
@@ -92,4 +94,8 @@ input[type="radio"] + label {
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-weight: 500;
   font-size: 16.5px;
+}
+
+.div-h4{
+  margin: 45px 0 10px;
 }

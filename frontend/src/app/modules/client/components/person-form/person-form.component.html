@@ -2,9 +2,8 @@
     <div>
       <h2 class="text-center text-light-emphasis">Formulario de {{editOrCreateText}}</h2>
     </div>
-  
+    
     <form [formGroup]="formPerson" class="row g-3 needs-validation mx-auto my-4 w-100" novalidate (ngSubmit)="onSubmit()">
-
       <div class="col-md-6 form-floating my-4">
         <input formControlName="firstName" value="{{personEdit.firstName}}" type="text" class="form-control" id="floatingInput" placeholder="Nombre">
         <label for="floatingInput">Nombre de la persona</label>  
@@ -36,4 +35,4 @@
         <button [disabled]="formPerson.invalid" class="btn btn-lg createbutton" type="submit">{{editOrCreateText}}</button>
       </div>
     </form>
-  </div>
+</div>

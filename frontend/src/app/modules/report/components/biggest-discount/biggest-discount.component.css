@@ -1,3 +1,12 @@
+
+.gobackbutton{
+    margin-top: 25px;
+    width:100px;
+}
+
+.gobackbutton:hover{
+    background-color: black;
+
 .generatebutton{
   background-color: black;
   font-weight: 500;
@@ -5,7 +14,7 @@
   width: 200px;
   height: 50px;
   border: none;
-  border-radius: 10px;
+  
   transition: .2s;
   -webkit-transition: .2s;
   -moz-transition: .2s;
@@ -16,4 +25,5 @@
 .generatebutton:hover{
   background-color: #EAE0D5;
   color: #000;
+
 }

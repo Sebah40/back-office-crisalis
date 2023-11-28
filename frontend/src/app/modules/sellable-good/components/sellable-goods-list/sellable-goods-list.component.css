@@ -5,7 +5,7 @@
 #container h2 {
   color: black;
   text-align: center;
-  margin-top: 40px;
+  margin-top: 140px;
 }
 
 /* #container-list {
@@ -19,7 +19,7 @@
 
 #container-list {
   /* background-color: #EAE0D5; */
-  margin-top: 55px;
+  margin-top: 10px;
   color: #22333b;
   height: max-content;
   min-width: 100%;
@@ -70,9 +70,26 @@ td {
   text-align: center;
 }
 
+#container-button{
+  display: flex;
+  justify-content: end;
+  margin-top: 50px;
+}
+
 .createbutton{
-  background-color: black;
-  color: #EAE0D5;
+  background-color: transparent;
+  border: 0.2em solid #22333b;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  font-size: small;
+  padding: 8px 20px;
+  color: black;
+}
+
+#svg-add{
+  width: 20px;
+  height: auto;
+  margin-left: 4px;
 }
 
 .editbutton{

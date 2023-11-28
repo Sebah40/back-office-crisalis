@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule} from '@angular/forms';
 import { IEnterprise } from '../../model/enterprise.model';
 import { EnterpriseService } from '../../service/enterprise-list.service';
 import { ActivatedRoute, Router } from '@angular/router';

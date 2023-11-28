@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { OrderDTO } from '../model/order-dto';
 import { RequestBodyCreateOrderDto } from '../model/request-body-create-order-dto';
+import { CalculatedOrder } from '../model/calculated-order-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,10 @@ export class OrderService {
   }
   public getOrder(id: any): Observable<OrderDTO> {
     return this.httpClient.get<any>(this.orderURL + `/${id}`).pipe(map(res => res))
+  }
+
+  public getOrderWithCalculation(id:number): Observable<CalculatedOrder> {
+    return this.httpClient.get<any>(`${this.orderURL}/withcalculation/${id}`).pipe(map(res => res))
   }
 
   public save(order: RequestBodyCreateOrderDto): Observable<any> {

@@ -43,6 +43,7 @@ li a:hover {
 
 .dropdown-toggle {
   font-size: 17px;
+  border: none;
 }
 
 .show-span {
@@ -61,5 +62,5 @@ li a:hover {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: stretch;
 }

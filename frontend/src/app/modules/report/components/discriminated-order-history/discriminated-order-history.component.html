@@ -1,0 +1,53 @@
+<app-simple-container [title]="title">
+  <app-list-table class="bg-white"
+    [header]="[
+      'Cliente',
+      'Producto/Servicio',
+      'Pedido Nro.',
+      'Estado',
+      'Fecha',
+      'Cantidad',
+      'Precio',
+      'Subtotal',
+      'Impuestos',
+      'Total'
+    ]"
+    id="table"
+  >
+    <ng-container *ngFor="let client of group(data)">
+      <tr style="background-color: rgba(0, 0, 0, 0.3); color: #052c65;">
+        <td style="font-weight: bolder">{{ client.client }}</td>
+        <td colspan="9"></td>
+      </tr>
+      <ng-container *ngFor="let good of client.items">
+        <tr style="background-color: rgba(0, 0, 0, 0.2); color: #052c65;">
+          <td></td>
+          <td style="font-weight: bold">{{ good.sellablegood }}</td>
+          <td colspan="3"></td>
+          <td style="font-weight: bold">{{ good.quantityAccumulator }}</td>
+          <td></td>
+          <td style="font-weight: bold">
+            {{ good.subtotalAccumulator | moneyFormat }}
+          </td>
+          <td style="font-weight: bold">
+            {{ good.totalTaxesAccumulator | moneyFormat }}
+          </td>
+          <td style="font-weight: bold">
+            {{ good.totalAccumulator | moneyFormat }}
+          </td>
+        </tr>
+        <tr *ngFor="let order of good.items">
+          <td colspan="2"></td>
+          <td>{{ order.orderId }}</td>
+          <td>{{ order.status }}</td>
+          <td>{{ order.date | dateFormat }}</td>
+          <td>{{ order.quantity }}</td>
+          <td>{{ order.price | moneyFormat }}</td>
+          <td>{{ order.subtotal | moneyFormat }}</td>
+          <td>{{ order.totalTaxes | moneyFormat }}</td>
+          <td>{{ order.total | moneyFormat }}</td>
+        </tr>
+      </ng-container>
+    </ng-container>
+  </app-list-table>
+</app-simple-container>

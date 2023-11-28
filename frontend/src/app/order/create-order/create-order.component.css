@@ -64,6 +64,7 @@ td {
   /* background-color: transparent; */
   color: #22333b;
   min-height: 100px;
+  max-height: 500px;
   width: 87%;
 }
 

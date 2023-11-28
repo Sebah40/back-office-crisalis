@@ -1,0 +1,19 @@
+.generatebutton{
+  background-color: black;
+  font-weight: 500;
+  color: #EAE0D5;
+  width: 200px;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  transition: .2s;
+  -webkit-transition: .2s;
+  -moz-transition: .2s;
+  -ms-transition: .2s;
+  -o-transition: .2s;
+  margin: 4px;
+}
+.generatebutton:hover{
+  background-color: #EAE0D5;
+  color: #000;
+}

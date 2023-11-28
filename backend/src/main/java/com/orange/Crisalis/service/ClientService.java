@@ -49,6 +49,7 @@ public class ClientService {
         return iClientRepository.save(client);
     }
 
+
     public Set<ClientDiscountServiceEntity> getAllDiscountServices(Date startDate, Date endDate) {
         List<ClientDiscountServiceEntity> discountServicesInRange = discountServiceRepository.findByOrderDateBetween(startDate, endDate);
         return discountServicesInRange.stream()
@@ -56,6 +57,7 @@ public class ClientService {
     }
     public Set<DiscountServiceDTO> getDiscountServicesInRange(Date startDate, Date endDate) {
         Set<DiscountServiceDTO> discountServicesInRangeDTO = getAllDiscountServices(startDate, endDate).stream()
+
                 .map(entity -> {
                     DiscountServiceDTO dto = new DiscountServiceDTO();
                     dto.setClientID(entity.getId());
@@ -96,7 +98,9 @@ public class ClientService {
     }
 
     public Set<DiscountServiceGroupedDTO> getDiscountServicesInRangeGroup(Date startDate, Date endDate) {
+
         Set<DiscountServiceGroupedDTO> discountServicesInRangeDTO = getAllDiscountServices(startDate, endDate).stream()
+
                 .map(entity -> {
                     DiscountServiceGroupedDTO dto = new DiscountServiceGroupedDTO();
                     dto.setClientID(entity.getId());

@@ -34,6 +34,7 @@ public class Tax {
         },
         mappedBy = "taxes")
     @JsonIgnore
+    @ToString.Exclude
     private Set<SellableGood> sellableGoods = new HashSet<>();
 
     public Tax(String taxName, Double taxPercentage) {

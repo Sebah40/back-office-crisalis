@@ -4,14 +4,14 @@
     <table class="p-2" id="custom-table">
       <thead>
         <tr>
-          <th style="background-color: transparent;" class="text-center" *ngFor="let field of ['Id','Nombre','Descripcion','Precio','Tipo','Impuestos']">{{ field }}</th>
+          <th style="background-color: transparent;" class="text-center" *ngFor="let field of ['Nombre','Descripcion','Precio','Tipo','Impuestos']">{{ field }}</th>
           <th style="background-color: transparent;" class="text-center">Acciones</th>
         </tr>
       </thead>
       <tbody>
         <tr style="height: 5px;"></tr>
         <tr class="align-middle" *ngFor="let data of sellableGoodListData">
-          <td class="text-center" >{{ data.id }}</td>
+          
           <td class="text-center" >{{ data.name }}</td>
           <td class="text-center" >{{ data.description }}</td>
           <td class="text-center" >{{ data.price }}</td>

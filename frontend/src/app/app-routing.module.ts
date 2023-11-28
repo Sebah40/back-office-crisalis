@@ -15,29 +15,99 @@ import { CreateOrderComponent } from './order/create-order/create-order.componen
 import { EditOrderComponent } from './order/edit-order/edit-order.component';
 import { ClientList2Component } from './modules/client/components/client-list/client-list.component';
 import { ClientServicesListComponent } from './modules/client/components/client-services-list/client-services-list.component';
+import { userGuard } from './guards/user.guard';
+import { loginGuard } from './guards/login.guard';
 
 const routes: Routes = [
-  { path: 'home', component: HomepageComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'enterprise', component: ClientListComponent },
-  { path: 'enterprise/getAll', component: ClientListComponent },
-  { path: 'enterprise/create', component: EnterpriseFormComponent },
-  { path: 'enterprise/edit/:id', component: EnterpriseFormComponent },
-  { path: 'enterprise/disable', component: ClientListComponent },
-  { path: 'person', component: PersonListComponent },
-  { path: 'person/getAll', component: PersonListComponent },
-  { path: 'person/create', component: PersonFormComponent },
-  { path: 'person/edit/:id', component: PersonFormComponent },
-  { path: 'person/disable', component: PersonListComponent },
-  { path: 'clients', component: ClientList2Component },
-  { path: 'clients/:id/services', component: ClientServicesListComponent },
-  { path: 'taxlist', component: TaxListComponent },
-  { path: 'tax/create', component: TaxCreateComponent },
-  { path: 'tax/edit/:id', component: TaxCreateComponent },
-  { path: 'order/create', component: CreateOrderComponent },
-  { path: 'order/getAll', component: OrderListComponent },
-  { path: 'order/edit/:id', component: EditOrderComponent },
-  { path: 'order/:id', component: OrderComponent },
+  {
+    path: 'home',
+    component: HomepageComponent,
+    canActivate: [userGuard],
+  },
+  { path: 'login', component: LoginComponent, canActivate: [loginGuard] },
+  {
+    path: 'enterprise',
+    component: ClientListComponent,
+    canActivate: [userGuard],
+  },
+  {
+    path: 'enterprise/getAll',
+    component: ClientListComponent,
+    canActivate: [userGuard],
+  },
+  {
+    path: 'enterprise/create',
+    component: EnterpriseFormComponent,
+    canActivate: [userGuard],
+  },
+  {
+    path: 'enterprise/edit/:id',
+    component: EnterpriseFormComponent,
+    canActivate: [userGuard],
+  },
+  {
+    path: 'enterprise/disable',
+    component: ClientListComponent,
+    canActivate: [userGuard],
+  },
+  { path: 'person', component: PersonListComponent, canActivate: [userGuard] },
+  {
+    path: 'person/getAll',
+    component: PersonListComponent,
+    canActivate: [userGuard],
+  },
+  {
+    path: 'person/create',
+    component: PersonFormComponent,
+    canActivate: [userGuard],
+  },
+  {
+    path: 'person/edit/:id',
+    component: PersonFormComponent,
+    canActivate: [userGuard],
+  },
+  {
+    path: 'person/disable',
+    component: PersonListComponent,
+    canActivate: [userGuard],
+  },
+  {
+    path: 'clients',
+    component: ClientList2Component,
+    canActivate: [userGuard],
+  },
+  {
+    path: 'clients/:id/services',
+    component: ClientServicesListComponent,
+    canActivate: [userGuard],
+  },
+  { path: 'taxlist', component: TaxListComponent, canActivate: [userGuard] },
+  {
+    path: 'tax/create',
+    component: TaxCreateComponent,
+    canActivate: [userGuard],
+  },
+  {
+    path: 'tax/edit/:id',
+    component: TaxCreateComponent,
+    canActivate: [userGuard],
+  },
+  {
+    path: 'order/create',
+    component: CreateOrderComponent,
+    canActivate: [userGuard],
+  },
+  {
+    path: 'order/getAll',
+    component: OrderListComponent,
+    canActivate: [userGuard],
+  },
+  {
+    path: 'order/edit/:id',
+    component: EditOrderComponent,
+    canActivate: [userGuard],
+  },
+  { path: 'order/:id', component: OrderComponent, canActivate: [userGuard] },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];

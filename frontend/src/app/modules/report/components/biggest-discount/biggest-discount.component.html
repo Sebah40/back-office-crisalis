@@ -1,0 +1,21 @@
+
+
+<div class="container w-75 d-flex flex-column justify-content-center align-items-center " style="height: 60vh;">
+  <h2 class="m-lg-5 py-5">Informe de servicio que mayor descuento generó</h2>
+    
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <!-- Columnas generadas dinámicamente con *ngFor -->
+    <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ getColumnHeader(column) }} </th>
+      <td mat-cell *matCellDef="let element"> {{ element[column] }} </td>
+    </ng-container>
+
+    <!-- Definición de filas y encabezados -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+  <div>
+    <button (click)="goBack()">Volver</button>
+  </div>
+</div>

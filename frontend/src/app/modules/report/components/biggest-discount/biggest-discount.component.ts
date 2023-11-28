@@ -1,9 +1,11 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ReportService } from '../../service/report.service';
 import { Location } from '@angular/common';
+import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-biggest-discount',
@@ -15,6 +17,7 @@ export class BiggestDiscountComponent {
   biggestDiscountList!: any;
   displayedColumns: string[] = ['clientName', 'service', 'discount', 'orderID'];
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild('pdfTable') pdfTable!: ElementRef;
 
   constructor(
     private route: ActivatedRoute,
@@ -74,5 +77,23 @@ export class BiggestDiscountComponent {
 
   goBack() {
     this.location.back();
+  }
+
+  generatePDF() {
+    const content = this.pdfTable.nativeElement;
+
+    const options = {
+      scale: 2.5,
+    };
+
+    html2canvas(content, options).then((canvas) => {
+      const imgData = canvas.toDataURL('image/jpeg');
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const imgWidth = 210;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+      pdf.addImage(imgData, 'JPEG', 0, 20, imgWidth, imgHeight);
+      pdf.save('informe-servicio.pdf');
+    });
   }
 }

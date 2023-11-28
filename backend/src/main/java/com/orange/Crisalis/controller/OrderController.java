@@ -1,6 +1,7 @@
 package com.orange.Crisalis.controller;
 
 
+import com.orange.Crisalis.dto.FilteredReportDTO;
 import com.orange.Crisalis.dto.RequestBodyCreateOrderDTO;
 
 import com.orange.Crisalis.exceptions.ErrorMessage;
@@ -9,6 +10,7 @@ import com.orange.Crisalis.model.dto.OrderDTO;
 import com.orange.Crisalis.model.dto.OrderWithCalculationEngineDTO;
 import com.orange.Crisalis.security.Controller.Message;
 import com.orange.Crisalis.service.OrderService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +19,11 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import javax.validation.ValidationException;
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/order")
@@ -83,6 +88,26 @@ public class OrderController {
             ErrorMessage errorMessage = new ErrorMessage(e, "/validate/" + orderId);
             return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
         }
+    }
+
+    @GetMapping("/filteredReport")
+    public ResponseEntity<Set<FilteredReportDTO>> getFilteredReport(
+            @RequestParam(name = "startDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+            @RequestParam(name = "endDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
+            @RequestParam(name = "sellableGood", required = false) String sellableGood,
+            @RequestParam(name = "clientID", required = false) Integer clientID) {
+        if (startDate == null) {
+            startDate = Date.from(Date.from(Instant.parse("1980-01-13T00:00:00Z")).toInstant());
+        }
+
+        if (endDate == null) {
+            endDate = Date.from(Date.from(Instant.parse("2300-01-13T23:59:59Z")).toInstant());
+        }
+        Set<FilteredReportDTO> filteredReportDTO = orderService.getDTO(startDate, endDate, sellableGood, clientID);
+        if (filteredReportDTO.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(filteredReportDTO);
     }
 
     @GetMapping("/get")

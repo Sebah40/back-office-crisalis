@@ -1,6 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 
 
+body {
+  background-image: url("./assets/svg/wave4.svg");
+  background-size: cover;
+  /* background-repeat: no-repeat; */
+  /* background-attachment: fixed; */
+  background-position-x: left;
+  min-height: 92vh;
+}
+
 
 .ligh {
   background-color: #c4c4c4;
@@ -73,4 +82,35 @@ body {
 
 .searchbar input{
   text-align: center;
+}
+*{
+  box-sizing: border-box;
+}
+*::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+*::-webkit-scrollbar:vertical {
+    width:8px;
+}
+*::-webkit-scrollbar-button:increment {
+    display: none;
+} 
+*::-webkit-scrollbar:horizontal {
+    height: 2px;
+   
+}
+*::-webkit-scrollbar-thumb {
+    background-color: #797979;
+    border-radius: 15px;
+    border: 2px solid #f1f2f3;
+}
+
+*::-webkit-scrollbar-track {
+    border-radius: 15px;  
+}
+*::-webkit-scrollbar-button {
+    display: none;
+}
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
 }

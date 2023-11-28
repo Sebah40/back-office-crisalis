@@ -35,6 +35,6 @@ export class HomepageComponent {
     imagen: '../assets/png/informes1.png',
     color: '#C8A34E',
     nombre: 'Informes',
-    path: '/chart',
+    path: '/report',
   };
 }

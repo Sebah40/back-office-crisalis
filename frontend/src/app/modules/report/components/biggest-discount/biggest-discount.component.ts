@@ -4,8 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ReportService } from '../../service/report.service';
 import { Location } from '@angular/common';
-import { jsPDF } from 'jspdf';
-import html2canvas from 'html2canvas';
+import { PdfService } from '../../service/pdf.service';
 
 @Component({
   selector: 'app-biggest-discount',
@@ -23,7 +22,8 @@ export class BiggestDiscountComponent {
     private route: ActivatedRoute,
     private router: Router,
     private reportService: ReportService,
-    private location: Location
+    private location: Location,
+    private pdfService: PdfService
   ) {}
 
   ngOnInit(): void {
@@ -81,19 +81,6 @@ export class BiggestDiscountComponent {
 
   generatePDF() {
     const content = this.pdfTable.nativeElement;
-
-    const options = {
-      scale: 2.5,
-    };
-
-    html2canvas(content, options).then((canvas) => {
-      const imgData = canvas.toDataURL('image/jpeg');
-      const pdf = new jsPDF('p', 'mm', 'a4');
-      const imgWidth = 210;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
-      pdf.addImage(imgData, 'JPEG', 0, 20, imgWidth, imgHeight);
-      pdf.save('informe-servicio.pdf');
-    });
+    this.pdfService.generatePdf(content, 'informe-servicio.pdf');
   }
 }

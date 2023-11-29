@@ -1,12 +1,14 @@
 export interface OrderByClient {
-  client: string;
+  clientID: number;
+  clientName: string;
   sellableGood: string;
-  orderId: number;
+  orderID: number;
   orderStatus: string;
-  date: string;
+  orderDate: string;
   quantity: number;
   price: number;
   subtotal: number;
-  totalTaxes: number;
+  taxes: number;
   total: number;
+  discount: number;
 }

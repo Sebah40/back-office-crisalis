@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrderByClient } from '../../DTOs/orderByClientDTO.model';
 import { GroupClient } from '../../DTOs/groupData.model';
 import { ActivatedRoute } from '@angular/router';
+import { ReportService } from '../../service/report.service';
 
 @Component({
   selector: 'app-discriminated-order-history',
@@ -13,77 +14,93 @@ export class DiscriminatedOrderHistoryComponent implements OnInit {
 
   data:OrderByClient[] = [
     {
-      client: "Coca Cola",
+      clientName: "Coca Cola",
       sellableGood: "Internet 100 MB",
-      orderId: 23,
+      orderID: 23,
       orderStatus: "Activo",
-      date: "01-feb",
+      orderDate: "01-feb",
       quantity: 1,
       price: 2000,
       subtotal: 2000,
-      totalTaxes: 2100,
-      total: 10250
+      taxes: 2100,
+      total: 10250,
+      discount: 0,
+      clientID: 1,
     },
     {
-      client: "Coca Cola",
+      clientName: "Coca Cola",
       sellableGood: "Celular",
-      orderId: 23,
+      orderID: 23,
       orderStatus: "Activo",
-      date: "01-feb",
+      orderDate: "01-feb",
       quantity: 2,
       price: 300,
       subtotal: 500,
-      totalTaxes: 2100,
-      total: 10250
+      taxes: 2100,
+      total: 10250,
+      discount: 0,
+      clientID: 1,
     },
     {
-      client: "Coca Cola",
+      clientName: "Coca Cola",
       sellableGood: "Celular",
-      orderId: 34,
+      orderID: 34,
       orderStatus: "Anulado",
-      date: "05-mar",
+      orderDate: "05-mar",
       quantity: 1,
       price: 350,
       subtotal: 350,
-      totalTaxes: 70,
-      total: 420
+      taxes: 70,
+      total: 420,
+      discount: 0,
+      clientID: 1,
     },
     {
-      client: "Pepsi S.a.",
+      clientName: "Pepsi S.a.",
       sellableGood: "Celular",
-      orderId: 25,
+      orderID: 25,
       orderStatus: "Activo",
-      date: "02-feb",
+      orderDate: "02-feb",
       quantity: 1,
       price: 300,
       subtotal: 300,
-      totalTaxes: 60,
-      total: 420
+      taxes: 60,
+      total: 420,
+      discount: 0,
+      clientID: 1,
     },
     {
-      client: "Pepsi S.a.",
+      clientName: "Pepsi S.a.",
       sellableGood: "Internet 200 MB",
-      orderId: 26,
+      orderID: 26,
       orderStatus: "Activo",
-      date: "03-feb",
+      orderDate: "03-feb",
       quantity: 1,
       price: 2500,
       subtotal: 2500,
-      totalTaxes: 2600,
-      total: 12550
+      taxes: 2600,
+      total: 12550,
+      discount: 0,
+      clientID: 1,
     }
   ];
   
-  constructor(private route: ActivatedRoute) {}
+  constructor(private reportService: ReportService,private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((param) => {
       const clientId = param['clientId'];
       const dateFrom = param['dateFrom']
       const dateTo = param['dateTo']
-      console.log(clientId);
+      this.reportService
+        .generateOrderHistory(dateFrom, dateTo, clientId)
+        .subscribe({
+          next: (res) => {
+            this.data = res;
+          },
+        });
     });
-  }
+    }
   
   valores(order:OrderByClient):any[]{
     return Object.values(order);    
@@ -91,7 +108,7 @@ export class DiscriminatedOrderHistoryComponent implements OnInit {
 
   group(orders:OrderByClient[]):GroupClient[]{
     return orders.reduce((acc: GroupClient[], order: OrderByClient) => {
-      const clientGroup = acc.find(group => group.client === order.client);
+      const clientGroup = acc.find(group => group.client === order.clientName);
     
       if (clientGroup) {
         const goodGroup = clientGroup.items.find(good => good.sellablegood === order.sellableGood);
@@ -99,16 +116,16 @@ export class DiscriminatedOrderHistoryComponent implements OnInit {
         if (goodGroup) {
           goodGroup.quantityAccumulator += order.quantity;
           goodGroup.subtotalAccumulator += order.subtotal;
-          goodGroup.totalTaxesAccumulator += order.totalTaxes;
+          goodGroup.totalTaxesAccumulator += order.taxes;
           goodGroup.totalAccumulator += order.total;
           goodGroup.items.push({
-            orderId: order.orderId,
+            orderId: order.orderID,
             status: order.orderStatus,
-            date: new Date(order.date),
+            date: new Date(order.orderDate),
             quantity: order.quantity,
             price: order.price,
             subtotal: order.subtotal,
-            totalTaxes: order.totalTaxes,
+            totalTaxes: order.taxes,
             total: order.total
           });
         } else {
@@ -116,37 +133,37 @@ export class DiscriminatedOrderHistoryComponent implements OnInit {
             sellablegood: order.sellableGood,
             quantityAccumulator: order.quantity,
             subtotalAccumulator: order.subtotal,
-            totalTaxesAccumulator: order.totalTaxes,
+            totalTaxesAccumulator: order.taxes,
             totalAccumulator: order.total,
             items: [{
-              orderId: order.orderId,
+              orderId: order.orderID,
               status: order.orderStatus,
-              date: new Date(order.date),
+              date: new Date(order.orderDate),
               quantity: order.quantity,
               price: order.price,
               subtotal: order.subtotal,
-              totalTaxes: order.totalTaxes,
+              totalTaxes: order.taxes,
               total: order.total
             }]
           });
         }
       } else {
         acc.push({
-          client: order.client,
+          client: order.clientName,
           items: [{
             sellablegood: order.sellableGood,
             quantityAccumulator: order.quantity,
             subtotalAccumulator: order.subtotal,
-            totalTaxesAccumulator: order.totalTaxes,
+            totalTaxesAccumulator: order.taxes,
             totalAccumulator: order.total,
             items: [{
-              orderId: order.orderId,
+              orderId: order.orderID,
               status: order.orderStatus,
-              date: new Date(order.date),
+              date: new Date(order.orderDate),
               quantity: order.quantity,
               price: order.price,
               subtotal: order.subtotal,
-              totalTaxes: order.totalTaxes,
+              totalTaxes: order.taxes,
               total: order.total
             }]
           }]

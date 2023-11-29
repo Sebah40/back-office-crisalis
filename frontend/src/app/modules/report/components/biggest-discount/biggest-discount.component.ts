@@ -81,6 +81,6 @@ export class BiggestDiscountComponent {
 
   generatePDF() {
     const content = this.pdfTable.nativeElement;
-    this.pdfService.generatePdf(content);
+    this.pdfService.generatePdf(content, 'informe-servicio.pdf');
   }
 }

@@ -6,7 +6,7 @@ import html2canvas from 'html2canvas';
   providedIn: 'root',
 })
 export class PdfService {
-  generatePdf(content: HTMLElement) {
+  generatePdf(content: HTMLElement, namePdf: string) {
     const options = {
       scale: 2.5,
     };
@@ -18,7 +18,7 @@ export class PdfService {
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
       pdf.addImage(imgData, 'JPEG', 0, 20, imgWidth, imgHeight);
-      pdf.save('informe-servicio.pdf');
+      pdf.save(namePdf);
     });
   }
 }

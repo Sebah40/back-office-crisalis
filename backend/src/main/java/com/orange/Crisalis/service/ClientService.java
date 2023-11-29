@@ -77,6 +77,8 @@ public class ClientService {
 
     public Set<DiscountServiceDTO> getMaxDiscountServiceInRange(Date startDate, Date endDate) {
         Map<Integer, DiscountServiceDTO> maxDiscountByClient = getAllDiscountServices(startDate, endDate).stream()
+                .filter(Objects::nonNull)
+                .filter(dto -> dto.getDiscount() > 0)
                 .collect(Collectors.toMap(
                         entity -> entity.getClient().getId(),
                         dto -> {

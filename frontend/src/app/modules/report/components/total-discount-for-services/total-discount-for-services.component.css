@@ -3,6 +3,10 @@
     width: 200px;
 }
 
+.reporttable{
+    max-height: 500px;
+}
+
 .reporttable td{
     padding: 5px;
     min-width: 100px;

@@ -1,0 +1,23 @@
+.gobackbutton{
+    margin-top: 25px;
+    width: 200px;
+}
+
+.reporttable td{
+    padding: 10px;
+}
+
+.td-client{
+    text-align: center;
+    text-transform: uppercase;
+    font-size: larger;
+    color: black;
+    font-weight: bold;
+    border-bottom: 3px solid black;
+}
+
+/* .td-client1{
+    background-color: transparent;
+    border-top: 1px solid black;
+    border-bottom: 3px solid black;
+} */

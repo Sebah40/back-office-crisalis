@@ -4,7 +4,9 @@
 }
 
 .reporttable td{
-    padding: 10px;
+    padding: 5px;
+    min-width: 100px;
+    height: 45px;
 }
 
 .td-client{

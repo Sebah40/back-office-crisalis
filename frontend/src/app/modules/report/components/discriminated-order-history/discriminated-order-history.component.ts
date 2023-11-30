@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { OrderByClient } from '../../DTOs/orderByClientDTO.model';
 import { GroupClient } from '../../DTOs/groupData.model';
 import { ActivatedRoute } from '@angular/router';
 import { ReportService } from '../../service/report.service';
+import { PdfService } from '../../service/pdf.service';
+import { Location } from '@angular/common';
+import { SimpleContainerComponent } from 'src/app/modules/shared/components/simple-container/simple-container.component';
 
 @Component({
   selector: 'app-discriminated-order-history',
@@ -11,6 +14,7 @@ import { ReportService } from '../../service/report.service';
 })
 export class DiscriminatedOrderHistoryComponent implements OnInit {
   title = "Informe de historial de pedidos por cliente"
+  @ViewChild(SimpleContainerComponent) simpleContainer!:SimpleContainerComponent; 
 
   data:OrderByClient[] = [
     {
@@ -85,7 +89,10 @@ export class DiscriminatedOrderHistoryComponent implements OnInit {
     }
   ];
   
-  constructor(private reportService: ReportService,private route: ActivatedRoute) {}
+  constructor(private reportService: ReportService,
+    private route: ActivatedRoute, 
+    private location: Location,
+    private pdfService: PdfService) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((param) => {
@@ -100,7 +107,16 @@ export class DiscriminatedOrderHistoryComponent implements OnInit {
           },
         });
     });
-    }
+  }
+
+  goBack() {
+    this.location.back();
+  }
+
+  generatePDF() {
+    const content = this.simpleContainer.getRootElement();
+    this.pdfService.generatePdf(content, 'informe-historial.pdf');
+  }
   
   valores(order:OrderByClient):any[]{
     return Object.values(order);    

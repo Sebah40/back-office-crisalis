@@ -20,6 +20,10 @@ public class ClientDiscountServiceEntity {
     private ClientEntity client;
 
     @ManyToOne
+    @JoinColumn(name = "order_id")
+    private OrderEntity order;
+
+    @ManyToOne
     @JoinColumn(name = "sellablegood_id")
     private SellableGood sellableGood;
 
@@ -33,8 +37,9 @@ public class ClientDiscountServiceEntity {
     public ClientDiscountServiceEntity() {
     }
 
-    public ClientDiscountServiceEntity(ClientEntity client, SellableGood sellableGood, Double discount, Date date) {
+    public ClientDiscountServiceEntity(ClientEntity client, OrderEntity order, SellableGood sellableGood, Double discount, Date date) {
         this.client = client;
+        this.order = order;
         this.sellableGood = sellableGood;
         this.discount = discount;
         this.orderDate   = date;
@@ -78,5 +83,13 @@ public class ClientDiscountServiceEntity {
 
     public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
+    }
+
+    public OrderEntity getOrder() {
+        return order;
+    }
+
+    public void setOrder(OrderEntity order) {
+        this.order = order;
     }
 }

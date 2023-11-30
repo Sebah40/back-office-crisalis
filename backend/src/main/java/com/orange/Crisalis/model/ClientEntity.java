@@ -34,8 +34,8 @@ public class ClientEntity {
         return discountServices;
     }
 
-    public void addDiscountService(SellableGood service, Double discount, Date date) {
-        ClientDiscountServiceEntity newEntry = new ClientDiscountServiceEntity(this,service, discount, date);
+    public void addDiscountService(SellableGood service, OrderEntity order, Double discount, Date date) {
+        ClientDiscountServiceEntity newEntry = new ClientDiscountServiceEntity(this,order,service, discount, date);
         this.discountServices.add(newEntry);
     }
 

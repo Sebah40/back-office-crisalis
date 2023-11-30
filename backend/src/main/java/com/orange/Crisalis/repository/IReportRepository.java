@@ -11,6 +11,6 @@ import java.util.List;
 
 public interface IReportRepository extends JpaRepository<ReportTotalDiscount, Long> {
     @Transactional
-    @Procedure(name = "reportTotalDiscount(:fromDate, :untilDate)")
-    List<ReportTotalDiscount> reportTotalDiscount(@Param("fromDate") String fromDate, @Param("untilDate") String untilDate);
+    @Procedure(name = "reportTotalDiscount(:from_date, :until_date)")
+    List<ReportTotalDiscount> reportTotalDiscount(@Param("from_date") String fromDate, @Param("until_date") String untilDate);
 }

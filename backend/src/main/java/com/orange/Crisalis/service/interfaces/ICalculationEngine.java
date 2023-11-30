@@ -59,9 +59,9 @@ public interface ICalculationEngine {
 
    static Double generateSubTotal(OrderDetail detail){
         return (
-                detail.getQuantity() * detail.getPriceSell())
-                + detail.getSellableGood().getSupportCharge().doubleValue()
-                + calculateValueWarranty(detail);
+                detail.getQuantity() * detail.getSellableGood().getPrice().doubleValue());
+//                + detail.getSellableGood().getSupportCharge().doubleValue()
+//                + calculateValueWarranty(detail);
    }
    static Double generateSubTotal(OrderEntity order){
        return order.getOrderDetailList()

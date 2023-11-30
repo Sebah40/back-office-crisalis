@@ -17,8 +17,11 @@ public class ReportController {
 
     @GetMapping("/total-discount")
     @Transactional(readOnly = false)
-    public List<ReportTotalDiscount> getTotalDiscountPerClient(@RequestParam("fromDate") String fromDate,
-                                                               @RequestParam("untilDate") String untilDate) {
+    public List<ReportTotalDiscount> getTotalDiscountPerClient(@RequestParam("from_date") String fromDate,
+                                                               @RequestParam("until_date") String untilDate) {
+        System.out.println(fromDate);
+        System.out.println(untilDate);
+        
         return reportService.totalDiscountReport(fromDate, untilDate);
     }
 }

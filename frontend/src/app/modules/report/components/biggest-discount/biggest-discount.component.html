@@ -33,7 +33,12 @@
           mat-cell
           *matCellDef="let element"
         >
-          {{ element[column] }}
+          <ng-container *ngIf="column === 'discount'; else otherColumns">
+            {{ element[column] | currency : "USD" : "symbol" : "1.2-2" }}
+          </ng-container>
+          <ng-template #otherColumns>
+            {{ element[column] }}
+          </ng-template>
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

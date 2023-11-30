@@ -45,21 +45,22 @@ public class CrisalisApplication {
                 roleRepo.save(admin);
 
                 roleRepo.save(user);
+                UserEntity adminUser = new UserEntity();
+                adminUser.setPassword(passwordEncoder.encode("admin"));
+                adminUser.setUsername("admin");
+                adminUser.setName("admin");
+                adminUser.setEmail("admin@admin.com");
+                adminUser.setActive(true);
+                Set<RoleEntity> roles = new HashSet<>();
+                roles.add(admin);
+                roles.add(user);
+                adminUser.setRoles(roles);
+
+                iUserRepository.save(adminUser);
 
             }
 
-            UserEntity adminUser = new UserEntity();
-            adminUser.setPassword(passwordEncoder.encode("admin"));
-            adminUser.setUsername("admin");
-            adminUser.setName("admin");
-            adminUser.setEmail("admin@admin.com");
-            adminUser.setActive(true);
-            Set<RoleEntity> roles = new HashSet<>();
-            roles.add(admin);
-            roles.add(user);
-            adminUser.setRoles(roles);
 
-            iUserRepository.save(adminUser);
 
 
 

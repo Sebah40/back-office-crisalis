@@ -28,5 +28,44 @@ public class CrisalisApplication {
 	public static void main(String[] args) {
         SpringApplication.run(CrisalisApplication.class, args);
     }
+    @Bean
+    CommandLineRunner commandLineRunner(
+            IUserRepository iUserRepository,
+            IRoleRepository  roleRepo,
+            PasswordEncoder passwordEncoder
 
+
+
+    ) {
+        return args -> {
+            RoleEntity admin = new RoleEntity(RoleName.ROLE_ADMIN);
+            RoleEntity user = new RoleEntity(RoleName.ROLE_USER);
+            if(roleRepo.findAll().isEmpty()){
+
+                roleRepo.save(admin);
+
+                roleRepo.save(user);
+
+            }
+
+            UserEntity adminUser = new UserEntity();
+            adminUser.setPassword(passwordEncoder.encode("admin"));
+            adminUser.setUsername("admin");
+            adminUser.setName("admin");
+            adminUser.setEmail("admin@admin.com");
+            adminUser.setActive(true);
+            Set<RoleEntity> roles = new HashSet<>();
+            roles.add(admin);
+            roles.add(user);
+            adminUser.setRoles(roles);
+
+            iUserRepository.save(adminUser);
+
+
+
+
+
+
+        };
+    }
 }

@@ -21,7 +21,7 @@ public class ReportController {
                                                                @RequestParam("until_date") String untilDate) {
         System.out.println(fromDate);
         System.out.println(untilDate);
-        
+
         return reportService.totalDiscountReport(fromDate, untilDate);
     }
 }

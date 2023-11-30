@@ -30,6 +30,8 @@ export class DiscriminatedOrderHistoryComponent implements OnInit {
       total: 10250,
       discount: 0,
       clientID: 1,
+      warrantyValue: 0,
+      supportCharge: 0
     },
     {
       clientName: "Coca Cola",
@@ -44,6 +46,8 @@ export class DiscriminatedOrderHistoryComponent implements OnInit {
       total: 10250,
       discount: 0,
       clientID: 1,
+      warrantyValue: 0,
+      supportCharge: 0
     },
     {
       clientName: "Coca Cola",
@@ -58,6 +62,8 @@ export class DiscriminatedOrderHistoryComponent implements OnInit {
       total: 420,
       discount: 0,
       clientID: 1,
+      warrantyValue: 0,
+      supportCharge:0
     },
     {
       clientName: "Pepsi S.a.",
@@ -72,6 +78,8 @@ export class DiscriminatedOrderHistoryComponent implements OnInit {
       total: 420,
       discount: 0,
       clientID: 1,
+      warrantyValue: 0,
+      supportCharge:0
     },
     {
       clientName: "Pepsi S.a.",
@@ -86,6 +94,8 @@ export class DiscriminatedOrderHistoryComponent implements OnInit {
       total: 12550,
       discount: 0,
       clientID: 1,
+      warrantyValue: 0,
+      supportCharge: 0
     }
   ];
   
@@ -134,6 +144,7 @@ export class DiscriminatedOrderHistoryComponent implements OnInit {
           goodGroup.subtotalAccumulator += order.subtotal;
           goodGroup.totalTaxesAccumulator += order.taxes;
           goodGroup.totalAccumulator += order.total;
+          goodGroup.discountAccumulator += order.discount;
           goodGroup.items.push({
             orderId: order.orderID,
             status: order.orderStatus,
@@ -142,7 +153,10 @@ export class DiscriminatedOrderHistoryComponent implements OnInit {
             price: order.price,
             subtotal: order.subtotal,
             totalTaxes: order.taxes,
-            total: order.total
+            total: order.total,
+            warrantyValue: order.warrantyValue,
+            supportCharge: order.supportCharge,
+            discount: order.discount
           });
         } else {
           clientGroup.items.push({
@@ -150,6 +164,7 @@ export class DiscriminatedOrderHistoryComponent implements OnInit {
             quantityAccumulator: order.quantity,
             subtotalAccumulator: order.subtotal,
             totalTaxesAccumulator: order.taxes,
+            discountAccumulator: order.discount,
             totalAccumulator: order.total,
             items: [{
               orderId: order.orderID,
@@ -159,7 +174,10 @@ export class DiscriminatedOrderHistoryComponent implements OnInit {
               price: order.price,
               subtotal: order.subtotal,
               totalTaxes: order.taxes,
-              total: order.total
+              total: order.total,
+              warrantyValue: order.warrantyValue,
+              supportCharge: order.supportCharge,
+              discount: order.discount
             }]
           });
         }
@@ -171,6 +189,7 @@ export class DiscriminatedOrderHistoryComponent implements OnInit {
             quantityAccumulator: order.quantity,
             subtotalAccumulator: order.subtotal,
             totalTaxesAccumulator: order.taxes,
+            discountAccumulator: order.discount,
             totalAccumulator: order.total,
             items: [{
               orderId: order.orderID,
@@ -180,7 +199,10 @@ export class DiscriminatedOrderHistoryComponent implements OnInit {
               price: order.price,
               subtotal: order.subtotal,
               totalTaxes: order.taxes,
-              total: order.total
+              total: order.total,
+              warrantyValue: order.warrantyValue,
+              supportCharge: order.supportCharge,
+              discount: order.discount
             }]
           }]
         });

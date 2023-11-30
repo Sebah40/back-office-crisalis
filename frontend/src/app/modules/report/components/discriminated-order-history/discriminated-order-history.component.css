@@ -2,23 +2,10 @@ td {
   text-align: center;
 }
 
-.reporttable{
-  max-height: 500px;
-}
-
-.reporttable td{
-  padding: 5px;
-  min-width: 100px;
-  height: 45px;
-}
-
 .td-client{
   text-align: center;
-  text-transform: uppercase;
-  font-size: larger;
   color: black;
-  font-weight: bold;
-  border-bottom: 3px solid black;
+  border-bottom: .125rem solid rgba(0,0,0,.5);
 }
 
 .gobackbutton {

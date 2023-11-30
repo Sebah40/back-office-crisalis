@@ -77,6 +77,8 @@ public class ClientService {
 
     public Set<DiscountServiceDTO> getMaxDiscountServiceInRange(Date startDate, Date endDate) {
         Map<Integer, DiscountServiceDTO> maxDiscountByClient = getAllDiscountServices(startDate, endDate).stream()
+                .filter(Objects::nonNull)
+                .filter(dto -> dto.getDiscount() > 0)
                 .collect(Collectors.toMap(
                         entity -> entity.getClient().getId(),
                         dto -> {
@@ -84,7 +86,7 @@ public class ClientService {
                             result.setClientID(dto.getClient().getId());
                             result.setService(dto.getSellableGood().getName());
                             result.setDiscount(dto.getDiscount());
-                            result.setOrderID(dto.getId());
+                            result.setOrderID(dto.getOrder().getId().intValue());
                             iPersonRepository.findById(result.getClientID())
                                     .ifPresent(person -> result.setClientName(person.getFirstName() + " " + person.getLastName()));
                             iEnterpriseRepository.findById(result.getClientID())

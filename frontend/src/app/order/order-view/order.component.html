@@ -1,60 +1,91 @@
 <app-simple-container #pdfTable [title]="title">
   <div class="container d-flex justify-content-between mb-3 px-5">
-    <div class="card" style="max-width: 30rem;width: 100%;">
+    <div class="card" style="max-width: 30rem; width: 100%">
       <div class="card-body">
         <h5 class="card-title">Cliente</h5>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item" *ngFor="let item of clientToData(order.client)">
-            <span class="fw-medium">{{item[0]}}:</span> {{item[1]}}
+          <li
+            class="list-group-item"
+            *ngFor="let item of clientToData(order.client)"
+          >
+            <span class="fw-medium">{{ item[0] }}:</span> {{ item[1] }}
           </li>
         </ul>
       </div>
     </div>
-    <div class="card" style="max-width: 30rem;width: 100%;">
+    <div class="card" style="max-width: 30rem; width: 100%">
       <div class="card-body">
         <h5 class="card-title">Pedido</h5>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
-            <span class="fw-medium">Nro. de pedido: </span> {{order.id}}
+            <span class="fw-medium">Nro. de pedido: </span> {{ order.id }}
           </li>
           <li class="list-group-item">
-            <span class="fw-medium">Fecha: </span> {{order.dateCreated | date: 'dd/MM/yyyy'}}
+            <span class="fw-medium">Fecha: </span>
+            {{ order.dateCreated | date : "dd/MM/yyyy" }}
           </li>
           <li class="list-group-item">
-            <span class="fw-medium">Estado: </span> {{order.orderState}}
+            <span class="fw-medium">Estado: </span> {{ order.orderState }}
           </li>
         </ul>
       </div>
     </div>
   </div>
-  <app-list-table [header]="['Cantidad','Nombre','Tipo','Precio/u','Impuestos','$ Impuestos/u','Garantia/u','Soporte','Descuento','Subtotal']">
+  <app-list-table
+    [header]="[
+      'Cantidad',
+      'Nombre',
+      'Tipo',
+      'Precio/u',
+      'Impuestos',
+      '$ Impuestos/u',
+      'Garantia/u',
+      'Soporte',
+      'Descuento',
+      'Subtotal'
+    ]"
+  >
     <tr *ngFor="let detail of order.orderDetailList">
-      <td>{{detail.quantity}}</td>
-      <td>{{detail.sellableGood.name}}</td>
-      <td>{{detail.sellableGood.type == 'PRODUCT' ? 'Producto' : 'Servicio'}}</td>
-      <td>{{detail.sellableGood.price|moneyFormat}}</td>
+      <td>{{ detail.quantity }}</td>
+      <td>{{ detail.sellableGood.name }}</td>
       <td>
-        <div class="dropdown" [hidden]="detail?.sellableGood?.taxes?.length == 0">
-          <button class="btn dropdown-toggle editbutton" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        {{ detail.sellableGood.type == "PRODUCT" ? "Producto" : "Servicio" }}
+      </td>
+      <td>{{ detail.sellableGood.price | moneyFormat }}</td>
+      <td>
+        <div
+          class="dropdown"
+          [hidden]="detail?.sellableGood?.taxes?.length == 0"
+        >
+          <button
+            class="btn dropdown-toggle editbutton"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
             Ver impuestos
           </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" >
-            <div class="container" *ngFor="let tax of detail.sellableGood.taxes">
-              <li class="p-2">{{tax.taxName}} ({{tax.taxPercentage}}%)</li>
-            </div>                  
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <div
+              class="container"
+              *ngFor="let tax of detail.sellableGood.taxes"
+            >
+              <li class="p-2">{{ tax.taxName }} ({{ tax.taxPercentage }}%)</li>
+            </div>
           </ul>
         </div>
       </td>
-      <td>{{totalTaxes(detail.sellableGood)|moneyFormat}}</td>
-      <td>{{detail.warrantyValue|moneyFormat}}</td>
-      <td>{{detail.supportCharge|moneyFormat}}</td>
-      <td>{{detail.discount|moneyFormat}}</td>
-      <td>{{subtotal(detail)|moneyFormat}}</td>
+      <td>{{ totalTaxes(detail.sellableGood) | moneyFormat }}</td>
+      <td>{{ detail.warrantyValue | moneyFormat }}</td>
+      <td>{{ detail.supportCharge | moneyFormat }}</td>
+      <td>{{ detail.discount | moneyFormat }}</td>
+      <td>{{ subtotal(detail) | moneyFormat }}</td>
     </tr>
     <tr style="background-color: #eae0d5; color: black">
       <td colspan="8"></td>
       <td class="fw-bolder">Total</td>
-      <td>{{order.total|moneyFormat}}</td>
+      <td>{{ order.total | moneyFormat }}</td>
     </tr>
   </app-list-table>
 </app-simple-container>
@@ -62,11 +93,23 @@
   <button (click)="goBack()" id="goBack" class="btn editbutton">
     Volver a lista
   </button>
-  <button class="btn cancelbutton shadow-sm" (click)="generatePDF()">Generar pdf</button>
-  <button  routerLink="/order/edit/{{order.id}}" id="edit" class="btn editbutton shadow-sm">
+  <button class="btn cancelbutton shadow-sm" (click)="generatePDF()">
+    Generar pdf
+  </button>
+  <button
+    routerLink="/order/edit/{{ order.id }}"
+    id="edit"
+    class="btn editbutton shadow-sm"
+    [disabled]="order.orderState !== 'PENDING'"
+  >
     Editar
   </button>
-  <button (click)="cancel(order.id)" id="cancel" class="btn cancelbutton shadow-sm">
+  <button
+    (click)="cancel(order.id)"
+    id="cancel"
+    class="btn cancelbutton shadow-sm"
+    [disabled]="order.orderState !== 'PENDING'"
+  >
     Cancelar
   </button>
 </div>

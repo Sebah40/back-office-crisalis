@@ -63,6 +63,12 @@ public interface ICalculationEngine {
 //                + detail.getSellableGood().getSupportCharge().doubleValue()
 //                + calculateValueWarranty(detail);
    }
+
+   static Double generateTotalOrderDetail(OrderDetail orderDetail) {
+       double taxesByUnit = (orderDetail.getSellableGood().getTaxes().stream().mapToDouble(Tax::getTaxPercentage).sum() * orderDetail.getSellableGood().getPrice().doubleValue()) / 100;
+       double subtotalWithTaxWarrantyAndSupportCharge = orderDetail.getSellableGood().getPrice().doubleValue() + taxesByUnit + orderDetail.getWarrantyYear() + orderDetail.getSellableGood().getSupportCharge().doubleValue();
+       return orderDetail.getQuantity() * subtotalWithTaxWarrantyAndSupportCharge - orderDetail.getDiscount();
+   }
    static Double generateSubTotal(OrderEntity order){
        return order.getOrderDetailList()
                .stream()

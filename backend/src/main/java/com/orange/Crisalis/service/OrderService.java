@@ -279,18 +279,24 @@ public class OrderService implements IOrderService {
                                     FilteredReportDTO dto = new FilteredReportDTO();
                                     dto.setOrderDate(entity.getOrderDate());
                                     if (clientID == null || clientID.equals(order.getClient().getId())) {
+                                        dto.setOrderStatus(order.getOrderState());
                                         dto.setClientID(order.getClient().getId());
                                         dto.setOrderID(orderDetail.getOrder().getId().intValue());
                                         dto.setSellableGood(orderDetail.getSellableGood().getName());
+                                        dto.setSupportCharge(orderDetail.getSellableGood().getSupportCharge().doubleValue());
+                                        dto.setWarrantyValue(ICalculationEngine.calculateValueWarranty(orderDetail));
                                         dto.setPrice(orderDetail.getSellableGood().getPrice().doubleValue());
                                         dto.setDiscount(orderDetail.getDiscount());
                                         if (dto.getDiscount() < 0)
                                             dto.setDiscount(0.0);
                                         dto.setSubtotal(ICalculationEngine.generateSubTotal(orderDetail));
-                                        dto.setTotal(ICalculationEngine.generateSubTotal(orderDetail) - dto.getDiscount());
+                                        dto.setTotal(ICalculationEngine.generateTotalOrderDetail(orderDetail));
                                         dto.setQuantity((int) Math.round(ICalculationEngine.generateSubTotal(orderDetail) / orderDetail.getSellableGood().getPrice().doubleValue()));
                                         double totalTaxes = orderDetail.getSellableGood().getTaxes().stream()
-                                                .mapToDouble(tax -> tax.getTaxPercentage() * 0.1 * dto.getQuantity())
+                                                .mapToDouble(tax -> {
+                                                    double taxByUnit = (tax.getTaxPercentage() * orderDetail.getSellableGood().getPrice().doubleValue()) / 100;
+                                                    return taxByUnit * dto.getQuantity();
+                                                })
                                                 .sum();
                                         dto.setTaxes(totalTaxes);
                                         iPersonRepository.findById(dto.getClientID())

@@ -291,7 +291,7 @@ public class OrderService implements IOrderService {
                                             dto.setDiscount(0.0);
                                         dto.setSubtotal(ICalculationEngine.generateSubTotal(orderDetail));
                                         dto.setTotal(ICalculationEngine.generateTotalOrderDetail(orderDetail));
-                                        dto.setQuantity((int) Math.round(ICalculationEngine.generateSubTotal(orderDetail) / orderDetail.getSellableGood().getPrice().doubleValue()));
+                                        dto.setQuantity(orderDetail.getQuantity());
                                         double totalTaxes = orderDetail.getSellableGood().getTaxes().stream()
                                                 .mapToDouble(tax -> {
                                                     double taxByUnit = (tax.getTaxPercentage() * orderDetail.getSellableGood().getPrice().doubleValue()) / 100;

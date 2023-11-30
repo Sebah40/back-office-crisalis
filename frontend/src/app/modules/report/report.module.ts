@@ -29,6 +29,6 @@ import { MoneyFormatPipe } from './pipes/money-format.pipe';
     MatSortModule,
     SharedModule
   ],
-  exports: [FormReportsComponent],
+  exports: [FormReportsComponent, MoneyFormatPipe, DateFormatPipe],
 })
 export class ReportModule {}

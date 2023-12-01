@@ -30,9 +30,10 @@ public class ReportTotalDiscount implements Serializable {
     @Column
     private String dtype;
     @Column
-    private String service;
+    private String serviceName;
     @Column
     private Date date;
     @Column
-    private Double discount;
+    private Double totalDiscount;
+
 }

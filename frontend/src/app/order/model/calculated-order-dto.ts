@@ -3,7 +3,7 @@ import { SellableGood } from "src/app/modules/sellable-good/model/sellable-good.
 
 export interface CalculatedOrder {
   id: number;
-  dateCreated: string;
+  dateCreated: Date;
   orderState: string;
   client: Client;
   orderDetailList: OrderDetail[];

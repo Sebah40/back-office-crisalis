@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { OrderService } from '../service/order.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CalculatedOrder } from '../model/calculated-order-dto';
+import { CalculatedOrder, OrderDetail } from '../model/calculated-order-dto';
 import { Client } from 'src/app/modules/client/model/client.model';
 import { PersonClient } from 'src/app/modules/client/model/person-client.model';
 import { EnterpriseClient } from 'src/app/modules/client/model/enterprise-client.model';
+import { SellableGood } from 'src/app/modules/sellable-good/model/sellable-good.model';
+import { PdfService } from 'src/app/modules/report/service/pdf.service';
+import { SimpleContainerComponent } from 'src/app/modules/shared/components/simple-container/simple-container.component';
 
 
 @Component({
@@ -13,12 +16,13 @@ import { EnterpriseClient } from 'src/app/modules/client/model/enterprise-client
   styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit {
-
+  title='Detalle de Pedido'
   order!:CalculatedOrder;
+  @ViewChild(SimpleContainerComponent) simpleContainer!: SimpleContainerComponent;
   id?:any;
 
   constructor(private orderService: OrderService,
-    private activatedRoute: ActivatedRoute, private router: Router) {
+    private activatedRoute: ActivatedRoute, private router: Router, private pdfService: PdfService) {
 
     }
 
@@ -58,5 +62,37 @@ export class OrderComponent implements OnInit {
 
   isEnterprise(client: Client): client is EnterpriseClient {
     return 'businessName' in client;
+  }
+
+  totalTaxes(sellableGood: SellableGood) {
+    return (sellableGood.taxes || [])
+    .filter((tax) => tax.active && tax.taxPercentage)
+    .reduce((totalImpuestos, tax) => {
+      return totalImpuestos + ((sellableGood.price || 0) * ((tax.taxPercentage??0) / 100));
+    }, 0);
+  }
+
+  subtotal(orderDetail: OrderDetail): number {
+    return (orderDetail.priceSell+orderDetail.warrantyValue+orderDetail.supportCharge) * orderDetail.quantity - orderDetail.discount;
+  }
+
+  clientToData(client:Client): [string,string][] {
+    const result: [string,string][] = [['Tipo',''],['Nombre',''],['CUIT/DNI','']]
+    if(this.isPerson(client)) {
+      result[0][1] = "Persona"
+      result[1][1] = `${client.lastName} ${client.firstName}`
+      result[2][1] = client.dni
+    }else{
+      this.isEnterprise(client)
+      result[0][1] = "Empresa"
+      result[1][1] = client.businessName
+      result[2][1] = client.cuit
+    }
+    return result
+  }
+
+  generatePDF() {
+    const content = this.simpleContainer.getRootElement();
+    this.pdfService.generatePdf(content, `pedidoNro${this.order.id}.pdf`);
   }
 }

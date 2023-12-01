@@ -255,7 +255,7 @@ public class OrderService implements IOrderService {
                     if(order.getClient().isBeneficiary()){
                         SellableGood firstService = order.getClient().getActiveServices().stream().findFirst().get();
                         Double discount = ICalculationEngine.generateDiscount(order);
-                        order.getClient().addDiscountService(firstService,discount, new Date());
+                        order.getClient().addDiscountService(firstService,order,discount, new Date());
                     }
                 }
                 orderRepository.save(order);
@@ -279,17 +279,26 @@ public class OrderService implements IOrderService {
                                     FilteredReportDTO dto = new FilteredReportDTO();
                                     dto.setOrderDate(entity.getOrderDate());
                                     if (clientID == null || clientID.equals(order.getClient().getId())) {
+                                        dto.setOrderStatus(order.getOrderState());
                                         dto.setClientID(order.getClient().getId());
-                                        dto.setOrderID(entity.getId());
+                                        dto.setOrderID(orderDetail.getOrder().getId().intValue());
                                         dto.setSellableGood(orderDetail.getSellableGood().getName());
+                                        dto.setSupportCharge(orderDetail.getSellableGood().getSupportCharge().doubleValue());
+                                        dto.setWarrantyValue(ICalculationEngine.calculateValueWarranty(orderDetail));
                                         dto.setPrice(orderDetail.getSellableGood().getPrice().doubleValue());
                                         dto.setDiscount(orderDetail.getDiscount());
                                         if (dto.getDiscount() < 0)
                                             dto.setDiscount(0.0);
                                         dto.setSubtotal(ICalculationEngine.generateSubTotal(orderDetail));
-                                        dto.setTotal(ICalculationEngine.generateSubTotal(orderDetail) - dto.getDiscount());
-                                        dto.setQuantity((int) Math.round(ICalculationEngine.generateSubTotal(orderDetail) / orderDetail.getSellableGood().getPrice().doubleValue()));
-                                        dto.setTaxes((double) Math.round(dto.getSubtotal() - orderDetail.getSellableGood().getPrice().doubleValue()*dto.getQuantity()));
+                                        dto.setTotal(ICalculationEngine.generateTotalOrderDetail(orderDetail));
+                                        dto.setQuantity(orderDetail.getQuantity());
+                                        double totalTaxes = orderDetail.getSellableGood().getTaxes().stream()
+                                                .mapToDouble(tax -> {
+                                                    double taxByUnit = (tax.getTaxPercentage() * orderDetail.getSellableGood().getPrice().doubleValue()) / 100;
+                                                    return taxByUnit * dto.getQuantity();
+                                                })
+                                                .sum();
+                                        dto.setTaxes(totalTaxes);
                                         iPersonRepository.findById(dto.getClientID())
                                                 .ifPresent(person -> dto.setClientName(person.getFirstName() + " " + person.getLastName()));
                                         iEnterpriseRepository.findById(dto.getClientID())

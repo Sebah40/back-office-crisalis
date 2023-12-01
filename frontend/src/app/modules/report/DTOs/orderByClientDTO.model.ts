@@ -11,4 +11,6 @@ export interface OrderByClient {
   taxes: number;
   total: number;
   discount: number;
+  warrantyValue: number;
+  supportCharge: number;
 }

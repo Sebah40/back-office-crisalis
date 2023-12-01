@@ -1,5 +1,8 @@
 package com.orange.Crisalis.dto;
 
+import com.orange.Crisalis.enums.OrderState;
+
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +18,9 @@ public class FilteredReportDTO {
     private Double total;
     private Date orderDate;
     private Double taxes;
+    private OrderState orderStatus;
+    private Double warrantyValue;
+    private Double supportCharge;
 
     public int getClientID() {
         return clientID;
@@ -101,5 +107,29 @@ public class FilteredReportDTO {
     }
     public Double getTaxes(){
         return taxes;
+    }
+
+    public void setOrderStatus(OrderState orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public OrderState getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setSupportCharge(Double supportCharge) {
+        this.supportCharge = supportCharge;
+    }
+
+    public Double getSupportCharge() {
+        return supportCharge;
+    }
+
+    public void setWarrantyValue(Double warrantyValue) {
+        this.warrantyValue = warrantyValue;
+    }
+
+    public Double getWarrantyValue() {
+        return warrantyValue;
     }
 }

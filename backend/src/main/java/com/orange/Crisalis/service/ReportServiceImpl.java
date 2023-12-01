@@ -23,7 +23,10 @@ public class ReportServiceImpl implements IReportService {
     @Override
     public List<ReportTotalDiscountDTO> totalDiscountReport(String fromDate, String untilDate) {
         List<ReportTotalDiscount> reports = reportRepository.reportTotalDiscount(fromDate, untilDate);
-
+        for (ReportTotalDiscount report : reports){
+            System.out.println(report.getOrderNum());
+            System.out.println(report.getTotalDiscount());
+        }
         List<ReportTotalDiscountDTO> reportsDTO = reports.stream().map(rep -> {
             String clientName = rep.getDtype().equalsIgnoreCase("PERSON")
                     ? rep.getFirstName() + " " + rep.getLastName() : rep.getBusinessName();

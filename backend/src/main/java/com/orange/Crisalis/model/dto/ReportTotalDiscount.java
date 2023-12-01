@@ -15,11 +15,11 @@ import java.util.Date;
 @Table(name = "reportTotalDiscount") // <--- nombre del stored procedure en la base de datos
 @Immutable
 public class ReportTotalDiscount implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "client_id", updatable = false, nullable = false)
-    private Long clientId;
+
     @Column
+    private Long clientId;
+    @Id
+    @Column(name = "order_num", updatable = false, nullable = false)
     private Long orderNum;
     @Column
     private String businessName;

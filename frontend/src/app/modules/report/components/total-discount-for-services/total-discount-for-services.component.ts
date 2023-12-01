@@ -4,10 +4,12 @@ import { DataForTotalDiscount } from '../../DTOs/dataForTotalDiscount.model';
 import { GroupClientForDiscount } from '../../DTOs/groupDataTotalDiscount.model';
 import { Location } from '@angular/common';
 
-import { Component, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { ReportService } from '../../service/report.service';
+import { PdfService } from '../../service/pdf.service';
+import { SimpleContainerComponent } from 'src/app/modules/shared/components/simple-container/simple-container.component';
 
 @Component({
   selector: 'app-total-discount-for-services',
@@ -16,13 +18,15 @@ import { ReportService } from '../../service/report.service';
 })
 export class TotalDiscountForServicesComponent {
   title = 'Informe de descuentos totales en pedidos por cliente';
-
-  data!: DataForTotalDiscount[];
+  data: DataForTotalDiscount[] = [];
+  @ViewChild(SimpleContainerComponent)
+  simpleContainer!: SimpleContainerComponent;
 
   constructor(
     private route: ActivatedRoute,
     private location: Location,
-    private reportService: ReportService
+    private reportService: ReportService,
+    private pdfService: PdfService
   ) {}
 
   ngOnInit(): void {
@@ -35,7 +39,6 @@ export class TotalDiscountForServicesComponent {
         .generateHistoryTotalDiscount(dateFrom, dateTo)
         .subscribe({
           next: (res) => {
-            console.log('respuesta', res);
             if (clientId !== 'null') {
               this.data = res.filter((e) => e.clientId === clientId);
             } else {
@@ -110,5 +113,13 @@ export class TotalDiscountForServicesComponent {
 
   goBack() {
     this.location.back();
+  }
+
+  generatePDF() {
+    const content = this.simpleContainer.getRootElement();
+    this.pdfService.generatePdf(
+      content,
+      'informe-descuentos-totales-por-servicio.pdf'
+    );
   }
 }

@@ -1,40 +1,74 @@
-<div class="container w-100 d-flex flex-column justify-content-sm-start align-items-center" id="container">
+<div
+  class="container w-100 d-flex flex-column justify-content-sm-start align-items-center"
+  id="container"
+>
   <h2 class="title">Lista de productos y servicios</h2>
 
   <div class="container p-0" id="container-button">
-    <button class="btn createbutton" (click)="createEntity()">Crear nuevo producto/servicio
-    <img id="svg-add" src="../../../../../assets/icons/plus-solid.svg" alt="SVG ADD">
-  </button>
+    <button class="btn createbutton" (click)="createEntity()">
+      Crear nuevo producto/servicio
+      <img
+        id="svg-add"
+        src="../../../../../assets/icons/plus-solid.svg"
+        alt="SVG ADD"
+      />
+    </button>
   </div>
 
   <div id="container-list">
     <table class="p-2" id="custom-table">
       <thead>
         <tr>
-          <th style="background-color: transparent;" class="text-center" *ngFor="let field of ['Nombre','Descripción','Precio','Tipo','Impuestos']">{{ field }}</th>
-          <th style="background-color: transparent;" class="text-center">Acciones</th>
+          <th
+            style="background-color: transparent"
+            class="text-center"
+            *ngFor="
+              let field of [
+                'Nombre',
+                'Descripción',
+                'Precio',
+                'Tipo',
+                'Impuestos'
+              ]
+            "
+          >
+            {{ field }}
+          </th>
+          <th style="background-color: transparent" class="text-center">
+            Acciones
+          </th>
         </tr>
       </thead>
       <tbody>
-        <tr style="height: 5px;"></tr>
+        <tr style="height: 5px"></tr>
         <tr class="align-middle" *ngFor="let data of sellableGoodListData">
-          
-          <td class="text-center" >{{ data.name }}</td>
-          <td class="text-center" >{{ data.description }}</td>
-          <td class="text-center" >{{ data.price }}</td>
-          <td class="text-center" >{{ data.type }}</td>
-          <td class="taxes" >{{ data.taxes | formatTaxes  }}</td>
+          <td class="text-center">{{ data.name }}</td>
+          <td class="text-center">{{ data.description }}</td>
+          <td class="text-center">{{ data.price }}</td>
+          <td class="text-center">{{ data.type }}</td>
+          <td class="taxes">{{ data.taxes | formatTaxes }}</td>
 
           <td class="td-buttons">
-            <button (click)="editEntity(data)" class="btn btn-sm m-1 editbutton" >Editar</button>
-            <button (click)="disableEntity(data)" class="btn btn-sm m-1 deletebutton">Eliminar</button>
+            <button
+              (click)="editEntity(data)"
+              class="btn btn-sm m-1 editbutton"
+            >
+              Editar
+            </button>
+            <button
+              (click)="disableEntity(data)"
+              class="btn btn-sm m-1 deletebutton"
+            >
+              Eliminar
+            </button>
           </td>
         </tr>
-        <tr style="height: 5px;"></tr>
+        <tr style="height: 5px"></tr>
       </tbody>
     </table>
   </div>
   <!-- <div class="container my-3 p-0" id="container-button">
     <button class="btn createbutton btn my-auto" (click)="createEntity()">Crear producto/servicio</button>
   </div> -->
+  <app-button-back></app-button-back>
 </div>

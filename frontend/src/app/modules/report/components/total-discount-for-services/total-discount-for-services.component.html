@@ -28,7 +28,7 @@
           <td colspan="2"></td>
           <td style="text-align: center">{{ order.orderNum }}</td>
           <td style="text-align: center">
-            {{ order.date | date : "dd-MM-yyyy" }}
+            {{ order.date | dateFormat }}
           </td>
           <td style="text-align: center">{{ order.discount | moneyFormat }}</td>
         </tr>

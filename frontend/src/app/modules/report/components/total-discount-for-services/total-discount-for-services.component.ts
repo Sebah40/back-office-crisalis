@@ -7,6 +7,7 @@ import { Location } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 
 import { ActivatedRoute, Router } from '@angular/router';
+import { ReportService } from '../../service/report.service';
 
 @Component({
   selector: 'app-total-discount-for-services',
@@ -16,52 +17,33 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class TotalDiscountForServicesComponent {
   title = 'Informe de descuentos totales en pedidos por cliente';
 
-  data: DataForTotalDiscount[] = [
-    {
-      clientId: 1,
-      client: 'Coca Cola',
-      service: 'Internet 100 MB',
-      orderNum: 23,
-      date: '01-feb',
-      discount: 1200,
-    },
-    {
-      clientId: 1,
-      client: 'Coca Cola',
-      service: 'Internet 100 MB',
-      orderNum: 11,
-      date: '22-feb',
-      discount: 900,
-    },
-    {
-      clientId: 2,
-      client: 'Pepsi',
-      service: 'Internet 100 MB',
-      orderNum: 44,
-      date: '25-feb',
-      discount: 1900,
-    },
-    {
-      clientId: 1,
-      client: 'Coca Cola',
-      service: 'Linea Celular',
-      orderNum: 45,
-      date: '27-feb',
-      discount: 200,
-    },
-  ];
+  data!: DataForTotalDiscount[];
 
-  constructor(private route: ActivatedRoute, private location: Location) {}
+  constructor(
+    private route: ActivatedRoute,
+    private location: Location,
+    private reportService: ReportService
+  ) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((param) => {
       const clientId = param['clientId'];
-
-      if (clientId !== 'null') {
-        this.data = this.data.filter((element) => element.clientId == clientId);
-      }
       const dateFrom = param['dateFrom'];
       const dateTo = param['dateTo'];
+
+      this.reportService
+        .generateHistoryTotalDiscount(dateFrom, dateTo)
+        .subscribe({
+          next: (res) => {
+            console.log('respuesta', res);
+            if (clientId !== 'null') {
+              this.data = res.filter((e) => e.clientId === clientId);
+            } else {
+              this.data = res;
+            }
+          },
+        });
+
       console.log(clientId);
     });
   }

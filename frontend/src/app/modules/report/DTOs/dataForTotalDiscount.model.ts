@@ -3,6 +3,6 @@ export interface DataForTotalDiscount {
   client: string;
   service: string;
   orderNum: number;
-  date: string;
+  date: Date;
   discount: number;
 }

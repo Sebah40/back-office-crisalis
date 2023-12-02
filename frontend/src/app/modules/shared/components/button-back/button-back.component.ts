@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-button-back',
@@ -7,9 +8,10 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./button-back.component.css'],
 })
 export class ButtonBackComponent {
-  constructor(private location: Location) {}
+  constructor(private location: Location, private router: Router) {}
   @Input() isStraight: boolean = false;
+  @Input() path: string = '';
   goBack() {
-    this.location.back();
+    this.path === '' ? this.location.back() : this.router.navigate([this.path]);
   }
 }

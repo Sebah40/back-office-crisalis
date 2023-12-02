@@ -96,15 +96,14 @@ export class PersonFormComponent implements OnInit {
       this.createPerson(newPerson).subscribe({
         next: (response) => {
           if ('mensaje' in response) {
-            console.log(response.mensaje);
-            alert(response.mensaje);
+            this.sweet.showAlert(response.mensaje, 'success');
           } else {
             throw response;
           }
         },
         error: (error: HttpErrorResponse) => {
           console.log(error.error.mensaje);
-          alert(error.error.mensaje);
+          this.sweet.showAlert(error.error.mensaje, 'error');
         },
       });
     }

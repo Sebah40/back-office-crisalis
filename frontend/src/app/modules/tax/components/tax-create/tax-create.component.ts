@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ResponseCreate } from 'src/app/components/interfaces/ResponseCreate.type';
 import Swal from 'sweetalert2';
+import { SweetAlertService } from 'src/app/modules/shared/service/sweet-alert.service';
 
 @Component({
   selector: 'app-tax-create',
@@ -33,7 +34,8 @@ export class TaxCreateComponent implements OnInit {
     private formBuilder: FormBuilder,
     private taxService: TaxService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private sweet: SweetAlertService
   ) {}
 
   ngOnInit(): void {
@@ -46,7 +48,7 @@ export class TaxCreateComponent implements OnInit {
         this.taxEdit.taxPercentage = state.taxPercentage;
       }
     });
-    console.log(this.taxEdit.id);
+
     this.isEditing = this.taxEdit.id != 0; //this.taxEdit.taxPercentage.toString.length ? true : false;
 
     this.formTax = this.formBuilder.group({
@@ -72,7 +74,6 @@ export class TaxCreateComponent implements OnInit {
   }
 
   editTax(tax: Tax): Observable<ResponseCreate> {
-    console.log(tax);
     return this.taxService.editTax(tax);
   }
 
@@ -90,37 +91,34 @@ export class TaxCreateComponent implements OnInit {
       this.editTax(newTax).subscribe({
         next: (response) => {
           if ('mensaje' in response) {
-            console.log(response.mensaje);
-            Swal.fire(response.mensaje, undefined, 'success');
+            this.sweet.showAlert(response.mensaje, 'success');
           } else {
             throw response;
           }
         },
         error: (error: HttpErrorResponse) => {
-          console.log(error.error.mensaje);
-          Swal.fire(error.error.mensaje, undefined, 'error');
+          this.sweet.showAlert(error.error.mensaje, 'error');
         },
       });
     } else {
       this.createTax(newTax).subscribe({
         next: (response) => {
           if ('mensaje' in response) {
-            console.log(response.mensaje);
+            this.sweet.showAlert(response.mensaje, 'success');
           } else {
             throw response;
           }
         },
         error: (error: HttpErrorResponse) => {
           console.log(error.error.mensaje);
-          Swal.fire(error.error.mensaje, undefined, 'error');
+          this.sweet.showAlert(error.error.mensaje, 'error');
         },
       });
     }
-    Swal.fire('Éxito', undefined, 'success');
+
     this.goToTaxList();
   }
   goToTaxList() {
-
-        this.router.navigate(['/taxlist']);
+    this.router.navigate(['/taxlist']);
   }
 }

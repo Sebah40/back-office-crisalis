@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SellableGoodService } from '../../services/sellable-good.service';
 import { SellableGood } from '../../model/sellable-good.model';
 import { NavigationExtras, Router } from '@angular/router';
+import { SweetAlertService } from 'src/app/modules/shared/service/sweet-alert.service';
 
 @Component({
   selector: 'app-sellable-goods-list',
@@ -14,7 +15,8 @@ export class SellableGoodsListComponent implements OnInit {
 
   constructor(
     public sellableGoodService: SellableGoodService,
-    private router: Router
+    private router: Router,
+    private sweet: SweetAlertService
   ) {}
 
   ngOnInit(): void {
@@ -31,7 +33,7 @@ export class SellableGoodsListComponent implements OnInit {
     this.sellableGoodService.disable(sellableGood).subscribe({
       next: (response: any) => {
         this.sellableGoodService.updateSellableGoodListData();
-        alert(response.mensaje);
+        this.sweet.showAlert(response.mensaje, 'success');
       },
       error: (error: any) => {
         console.log(error);

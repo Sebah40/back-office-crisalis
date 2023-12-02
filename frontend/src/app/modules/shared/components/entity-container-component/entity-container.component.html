@@ -24,7 +24,7 @@
             class="text-center"
             *ngFor="let key of entityKeysToString"
           >
-            {{ key !== "id" ? key : ("" | translate) }}
+            {{ key !== "id" ? (key | translate) : ("" | translate) }}
           </th>
           <th
             *ngIf="entities.length"

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IPersonGet } from '../../model/personGet.model';
 import { PersonService } from '../../service/person-list.service';
 import { Router } from '@angular/router';
+import { SweetAlertService } from 'src/app/modules/shared/service/sweet-alert.service';
 
 @Component({
   selector: 'app-person-list',
@@ -12,7 +13,10 @@ export class PersonListComponent {
   public personListData: IPersonGet[] = [];
   public editableValue: boolean = true;
 
-  constructor(private personService: PersonService) {}
+  constructor(
+    private personService: PersonService,
+    private sweet: SweetAlertService
+  ) {}
 
   ngOnInit(): void {
     this.personService.personListData$.subscribe((persons) => {
@@ -31,7 +35,7 @@ export class PersonListComponent {
     this.personService.delete(person).subscribe({
       next: (response: any) => {
         this.personService.updatePersonListData();
-        alert(response.mensaje);
+        this.sweet.showAlert(response.mensaje, 'success');
       },
       error: (error: any) => {
         console.log(error);

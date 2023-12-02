@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { IUserGet } from '../../model/UserGet.model';
+import { SweetAlertService } from '../../../shared/service/sweet-alert.service';
 
 @Component({
   selector: 'app-user',
@@ -11,7 +12,10 @@ export class UserListComponent implements OnInit {
   public userListData: IUserGet[] = [];
   public editableValue: boolean = true;
 
-  constructor(public userService: UserService) {}
+  constructor(
+    public userService: UserService,
+    private sweet: SweetAlertService
+  ) {}
 
   ngOnInit(): void {
     this.userService.userListData$.subscribe((users) => {
@@ -29,7 +33,7 @@ export class UserListComponent implements OnInit {
     this.userService.delete(user).subscribe({
       next: (response: any) => {
         this.userService.updateUserListData();
-        alert(response.mensaje);
+        this.sweet.showAlert(response.mensaje, 'success');
       },
       error: (error: any) => {
         console.log(error);

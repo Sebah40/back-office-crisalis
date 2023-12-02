@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SellableGood } from '../../model/sellable-good.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Tax } from '../../model/tax.model';
+import { SweetAlertService } from 'src/app/modules/shared/service/sweet-alert.service';
 
 enum SellableGoodType {
   PRODUCT,
@@ -41,7 +42,8 @@ export class SellableGoodFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private sellableGoodService: SellableGoodService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private sweet: SweetAlertService
   ) {}
 
   ngOnInit(): void {
@@ -64,7 +66,10 @@ export class SellableGoodFormComponent implements OnInit {
       ],
       type: [this.sellableGoodInstance.type, [Validators.required]],
       taxes: [this.sellableGoodInstance.taxes],
-      charge: [this.sellableGoodInstance.supportCharge, [Validators.required, Validators.pattern(/^\d+(\.\d+)?$/)]]
+      charge: [
+        this.sellableGoodInstance.supportCharge,
+        [Validators.required, Validators.pattern(/^\d+(\.\d+)?$/)],
+      ],
     });
   }
 
@@ -91,12 +96,13 @@ export class SellableGoodFormComponent implements OnInit {
       this.formSellableGood.value.description;
     this.sellableGoodInstance.price = this.formSellableGood.value.price;
     this.sellableGoodInstance.type = this.formSellableGood.value.type;
-    this.sellableGoodInstance.supportCharge = this.formSellableGood.value.charge;
+    this.sellableGoodInstance.supportCharge =
+      this.formSellableGood.value.charge;
     if (isEmpty(this.sellableGoodInstance.id)) {
       this.sellableGoodService.create(this.sellableGoodInstance).subscribe({
         next: (response) => {
           if ('id' in response) {
-            alert('Se creo exitosamente!');
+            this.sweet.showAlert('Se creo correctamente', 'success');
             this.goToSellableGoodList();
           } else {
             throw response;
@@ -104,21 +110,21 @@ export class SellableGoodFormComponent implements OnInit {
         },
         error: (error: HttpErrorResponse) => {
           console.log(error.error.mensaje);
-          alert(error.error.mensaje);
+          this.sweet.showAlert(error.error.mensaje, 'error');
         },
       });
     } else {
       this.sellableGoodService.edit(this.sellableGoodInstance).subscribe({
         next: (response) => {
           if ('mensaje' in response) {
-            alert(response.mensaje);
+            this.sweet.showAlert(response.mensaje, 'success');
             this.goToSellableGoodList();
           } else {
             throw response;
           }
         },
         error: (error: HttpErrorResponse) => {
-          console.log(error.error.mensaje);
+          this.sweet.showAlert(error.error.mensaje, 'error');
           alert(error.error.mensaje);
         },
       });
@@ -146,7 +152,7 @@ export class SellableGoodFormComponent implements OnInit {
     this.isEnabled = this.taxes.length > 0;
   }
 
-  isService(){
-    return this.selectedType === "SERVICE";
+  isService() {
+    return this.selectedType === 'SERVICE';
   }
 }

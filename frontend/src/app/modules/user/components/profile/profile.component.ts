@@ -105,8 +105,7 @@ export class ProfileComponent implements OnInit {
   async showAlert() {
     const resultado = await Swal.fire({
       title: '¿Estás seguro?',
-      text: 'Quieres cambiar tu contraseña?',
-      icon: 'warning',
+      icon: 'question',
       showCancelButton: true,
       confirmButtonText: 'Sí, estoy seguro',
       cancelButtonText: 'Cancelar',

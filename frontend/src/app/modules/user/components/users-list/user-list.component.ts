@@ -37,6 +37,7 @@ export class UserListComponent implements OnInit {
       },
       error: (error: any) => {
         console.log(error);
+        this.sweet.showAlert(error.error.mensaje, 'error');
       },
     });
   }

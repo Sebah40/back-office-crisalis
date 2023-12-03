@@ -90,14 +90,18 @@ export class UserFormComponent implements OnInit {
           }
         },
         error: (error: HttpErrorResponse) => {
-          this.sweet.showAlert(error.error.mensaje, 'error');
+          this.sweet.showAlert(error.error.mensaje, 'error', this.goToUserList);
         },
       });
     } else {
       this.createUser(newUser).subscribe({
         next: (response) => {
           if ('mensaje' in response) {
-            this.sweet.showAlert(response.mensaje, 'success');
+            this.sweet.showAlert(
+              response.mensaje,
+              'success',
+              this.goToUserList
+            );
           } else {
             throw response;
           }

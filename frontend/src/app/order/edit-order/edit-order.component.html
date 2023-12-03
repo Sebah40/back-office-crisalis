@@ -13,7 +13,7 @@
       </ul>
     </div>
   </div>
-
+  
   <table class="rounded p-2" id="custom-table" >
     <thead>
       <tr>
@@ -77,7 +77,7 @@
   <ng-template [ngIf]="order.orderState != 'CANCELED'">
     <section class="form-section">
       <form class="form">
-        <h3>Lista de productos y servicios</h3>
+<h3>Lista de productos y servicios</h3>
         <ul type="none" class="p-2" >
           <li *ngFor="let item of itemList" class="list-item items" >
               <span>
@@ -96,6 +96,9 @@
           Enviar
         </button>
       </form>
+      <div class="center-button-back">
+        <app-button-back></app-button-back>
+      </div>
     </section>
   </ng-template>
 </main>

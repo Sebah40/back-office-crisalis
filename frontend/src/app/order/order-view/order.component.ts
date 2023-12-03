@@ -8,7 +8,7 @@ import { EnterpriseClient } from 'src/app/modules/client/model/enterprise-client
 import { SellableGood } from 'src/app/modules/sellable-good/model/sellable-good.model';
 import { PdfService } from 'src/app/modules/report/service/pdf.service';
 import { SimpleContainerComponent } from 'src/app/modules/shared/components/simple-container/simple-container.component';
-
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-order',
@@ -49,8 +49,10 @@ export class OrderComponent implements OnInit {
     }
   }
   cancel(id: any) {
-    this.orderService.delete(id).subscribe(res => res);
-    this.getOrder();
+    this.orderService.delete(id).subscribe(() => {
+      this.getOrder();
+      Swal.fire('Órden borrada', undefined, 'success');
+    });
   }
   goBack(){
     this.router.navigate(['/order/getAll']);

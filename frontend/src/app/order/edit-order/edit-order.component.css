@@ -6,6 +6,11 @@
 .text-center {
   margin: 0 20px !important;
 }
+.center-button-back {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* Adjust this value based on your layout */
+}
 
 .table {
   width: 75%;

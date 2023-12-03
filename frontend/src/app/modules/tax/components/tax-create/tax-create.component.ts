@@ -49,7 +49,7 @@ export class TaxCreateComponent implements OnInit {
       }
     });
 
-    this.isEditing = this.taxEdit.id != 0; //this.taxEdit.taxPercentage.toString.length ? true : false;
+    this.isEditing = this.taxEdit.id != 0;
 
     this.formTax = this.formBuilder.group({
       id: [this.taxEdit.id, [Validators.required, Validators.minLength(1)]],
@@ -92,6 +92,7 @@ export class TaxCreateComponent implements OnInit {
         next: (response) => {
           if ('mensaje' in response) {
             this.sweet.showAlert(response.mensaje, 'success');
+            this.taxService.updateTaxListData();
           } else {
             throw response;
           }
@@ -105,6 +106,7 @@ export class TaxCreateComponent implements OnInit {
         next: (response) => {
           if ('mensaje' in response) {
             this.sweet.showAlert(response.mensaje, 'success');
+            this.taxService.updateTaxListData();
           } else {
             throw response;
           }

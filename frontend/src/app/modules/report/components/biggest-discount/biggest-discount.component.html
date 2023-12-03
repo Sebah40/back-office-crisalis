@@ -3,9 +3,13 @@
   class="container w-75 d-flex flex-column justify-content-center align-items-center"
   style="height: 60vh"
 >
-  <h2 class="m-lg-5 py-5">Informe de servicio que mayor descuento generó</h2>
+  <h2 class="m-lg-5 py-5" id="title">
+    Informe de servicio que mayor descuento generó
+  </h2>
 
-  <div style="width: 75%">
+  <div
+    style="width: 75%; border: 1px solid #000; border-radius: 6px; padding: 1px"
+  >
     <table mat-table [dataSource]="dataSource" matSort>
       <ng-container
         *ngFor="let column of displayedColumns"

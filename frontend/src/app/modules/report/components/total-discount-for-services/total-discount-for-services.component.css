@@ -15,11 +15,11 @@
 
 .td-client{
     text-align: center;
-    text-transform: uppercase;
     font-size: larger;
-    color: black;
+    color: #fff;
+    background-color: #22333bc4;
     font-weight: bold;
-    border-bottom: 3px solid black;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 /* .td-client1{

@@ -13,10 +13,8 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-create-order',
   templateUrl: './create-order.component.html',
-  styleUrls: ['./create-order.component.css']
+  styleUrls: ['./create-order.component.css'],
 })
-
-
 export class CreateOrderComponent implements OnInit {
   clientId?: any;
   orderState = new FormControl('');
@@ -26,74 +24,88 @@ export class CreateOrderComponent implements OnInit {
   showClient = this.selectedClient == null ? 'none' : 'inline';
   searchbar = new FormControl('');
   selectedItems = new FormControl('');
-  quant?:any;
+  quant?: any;
   itemList?: SellableGood[];
   productList: ProductIdAndQuantityDto[] = [];
   productQuantity?: ProductIdAndQuantityDto;
   productIdAndQuantity?: ProductIdAndQuantityDto;
   createOrder?: RequestBodyCreateOrderDto;
-  newOrder?:RequestBodyCreateOrderDto;
+  newOrder?: RequestBodyCreateOrderDto;
 
-  constructor(private orderService: OrderService,
-    private clientService: ClientService, private sellableGoodService: SellableGoodService,
-    private router: Router) {}
+  constructor(
+    private orderService: OrderService,
+    private clientService: ClientService,
+    private sellableGoodService: SellableGoodService,
+    private router: Router
+  ) {}
 
   addClient(id: any): void {
     this.clientId = id;
-    var element: any = document.getElementById("id-"+this.clientId);
-    var bool = element?.classList.contains( 'selected' );
-    if(this.selectedClient != null && this.selectedClient != undefined) {
-      if(this.selectedClient.id == this.clientId) {
-        this.selectedClient = null
+    var element: any = document.getElementById('id-' + this.clientId);
+    var bool = element?.classList.contains('selected');
+    if (this.selectedClient != null && this.selectedClient != undefined) {
+      if (this.selectedClient.id == this.clientId) {
+        this.selectedClient = null;
       }
     } else {
-      this.selectedClient = this.clientList.find(client => client.id === this.clientId);
+      this.selectedClient = this.clientList.find(
+        (client) => client.id === this.clientId
+      );
     }
-    var all = document.querySelectorAll( '.selected' );
-    all.forEach(elem => {
-      elem?.classList.remove("selected");
+    var all = document.querySelectorAll('.selected');
+    all.forEach((elem) => {
+      elem?.classList.remove('selected');
       elem.textContent = 'Seleccionar';
     });
-    if(!bool) {
-      element?.classList.add("selected");
+    if (!bool) {
+      element?.classList.add('selected');
       element.textContent = 'Desasignar';
     }
     this.disabled();
   }
 
   loadItemList(): void {
-    this.sellableGoodService.getAll().subscribe(itemList => {
+    this.sellableGoodService.getAll().subscribe((itemList) => {
       this.itemList = itemList;
       console.log(this.itemList);
-    })
+    });
   }
 
   disabled() {
     var element: any = document.getElementById('submit');
-    if(this.selectedClient == null || this.productList.length == 0 ) {
-      element.setAttribute('disabled', '')
+    if (this.selectedClient == null || this.productList.length == 0) {
+      element.setAttribute('disabled', '');
     } else {
-      element.removeAttribute('disabled')
+      element.removeAttribute('disabled');
     }
   }
 
   select(id: any): void {
     this.quant = document.getElementById(`${id}`);
     var btn: any = document.getElementById(`btn-${id}`);
-    const warranty:any = document.getElementById(`warranty-${id}`);
+    const warranty: any = document.getElementById(`warranty-${id}`);
     console.log(warranty);
 
-    if(this.productList.find(prod => prod.productId === id)) {
-      this.productList = this.productList.filter(prod => prod.productId !== id)
+    if (this.productList.find((prod) => prod.productId === id)) {
+      this.productList = this.productList.filter(
+        (prod) => prod.productId !== id
+      );
     }
-    if(this.quant.value > 0 && this.quant.value != null && this.quant.value != undefined) {
-      this.productQuantity = new ProductIdAndQuantityDto(id, Number(this.quant.value));
+    if (
+      this.quant.value > 0 &&
+      this.quant.value != null &&
+      this.quant.value != undefined
+    ) {
+      this.productQuantity = new ProductIdAndQuantityDto(
+        id,
+        Number(this.quant.value)
+      );
       this.productQuantity.warrantyYear = warranty ? warranty.value : 0;
       this.productList.push(this.productQuantity);
-      btn?.setAttribute('disabled', '')
+      btn?.setAttribute('disabled', '');
       btn.textContent = 'Agregado';
-      btn.classList.remove("btn-primary");
-      btn.classList.add("btn-secondary");
+      btn.classList.remove('btn-primary');
+      btn.classList.add('btn-secondary');
     }
     this.disabled();
   }
@@ -101,22 +113,25 @@ export class CreateOrderComponent implements OnInit {
   undo(id: any): void {
     var btn: any = document.getElementById(`btn-${id}`);
     btn?.removeAttribute('disabled');
-    btn.textContent = '+';
-    btn.classList.remove("btn-secondary");
-    btn.classList.add("btn-primary");
-    this.productList = this.productList.filter(prod => prod.productId !== id)
+    btn.textContent = 'Agregar';
+    btn.classList.remove('btn-secondary');
+    btn.classList.add('btn-primary');
+    this.productList = this.productList.filter((prod) => prod.productId !== id);
     this.quant = document.getElementById(`${id}`);
     this.quant.value = 0;
     this.disabled();
   }
 
-  loadClients():any[] {
-    this.clientService.getClients().subscribe(clientList => {
-      this.clientList = clientList;
-      console.log(this.clientList);
-    }, err => {
-      console.log(err);
-    })
+  loadClients(): any[] {
+    this.clientService.getClients().subscribe(
+      (clientList) => {
+        this.clientList = clientList;
+        console.log(this.clientList);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
     return this.clientList;
   }
 
@@ -128,28 +143,42 @@ export class CreateOrderComponent implements OnInit {
 
   clientList: ClientEntity[] = [];
   searchbarFilter(query: string): void {
-      this.clientService.searchbar(query).subscribe(clientList => {
+    this.clientService.searchbar(query).subscribe(
+      (clientList) => {
         this.clientList = clientList;
         console.log(this.clientList);
-      }, err => {
+      },
+      (err) => {
         console.log(err);
-      })
+      }
+    );
   }
   redirect(id: any): void {
-    this.router.navigate(['/'+id]);
+    this.router.navigate(['/' + id]);
   }
   submitOrder(): void {
-    this.newOrder = new RequestBodyCreateOrderDto(this.clientId, this.productList);
+    this.newOrder = new RequestBodyCreateOrderDto(
+      this.clientId,
+      this.productList
+    );
     var ord: any;
-    this.orderService.save(this.newOrder).subscribe(res => {
+    this.orderService.save(this.newOrder).subscribe((res) => {
       ord = res;
-      res
+      res;
       console.log(res);
     });
 
-    Swal.fire('Agregado con éxito', undefined, 'success')
+    Swal.fire('Agregado con éxito', undefined, 'success');
     setTimeout(() => {
       this.redirect('order/getAll');
     }, 2500);
+  }
+
+  onChange(id: any) {
+    const input = document.getElementById(id) as any;
+    console.log(input);
+    if (input?.value < 0) {
+      input.value = 0;
+    }
   }
 }

@@ -113,7 +113,7 @@ export class TaxCreateComponent implements OnInit {
         },
         error: (error: HttpErrorResponse) => {
           console.log(error.error.mensaje);
-          this.sweet.showAlert(error.error.mensaje, 'error');
+          this.sweet.showAlert("Impuesto existente", 'error');
         },
       });
     }

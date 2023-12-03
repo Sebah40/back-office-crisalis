@@ -35,7 +35,12 @@ export class DiscriminatedOrderHistoryComponent implements OnInit {
         .generateOrderHistory(dateFrom, dateTo, clientId)
         .subscribe({
           next: (res) => {
-            this.data = res;
+            if(clientId !== 'null') {
+              this.data = res.filter(item => item.clientID == clientId)
+            }else{
+              this.data = res
+            }
+
           },
         });
     });

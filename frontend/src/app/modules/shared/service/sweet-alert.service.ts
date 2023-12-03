@@ -10,6 +10,9 @@ export class SweetAlertService {
   showAlert(message: string, type: SweetAlertIcon, callback?: any) {
     Swal.fire({
       title: message,
+      padding: '3.5em',
+      background: '#22334B',
+      color: '#fAf0e5',
       icon: type,
       timer: 1500,
       showConfirmButton: false,

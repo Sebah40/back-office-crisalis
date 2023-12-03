@@ -9,6 +9,7 @@ import { SellableGood } from 'src/app/modules/sellable-good/model/sellable-good.
 import { SellableGoodService } from 'src/app/modules/sellable-good/services/sellable-good.service';
 import { OrderService } from 'src/app/order/service/order.service';
 import Swal from 'sweetalert2';
+import { SweetAlertService } from 'src/app/modules/shared/service/sweet-alert.service';
 
 @Component({
   selector: 'app-create-order',
@@ -36,7 +37,8 @@ export class CreateOrderComponent implements OnInit {
     private orderService: OrderService,
     private clientService: ClientService,
     private sellableGoodService: SellableGoodService,
-    private router: Router
+    private router: Router,
+    private sweet: SweetAlertService
   ) {}
 
   addClient(id: any): void {
@@ -168,10 +170,10 @@ export class CreateOrderComponent implements OnInit {
       console.log(res);
     });
 
-    Swal.fire('Agregado con éxito', undefined, 'success');
+    this.sweet.showAlert('Pedido creado con éxito', 'success');
     setTimeout(() => {
       this.redirect('order/getAll');
-    }, 2500);
+    }, 1500);
   }
 
   onChange(id: any) {

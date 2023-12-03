@@ -16,20 +16,14 @@ export class OrderListComponent implements OnInit {
   constructor(private orderService: OrderService, private router: Router) {}
 
   orderList: OrderDTO[] = [];
-  loadOrderList(): void {
-    this.orderService.orderList().subscribe(
-      (orderList) => {
-        this.orderList = orderList;
-        console.log(this.orderList);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-  }
 
-  delete(id: any): void {
-    this.orderService.delete(id).subscribe();
+
+  public delete(id: any): void {
+    this.orderService.delete(id).pipe(
+      ).subscribe((res) => {
+        this.orderService.updateOrderListData();
+        Swal.fire('Órden borrada', undefined, 'success');
+      });
   }
   validate(id: any) {
     this.orderService.validate(id).pipe(

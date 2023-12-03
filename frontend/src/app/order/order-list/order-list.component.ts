@@ -3,6 +3,7 @@ import { OrderDTO } from '../model/order-dto';
 import { OrderService } from '../service/order.service';
 import { RouterModule, Routes, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-order-list',
@@ -31,9 +32,11 @@ export class OrderListComponent implements OnInit {
     this.orderService.delete(id).subscribe();
   }
   validate(id: any) {
-    this.orderService.validate(id).subscribe((res) => res);
-
-    Swal.fire('Órden validada', undefined, 'success');
+    this.orderService.validate(id).pipe(
+    ).subscribe((res) => {
+      this.orderService.updateOrderListData();
+      Swal.fire('Órden validada', undefined, 'success');
+    });
   }
 
   redirect(id: any): void {
@@ -41,7 +44,14 @@ export class OrderListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadOrderList();
+    this.orderService.updateOrderListData();
+    this.orderService.orderListData$.subscribe((data) => {
+      this.orderList = data;
+    });
+
+    this.orderService.getAll().subscribe((data) => {
+      this.orderList = data;
+    });
   }
 
   headers = ['N° de pedido', 'Cliente', 'Fecha', 'Estado'];

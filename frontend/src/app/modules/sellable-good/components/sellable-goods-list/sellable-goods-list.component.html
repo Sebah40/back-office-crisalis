@@ -56,7 +56,17 @@
           </td>
           <td class="text-center">{{ "$" + data.price }}</td>
           <td class="text-center">{{ data.type }}</td>
-          <td class="taxes">{{ data.taxes | formatTaxes }}</td>
+          <td
+            class="taxes"
+            style="
+              max-width: 100px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            "
+          >
+            {{ data.taxes | formatTaxes }}
+          </td>
 
           <td class="td-buttons">
             <button

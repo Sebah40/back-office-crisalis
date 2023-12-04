@@ -43,8 +43,18 @@
         <tr style="height: 5px"></tr>
         <tr class="align-middle" *ngFor="let data of sellableGoodListData">
           <td class="text-center">{{ data.name }}</td>
-          <td class="text-center">{{ data.description }}</td>
-          <td class="text-center">{{ data.price }}</td>
+          <td
+            class="text-center"
+            style="
+              max-width: 100px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            "
+          >
+            {{ data.description }}
+          </td>
+          <td class="text-center">{{ "$" + data.price }}</td>
           <td class="text-center">{{ data.type }}</td>
           <td class="taxes">{{ data.taxes | formatTaxes }}</td>
 

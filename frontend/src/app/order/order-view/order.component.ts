@@ -9,41 +9,46 @@ import { SellableGood } from 'src/app/modules/sellable-good/model/sellable-good.
 import { PdfService } from 'src/app/modules/report/service/pdf.service';
 import { SimpleContainerComponent } from 'src/app/modules/shared/components/simple-container/simple-container.component';
 import Swal from 'sweetalert2';
+import { SweetAlertService } from 'src/app/modules/shared/service/sweet-alert.service';
 
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
-  styleUrls: ['./order.component.css']
+  styleUrls: ['./order.component.css'],
 })
 export class OrderComponent implements OnInit {
-  title='Detalle de Pedido'
-  order!:CalculatedOrder;
-  @ViewChild(SimpleContainerComponent) simpleContainer!: SimpleContainerComponent;
-  id?:any;
+  title = 'Detalle de Pedido';
+  order!: CalculatedOrder;
+  @ViewChild(SimpleContainerComponent)
+  simpleContainer!: SimpleContainerComponent;
+  id?: any;
 
-  constructor(private orderService: OrderService,
-    private activatedRoute: ActivatedRoute, private router: Router, private pdfService: PdfService) {
-
-    }
+  constructor(
+    private orderService: OrderService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private pdfService: PdfService,
+    private sweet: SweetAlertService
+  ) {}
 
   getOrder() {
-    this.orderService.getOrderWithCalculation(this.id).subscribe(res => {
+    this.orderService.getOrderWithCalculation(this.id).subscribe((res) => {
       this.order = res;
       this.disable();
-    })
+    });
   }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       this.id = params['id'];
-    })
+    });
     this.getOrder();
   }
   disable() {
     var btn = document.getElementById('edit');
     var btn2 = document.getElementById('cancel');
-    console.log(this.order)
-    if(this.order?.orderState === "CANCELED") {
+    console.log(this.order);
+    if (this.order?.orderState === 'CANCELED') {
       btn?.setAttribute('disabled', '');
       btn2?.setAttribute('disabled', '');
     }
@@ -51,10 +56,10 @@ export class OrderComponent implements OnInit {
   cancel(id: any) {
     this.orderService.delete(id).subscribe(() => {
       this.getOrder();
-      Swal.fire('Órden borrada', undefined, 'success');
+      this.sweet.showAlert('Pedido cancelado', 'success');
     });
   }
-  goBack(){
+  goBack() {
     this.router.navigate(['/order/getAll']);
   }
 
@@ -68,29 +73,42 @@ export class OrderComponent implements OnInit {
 
   totalTaxes(sellableGood: SellableGood) {
     return (sellableGood.taxes || [])
-    .filter((tax) => tax.active && tax.taxPercentage)
-    .reduce((totalImpuestos, tax) => {
-      return totalImpuestos + ((sellableGood.price || 0) * ((tax.taxPercentage??0) / 100));
-    }, 0);
+      .filter((tax) => tax.active && tax.taxPercentage)
+      .reduce((totalImpuestos, tax) => {
+        return (
+          totalImpuestos +
+          (sellableGood.price || 0) * ((tax.taxPercentage ?? 0) / 100)
+        );
+      }, 0);
   }
 
   subtotal(orderDetail: OrderDetail): number {
-    return (orderDetail.priceSell+orderDetail.warrantyValue+orderDetail.supportCharge) * orderDetail.quantity - orderDetail.discount;
+    return (
+      (orderDetail.priceSell +
+        orderDetail.warrantyValue +
+        orderDetail.supportCharge) *
+        orderDetail.quantity -
+      orderDetail.discount
+    );
   }
 
-  clientToData(client:Client): [string,string][] {
-    const result: [string,string][] = [['Tipo',''],['Nombre',''],['CUIT/DNI','']]
-    if(this.isPerson(client)) {
-      result[0][1] = "Persona"
-      result[1][1] = `${client.lastName} ${client.firstName}`
-      result[2][1] = client.dni
-    }else{
-      this.isEnterprise(client)
-      result[0][1] = "Empresa"
-      result[1][1] = client.businessName
-      result[2][1] = client.cuit
+  clientToData(client: Client): [string, string][] {
+    const result: [string, string][] = [
+      ['Tipo', ''],
+      ['Nombre', ''],
+      ['CUIT/DNI', ''],
+    ];
+    if (this.isPerson(client)) {
+      result[0][1] = 'Persona';
+      result[1][1] = `${client.lastName} ${client.firstName}`;
+      result[2][1] = client.dni;
+    } else {
+      this.isEnterprise(client);
+      result[0][1] = 'Empresa';
+      result[1][1] = client.businessName;
+      result[2][1] = client.cuit;
     }
-    return result
+    return result;
   }
 
   generatePDF() {

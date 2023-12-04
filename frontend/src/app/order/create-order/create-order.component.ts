@@ -167,7 +167,6 @@ export class CreateOrderComponent implements OnInit {
     this.orderService.save(this.newOrder).subscribe((res) => {
       ord = res;
       res;
-      console.log(res);
     });
 
     this.sweet.showAlert('Pedido creado con éxito', 'success');

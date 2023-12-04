@@ -4,6 +4,7 @@ import { OrderService } from '../service/order.service';
 import { RouterModule, Routes, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { delay } from 'rxjs';
+import { SweetAlertService } from 'src/app/modules/shared/service/sweet-alert.service';
 
 @Component({
   selector: 'app-order-list',
@@ -13,24 +14,31 @@ import { delay } from 'rxjs';
 export class OrderListComponent implements OnInit {
   //order = new OrderDTO(300, 2, new Date());
 
-  constructor(private orderService: OrderService, private router: Router) {}
+  constructor(
+    private orderService: OrderService,
+    private router: Router,
+    private sweet: SweetAlertService
+  ) {}
 
   orderList: OrderDTO[] = [];
 
-
   public delete(id: any): void {
-    this.orderService.delete(id).pipe(
-      ).subscribe((res) => {
+    this.orderService
+      .delete(id)
+      .pipe()
+      .subscribe((res) => {
         this.orderService.updateOrderListData();
         Swal.fire('Órden borrada', undefined, 'success');
       });
   }
   validate(id: any) {
-    this.orderService.validate(id).pipe(
-    ).subscribe((res) => {
-      this.orderService.updateOrderListData();
-      Swal.fire('Órden validada', undefined, 'success');
-    });
+    this.orderService
+      .validate(id)
+      .pipe()
+      .subscribe((res) => {
+        this.orderService.updateOrderListData();
+        this.sweet.showAlert('Órden validada', 'success');
+      });
   }
 
   redirect(id: any): void {

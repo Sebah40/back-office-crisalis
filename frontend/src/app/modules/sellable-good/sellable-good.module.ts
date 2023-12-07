@@ -7,6 +7,7 @@ import { SellableGoodFormComponent } from './components/sellable-good-form/sella
 import { FormatTaxesPipe } from './pipes/format-taxes.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TaxFormatterPipe } from './pipes/tax-formatter.pipe';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { TaxFormatterPipe } from './pipes/tax-formatter.pipe';
     SellableGoodsRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule,
   ],
 })
 export class SellableGoodsModule {}

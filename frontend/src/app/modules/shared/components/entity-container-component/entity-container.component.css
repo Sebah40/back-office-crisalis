@@ -95,9 +95,11 @@ th {
   padding: 8px 20px;
   
 }
+
 #btn-custom:hover{
   background-color: #22333b33;
 }
+
 #svg-add{
   width: 20px;
   height: auto;

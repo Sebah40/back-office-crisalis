@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ResponseCreate } from 'src/app/components/interfaces/ResponseCreate.type';
+import { SweetAlertService } from 'src/app/modules/shared/service/sweet-alert.service';
 
 @Component({
   selector: 'app-enterprise-form',
@@ -38,7 +39,8 @@ export class EnterpriseFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private enterpriseService: EnterpriseService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private sweet: SweetAlertService
   ) {}
 
   ngOnInit(): void {
@@ -105,14 +107,14 @@ export class EnterpriseFormComponent implements OnInit {
         next: (response) => {
           if ('mensaje' in response) {
             console.log(response.mensaje);
-            alert(response.mensaje);
+            this.sweet.showAlert(response.mensaje, 'success');
           } else {
             throw response;
           }
         },
         error: (error: HttpErrorResponse) => {
           console.log(error.error.mensaje);
-          alert(error.error.mensaje);
+          this.sweet.showAlert(error.error.mensaje, 'error');
         },
       });
     } else {
@@ -120,14 +122,14 @@ export class EnterpriseFormComponent implements OnInit {
         next: (response) => {
           if ('mensaje' in response) {
             console.log(response.mensaje);
-            alert(response.mensaje);
+            this.sweet.showAlert(response.mensaje, 'success');
           } else {
             throw response;
           }
         },
         error: (error: HttpErrorResponse) => {
           console.log(error.error.mensaje);
-          alert(error.error.mensaje);
+          this.sweet.showAlert(error.error.mensaje, 'error');
         },
       });
     }

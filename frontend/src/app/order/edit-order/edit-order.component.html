@@ -3,18 +3,26 @@
     <h2>Editar pedido</h2>
   </header>
   <div class="card-container" width="100%">
-    <div class="card" style="width: 25rem; margin: auto;">
+    <div class="card" style="width: 25rem; margin: auto">
       <div class="card-header beige">
-        <li class="list-group-item text-center">Cliente: {{order?.client?.businessName}}</li>
+        <li class="list-group-item text-center">
+          Cliente:
+          {{
+            order?.client?.businessName ||
+              order?.client?.firstName + " " + order?.client?.lastName
+          }}
+        </li>
       </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">ID: {{order?.client?.id}}</li>
-        <li class="list-group-item">Beneficiario: {{order?.client?.beneficiary ? 'Sí': 'No'}}</li>
+        <li class="list-group-item">ID: {{ order?.client?.id }}</li>
+        <li class="list-group-item">
+          Beneficiario: {{ order?.client?.beneficiary ? "Sí" : "No" }}
+        </li>
       </ul>
     </div>
   </div>
 
-  <table class="rounded p-2" id="custom-table" >
+  <table class="rounded p-2" id="custom-table">
     <thead>
       <tr>
         <th>ID</th>
@@ -26,25 +34,49 @@
     </thead>
     <tbody>
       <tr *ngFor="let detail of order?.orderDetailDTOList">
-        <td>{{detail.id}}</td>
-        <td>{{detail.sellableGood.name}}</td>
-        <td>{{detail.sellableGood.type == 'PRODUCT' ? 'Producto' : 'Servicio'}}</td>
-        <td>{{detail.quantity}}</td>
-        <td>{{detail.priceSell}}</td>
+        <td>{{ detail.id }}</td>
+        <td>{{ detail.sellableGood.name }}</td>
+        <td>
+          {{ detail.sellableGood.type == "PRODUCT" ? "Producto" : "Servicio" }}
+        </td>
+        <td>{{ detail.quantity }}</td>
+        <td>{{ detail.priceSell }}</td>
         <ng-template [ngIf]="order.orderState != 'CANCELED'">
           <span class="buttons">
-            <label><small>Unidades:</small>
-              <input min="{{0}}" defaultValue="{{0}}" id="det-val-{{detail.id}}" class="number" type="number"/>
+            <label
+              ><small>Unidades:</small>
+              <input
+                min="{{ 0 }}"
+                defaultValue="{{ 0 }}"
+                id="det-val-{{ detail.id }}"
+                class="number"
+                type="number"
+              />
             </label>
-            <button class="btn addbutton2" [value]="detail.id" id="det-{{detail.id}}" (click)="select(detail.sellableGood, detail.id)">+</button>
-            <button class="btn removebutton" [value]="detail.id" (click)="undo(detail.id, false)">x</button>
-            <button class="btn btn-dark" (click)="remove(detail)" >Quitar</button>
+            <button
+              class="btn addbutton2"
+              [value]="detail.id"
+              id="det-{{ detail.id }}"
+              (click)="select(detail.sellableGood, detail.id)"
+            >
+              Agregar
+            </button>
+            <button
+              class="btn removebutton"
+              [value]="detail.id"
+              (click)="undo(detail.id, false)"
+            >
+              Deshacer
+            </button>
+            <button class="btn btn-dark" (click)="remove(detail)">
+              Quitar del pedido
+            </button>
           </span>
         </ng-template>
       </tr>
     </tbody>
   </table>
-  
+
   <!-- <table id="custom-table">
       <thead>
         <tr>
@@ -78,24 +110,52 @@
     <section class="form-section">
       <form class="form">
         <h3>Lista de productos y servicios</h3>
-        <ul type="none" class="p-2" >
-          <li *ngFor="let item of itemList" class="list-item items" >
-              <span>
-                {{item.name}}
-              </span>
+        <ul type="none" class="p-2">
+          <li *ngFor="let item of itemList" class="list-item items">
             <span>
-              <label class="unidades">Unidades:
-                <input defaultValue="{{0}}" min="{{0}}" id="order-{{item.id}}" class="number" type="number"/>
+              {{ item.name }}
+            </span>
+            <span>
+              <label class="unidades"
+                >Unidades:
+                <input
+                  defaultValue="{{ 0 }}"
+                  min="{{ 0 }}"
+                  id="order-{{ item.id }}"
+                  class="number"
+                  type="number"
+                />
               </label>
-              <button class="btn addbutton2" [value]="item.id" id="btn-{{item.id}}" (click)="select(item, null)">+</button>
-            <button class="btn removebutton" [value]="item.id" (click)="undo(item.id, true)">x</button>
+              <button
+                class="btn addbutton2"
+                [value]="item.id"
+                id="btn-{{ item.id }}"
+                (click)="select(item, null)"
+              >
+                Agregar
+              </button>
+              <button
+                class="btn removebutton"
+                [value]="item.id"
+                (click)="undo(item.id, true)"
+              >
+                Deshacer
+              </button>
             </span>
           </li>
         </ul>
-        <button class="btn addbutton3" [disabled]="disable" id="submit" (click)="submitOrder()">
+        <button
+          class="btn addbutton3"
+          [disabled]="disable"
+          id="submit"
+          (click)="submitOrder()"
+        >
           Enviar
         </button>
       </form>
+      <div class="center-button-back">
+        <app-button-back></app-button-back>
+      </div>
     </section>
   </ng-template>
 </main>

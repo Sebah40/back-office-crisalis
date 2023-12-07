@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TaxService } from '../../service/tax.service';
 import { EntityContainerComponent } from '../../../shared/components/entity-container-component/entity-container.component';
+import { SweetAlertService } from 'src/app/modules/shared/service/sweet-alert.service';
 @Component({
   selector: 'app-tax',
   templateUrl: './tax-list.component.html',
@@ -13,7 +14,10 @@ export class TaxListComponent<T extends object> implements OnInit {
   @Input() title: string = '';
   @Input() isEditable: boolean = false;
 
-  constructor(private taxService: TaxService) {}
+  constructor(
+    private taxService: TaxService,
+    private sweet: SweetAlertService
+  ) {}
 
   ngOnInit() {
     this.taxService.taxListData$.subscribe((data) => {
@@ -33,15 +37,20 @@ export class TaxListComponent<T extends object> implements OnInit {
   }
   deleteTax(entity: any) {
     console.log('taxList', entity);
-    const tax: { id: number, taxName: string, taxPercentage: number } = { id: entity.id, taxName: "", taxPercentage: 0 };
+    const tax: { id: number; taxName: string; taxPercentage: number } = {
+      id: entity.id,
+      taxName: '',
+      taxPercentage: 0,
+    };
 
     console.log('tax', tax);
     this.taxService.deleteTax(tax).subscribe({
       next: (response: any) => {
+        this.sweet.showAlert('Se eliminó correctamente', 'success');
         this.taxService.updateTaxListData();
       },
       error: (error: any) => {
-        console.log(error);
+        this.sweet.showAlert('Ocurrió un error', 'error');
       },
     });
   }

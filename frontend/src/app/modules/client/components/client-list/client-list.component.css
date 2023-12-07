@@ -2,10 +2,6 @@ app-list-table{
   background-color: transparent !important;
 }
 
-/* #table{
-  background-color: white !important;
-} */
-
 td {
   background-color: transparent;
   color: #22333b;
@@ -18,7 +14,6 @@ td {
 }
 
 .noservice{
-  /* background-color: rgb(97, 2, 2); */
   border: 1px solid rgb(97, 2, 2);;
   color: rgb(97, 2, 2);;
   width: fit-content;

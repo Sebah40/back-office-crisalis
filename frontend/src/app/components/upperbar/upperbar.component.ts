@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { TokenService } from '../../modules/auth/service/token.service';
+import { UserService } from 'src/app/modules/user/services/user.service';
 
 @Component({
   selector: 'app-upperbar',
@@ -15,9 +16,13 @@ export class UpperbarComponent {
   showSun: string = localStorage.getItem('theme') != 'light' ? 'block' : 'none';
   showMoon: string = localStorage.getItem('theme') != 'dark' ? 'block' : 'none';
 
-  constructor(private tokenService: TokenService) {}
+  constructor(
+    private tokenService: TokenService,
+    private userService: UserService
+  ) {}
   isLogged = false;
   name = 'username';
+  srcPhoto: string = '';
   ngOnInit(): void {
     if (this.tokenService.getToken()) {
       this.isLogged = true;
@@ -25,6 +30,11 @@ export class UpperbarComponent {
     } else {
       this.isLogged = false;
     }
+    this.userService.getProfile().subscribe({
+      next: (res) => {
+        this.srcPhoto = res.photo;
+      },
+    });
   }
   onLogOut(): void {
     this.tokenService.logOut();

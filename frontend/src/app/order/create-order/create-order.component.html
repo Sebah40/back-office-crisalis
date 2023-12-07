@@ -1,64 +1,124 @@
-<div class="container d-flex flex-column justify-content-sm-start align-items-center" id="container">
+<div
+  class="container d-flex flex-column justify-content-sm-start align-items-center"
+  id="container"
+>
   <h2 class="title">{{ title }}</h2>
   <div class="searchbar-section">
     <div class="searchbar">
       <input [formControl]="searchbar" placeholder="Buscar cliente" />
-      <svg type="button" class="svgbutton"
-      (click)="searchbarFilter(searchbar.value == null ? '' : searchbar.value)"
-      xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+      <svg
+        type="button"
+        class="svgbutton"
+        (click)="
+          searchbarFilter(searchbar.value == null ? '' : searchbar.value)
+        "
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        class="bi bi-search"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+        />
       </svg>
     </div>
   </div>
 
-  <table class="rounded p-2" id="custom-table" >
-    <thead>
-      <tr>
-        <th>ID Cliente</th>
-        <th>Cliente</th>
-        <th>Beneficiario</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let client of clientList"  >
-
-          <td>
+  <div
+    class="table-responsive w-75"
+    style="max-height: 240px"
+    id="table-responsive"
+  >
+    <table class="rounded p-2" id="custom-table">
+      <thead>
+        <tr>
+          <!-- <th>ID Cliente</th> -->
+          <th>Cliente</th>
+          <th>Beneficiario</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let client of clientList">
+          <!-- <td>
             {{client.id}}
+          </td> -->
+          <td>
+            {{
+              client.businessName == null
+                ? client.firstName + " " + client.lastName
+                : client.businessName
+            }}
           </td>
           <td>
-            {{client.businessName == null ? client.firstName + " " + client.lastName : client.businessName}}
+            {{ client.beneficiary ? "Sí" : "No" }}
           </td>
           <td>
-            {{client.beneficiary ? 'Sí' : 'No'}}
+            <button
+              class="btn btn-dark addbutton1"
+              id="id-{{ client.id }}"
+              (click)="addClient(client.id)"
+            >
+              Seleccionar
+            </button>
           </td>
-          <td>
-            <button class="btn btn-dark addbutton1" id="id-{{client.id}}" (click)="addClient(client.id)">Seleccionar</button>
-          </td>
-      </tr>
-    </tbody>
-  </table>
-
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   <section class="form-section">
     <form class="form">
-
-
       <h3>Lista de productos y servicios</h3>
 
-      <ul type="none" class="p-2" style="max-height:300px ;">
-        <li *ngFor="let item of itemList" class="list-item items" id="li-{{item.id}}" >
-            <span>
-              {{item.name}}
-            </span>
+      <ul type="none" class="p-2" style="max-height: 300px">
+        <li
+          *ngFor="let item of itemList"
+          class="list-item items"
+          id="li-{{ item.id }}"
+        >
           <span>
-            <label *ngIf="item.type === 'PRODUCT'" class="unidades">Garantia:
-              <input defaultValue="{{0}}" class="number" name="warranty" type="number"/>
+            {{ item.name }}
+          </span>
+          <span>
+            <label *ngIf="item.type === 'PRODUCT'" class="unidades"
+              >Garantia:
+              <input
+                defaultValue="{{ 0 }}"
+                class="number"
+                id="warranty-{{ item.id }}"
+                name="warranty"
+                type="number"
+                (change)="onChange('warranty-' + item.id)"
+              />
             </label>
-            <label class="unidades">Unidades:
-              <input defaultValue="{{0}}" id="{{item.id}}" class="number" name="{{item.id}}" type="number"/>
+            <label class="unidades"
+              >Unidades:
+              <input
+                defaultValue="{{ 0 }}"
+                id="{{ item.id }}"
+                class="number"
+                name="{{ item.id }}"
+                type="number"
+                (change)="onChange(item.id)"
+              />
             </label>
-            <button class="btn btn-primary addbutton2" [value]="item.id" id="btn-{{item.id}}" (click)="select(item.id)">+</button>
-          <button class="btn btn-danger removebutton" [value]="item.id" (click)="undo(item.id)">x</button>
+            <button
+              class="btn addbutton2"
+              [value]="item.id"
+              id="btn-{{ item.id }}"
+              (click)="select(item.id)"
+            >
+              Agregar
+            </button>
+            <button
+              class="btn btn-danger removebutton"
+              [value]="item.id"
+              (click)="undo(item.id)"
+            >
+              Quitar
+            </button>
           </span>
         </li>
       </ul>

@@ -1,4 +1,4 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { UserProfileDTO } from '../../model/UserProfileDTO';
 import { EditProfileDTO } from '../../model/EditProfileDTO';
@@ -105,8 +105,7 @@ export class ProfileComponent implements OnInit {
   async showAlert() {
     const resultado = await Swal.fire({
       title: '¿Estás seguro?',
-      text: 'Quieres cambiar tu contraseña?',
-      icon: 'warning',
+      icon: 'question',
       showCancelButton: true,
       confirmButtonText: 'Sí, estoy seguro',
       cancelButtonText: 'Cancelar',

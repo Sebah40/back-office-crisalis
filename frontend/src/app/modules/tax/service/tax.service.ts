@@ -12,7 +12,7 @@ type Message = { mensaje: string };
   providedIn: 'root',
 })
 export class TaxService {
-  private apiUrl = 'http://localhost:3000/tax'; // Replace with your API URL
+  private apiUrl = 'http://localhost:3000/tax';
 
   private taxListData: BehaviorSubject<ITaxGet[]> = new BehaviorSubject<
   ITaxGet[]
@@ -25,6 +25,7 @@ export class TaxService {
 
 
   private loadTaxListData() {
+    
     this.getAll().subscribe((data) => {
       this.taxListData.next(data);
       console.log("taxListData Actualizado")
@@ -32,12 +33,10 @@ export class TaxService {
   }
 
 
-  // Get all taxes
   getAll(): Observable<ITaxGet[]> {
     return this.http.get<ITaxGet[]>(this.apiUrl);
   }
 
-  // Create a new tax
   createTax(newTax: Tax): Observable<ResponseCreate> {
     return this.http.post<ResponseCreate>(
       'http://localhost:3000/tax/create/', 
@@ -45,7 +44,6 @@ export class TaxService {
     );
   }
 
-  // Delete a tax
   deleteTax(taxID: Tax): Observable<Message> {
     console.log(taxID)
     return this.http.post<Message>(`http://localhost:3000/tax/delete`, taxID);
@@ -57,7 +55,6 @@ export class TaxService {
     return this.http.put<ResponseCreate>(url, updatedTax);
   }
 
-  //Update tax
   updateTaxListData() {
     this.loadTaxListData();
   }

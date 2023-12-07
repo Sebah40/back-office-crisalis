@@ -1,0 +1,43 @@
+<app-simple-container [title]="title">
+  <app-list-table
+    class="reporttable"
+    [header]="['Cliente', 'Servicio', 'Pedido número', 'Fecha', 'Descuento']"
+    id="table"
+    #pdfTable
+  >
+    <ng-container *ngFor="let client of group(data)">
+      <tr style="color: black">
+        <td class="td-client">
+          {{ client.client }}
+        </td>
+        <td colspan="9" class="td-client"></td>
+      </tr>
+      <ng-container *ngFor="let service of client.services">
+        <tr style="background-color: #eae0d5; color: black">
+          <td></td>
+          <td style="font-weight: bold; text-align: center">
+            {{ service.service }}
+          </td>
+
+          <td style="font-weight: bold"></td>
+          <td style="font-weight: bold"></td>
+          <td style="font-weight: bold; text-align: center">
+            {{ service.totalDiscount | moneyFormat }}
+          </td>
+        </tr>
+        <tr *ngFor="let order of service.items">
+          <td colspan="2"></td>
+          <td style="text-align: center">{{ order.orderNum }}</td>
+          <td style="text-align: center">
+            {{ order.date | dateFormat }}
+          </td>
+          <td style="text-align: center">{{ order.discount | moneyFormat }}</td>
+        </tr>
+      </ng-container>
+    </ng-container>
+  </app-list-table>
+</app-simple-container>
+<div class="text-center">
+  <app-button-back path="/report"></app-button-back>
+  <button class="generatebutton" (click)="generatePDF()">Generar PDF</button>
+</div>

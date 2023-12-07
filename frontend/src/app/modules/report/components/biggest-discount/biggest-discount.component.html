@@ -1,0 +1,56 @@
+<div
+  #pdfTable
+  class="container w-75 d-flex flex-column justify-content-center align-items-center"
+  style="height: 60vh"
+>
+  <h2 class="m-lg-5 py-5" id="title">
+    Informe de servicio que mayor descuento generó
+  </h2>
+
+  <div
+    style="width: 75%; border: 1px solid #000; border-radius: 6px; padding: 1px"
+  >
+    <table mat-table [dataSource]="dataSource" matSort>
+      <ng-container
+        *ngFor="let column of displayedColumns"
+        [matColumnDef]="column"
+      >
+        <th
+          style="
+            font-weight: bold;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial,
+              sans-serif;
+            font-size: 18px;
+          "
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+        >
+          {{ getColumnHeader(column) }}
+        </th>
+        <td
+          style="
+            font-size: 17px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial,
+              sans-serif;
+          "
+          mat-cell
+          *matCellDef="let element"
+        >
+          <ng-container *ngIf="column === 'discount'; else otherColumns">
+            {{ element[column] | currency : "USD" : "symbol" : "1.2-2" }}
+          </ng-container>
+          <ng-template #otherColumns>
+            {{ element[column] }}
+          </ng-template>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</div>
+<div class="container w-75 d-flex justify-content-center">
+  <app-button-back path="/report"></app-button-back>
+  <button class="generatebutton" (click)="generatePDF()">Generar pdf</button>
+</div>

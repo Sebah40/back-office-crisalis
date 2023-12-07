@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IEnterpriseGet } from '../../model/enterpriseGet.model';
 import { EnterpriseService } from '../../service/enterprise-list.service';
+import { SweetAlertService } from 'src/app/modules/shared/service/sweet-alert.service';
 
 @Component({
   selector: 'app-client-list',
@@ -11,7 +12,10 @@ export class ClientListComponent implements OnInit {
   public enterpriseListData: IEnterpriseGet[] = [];
   public editableValue: boolean = true;
 
-  constructor(private enterpriseService: EnterpriseService) {}
+  constructor(
+    private enterpriseService: EnterpriseService,
+    private sweet: SweetAlertService
+  ) {}
 
   ngOnInit(): void {
     this.enterpriseService.enterpriseListData$.subscribe((enterprises) => {
@@ -30,7 +34,7 @@ export class ClientListComponent implements OnInit {
     this.enterpriseService.delete(enterprise).subscribe({
       next: (response: any) => {
         this.enterpriseService.updateEnterpriseListData();
-        alert(response.mensaje);
+        this.sweet.showAlert(response.mensaje, 'success');
       },
       error: (error: any) => {
         console.log(error);

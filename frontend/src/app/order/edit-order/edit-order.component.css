@@ -6,6 +6,11 @@
 .text-center {
   margin: 0 20px !important;
 }
+.center-button-back {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* Adjust this value based on your layout */
+}
 
 .table {
   width: 75%;
@@ -29,7 +34,7 @@
 
 .buttons {
   display: flex;
-  width: 90%;
+  width: 100%;
   flex-wrap: nowrap;
   justify-content: space-evenly;
 }
@@ -61,10 +66,10 @@
 }
 
 .number {
-  width: 40px;
+  width: 60px;
   margin: 0 15px 0 7px;
   border: none;
-  height: 33px;
+  height: 38px;
   text-align: center;
   border: 1px solid black;
   border-radius: 5px;
@@ -193,7 +198,7 @@ h3{
   background-color: rgba(255, 255, 255, 0) !important;
 }
 
-.addbutton1, .addbutton2, addbutton3{
+.addbutton1, addbutton3{
   background-color: #EAE0D5 !important;
   border: none;
   color: black
@@ -201,8 +206,25 @@ h3{
 
 .addbutton2{
   margin: 0 5px;
-  height: 100%;
+  
+}
+
+.addbutton2{
+  margin: 0 5px;
+  
   min-width: 35px;
+  background-color: #000;
+  color: #EAE0D5;
+  border: none;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+}
+.addbutton2:hover{
+  background-color:  #EAE0D5;
+  color: #000;
 }
 
 .addbutton3{
@@ -215,8 +237,7 @@ h3{
   border: none;
   border-radius: 5px;
   color: #EAE0D5;
-  width: 35px;
-  height: 100%;
+
 }
 
 .items{

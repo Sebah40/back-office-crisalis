@@ -1,0 +1,103 @@
+#client-container{
+  margin-top: 60px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+#label-type-inf{
+   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+   font-weight: 700;
+   font-size: 16px;
+}
+
+.input-checkbox{
+  display: none;
+}
+
+.accordion-item{
+  margin-bottom: 25px;
+  border: 1px solid black;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: black;
+  color: #EAE0D5;
+  border: none;
+  box-shadow: none;
+  border-radius: 0px;
+}
+
+.accordion-button:focus{
+  border-color: black;
+  box-shadow: none;
+  border-radius: 0px;
+}
+
+.accordion-item{
+  border-radius: 0px;
+}
+
+.generatebutton{
+  background-color: black;
+  font-weight: 500;
+  color: #EAE0D5;
+  width: 200px;
+  height: 50px;
+  border: none;
+  transition: .2s;
+  -webkit-transition: .2s;
+  -moz-transition: .2s;
+  -ms-transition: .2s;
+  -o-transition: .2s;
+}
+.generatebutton:hover{
+  background-color: #EAE0D5;
+  color: #000;
+
+}
+
+.select-option{
+  height: 52px;
+  border: 1px solid black;
+}
+
+.label-fecha{
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.input-fecha{
+  text-align: center;
+  padding: 10px;
+}
+
+.search-bar{
+  border: 1px solid black;
+}
+
+tr th, tr td{
+  text-align: center;
+}
+
+input[type="radio"]:checked + label {
+  background-color: #0f0f0f;
+  color: #EAE0D5;
+}
+
+/* Estilos cuando no está seleccionado */
+input[type="radio"] + label {
+  background-color: #fff;
+  color: #353131;
+  border: 1px solid #0f0f0f;
+  padding: 12px 16px;
+  font-family: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 300;
+  font-size: 16.5px;
+}
+
+.div-h4{
+  margin: 45px 0 10px;
+}
+
+.reportsbtn{
+  margin: 0 10px;
+}

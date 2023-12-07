@@ -1,54 +1,53 @@
 <div class="container-xl d-flex flex-column p-3">
-    <div>
-      <h2 class="text-center text-light-emphasis">Formulario de {{editOrCreateText}}</h2>
+  <div>
+    <h2 class="text-center text-light-emphasis">Formulario de {{editOrCreateText}}</h2>
+  </div>
+  
+  <form [formGroup]="formEnterprise" class="row g-3 needs-validation mx-auto my-4 w-100" novalidate (ngSubmit)="onSubmit()">
+    <div class="col-md-6 form-floating my-4">
+      <input formControlName="cuit" value="{{enterpriseEdit.cuit}}" type="text" class="form-control" id="floatingInput" placeholder="Cuit">
+      <label for="floatingInput" >CUIT</label>  
     </div>
-  
-    <form [formGroup]="formEnterprise" class="row g-3 needs-validation mx-auto my-4 w-100" novalidate (ngSubmit)="onSubmit()">
+    
+    <div class="col-md-6 form-floating my-4">
+      <input formControlName="firstNameResponsible" value="{{enterpriseEdit.firstNameResponsible}}" type="text" class="form-control" id="floatingInput" placeholder="Nombre del Responsable">
+      <label for="floatingInput">Nombre del responsable</label>  
+    </div>
+    
+    <div class="col-md-6 form-floating my-4">
+      <input formControlName="date" value="{{enterpriseEdit.date}}" type="date" class="form-control" id="floatingInput" placeholder="Fecha">
+      <label for="floatingInput">Fecha</label>  
+    </div>
 
-      <div class="col-md-6 form-floating my-4">
-        <input formControlName="cuit" value="{{enterpriseEdit.cuit}}" type="text" class="form-control" id="floatingInput" placeholder="Cuit">
-        <label for="floatingInput" >CUIT</label>  
-      </div>
+    <div class="col-md-6 form-floating my-4">
+      <input formControlName="lastNameResponsible" value="{{enterpriseEdit.lastNameResponsible}}" type="text" class="form-control" id="floatingInput" placeholder="Apellido del Responsable">
+      <label for="floatingInput">Apellido del responsable</label>  
+    </div>
 
-      <div class="col-md-6 form-floating my-4">
-        <input formControlName="firstNameResponsible" value="{{enterpriseEdit.firstNameResponsible}}" type="text" class="form-control" id="floatingInput" placeholder="Nombre del Responsable">
-        <label for="floatingInput">Nombre del responsable</label>  
-      </div>
+    <div class="col-md-6 form-floating my-4">
+      <input formControlName="dniResponsible" value="{{enterpriseEdit.dniResponsible}}" type="text" class="form-control" id="floatingInput" placeholder="DNI del Responsable">
+      <label for="floatingInput">DNI del responsable</label>  
+    </div>
 
-      <div class="col-md-6 form-floating my-4">
-        <input formControlName="date" value="{{enterpriseEdit.date}}" type="date" class="form-control" id="floatingInput" placeholder="Fecha">
-        <label for="floatingInput">Fecha</label>  
-      </div>
-
-      <div class="col-md-6 form-floating my-4">
-        <input formControlName="lastNameResponsible" value="{{enterpriseEdit.lastNameResponsible}}" type="text" class="form-control" id="floatingInput" placeholder="Apellido del Responsable">
-        <label for="floatingInput">Apellido del responsable</label>  
-      </div>
-
-      <div class="col-md-6 form-floating my-4">
-        <input formControlName="dniResponsible" value="{{enterpriseEdit.dniResponsible}}" type="text" class="form-control" id="floatingInput" placeholder="DNI del Responsable">
-        <label for="floatingInput">DNI del responsable</label>  
-      </div>
-
-      <div class="col-md-4 form-floating my-4">
-        <div  *ngIf="isEditing; else createMode">
-          <div class="d-flex form-floating">
-            <input [disabled]="true" value="{{enterpriseEdit.businessName}}" type="text" class="form-control" id="floatingInput" placeholder="Razón Social">
-            <label for="floatingInput" >Razón Social</label>
-          </div>    
-        </div>
-  
-        <ng-template #createMode >
-          <div class="d-flex form-floating">
-            <input formControlName="businessName" type="text" class="form-control" id="floatingInput" placeholder="Razón Social">
-            <label for="floatingInput">Razón Social</label>
-          </div>
-        </ng-template>
+    <div class="col-md-4 form-floating my-4">
+      <div  *ngIf="isEditing; else createMode">
+        <div class="d-flex form-floating">
+          <input [disabled]="true" value="{{enterpriseEdit.businessName}}" type="text" class="form-control" id="floatingInput" placeholder="Razón Social">
+          <label for="floatingInput" >Razón Social</label>
+        </div>    
       </div>
       
-      <div class="d-flex justify-content-center my-2">
-        <button class="btn btn-lg mx-2 gobackbutton" type="button" (click)="goToEnterpriseList()">Regresar</button>
-        <button [disabled]="formEnterprise.invalid" class="btn btn-lg createbutton" type="submit">{{editOrCreateText}}</button> 
-      </div>
-    </form>
-  </div>
+      <ng-template #createMode >
+        <div class="d-flex form-floating">
+          <input formControlName="businessName" type="text" class="form-control" id="floatingInput" placeholder="Razón Social">
+          <label for="floatingInput">Razón Social</label>
+        </div>
+      </ng-template>
+    </div>
+    
+    <div class="d-flex justify-content-center my-2">
+      <button class="btn btn-lg mx-2 gobackbutton" type="button" (click)="goToEnterpriseList()">Regresar</button>
+      <button [disabled]="formEnterprise.invalid" class="btn btn-lg createbutton" type="submit">{{editOrCreateText}}</button> 
+    </div>
+  </form>
+</div>

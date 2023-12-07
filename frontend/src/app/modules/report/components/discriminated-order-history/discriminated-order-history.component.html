@@ -1,0 +1,76 @@
+<app-simple-container [title]="title">
+  <app-list-table
+    class="reporttable"
+    [header]="[
+      'Cliente',
+      'Prod./Serv.',
+      'N°Pedido',
+      'Estado',
+      'Fecha',
+      '#',
+      'Precio',
+      'Subtotal',
+      'Impuestos',
+      'Gar./u',
+      'Soporte',
+      'Descuento',
+      'Total'
+    ]"
+    id="table"
+  >
+    <ng-container *ngFor="let client of group(data)">
+      <tr style="color: #eae0d5; background-color: #22333bc4">
+        <td class="td-client color: #eae0d5; fw-medium">
+          {{ client.client }}
+        </td>
+        <td colspan="12" class="td-client"></td>
+      </tr>
+      <ng-container *ngFor="let good of client.items">
+        <tr style="background-color: #eae0d5; color: black">
+          <td></td>
+          <td style="font-weight: bold; text-align: center">
+            {{ good.sellablegood }}
+          </td>
+          <td colspan="3"></td>
+          <td style="font-weight: bold; text-align: center">
+            {{ good.quantityAccumulator }}
+          </td>
+          <td></td>
+          <td style="font-weight: bold; text-align: center">
+            {{ good.subtotalAccumulator | moneyFormat }}
+          </td>
+          <td style="font-weight: bold; text-align: center">
+            {{ good.totalTaxesAccumulator | moneyFormat }}
+          </td>
+          <td colspan="2"></td>
+          <td style="font-weight: bold; text-align: center">
+            {{ good.discountAccumulator | moneyFormat }}
+          </td>
+          <td style="font-weight: bold; text-align: center">
+            {{ good.totalAccumulator | moneyFormat }}
+          </td>
+        </tr>
+        <tr *ngFor="let order of good.items">
+          <td colspan="2"></td>
+          <td>{{ order.orderId }}</td>
+          <td>{{ order.status }}</td>
+          <td>{{ order.date | dateFormat }}</td>
+          <td>{{ order.quantity }}</td>
+          <td>{{ order.price | moneyFormat }}</td>
+          <td>{{ order.subtotal | moneyFormat }}</td>
+          <td>{{ order.totalTaxes | moneyFormat }}</td>
+          <td>{{ order.warrantyValue | moneyFormat }}</td>
+          <td>{{ order.supportCharge | moneyFormat }}</td>
+          <td>{{ order.discount | moneyFormat }}</td>
+          <td>{{ order.total | moneyFormat }}</td>
+        </tr>
+      </ng-container>
+    </ng-container>
+  </app-list-table>
+</app-simple-container>
+<div class="container w-75 d-flex justify-content-center my-3">
+  <app-button-back path="/report"></app-button-back>
+  <button class="btn shadow-sm generatebutton" (click)="generatePDF()">
+    Generar pdf
+  </button>
+</div>

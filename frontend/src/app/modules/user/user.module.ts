@@ -7,6 +7,8 @@ import { EntityContainerComponent } from '../shared/components/entity-container-
 import { TranslateModule } from '@ngx-translate/core';
 
 import { ProfileComponent } from './components/profile/profile.component';
+import { ButtonBackComponent } from '../shared/components/button-back/button-back.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     FormsModule,
     ReactiveFormsModule,
     TranslateModule.forChild(),
+    SharedModule,
   ],
   exports: [
     UserListComponent,

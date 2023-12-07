@@ -74,7 +74,7 @@ public class TaxController {
         }
         if(taxService.verifyTaxById(id)) {
             taxService.updateTax(taxDto, id);
-            return new ResponseEntity<>(new ResponseMessage("Editado con éxito", HttpStatus.OK), HttpStatus.OK);
+            return new ResponseEntity(new Message("Editado con éxito"), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(new ResponseMessage("El impuesto con el ID solicitado no existe", HttpStatus.NOT_FOUND)
                     , HttpStatus.NOT_FOUND);

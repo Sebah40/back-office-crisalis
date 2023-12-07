@@ -1,0 +1,49 @@
+.gobackbutton{
+    margin-top: 25px;
+    width: 200px;
+}
+
+.reporttable{
+    max-height: 500px;
+}
+
+.reporttable td{
+    padding: 5px;
+    min-width: 100px;
+    height: 45px;
+}
+
+.td-client{
+    text-align: center;
+    font-size: larger;
+    color: #fff;
+    background-color: #22333bc4;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* .td-client1{
+    background-color: transparent;
+    border-top: 1px solid black;
+    border-bottom: 3px solid black;
+} */
+
+.generatebutton {
+  background-color: black;
+  font-weight: 500;
+  color: #eae0d5;
+  width: 200px;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+  margin: 4px;
+}
+.generatebutton:hover {
+  background-color: #eae0d5;
+  color: #000;
+}

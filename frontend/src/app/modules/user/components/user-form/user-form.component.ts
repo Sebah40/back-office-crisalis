@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { ResponseCreate } from 'src/app/components/interfaces/ResponseCreate.type';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SweetAlertService } from '../../../shared/service/sweet-alert.service';
 
 @Component({
   selector: 'app-user-form',
@@ -29,7 +30,8 @@ export class UserFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private sweet: SweetAlertService
   ) {}
 
   ngOnInit(): void {
@@ -78,30 +80,34 @@ export class UserFormComponent implements OnInit {
       this.editUser(newUser).subscribe({
         next: (response) => {
           if ('mensaje' in response) {
-            console.log(response.mensaje);
-            alert(response.mensaje);
+            this.sweet.showAlert(
+              response.mensaje,
+              'success',
+              this.goToUserList()
+            );
           } else {
             throw response;
           }
         },
         error: (error: HttpErrorResponse) => {
-          console.log(error.error.mensaje);
-          alert(error.error.mensaje);
+          this.sweet.showAlert(error.error.mensaje, 'error', this.goToUserList);
         },
       });
     } else {
       this.createUser(newUser).subscribe({
         next: (response) => {
           if ('mensaje' in response) {
-            console.log(response.mensaje);
-            alert(response.mensaje);
+            this.sweet.showAlert(
+              response.mensaje,
+              'success',
+              this.goToUserList
+            );
           } else {
             throw response;
           }
         },
         error: (error: HttpErrorResponse) => {
-          console.log(error.error.mensaje);
-          alert(error.error.mensaje);
+          this.sweet.showAlert(error.error.mensaje, 'error');
         },
       });
     }

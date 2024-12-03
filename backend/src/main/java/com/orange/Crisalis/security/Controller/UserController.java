@@ -37,7 +37,7 @@ import java.nio.file.Paths;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://crisalisorangecrm.web.app/")
 public class UserController {
     @Autowired
     PasswordEncoder passwordEncoder;
